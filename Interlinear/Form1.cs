@@ -42,22 +42,35 @@ namespace WindowsFormsApplication1
 
         private void btnSegmentLegacy_Click(object sender, EventArgs e)
         {
+            DateTime StartTime = DateTime.Now;  // Get the start time
             wrdApp.Documents.Open(txtLegacy.Text);
+            wrdApp.Visible = false;  // Hide
+            boxProgress.Items.Clear();
             LegacyDoc = wrdApp.ActiveDocument;
             LegacyDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
             wrdApp.Selection.WholeStory(); // Make sure we've selected everything
             CleanWordText(wrdApp, LegacyDoc); // Clean the document
+            DateTime EndTime = DateTime.Now;  //
+            
+            boxProgress.Items.Add("Cleaned the text in " + EndTime.Subtract(StartTime).ToString());
 
             /*
-              * Now start splitting into 12 space-separated words
+              * Now start splitting into a number of space-separated words
               */
-            Segment(wrdApp, wrdApp.Selection, 12);
+            Segment(wrdApp, wrdApp.Selection, (int)WordsPerLine.Value);
 
             LegacyDoc.SaveAs2(txtOutput.Text, LegacyDoc.SaveFormat); // Save in the same format as the input file
+            EndTime = DateTime.Now;
+            boxProgress.Items.Add("Completed in " + EndTime.Subtract(StartTime).ToString());
+            wrdApp.Visible = true;  // show the finished document
+            MessageBox.Show("Finished");
+
             LegacyDoc.Close(false);
+ 
         }
         private void CleanWordText(WordApp theApp, Document theDoc )
         {
+            theApp.ScreenUpdating = false; // Turn off screen updating
          
             /*
              * Remove all shapes
@@ -106,7 +119,6 @@ namespace WindowsFormsApplication1
 
             // Go to the beginning
             theApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);
-
             // Clear all tabs
             GlobalReplace(theApp.Selection, "^t", " ", true);
             // Clear all paragraph markers
@@ -119,6 +131,7 @@ namespace WindowsFormsApplication1
             GlobalReplace(theApp.Selection, "^m", " ", false);
             // Clear all multiple spaces
             GlobalReplace(theApp.Selection, "  ", " ", true);
+            theApp.ScreenUpdating = true; // turn on screen updating
          }
   
          private void QuitWord()
@@ -158,7 +171,7 @@ namespace WindowsFormsApplication1
              {
                  Found = theSelection.Find.Execute(missing, false, false, false, false, false, missing, missing, missing, missing, WordRoot.WdReplace.wdReplaceAll,
                  missing, missing, missing, missing);
-                 Found = Found && Repeat;
+                 Found = Found && Repeat;  // If repeat not set, then we only execute once.
                  Application.DoEvents();
              }
          }
@@ -167,20 +180,44 @@ namespace WindowsFormsApplication1
              /*
              * Now segment into the number of words specified by the WordCount paramenter
              */
-             
+             DateTime StartTime = DateTime.Now;  // Start
              // Go to the beginning
-             progressBar1.Maximum = theApp.ActiveDocument.Words.Count; 
              theSelection.HomeKey(WordRoot.WdUnits.wdStory);
+             theApp.ScreenUpdating = false; // Turn off updating the screen
+             // Size the progressbar
+             progressBar1.Maximum = theApp.ActiveDocument.Words.Count/2; 
+ 
              theSelection.Find.Text = " ";
              theSelection.Find.Forward = true;
+             theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindStop;  // Stop at end of document
              int LineCounter = 0;
             // Now add paragraph markers
              while (theApp.WordBasic.AtEndofDocument() == 0)
              {
                  int Counter = 0;
-                 while (Counter < WordCount & theApp.WordBasic.AtEndofDocument() == 0)
+                 bool Found = true;
+                 while (Counter < WordCount & theApp.WordBasic.AtEndofDocument() == 0 & Found)
+                    /*
+                     * Keep going until we find the right number of spaces, the end of document or find no more
+                     * spaces.
+                     */
                  {
-                     theSelection.Find.Execute();
+                     int ErrorCounter = 0;
+                     bool Failure = true; // assume failure
+                     while (Failure & ErrorCounter < 3) // Keep going until success or failure count >= 3
+                     {
+                         // retry twice on failure
+                         try
+                         {
+                             Found = theSelection.Find.Execute();
+                             Failure = false;  // we succeeded
+                         }
+                         catch (Exception e)
+                         {
+                             boxProgress.Items.Add("Find Error " + e.Message + " at line " + LineCounter.ToString());
+                             ErrorCounter++;
+                         }
+                     }
                      Counter++; // increment
                  }
                  theSelection.InsertParagraphAfter();  // Add a paragraph mark
@@ -189,11 +226,13 @@ namespace WindowsFormsApplication1
                  if (LineCounter % 10 == 0)
                  {
                      txtLineCount.Text = LineCounter.ToString();  // Mark progress
-                     progressBar1.Value = LineCounter * WordCount;
+                     progressBar1.Value = Math.Min(LineCounter * WordCount, progressBar1.Maximum);
                  }
                  Application.DoEvents();
               }
-             
+             theApp.ScreenUpdating = true;  // turn on updating
+             DateTime EndTime = DateTime.Now;
+             boxProgress.Items.Add("Segmented in " + EndTime.Subtract(StartTime).ToString());
          }
 
          private void btnBrowseOutput_Click(object sender, EventArgs e)

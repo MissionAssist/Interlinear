@@ -41,6 +41,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtLineCount = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.boxProgress = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.WordsPerLine = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -130,7 +135,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(299, 189);
+            this.label3.Location = new System.Drawing.Point(149, 189);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 8;
@@ -138,7 +143,7 @@
             // 
             // txtLineCount
             // 
-            this.txtLineCount.Location = new System.Drawing.Point(392, 182);
+            this.txtLineCount.Location = new System.Drawing.Point(242, 182);
             this.txtLineCount.Name = "txtLineCount";
             this.txtLineCount.ReadOnly = true;
             this.txtLineCount.Size = new System.Drawing.Size(108, 20);
@@ -151,11 +156,64 @@
             this.progressBar1.Size = new System.Drawing.Size(686, 15);
             this.progressBar1.TabIndex = 10;
             // 
+            // boxProgress
+            // 
+            this.boxProgress.FormattingEnabled = true;
+            this.boxProgress.Location = new System.Drawing.Point(473, 53);
+            this.boxProgress.Name = "boxProgress";
+            this.boxProgress.Size = new System.Drawing.Size(196, 212);
+            this.boxProgress.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(545, 37);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Progress";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(39, 131);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Words per line";
+            // 
+            // WordsPerLine
+            // 
+            this.WordsPerLine.Location = new System.Drawing.Point(138, 131);
+            this.WordsPerLine.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.WordsPerLine.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.WordsPerLine.Name = "WordsPerLine";
+            this.WordsPerLine.Size = new System.Drawing.Size(37, 20);
+            this.WordsPerLine.TabIndex = 14;
+            this.WordsPerLine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.WordsPerLine.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 299);
+            this.Controls.Add(this.WordsPerLine);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.boxProgress);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.txtLineCount);
             this.Controls.Add(this.label3);
@@ -169,6 +227,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Interlinear comparison";
+            ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +248,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtLineCount;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ListBox boxProgress;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown WordsPerLine;
     }
 }
 
