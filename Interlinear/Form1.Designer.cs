@@ -51,12 +51,13 @@
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "doc";
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 55);
+            this.label1.Location = new System.Drawing.Point(12, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
@@ -65,14 +66,14 @@
             // 
             // txtLegacy
             // 
-            this.txtLegacy.Location = new System.Drawing.Point(138, 53);
+            this.txtLegacy.Location = new System.Drawing.Point(107, 53);
             this.txtLegacy.Name = "txtLegacy";
-            this.txtLegacy.Size = new System.Drawing.Size(178, 20);
+            this.txtLegacy.Size = new System.Drawing.Size(504, 20);
             this.txtLegacy.TabIndex = 1;
             // 
             // btnGetLegacyFile
             // 
-            this.btnGetLegacyFile.Location = new System.Drawing.Point(336, 49);
+            this.btnGetLegacyFile.Location = new System.Drawing.Point(617, 53);
             this.btnGetLegacyFile.Name = "btnGetLegacyFile";
             this.btnGetLegacyFile.Size = new System.Drawing.Size(75, 23);
             this.btnGetLegacyFile.TabIndex = 2;
@@ -83,17 +84,17 @@
             // btnSegmentLegacy
             // 
             this.btnSegmentLegacy.Enabled = false;
-            this.btnSegmentLegacy.Location = new System.Drawing.Point(36, 150);
+            this.btnSegmentLegacy.Location = new System.Drawing.Point(-4, 144);
             this.btnSegmentLegacy.Name = "btnSegmentLegacy";
-            this.btnSegmentLegacy.Size = new System.Drawing.Size(93, 52);
+            this.btnSegmentLegacy.Size = new System.Drawing.Size(112, 52);
             this.btnSegmentLegacy.TabIndex = 3;
-            this.btnSegmentLegacy.Text = "Segment Legacy File";
+            this.btnSegmentLegacy.Text = "Segment  File";
             this.btnSegmentLegacy.UseVisualStyleBackColor = true;
             this.btnSegmentLegacy.Click += new System.EventHandler(this.btnSegmentLegacy_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(36, 222);
+            this.btnClose.Location = new System.Drawing.Point(-4, 344);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 44);
             this.btnClose.TabIndex = 4;
@@ -104,7 +105,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 95);
+            this.label2.Location = new System.Drawing.Point(12, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 5;
@@ -112,14 +113,14 @@
             // 
             // txtOutput
             // 
-            this.txtOutput.Location = new System.Drawing.Point(138, 87);
+            this.txtOutput.Location = new System.Drawing.Point(107, 87);
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(178, 20);
+            this.txtOutput.Size = new System.Drawing.Size(504, 20);
             this.txtOutput.TabIndex = 6;
             // 
             // btnBrowseOutput
             // 
-            this.btnBrowseOutput.Location = new System.Drawing.Point(336, 84);
+            this.btnBrowseOutput.Location = new System.Drawing.Point(617, 90);
             this.btnBrowseOutput.Name = "btnBrowseOutput";
             this.btnBrowseOutput.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseOutput.TabIndex = 7;
@@ -135,7 +136,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(149, 189);
+            this.label3.Location = new System.Drawing.Point(130, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 8;
@@ -143,7 +144,7 @@
             // 
             // txtLineCount
             // 
-            this.txtLineCount.Location = new System.Drawing.Point(242, 182);
+            this.txtLineCount.Location = new System.Drawing.Point(223, 176);
             this.txtLineCount.Name = "txtLineCount";
             this.txtLineCount.ReadOnly = true;
             this.txtLineCount.Size = new System.Drawing.Size(108, 20);
@@ -151,15 +152,15 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(6, 283);
+            this.progressBar1.Location = new System.Drawing.Point(-5, 394);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(686, 15);
+            this.progressBar1.Size = new System.Drawing.Size(697, 18);
             this.progressBar1.TabIndex = 10;
             // 
             // boxProgress
             // 
             this.boxProgress.FormattingEnabled = true;
-            this.boxProgress.Location = new System.Drawing.Point(473, 53);
+            this.boxProgress.Location = new System.Drawing.Point(496, 176);
             this.boxProgress.Name = "boxProgress";
             this.boxProgress.Size = new System.Drawing.Size(196, 212);
             this.boxProgress.TabIndex = 11;
@@ -167,7 +168,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(545, 37);
+            this.label4.Location = new System.Drawing.Point(568, 160);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 12;
@@ -176,7 +177,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(39, 131);
+            this.label5.Location = new System.Drawing.Point(12, 120);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 13);
             this.label5.TabIndex = 13;
@@ -184,7 +185,7 @@
             // 
             // WordsPerLine
             // 
-            this.WordsPerLine.Location = new System.Drawing.Point(138, 131);
+            this.WordsPerLine.Location = new System.Drawing.Point(107, 118);
             this.WordsPerLine.Maximum = new decimal(new int[] {
             20,
             0,
@@ -209,7 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 299);
+            this.ClientSize = new System.Drawing.Size(704, 416);
             this.Controls.Add(this.WordsPerLine);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);

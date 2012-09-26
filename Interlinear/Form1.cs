@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using System.Data.Common;
 using WordApp = Microsoft.Office.Interop.Word._Application;
@@ -36,6 +37,14 @@ namespace WindowsFormsApplication1
             {
                 txtLegacy.Text = openFileDialog1.FileName;
                 btnSegmentLegacy.Enabled = true & txtOutput.Text.Length > 0;
+                if (Path.GetExtension(txtLegacy.Text) == ".doc")
+                {
+                    saveFileDialog1.FilterIndex = 1; // .doc
+                }
+                else
+                {
+                    saveFileDialog1.FilterIndex = 2; // .docx
+                }
 
         };
         }
@@ -44,24 +53,44 @@ namespace WindowsFormsApplication1
         {
             DateTime StartTime = DateTime.Now;  // Get the start time
             wrdApp.Documents.Open(txtLegacy.Text);
-            wrdApp.Visible = false;  // Hide
+
             boxProgress.Items.Clear();
-            LegacyDoc = wrdApp.ActiveDocument;
-            LegacyDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
+            /*
+             * Set various Word options to optimise performance
+             * 
+             */
+            wrdApp.Options.Pagination = false;  // turn off background pagination
+            wrdApp.Options.CheckGrammarAsYouType = false;   // Don't check grammar either
+            wrdApp.Options.CheckSpellingAsYouType = false;  // Don't try to check spelling
+            wrdApp.ScreenUpdating = false; // Turn off updating the screen
+            wrdApp.ActiveWindow.ActivePane.View.ShowAll = false;  // Don't show special marks
             wrdApp.Selection.WholeStory(); // Make sure we've selected everything
+            LegacyDoc = wrdApp.ActiveDocument;
+            LegacyDoc.ActiveWindow.View.Draft = true;  // Draft View
+            LegacyDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
+            LegacyDoc.ShowSpellingErrors = false;  // Don't show spelling errors
+            LegacyDoc.ShowGrammaticalErrors = false; // Don't show grammar errors
+            LegacyDoc.AutoHyphenation = false;
+            wrdApp.Visible = false;  // Hide
+
+            /*
+             * Now remove text boxes, etc. from the document to clean it up.
+             * We end with a single, huge paragraph
+             */
             CleanWordText(wrdApp, LegacyDoc); // Clean the document
             DateTime EndTime = DateTime.Now;  //
             
             boxProgress.Items.Add("Cleaned the text in " + EndTime.Subtract(StartTime).ToString());
 
             /*
-              * Now start splitting into a number of space-separated words
+              * Now start splitting into a number of space-separated words, i.e. segmenting it.
               */
             Segment(wrdApp, wrdApp.Selection, (int)WordsPerLine.Value);
 
             LegacyDoc.SaveAs2(txtOutput.Text, LegacyDoc.SaveFormat); // Save in the same format as the input file
             EndTime = DateTime.Now;
             boxProgress.Items.Add("Completed in " + EndTime.Subtract(StartTime).ToString());
+            wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
             wrdApp.Visible = true;  // show the finished document
             MessageBox.Show("Finished");
 
@@ -183,9 +212,8 @@ namespace WindowsFormsApplication1
              DateTime StartTime = DateTime.Now;  // Start
              // Go to the beginning
              theSelection.HomeKey(WordRoot.WdUnits.wdStory);
-             theApp.ScreenUpdating = false; // Turn off updating the screen
              // Size the progressbar
-             progressBar1.Maximum = theApp.ActiveDocument.Words.Count/2; 
+             progressBar1.Maximum = theApp.ActiveDocument.Words.Count/3;  // Word seems to find more words than there are spaces.
  
              theSelection.Find.Text = " ";
              theSelection.Find.Forward = true;
@@ -232,7 +260,9 @@ namespace WindowsFormsApplication1
               }
              theApp.ScreenUpdating = true;  // turn on updating
              DateTime EndTime = DateTime.Now;
-             boxProgress.Items.Add("Segmented in " + EndTime.Subtract(StartTime).ToString());
+             TimeSpan ElapsedTime =  EndTime.Subtract(StartTime);
+             boxProgress.Items.Add("Segmented in " +ElapsedTime.ToString());
+             boxProgress.Items.Add((ElapsedTime.TotalSeconds/LineCounter).ToString() + " seconds per line");
          }
 
          private void btnBrowseOutput_Click(object sender, EventArgs e)
@@ -244,6 +274,11 @@ namespace WindowsFormsApplication1
                  btnSegmentLegacy.Enabled = true &  txtLegacy.Text.Length > 0;
 
              }
+         }
+
+         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+         {
+
          }
 
  
