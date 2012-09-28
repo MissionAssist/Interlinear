@@ -160,6 +160,8 @@ namespace WindowsFormsApplication1
             GlobalReplace(theApp.Selection, "^m", " ", false);
             // Clear all multiple spaces
             GlobalReplace(theApp.Selection, "  ", " ", true);
+            // Clear the final space
+            GlobalReplace(theApp.Selection, " ^p", "", false);
             theApp.ScreenUpdating = true; // turn on screen updating
          }
   
@@ -193,7 +195,7 @@ namespace WindowsFormsApplication1
              theSelection.Find.Text = SearchChars;
              theSelection.Find.Replacement.Text = ReplacementChars;
              theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindContinue;
-             //
+            //
              // If we want to keep searching, we'll do so
              //
              while (Found)
@@ -209,24 +211,25 @@ namespace WindowsFormsApplication1
              /*
              * Now segment into the number of words specified by the WordCount paramenter
              */
-             DateTime StartTime = DateTime.Now;  // Start
-             // Go to the beginning
+
+            // Go to the beginning
              theSelection.HomeKey(WordRoot.WdUnits.wdStory);
              // Size the progressbar
              progressBar1.Maximum = theApp.ActiveDocument.Words.Count/3;  // Word seems to find more words than there are spaces.
+             DateTime StartTime = DateTime.Now;  // Start
  
              theSelection.Find.Text = " ";
              theSelection.Find.Forward = true;
              theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindStop;  // Stop at end of document
              int LineCounter = 0;
-            // Now add paragraph markers
-             while (theApp.WordBasic.AtEndofDocument() == 0)
+             bool Found = true;  // Assume success
+             // Now add paragraph markers
+             while (Found)  //  Keep going till we find no more spaces.
              {
                  int Counter = 0;
-                 bool Found = true;
-                 while (Counter < WordCount & theApp.WordBasic.AtEndofDocument() == 0 & Found)
+                 while (Counter < WordCount & Found)
                     /*
-                     * Keep going until we find the right number of spaces, the end of document or find no more
+                     * Keep going until we find the right number of spaces,  find no more
                      * spaces.
                      */
                  {
@@ -248,16 +251,24 @@ namespace WindowsFormsApplication1
                      }
                      Counter++; // increment
                  }
-                 theSelection.InsertParagraphAfter();  // Add a paragraph mark
-                 theSelection.MoveRight(WordRoot.WdUnits.wdCharacter);  // and move beyond it
+                 if (Found)  // we still have some way to go so we add a paragraph marker
+                 {
+                     theSelection.InsertParagraphAfter();  // Add a paragraph mark
+                     theSelection.MoveRight(WordRoot.WdUnits.wdCharacter);  // and move beyond it
+                 }
                  LineCounter++;
-                 if (LineCounter % 10 == 0)
+                 if (LineCounter % 10 == 0 | ! Found)  //  Also write this at the end of the document
                  {
                      txtLineCount.Text = LineCounter.ToString();  // Mark progress
                      progressBar1.Value = Math.Min(LineCounter * WordCount, progressBar1.Maximum);
                  }
                  Application.DoEvents();
               }
+             /*
+              * Now remove the trailing spaces
+              */
+             GlobalReplace(theSelection, " ^p", "^p", false);
+             
              theApp.ScreenUpdating = true;  // turn on updating
              DateTime EndTime = DateTime.Now;
              TimeSpan ElapsedTime =  EndTime.Subtract(StartTime);
