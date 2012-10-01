@@ -23,6 +23,7 @@ namespace WindowsFormsApplication1
         private WordApp wrdApp;
         private Document InputDoc;
         object missing = Type.Missing;
+        private const string theSpace = " ";
         public Form1()
         {
             InitializeComponent();
@@ -159,19 +160,19 @@ namespace WindowsFormsApplication1
             //  Make one column
             OneColumn(theApp);
             // Clear all tabs
-            GlobalReplace(theApp.Selection, "^t", " ", true);
+            GlobalReplace(theApp.Selection, "^t", theSpace, true);
             // Clear all paragraph markers
-            GlobalReplace(theApp.Selection, "^p", " ", false);
+            GlobalReplace(theApp.Selection, "^p", theSpace, false);
             // Clear all section breaks
-            GlobalReplace(theApp.Selection, "^b", " ", false);
+            GlobalReplace(theApp.Selection, "^b", theSpace, false);
             // Clear all manual line feeds
-            GlobalReplace(theApp.Selection, "^l", " ", false);
+            GlobalReplace(theApp.Selection, "^l", theSpace, false);
             // Clear all column breaks
-            GlobalReplace(theApp.Selection, "^n", " ", false);
+            GlobalReplace(theApp.Selection, "^n", theSpace, false);
             // Clear all manual page breaks
-            GlobalReplace(theApp.Selection, "^m", " ", false);
+            GlobalReplace(theApp.Selection, "^m", theSpace, false);
             // Clear all multiple spaces
-            GlobalReplace(theApp.Selection, "  ", " ", true);
+            GlobalReplace(theApp.Selection, "  ", theSpace, true);
             // Clear the final space
             GlobalReplace(theApp.Selection, " ^p", "", false);
          }
@@ -236,25 +237,25 @@ namespace WindowsFormsApplication1
              progressBar1.Maximum = NumberofWords;
              boxProgress.Items.Add("Starting segmentation...");
              DateTime StartTime = DateTime.Now;  // Start
- 
-             theSelection.Find.Text = " ";
+             int Lines = NumberofWords/WordCount;  // The number of lines rounded down
+             theSelection.Find.Text = theSpace;
              theSelection.Find.Forward = true;
              theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindStop;  // Stop at end of document
              int LineCounter = 0;
              bool Found = true;  // Assume success
              // Now add paragraph markers
-             while (Found)  //  Keep going till we find no more spaces.
+             for (LineCounter = 1; LineCounter <= Lines && Found; LineCounter++)  //  Keep going till we find no more spaces.
              {
                  int Counter = 0;
-                 while (Counter < WordCount & Found)
-                    /*
-                     * Keep going until we find the right number of spaces,  find no more
-                     * spaces.
-                     */
+                 for (Counter = 0; Found && Counter < WordCount; Counter++ )
+                 /*
+                  * Keep going until we find the right number of spaces,  find no more
+                  * spaces.
+                  */
                  {
                      int ErrorCounter = 0;
                      bool Failure = true; // assume failure
-                     while (Failure & ErrorCounter < 3) // Keep going until success or failure count >= 3
+                     while (Failure && ErrorCounter < 3) // Keep going until success or failure count >= 3
                      {
                          // retry twice on failure
                          try
@@ -268,13 +269,13 @@ namespace WindowsFormsApplication1
                              ErrorCounter++;
                          }
                      }
-                     Counter++; // increment
-                 }
+                  }
                  LineCounter++;
                  if (Found)  // we still have some way to go so we add a paragraph marker
                  {
                      theSelection.InsertParagraphAfter();  // Add a paragraph mark
                      //theSelection.MoveRight(WordRoot.WdUnits.wdCharacter);  // and move beyond it
+                     //theSelection.TypeText("\n");
                  }
                  if (LineCounter % 50 == 0 | ! Found)  //  Also write this at the end of the document
                  {
@@ -291,6 +292,7 @@ namespace WindowsFormsApplication1
              theApp.ScreenUpdating = true;  // turn on updating
              DateTime EndTime = DateTime.Now;
              TimeSpan ElapsedTime =  EndTime.Subtract(StartTime);
+             progressBar1.Value = progressBar1.Maximum;  // We've finished!
              boxProgress.Items.Add("Segmented in " +ElapsedTime.TotalSeconds.ToString() + " seconds");
              boxProgress.Items.Add((ElapsedTime.TotalSeconds/LineCounter).ToString() + " seconds per line");
          }
