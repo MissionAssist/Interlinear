@@ -30,9 +30,9 @@
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtLegacy = new System.Windows.Forms.TextBox();
-            this.btnGetLegacyFile = new System.Windows.Forms.Button();
-            this.btnSegmentLegacy = new System.Windows.Forms.Button();
+            this.txtInput = new System.Windows.Forms.TextBox();
+            this.btnGetInputFile = new System.Windows.Forms.Button();
+            this.btnSegmentInput = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
@@ -45,6 +45,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.WordsPerLine = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtWordCount = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,33 +66,33 @@
             this.label1.Text = "Input file name";
             this.label1.UseMnemonic = false;
             // 
-            // txtLegacy
+            // txtInput
             // 
-            this.txtLegacy.Location = new System.Drawing.Point(107, 53);
-            this.txtLegacy.Name = "txtLegacy";
-            this.txtLegacy.Size = new System.Drawing.Size(504, 20);
-            this.txtLegacy.TabIndex = 1;
+            this.txtInput.Location = new System.Drawing.Point(107, 53);
+            this.txtInput.Name = "txtInput";
+            this.txtInput.Size = new System.Drawing.Size(504, 20);
+            this.txtInput.TabIndex = 1;
             // 
-            // btnGetLegacyFile
+            // btnGetInputFile
             // 
-            this.btnGetLegacyFile.Location = new System.Drawing.Point(617, 53);
-            this.btnGetLegacyFile.Name = "btnGetLegacyFile";
-            this.btnGetLegacyFile.Size = new System.Drawing.Size(75, 23);
-            this.btnGetLegacyFile.TabIndex = 2;
-            this.btnGetLegacyFile.Text = "Browse";
-            this.btnGetLegacyFile.UseVisualStyleBackColor = true;
-            this.btnGetLegacyFile.Click += new System.EventHandler(this.btnGetLegacyFile_Click);
+            this.btnGetInputFile.Location = new System.Drawing.Point(617, 53);
+            this.btnGetInputFile.Name = "btnGetInputFile";
+            this.btnGetInputFile.Size = new System.Drawing.Size(75, 23);
+            this.btnGetInputFile.TabIndex = 2;
+            this.btnGetInputFile.Text = "Browse";
+            this.btnGetInputFile.UseVisualStyleBackColor = true;
+            this.btnGetInputFile.Click += new System.EventHandler(this.btnGetInputFile_Click);
             // 
-            // btnSegmentLegacy
+            // btnSegmentInput
             // 
-            this.btnSegmentLegacy.Enabled = false;
-            this.btnSegmentLegacy.Location = new System.Drawing.Point(-4, 144);
-            this.btnSegmentLegacy.Name = "btnSegmentLegacy";
-            this.btnSegmentLegacy.Size = new System.Drawing.Size(112, 52);
-            this.btnSegmentLegacy.TabIndex = 3;
-            this.btnSegmentLegacy.Text = "Segment  File";
-            this.btnSegmentLegacy.UseVisualStyleBackColor = true;
-            this.btnSegmentLegacy.Click += new System.EventHandler(this.btnSegmentLegacy_Click);
+            this.btnSegmentInput.Enabled = false;
+            this.btnSegmentInput.Location = new System.Drawing.Point(-4, 144);
+            this.btnSegmentInput.Name = "btnSegmentInput";
+            this.btnSegmentInput.Size = new System.Drawing.Size(112, 52);
+            this.btnSegmentInput.TabIndex = 3;
+            this.btnSegmentInput.Text = "Segment  File";
+            this.btnSegmentInput.UseVisualStyleBackColor = true;
+            this.btnSegmentInput.Click += new System.EventHandler(this.btnSegmentInput_Click);
             // 
             // btnClose
             // 
@@ -144,6 +146,7 @@
             // 
             // txtLineCount
             // 
+            this.txtLineCount.Enabled = false;
             this.txtLineCount.Location = new System.Drawing.Point(223, 176);
             this.txtLineCount.Name = "txtLineCount";
             this.txtLineCount.ReadOnly = true;
@@ -206,11 +209,30 @@
             0,
             0});
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(133, 145);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Word Count";
+            // 
+            // txtWordCount
+            // 
+            this.txtWordCount.Enabled = false;
+            this.txtWordCount.Location = new System.Drawing.Point(223, 144);
+            this.txtWordCount.Name = "txtWordCount";
+            this.txtWordCount.Size = new System.Drawing.Size(100, 20);
+            this.txtWordCount.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 416);
+            this.Controls.Add(this.txtWordCount);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.WordsPerLine);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -222,9 +244,9 @@
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnSegmentLegacy);
-            this.Controls.Add(this.btnGetLegacyFile);
-            this.Controls.Add(this.txtLegacy);
+            this.Controls.Add(this.btnSegmentInput);
+            this.Controls.Add(this.btnGetInputFile);
+            this.Controls.Add(this.txtInput);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Interlinear comparison";
@@ -238,9 +260,9 @@
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtLegacy;
-        private System.Windows.Forms.Button btnGetLegacyFile;
-        private System.Windows.Forms.Button btnSegmentLegacy;
+        private System.Windows.Forms.TextBox txtInput;
+        private System.Windows.Forms.Button btnGetInputFile;
+        private System.Windows.Forms.Button btnSegmentInput;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtOutput;
@@ -253,6 +275,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown WordsPerLine;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtWordCount;
     }
 }
 
