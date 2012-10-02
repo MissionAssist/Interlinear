@@ -47,7 +47,18 @@
             this.WordsPerLine = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.txtWordCount = new System.Windows.Forms.TextBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtExcelOutput = new System.Windows.Forms.TextBox();
+            this.btnGetExcelOutput = new System.Windows.Forms.Button();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtExpectedLines = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -96,7 +107,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(-4, 344);
+            this.btnClose.Location = new System.Drawing.Point(286, 373);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 44);
             this.btnClose.TabIndex = 4;
@@ -138,7 +149,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(130, 183);
+            this.label3.Location = new System.Drawing.Point(234, 207);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 8;
@@ -147,7 +158,7 @@
             // txtLineCount
             // 
             this.txtLineCount.Enabled = false;
-            this.txtLineCount.Location = new System.Drawing.Point(223, 176);
+            this.txtLineCount.Location = new System.Drawing.Point(327, 200);
             this.txtLineCount.Name = "txtLineCount";
             this.txtLineCount.ReadOnly = true;
             this.txtLineCount.Size = new System.Drawing.Size(108, 20);
@@ -155,7 +166,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(-5, 394);
+            this.progressBar1.Location = new System.Drawing.Point(5, 349);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(697, 18);
             this.progressBar1.TabIndex = 10;
@@ -163,15 +174,15 @@
             // boxProgress
             // 
             this.boxProgress.FormattingEnabled = true;
-            this.boxProgress.Location = new System.Drawing.Point(496, 176);
+            this.boxProgress.Location = new System.Drawing.Point(497, 144);
             this.boxProgress.Name = "boxProgress";
-            this.boxProgress.Size = new System.Drawing.Size(196, 212);
+            this.boxProgress.Size = new System.Drawing.Size(196, 121);
             this.boxProgress.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(568, 160);
+            this.label4.Location = new System.Drawing.Point(569, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 12;
@@ -212,7 +223,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(133, 145);
+            this.label6.Location = new System.Drawing.Point(237, 145);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 13);
             this.label6.TabIndex = 15;
@@ -221,16 +232,113 @@
             // txtWordCount
             // 
             this.txtWordCount.Enabled = false;
-            this.txtWordCount.Location = new System.Drawing.Point(223, 144);
+            this.txtWordCount.Location = new System.Drawing.Point(327, 144);
             this.txtWordCount.Name = "txtWordCount";
-            this.txtWordCount.Size = new System.Drawing.Size(100, 20);
+            this.txtWordCount.ReadOnly = true;
+            this.txtWordCount.Size = new System.Drawing.Size(108, 20);
             this.txtWordCount.TabIndex = 16;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(10, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(84, 17);
+            this.radioButton1.TabIndex = 17;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Legacy Font";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(10, 39);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(89, 17);
+            this.radioButton2.TabIndex = 18;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Unicode Font";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Location = new System.Drawing.Point(5, 212);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(112, 71);
+            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Font in file";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(14, 306);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(87, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Excel Output File";
+            // 
+            // txtExcelOutput
+            // 
+            this.txtExcelOutput.Location = new System.Drawing.Point(107, 299);
+            this.txtExcelOutput.Name = "txtExcelOutput";
+            this.txtExcelOutput.Size = new System.Drawing.Size(490, 20);
+            this.txtExcelOutput.TabIndex = 21;
+            // 
+            // btnGetExcelOutput
+            // 
+            this.btnGetExcelOutput.Location = new System.Drawing.Point(604, 298);
+            this.btnGetExcelOutput.Name = "btnGetExcelOutput";
+            this.btnGetExcelOutput.Size = new System.Drawing.Size(75, 23);
+            this.btnGetExcelOutput.TabIndex = 22;
+            this.btnGetExcelOutput.Text = "Browse";
+            this.btnGetExcelOutput.UseVisualStyleBackColor = true;
+            // 
+            // saveFileDialog2
+            // 
+            this.saveFileDialog2.Filter = "Excel WorkBook | .docx; .docx";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(241, 175);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 13);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Expected lines";
+            // 
+            // txtExpectedLines
+            // 
+            this.txtExpectedLines.Location = new System.Drawing.Point(327, 173);
+            this.txtExpectedLines.Name = "txtExpectedLines";
+            this.txtExpectedLines.ReadOnly = true;
+            this.txtExpectedLines.Size = new System.Drawing.Size(107, 20);
+            this.txtExpectedLines.TabIndex = 24;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(120, 154);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(92, 17);
+            this.checkBox1.TabIndex = 25;
+            this.checkBox1.Text = "Write to Excel";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 416);
+            this.ClientSize = new System.Drawing.Size(704, 414);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.txtExpectedLines);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.btnGetExcelOutput);
+            this.Controls.Add(this.txtExcelOutput);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtWordCount);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.WordsPerLine);
@@ -251,6 +359,8 @@
             this.Name = "Form1";
             this.Text = "Interlinear comparison";
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,6 +387,16 @@
         private System.Windows.Forms.NumericUpDown WordsPerLine;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtWordCount;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtExcelOutput;
+        private System.Windows.Forms.Button btnGetExcelOutput;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtExpectedLines;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
