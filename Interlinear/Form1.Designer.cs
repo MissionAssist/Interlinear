@@ -38,8 +38,6 @@
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.btnBrowseOutput = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtLineCount = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.boxProgress = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,9 +52,6 @@
             this.txtExcelOutput = new System.Windows.Forms.TextBox();
             this.btnGetExcelOutput = new System.Windows.Forms.Button();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtExpectedLines = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -146,24 +141,6 @@
             this.saveFileDialog1.DefaultExt = "doc";
             this.saveFileDialog1.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(234, 207);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Lines segmented";
-            // 
-            // txtLineCount
-            // 
-            this.txtLineCount.Enabled = false;
-            this.txtLineCount.Location = new System.Drawing.Point(327, 200);
-            this.txtLineCount.Name = "txtLineCount";
-            this.txtLineCount.ReadOnly = true;
-            this.txtLineCount.Size = new System.Drawing.Size(108, 20);
-            this.txtLineCount.TabIndex = 9;
-            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(5, 349);
@@ -174,15 +151,15 @@
             // boxProgress
             // 
             this.boxProgress.FormattingEnabled = true;
-            this.boxProgress.Location = new System.Drawing.Point(497, 144);
+            this.boxProgress.Location = new System.Drawing.Point(301, 144);
             this.boxProgress.Name = "boxProgress";
-            this.boxProgress.Size = new System.Drawing.Size(196, 121);
+            this.boxProgress.Size = new System.Drawing.Size(392, 147);
             this.boxProgress.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(569, 128);
+            this.label4.Location = new System.Drawing.Point(478, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 12;
@@ -219,11 +196,12 @@
             0,
             0,
             0});
+            this.WordsPerLine.ValueChanged += new System.EventHandler(this.WordsPerLine_ValueChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(234, 147);
+            this.label6.Location = new System.Drawing.Point(117, 147);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 13);
             this.label6.TabIndex = 15;
@@ -232,7 +210,7 @@
             // txtWordCount
             // 
             this.txtWordCount.Enabled = false;
-            this.txtWordCount.Location = new System.Drawing.Point(327, 144);
+            this.txtWordCount.Location = new System.Drawing.Point(187, 144);
             this.txtWordCount.Name = "txtWordCount";
             this.txtWordCount.ReadOnly = true;
             this.txtWordCount.Size = new System.Drawing.Size(108, 20);
@@ -300,41 +278,11 @@
             // 
             this.saveFileDialog2.Filter = "Excel WorkBook | .docx; .docx";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(234, 176);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 13);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Expected lines";
-            // 
-            // txtExpectedLines
-            // 
-            this.txtExpectedLines.Location = new System.Drawing.Point(327, 173);
-            this.txtExpectedLines.Name = "txtExpectedLines";
-            this.txtExpectedLines.ReadOnly = true;
-            this.txtExpectedLines.Size = new System.Drawing.Size(107, 20);
-            this.txtExpectedLines.TabIndex = 24;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(120, 154);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(92, 17);
-            this.checkBox1.TabIndex = 25;
-            this.checkBox1.Text = "Write to Excel";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 414);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.txtExpectedLines);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.btnGetExcelOutput);
             this.Controls.Add(this.txtExcelOutput);
             this.Controls.Add(this.label7);
@@ -346,8 +294,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.boxProgress);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.txtLineCount);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnBrowseOutput);
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.label2);
@@ -378,8 +324,6 @@
         private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Button btnBrowseOutput;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtLineCount;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ListBox boxProgress;
         private System.Windows.Forms.Label label4;
@@ -394,9 +338,6 @@
         private System.Windows.Forms.TextBox txtExcelOutput;
         private System.Windows.Forms.Button btnGetExcelOutput;
         private System.Windows.Forms.SaveFileDialog saveFileDialog2;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtExpectedLines;
-        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
