@@ -70,6 +70,7 @@ namespace WindowsFormsApplication1
             wrdApp.ScreenUpdating = false; // Turn off updating the screen
             wrdApp.ActiveWindow.ActivePane.View.ShowAll = false;  // Don't show special marks
             wrdApp.Selection.WholeStory(); // Make sure we've selected everything
+            wrdApp.ScreenUpdating = false; // Turn off screen updating
             InputDoc = wrdApp.ActiveDocument;
             InputDoc.ActiveWindow.View.Draft = true;  // Draft View
             InputDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
@@ -80,7 +81,9 @@ namespace WindowsFormsApplication1
             NumberOfWords = InputDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticWords, false);
 
             txtWordCount.Text = NumberOfWords.ToString(); // the number of words in the document
-
+            txtExpectedLines.Text = (NumberOfWords / WordsPerLine.Value).ToString();  // and the number of lines
+            boxProgress.Items.Add("Starting the cleanup...");
+            Application.DoEvents();
             /*
              * Now remove text boxes, etc. from the document to clean it up.
              * We end with a single, huge paragraph
@@ -89,6 +92,7 @@ namespace WindowsFormsApplication1
             DateTime EndTime = DateTime.Now;  //
             
             boxProgress.Items.Add("Cleaned the text in " + EndTime.Subtract(StartTime).ToString());
+            Application.DoEvents();
 
             /*
               * Now start splitting into a number of space-separated words, i.e. segmenting it.
@@ -108,7 +112,6 @@ namespace WindowsFormsApplication1
         }
         private void CleanWordText(WordApp theApp, Document theDoc )
         {
-            theApp.ScreenUpdating = false; // Turn off screen updating
          
             /*
              * Remove all shapes
@@ -221,7 +224,7 @@ namespace WindowsFormsApplication1
              {
                  Found = theSelection.Find.Execute(missing, false, false, false, false, false, missing, missing, missing, missing, WordRoot.WdReplace.wdReplaceAll,
                  missing, missing, missing, missing);
-                 Found = Found && Repeat;  // If repeat not set, then we only execute once.
+                 Found = Repeat && Found;  // If repeat not set, then we only execute once.
                  Application.DoEvents();
              }
          }
@@ -270,14 +273,14 @@ namespace WindowsFormsApplication1
                          }
                      }
                   }
-                 LineCounter++;
+                  LineCounter++;
                  if (Found)  // we still have some way to go so we add a paragraph marker
                  {
                      theSelection.InsertParagraphAfter();  // Add a paragraph mark
                      //theSelection.MoveRight(WordRoot.WdUnits.wdCharacter);  // and move beyond it
                      //theSelection.TypeText("\n");
                  }
-                 if (LineCounter % 50 == 0 | ! Found)  //  Also write this at the end of the document
+                 if (LineCounter % 50 == 0 || ! Found)  //  Also write this at the end of the document
                  {
                      txtLineCount.Text = LineCounter.ToString();  // Mark progress
                      progressBar1.Value = Math.Min(LineCounter * WordCount, progressBar1.Maximum);

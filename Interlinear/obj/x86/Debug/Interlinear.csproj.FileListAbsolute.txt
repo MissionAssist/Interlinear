@@ -1,8 +1,13 @@
 D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\bin\Debug\Interlinear.exe
 D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\bin\Debug\Interlinear.pdb
 D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
-D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
 D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.GenerateResource.Cache
 D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe
 D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb
 D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.ResolveComReference.cache
+D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.Properties.Resources.resources
+D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\bin\Debug\Interlinear.exe.manifest
+D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\bin\Debug\Interlinear.application
+D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.TrustInfo.xml
+D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe.manifest
+D:\Users\Stephen\documents\visual studio 2010\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.application
