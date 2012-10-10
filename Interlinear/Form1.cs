@@ -75,8 +75,11 @@ namespace Interlinear
 
                 OutputText.Text = Path.Combine(Path.GetDirectoryName(InputText.Text), Path.GetFileNameWithoutExtension(InputText.Text) +
                     " (Segmented)", Path.GetExtension(InputText.Text));
-                   
-               theSaveFileDialog.FileName = InputText.Text;
+
+                if (File.Exists(OutputText.Text))
+                {
+                    SegmentButton.Enabled = true;
+                }
 
         };
         }
@@ -107,6 +110,30 @@ namespace Interlinear
             }
  
         }
+        private void btnGetExcelOutput_Click(object sender, EventArgs e)
+        {
+            /*
+             * Handle the input file dialog.
+             */
+            if (saveExcelFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Button theButton = (Button)sender;  // A button click triggers this
+                txtExcelOutput.Text = saveExcelFileDialog.FileName;
+                chkLegacyToExcel.Enabled = true & txtExcelOutput.Text.Length > 0;
+                chkUnicodeToExcel.Enabled = true & txtExcelOutput.Text.Length > 0;
+                saveExcelFileDialog.FileName = txtExcelOutput.Text;
+                // Enable both write to Excel operations.
+                chkLegacyToExcel.Checked = true;
+                chkUnicodeToExcel.Checked = true;
+                // If the segmented files exist we can send them to Excel without resegmenting
+                btnLegacyToExcel.Enabled = File.Exists(txtLegacyOutput.Text);
+                btnUnicodeToExcel.Enabled = File.Exists(txtUnicodeOutput.Text);
+                btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text);
+
+            }
+
+        }
+
         private void btnSegmentInput_Click(object sender, EventArgs e)
         {
             Button theButton = (Button)sender;
@@ -521,20 +548,6 @@ namespace Interlinear
 
         }
 
-        private void btnGetExcelOutput_Click(object sender, EventArgs e)
-        {
-            /*
-             * Handle the input file dialog.
-             */
-            if (saveExcelFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txtExcelOutput.Text = saveExcelFileDialog.FileName;
-                chkLegacyToExcel.Enabled = true & txtExcelOutput.Text.Length > 0;
-                chkUnicodeToExcel.Enabled = true & txtExcelOutput.Text.Length > 0;
-                saveExcelFileDialog.FileName = txtExcelOutput.Text;
-            }
- 
-        }
         private int InitialiseExcel(ExcelApp excelApp, bool EvenRows, ref ExcelRoot.XlThemeColor CellColour)
         {
             string HeaderText;
@@ -609,7 +622,7 @@ namespace Interlinear
                 //ParagraphsMoved = wrdApp.Selection.MoveRight(WordRoot.WdUnits.wdParagraph, 1, WordRoot.WdMovementType.wdExtend);
                 if (CharactersMoved > 0)
                 {
-                    wrdApp.Selection.Copy(); // copy to clipboard
+                    //wrdApp.Selection.Copy(); // copy to clipboard
                     ExcelRoot.Range theCells = theWorkSheet.Cells[RowCounter, 1];  // get the cell
                     //
                     //  We'll retry pasting if we hit an error
@@ -618,13 +631,15 @@ namespace Interlinear
                     while (Failure && ErrorCounter < 3)
                     try
                     {
-                        theWorkSheet.Paste(theCells);
+                        //theWorkSheet.Paste(theCells);
+                        theCells.Value = wrdApp.Selection.Text;  // copy the Word selection to Excel
+                        theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font
                         ErrorCounter = 0;
                         Failure = false;
                     }
                     catch (Exception e)
                     {
-                        boxProgress.Items.Add("Paste error" + e.Message + " in row " + RowCounter.ToString());
+                        boxProgress.Items.Add("Copy error" + e.Message + " in row " + RowCounter.ToString());
                         ErrorCounter++;
                     }
                    
@@ -645,6 +660,48 @@ namespace Interlinear
             DateTime EndTime = DateTime.Now;
             boxProgress.Items.Add("Finished filling Excel in " + EndTime.Subtract(StartTime).TotalSeconds.ToString());
         }
+
+        private void SendToExcel_Click(object sender, EventArgs e)
+        {
+            Button theButton = (Button)sender;
+            bool EvenRows;
+            ExcelRoot.XlThemeColor CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent2;
+            Document theDoc;
+            if (theButton.Parent.Name == "grpLegacy")
+            {
+                EvenRows = false;
+                theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
+            }
+            else
+            {
+                EvenRows = true;
+                theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+            }
+            
+            // We'll send the information to Excel
+            int RowCounter = InitialiseExcel(excelApp, EvenRows, ref CellColour);
+            FillExcel(excelApp, wrdApp, RowCounter, CellColour);
+            theDoc.Close(false);
+            theDoc = null;
+
+        }
+        private void BothToExcel_Click(object sender, EventArgs e)
+        {
+            ExcelRoot.XlThemeColor CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent2;
+            // We'll send the information to Excel
+            Document theDoc;
+            theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
+
+            int RowCounter = InitialiseExcel(excelApp, false, ref CellColour);
+            FillExcel(excelApp, wrdApp, RowCounter, CellColour);
+            theDoc.Close(false);
+            theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+            RowCounter = InitialiseExcel(excelApp, true, ref CellColour);
+            FillExcel(excelApp, wrdApp, RowCounter, CellColour);
+            theDoc.Close(false);
+            theDoc = null;
+        }
+
              
     }
     
