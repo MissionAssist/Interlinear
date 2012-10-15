@@ -150,7 +150,7 @@
             this.tabControl1.Location = new System.Drawing.Point(10, 79);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(732, 416);
+            this.tabControl1.Size = new System.Drawing.Size(732, 452);
             this.tabControl1.TabIndex = 26;
             // 
             // Setup
@@ -474,7 +474,7 @@
             this.Progress.Location = new System.Drawing.Point(4, 22);
             this.Progress.Name = "Progress";
             this.Progress.Padding = new System.Windows.Forms.Padding(3);
-            this.Progress.Size = new System.Drawing.Size(724, 390);
+            this.Progress.Size = new System.Drawing.Size(724, 426);
             this.Progress.TabIndex = 1;
             this.Progress.Text = "Progress";
             this.Progress.UseVisualStyleBackColor = true;
@@ -492,7 +492,7 @@
             this.boxProgress.Location = new System.Drawing.Point(9, 6);
             this.boxProgress.Name = "boxProgress";
             this.boxProgress.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.boxProgress.Size = new System.Drawing.Size(709, 381);
+            this.boxProgress.Size = new System.Drawing.Size(709, 407);
             this.boxProgress.TabIndex = 28;
             // 
             // openUnicodeFileDialog
@@ -501,7 +501,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(304, 501);
+            this.btnClose.Location = new System.Drawing.Point(300, 537);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 44);
             this.btnClose.TabIndex = 27;

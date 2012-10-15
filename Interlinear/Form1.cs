@@ -88,24 +88,26 @@ namespace Interlinear
             Button theButton = (Button)sender;
             if (theButton.Parent.Text == "Legacy")
             {
-                HandleOutputFile(txtLegacyOutput, saveLegacyFileDialog, btnSegmentLegacy);
+                HandleOutputFile(txtLegacyInput, txtLegacyOutput, saveLegacyFileDialog, btnSegmentLegacy);
             }
             else
             {
-                HandleOutputFile(txtUnicodeOutput, saveUnicodeFileDialog, btnSegmentUnicode);
+                HandleOutputFile(txtUnicodeInput, txtUnicodeOutput, saveUnicodeFileDialog, btnSegmentUnicode);
             }
         }
-        private void HandleOutputFile (TextBox theTextBox, SaveFileDialog theDialog, Button SegmentButton)
+        private void HandleOutputFile (TextBox theInputBox, TextBox theOutputBox, SaveFileDialog theDialog, Button SegmentButton)
         {
             if (theDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
 
-                theTextBox.Text = theDialog.FileName;
-                SegmentButton.Enabled = true & theTextBox.Text.Length > 0;
+                theOutputBox.Text = theDialog.FileName;
+                SegmentButton.Enabled = theOutputBox.Text.Length > 0 && File.Exists(theInputBox.Text);  // only enable if both boxes filled in
                 /*
                  * If both individual segment buttons are enabled, we enable the segment both button, too.
                  */
                 btnSegmentBoth.Enabled = btnSegmentLegacy.Enabled && btnSegmentUnicode.Enabled;
+                btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text);
+
 
             }
  
@@ -133,7 +135,6 @@ namespace Interlinear
             }
 
         }
-
         private void btnSegmentInput_Click(object sender, EventArgs e)
         {
             Button theButton = (Button)sender;
@@ -176,7 +177,7 @@ namespace Interlinear
             // process Excel if desired
             if (SendToExcel.Checked)
             {
-                RowCounter = InitialiseExcel(excelApp, EvenRows,  ref CellColour);
+                RowCounter = InitialiseExcel(excelApp, EvenRows,  ref CellColour, theInputFile);
             }
              // Size the progressbar depending on how many replacments we do
             if (WordsPerLine.Value > 7)
@@ -548,12 +549,14 @@ namespace Interlinear
 
         }
 
-        private int InitialiseExcel(ExcelApp excelApp, bool EvenRows, ref ExcelRoot.XlThemeColor CellColour)
+        private int InitialiseExcel(ExcelApp excelApp, bool EvenRows, ref ExcelRoot.XlThemeColor CellColour, string FileName)
         {
             string HeaderText;
             int theRow;
             int RowCounter;
             bool CellFilled = true;
+            string StrippedFileName;
+            StrippedFileName = Path.GetFileName(FileName);  // Get the file name without the directory
             if (File.Exists(txtExcelOutput.Text))
             {
                 excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
@@ -572,13 +575,13 @@ namespace Interlinear
             if (EvenRows)
             {
                 theRow = 2;
-                HeaderText = "Unicode text in even rows";
+                HeaderText = "Unicode text in even rows from " + StrippedFileName ;
                 CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent2;
             }
             else
             {
                 theRow = 1;
-                HeaderText = "Legacy text in odd rows";
+                HeaderText = "Legacy text in odd rows from " + StrippedFileName;
                 CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent6;
 
             }
@@ -613,13 +616,17 @@ namespace Interlinear
             int CharactersMoved = 2;
             int ErrorCounter = 0;
             bool Failure = true;
+            int ParagraphCount = theDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticParagraphs);
+            boxProgress.Items.Add("There are " + ParagraphCount.ToString() + " paragraphs");
             // Go to the beginning of the document
+            Application.DoEvents();
             wrdApp.Selection.WholeStory();
             wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
+            int cellCounter = 0;
             while (CharactersMoved > 1)
             {
-                CharactersMoved = wrdApp.Selection.EndKey(WordRoot.WdUnits.wdLine, WordRoot.WdMovementType.wdExtend); // select to end of paragraph
-                //ParagraphsMoved = wrdApp.Selection.MoveRight(WordRoot.WdUnits.wdParagraph, 1, WordRoot.WdMovementType.wdExtend);
+                CharactersMoved = wrdApp.Selection.EndOf(WordRoot.WdUnits.wdParagraph, WordRoot.WdMovementType.wdExtend); // select to end of paragraph
+                //CharactersMoved = wrdApp.Selection.MoveRight(WordRoot.WdUnits.wdParagraph, 1, WordRoot.WdMovementType.wdExtend);
                 if (CharactersMoved > 0)
                 {
                     //wrdApp.Selection.Copy(); // copy to clipboard
@@ -632,7 +639,8 @@ namespace Interlinear
                     try
                     {
                         //theWorkSheet.Paste(theCells);
-                        theCells.Value = wrdApp.Selection.Text;  // copy the Word selection to Excel
+                        theCells.Interior.ThemeColor = CellColour;
+                        theCells.Value = wrdApp.Selection.FormattedText;  // copy the Word selection to Excel
                         theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font
                         ErrorCounter = 0;
                         Failure = false;
@@ -643,13 +651,18 @@ namespace Interlinear
                         ErrorCounter++;
                     }
                    
-                    theCells.Interior.ThemeColor = CellColour;
-                    //
+                   //
                     //  This manoeuver should detect the end of the document.
                     CharactersMoved = wrdApp.Selection.MoveRight(WordRoot.WdUnits.wdCharacter, 2, WordRoot.WdMovementType.wdMove); // move to the next two characters
                     wrdApp.Selection.MoveLeft(WordRoot.WdUnits.wdCharacter, 1, WordRoot.WdMovementType.wdMove); // and back one
                     RowCounter += 2;  // Increment the row
-                    if (RowCounter % 50 == 0)
+                    cellCounter++;  // and a counter
+                    if (cellCounter % (ParagraphCount/10) == 0)
+                    {
+                        boxProgress.Items.Add("Written " + cellCounter.ToString() + " rows");
+                        Application.DoEvents();
+                    }
+                    if (cellCounter % 50 == 0)
                     {
                         Application.DoEvents();
                     }
@@ -658,7 +671,7 @@ namespace Interlinear
             }
             excelApp.ActiveWorkbook.Save();
             DateTime EndTime = DateTime.Now;
-            boxProgress.Items.Add("Finished filling Excel in " + EndTime.Subtract(StartTime).TotalSeconds.ToString());
+            boxProgress.Items.Add("Finished filling " + cellCounter.ToString() + " rows in Excel in " + EndTime.Subtract(StartTime).TotalSeconds.ToString());
         }
 
         private void SendToExcel_Click(object sender, EventArgs e)
@@ -667,22 +680,28 @@ namespace Interlinear
             bool EvenRows;
             ExcelRoot.XlThemeColor CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent2;
             Document theDoc;
-            if (theButton.Parent.Name == "grpLegacy")
+            string FileName;
+            btnClose.Enabled = false;
+            tabControl1.SelectTab("Progress");
+            if (theButton.Parent.Text == "Legacy")
             {
                 EvenRows = false;
                 theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
+                FileName = txtLegacyOutput.Text;
             }
             else
             {
                 EvenRows = true;
                 theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+                FileName = txtUnicodeInput.Text;
             }
             
             // We'll send the information to Excel
-            int RowCounter = InitialiseExcel(excelApp, EvenRows, ref CellColour);
+            int RowCounter = InitialiseExcel(excelApp, EvenRows, ref CellColour, FileName);
             FillExcel(excelApp, wrdApp, RowCounter, CellColour);
             theDoc.Close(false);
             theDoc = null;
+            btnClose.Enabled = true;
 
         }
         private void BothToExcel_Click(object sender, EventArgs e)
@@ -690,16 +709,19 @@ namespace Interlinear
             ExcelRoot.XlThemeColor CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent2;
             // We'll send the information to Excel
             Document theDoc;
+            tabControl1.SelectTab("Progress");
+            btnClose.Enabled = false;
             theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
 
-            int RowCounter = InitialiseExcel(excelApp, false, ref CellColour);
+            int RowCounter = InitialiseExcel(excelApp, false, ref CellColour, txtLegacyOutput.Text);
             FillExcel(excelApp, wrdApp, RowCounter, CellColour);
             theDoc.Close(false);
             theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
-            RowCounter = InitialiseExcel(excelApp, true, ref CellColour);
+            RowCounter = InitialiseExcel(excelApp, true, ref CellColour, txtUnicodeOutput.Text);
             FillExcel(excelApp, wrdApp, RowCounter, CellColour);
             theDoc.Close(false);
             theDoc = null;
+            btnClose.Enabled = true;
         }
 
              
