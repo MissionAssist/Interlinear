@@ -610,12 +610,18 @@ namespace Interlinear
         {
             DateTime StartTime = DateTime.Now;
             boxProgress.Items.Add("Starting to fill Excel worksheet");
+            Application.DoEvents();
             // Get document and worksheet
             WordRoot.Document theDoc = wrdApp.ActiveDocument;
+            theDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure it isn't in reading layout.
             ExcelRoot.Worksheet theWorkSheet = excelApp.ActiveSheet;
+            excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationManual; // Don't calculate automatically.
             int CharactersMoved = 2;
             int ErrorCounter = 0;
             bool Failure = true;
+            string theText;
+            System.Text.RegularExpressions.Regex NonBreakingHyphen = new System.Text.RegularExpressions.Regex("\x1E", 
+                System.Text.RegularExpressions.RegexOptions.Multiline);  // Non-breaking hyphen
             int ParagraphCount = theDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticParagraphs);
             boxProgress.Items.Add("There are " + ParagraphCount.ToString() + " paragraphs");
             // Go to the beginning of the document
@@ -623,6 +629,7 @@ namespace Interlinear
             wrdApp.Selection.WholeStory();
             wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
             int cellCounter = 0;
+            //string Message = "";
             while (CharactersMoved > 1)
             {
                 CharactersMoved = wrdApp.Selection.EndOf(WordRoot.WdUnits.wdParagraph, WordRoot.WdMovementType.wdExtend); // select to end of paragraph
@@ -638,26 +645,26 @@ namespace Interlinear
                     while (Failure && ErrorCounter < 3)
                     try
                     {
-                        //theWorkSheet.Paste(theCells);
-                        theCells.Interior.ThemeColor = CellColour;
-                        theCells.Value = wrdApp.Selection.FormattedText;  // copy the Word selection to Excel
+                        theText = NonBreakingHyphen.Replace(wrdApp.Selection.Text, "-");
                         theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font
+                        theCells.Value = theText;  // copy the Word selection to Excel
+                        theCells.Interior.ThemeColor = CellColour;
                         ErrorCounter = 0;
                         Failure = false;
                     }
                     catch (Exception e)
                     {
-                        boxProgress.Items.Add("Copy error" + e.Message + " in row " + RowCounter.ToString());
+                        boxProgress.Items.Add("Copy error " + e.Message + " in row " + RowCounter.ToString());
                         ErrorCounter++;
                     }
                    
-                   //
+                    //
                     //  This manoeuver should detect the end of the document.
                     CharactersMoved = wrdApp.Selection.MoveRight(WordRoot.WdUnits.wdCharacter, 2, WordRoot.WdMovementType.wdMove); // move to the next two characters
                     wrdApp.Selection.MoveLeft(WordRoot.WdUnits.wdCharacter, 1, WordRoot.WdMovementType.wdMove); // and back one
                     RowCounter += 2;  // Increment the row
                     cellCounter++;  // and a counter
-                    if (cellCounter % (ParagraphCount/10) == 0)
+                    if (ParagraphCount > 10 && cellCounter % (ParagraphCount/10) == 0)
                     {
                         boxProgress.Items.Add("Written " + cellCounter.ToString() + " rows");
                         Application.DoEvents();
@@ -669,6 +676,8 @@ namespace Interlinear
 
                 }
             }
+            excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationAutomatic; // restore to automatic calculations
+            excelApp.CalculateBeforeSave = true;
             excelApp.ActiveWorkbook.Save();
             DateTime EndTime = DateTime.Now;
             boxProgress.Items.Add("Finished filling " + cellCounter.ToString() + " rows in Excel in " + EndTime.Subtract(StartTime).TotalSeconds.ToString());
