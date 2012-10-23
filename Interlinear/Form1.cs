@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Interlinear - a program to take two Word documents, segment them into paragraphs of up to 20 words in length and write them to Excel
+ * with the first (legacy) file in odd rows and the second (Unicode) file in even rows. This enables visual checking without the need to try
+ * to do side-by-side comparisons.  It depends on both Word and Excel being installed on the computer.
+ * 
+ * It was writting as part of a MissionAssist project to convert documents in legacy fonts to Unicode.  Much of the logic is attributable to
+ * Dennis Pepler, but the code here was written by Stephen Palmstrom.
+ * 
+ * Last modified on 23 October by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -173,7 +183,9 @@ namespace Interlinear
             DateTime StartTime = DateTime.Now;  // Get the start time
             int NumberOfWords;
             int RowCounter = 0;
+            progressBar1.Value = 0;
             ExcelRoot.XlThemeColor CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent1;
+            Application.DoEvents();
             try
             {
                 wrdApp.Documents.Open(theInputFile);
@@ -191,6 +203,10 @@ namespace Interlinear
             if (SendToExcel.Checked)
             {
                 RowCounter = InitialiseExcel(excelApp, EvenRows,  ref CellColour, theInputFile);
+                if (RowCounter == 0)
+                {
+                    return;  // we couldn't open the file
+                }
             }
              // Size the progressbar depending on how many replacments we do
             if (WordsPerLine.Value > 7)
@@ -201,7 +217,6 @@ namespace Interlinear
             {
                 progressBar1.Maximum = 2;
             }
-            progressBar1.Value = 0;
             /*
              * Set various Word options to optimise performance
              * 
@@ -237,9 +252,8 @@ namespace Interlinear
             Segment(wrdApp, wrdApp.Selection, (int)WordsPerLine.Value, NumberOfWords);
 
             InputDoc.SaveAs2(theOutputFile, InputDoc.SaveFormat); // Save in the same format as the input file
-            DateTime EndTime = DateTime.Now;
             boxProgress.Items.Add(Path.GetFileName(theOutputFile) + " saved after " + 
-                EndTime.Subtract(StartTime).TotalSeconds.ToString());
+                DateTime.Now.Subtract(StartTime).TotalSeconds.ToString());
             if (SendToExcel.Checked)
             {
                 // We'll send the information to Excel
@@ -248,7 +262,7 @@ namespace Interlinear
             wrdApp.ScreenUpdating = true; // turn on screen updating
             wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
             InputDoc.Close(false);
-            boxProgress.Items.Add("Completed in " + EndTime.Subtract(StartTime).ToString());
+            boxProgress.Items.Add("Completed in " + DateTime.Now.Subtract(StartTime).ToString());
  
         }
         private void CleanWordText(WordApp theApp, Document theDoc )
@@ -519,7 +533,7 @@ namespace Interlinear
              progressBar1.Value = progressBar1.Maximum;  // We've finished!
              boxProgress.Items.Add("Segmentation complete in " +ElapsedTime.TotalSeconds.ToString() + " seconds");
              int LineCounter = NumberofWords / WordCount;
-             boxProgress.Items.Add((ElapsedTime.TotalSeconds/LineCounter).ToString() + " seconds per line");
+             boxProgress.Items.Add((LineCounter/ElapsedTime.TotalSeconds).ToString() + " lines per second");
          }
         private void OneColumn(WordRoot._Application theApp)
         {
@@ -572,7 +586,18 @@ namespace Interlinear
             StrippedFileName = Path.GetFileName(FileName);  // Get the file name without the directory
             if (File.Exists(txtExcelOutput.Text))
             {
-                excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
+                try
+                {
+                    excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
+                }
+                catch (Exception e)
+                {
+                    DialogResult theResult = MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tabControl1.SelectTab("Setup");
+                    return 0;
+
+                }
+
             }
             else
             {
@@ -626,6 +651,7 @@ namespace Interlinear
             Application.DoEvents();
             // Get document and worksheet
             WordRoot.Document theDoc = wrdApp.ActiveDocument;
+            WordRoot.WdReadingOrder theReadingOrder;
             theDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure it isn't in reading layout.
             ExcelRoot.Worksheet theWorkSheet = excelApp.ActiveSheet;
             excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationManual; // Don't calculate automatically.
@@ -640,13 +666,19 @@ namespace Interlinear
             boxProgress.Items.Add("There are " + ParagraphCount.ToString() + " paragraphs");
             // Go to the beginning of the document
             Application.DoEvents();
+            // Initialise the progress bar
+            progressBar1.Maximum = ParagraphCount;
+            progressBar1.Value = 0;
+
             DisplayFrequency = Math.Min(ParagraphCount/10, 100);  // Display at least every 100 rows.
             wrdApp.Selection.WholeStory();
             wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
             int cellCounter = 0;
+            int ProgressCounter = 0;
             //string Message = "";
+
             DateTime Start = DateTime.Now;
-            DateTime End;
+
             while (CharactersMoved > 1)
             {
                 CharactersMoved = wrdApp.Selection.EndOf(WordRoot.WdUnits.wdParagraph, WordRoot.WdMovementType.wdExtend); // select to end of paragraph
@@ -659,11 +691,14 @@ namespace Interlinear
                     //  We'll retry pasting if we hit an error
                     //
                     Failure = true;  // Assume failure so we go into the loop.
+                    //DateTime Start1;
                     while (Failure && ErrorCounter < 3)
                     try
                     {
                         // Set the reading order based on the reading order of the originating paragraph.
-                        switch (wrdApp.Selection.ParagraphFormat.ReadingOrder)
+                        //Start1 = DateTime.Now;
+                        theReadingOrder = wrdApp.Selection.ParagraphFormat.ReadingOrder; // Get it once for speed.
+                        switch (theReadingOrder)
                         {
                             case WordRoot.WdReadingOrder.wdReadingOrderLtr:
                                 theCells.ReadingOrder = (int)ExcelRoot.Constants.xlLTR;
@@ -671,20 +706,32 @@ namespace Interlinear
                             case WordRoot.WdReadingOrder.wdReadingOrderRtl:
                                 theCells.ReadingOrder = (int)ExcelRoot.Constants.xlRTL;
                                 break;
+                            default:
+                                theCells.ReadingOrder = (int)ExcelRoot.Constants.xlContext; // this is the default, but we make sure of it.
+                                break;
                         }
-
+                        //boxProgress.Items.Add("Chosen reading order in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
+                        //Start1 = DateTime.Now;
                         theText = NonBreakingHyphen.Replace(wrdApp.Selection.Text, "-");
-                        theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font          
+                        //boxProgress.Items.Add("Replaced non-breaking hyphens in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
+                        //Start1 = DateTime.Now;
+                        theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font
+                        //boxProgress.Items.Add("Font name copied in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
+                        //Start1 = DateTime.Now;
                         theCells.Value = theText;  // copy the Word selection to Excel
+                        //boxProgress.Items.Add("Data copied in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
+                        //Start1 = DateTime.Now;
                         theCells.Interior.ThemeColor = CellColour;
                         theCells.HorizontalAlignment = ExcelRoot.Constants.xlLeft; // make sure we are left alighned
                         ErrorCounter = 0;
                         Failure = false;
+                        //Application.DoEvents();
                     }
                     catch (Exception e)
                     {
                         boxProgress.Items.Add("Copy error " + e.Message + " in row " + RowCounter.ToString());
                         ErrorCounter++;
+                        Application.DoEvents();
                     }
                    
                     //
@@ -695,9 +742,9 @@ namespace Interlinear
                     cellCounter++;  // and a counter
                     if (ParagraphCount > 10 && (cellCounter % DisplayFrequency == 0))
                     {
-                        End = DateTime.Now;
-                        boxProgress.Items.Add("Written " + cellCounter.ToString() + " rows in " + End.Subtract(Start).TotalSeconds.ToString());
-                        Start = End;
+                        boxProgress.Items.Add("Written " + cellCounter.ToString() + " rows in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
+                        ProgressCounter += cellCounter;
+                        progressBar1.Value = Math.Min(ProgressCounter, progressBar1.Maximum);  // show progress
                         Application.DoEvents();
                     }
                     if (cellCounter % 50 == 0)
@@ -710,8 +757,10 @@ namespace Interlinear
             excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationAutomatic; // restore to automatic calculations
             excelApp.CalculateBeforeSave = true;
             excelApp.ActiveWorkbook.Save();
-            DateTime EndTime = DateTime.Now;
-            boxProgress.Items.Add("Finished filling " + cellCounter.ToString() + " rows in Excel in " + EndTime.Subtract(StartTime).ToString());
+            progressBar1.Value = progressBar1.Maximum;
+            TimeSpan ElapsedTime = DateTime.Now.Subtract(StartTime);
+            boxProgress.Items.Add("Finished filling " + cellCounter.ToString() + " rows in Excel in " + ElapsedTime.ToString()
+                + " or " + (cellCounter/ElapsedTime.TotalSeconds).ToString() + " rows per second");
         }
 
         private void SendToExcel_Click(object sender, EventArgs e)
@@ -723,17 +772,26 @@ namespace Interlinear
             string FileName;
             btnClose.Enabled = false;
             tabControl1.SelectTab("Progress");
-            if (theButton.Parent.Text == "Legacy")
+            try
             {
-                EvenRows = false;
-                theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
-                FileName = txtLegacyOutput.Text;
+                if (theButton.Parent.Text == "Legacy")
+                {
+                    EvenRows = false;
+                    theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
+                    FileName = txtLegacyOutput.Text;
+                }
+                else
+                {
+                    EvenRows = true;
+                    theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+                    FileName = txtUnicodeInput.Text;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                EvenRows = true;
-                theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
-                FileName = txtUnicodeInput.Text;
+                DialogResult theResult = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tabControl1.SelectTab("Setup");
+                return;
             }
             
             // We'll send the information to Excel
@@ -751,12 +809,30 @@ namespace Interlinear
             Document theDoc;
             tabControl1.SelectTab("Progress");
             btnClose.Enabled = false;
-            theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
-
+            try
+            {
+                theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
+            }
+            catch (Exception ex)
+            {
+                DialogResult theResult = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tabControl1.SelectTab("Setup");
+                return;
+            }
             int RowCounter = InitialiseExcel(excelApp, false, ref CellColour, txtLegacyOutput.Text);
             FillExcel(excelApp, wrdApp, RowCounter, CellColour);
             theDoc.Close(false);
-            theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+            try 
+            {
+                theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+            }
+            catch (Exception ex)
+            {    
+                DialogResult theResult = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tabControl1.SelectTab("Setup");
+                return;
+            }
+
             RowCounter = InitialiseExcel(excelApp, true, ref CellColour, txtUnicodeOutput.Text);
             FillExcel(excelApp, wrdApp, RowCounter, CellColour);
             theDoc.Close(false);

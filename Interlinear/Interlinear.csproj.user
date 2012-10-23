@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>publish\</PublishUrlHistory>
-    <InstallUrlHistory />
+    <PublishUrlHistory>D:\users\Stephen\SkyDrive\Unicode Programs\Interlinear\|http://sdrv.ms/TPNCfL/|http://sdrv.ms/WFJpBp/|publish\</PublishUrlHistory>
+    <InstallUrlHistory>https://skydrive.live.com/%3fcid=c1bcb419809d5ef7&amp;id=C1BCB419809D5EF7%2521660/|http://sdrv.ms/TPNCfL/</InstallUrlHistory>
     <SupportUrlHistory />
-    <UpdateUrlHistory />
+    <UpdateUrlHistory>http://sdrv.ms/WFJpBp/|https://skydrive.live.com/embed%3fcid=C1BCB419809D5EF7&amp;resid=C1BCB419809D5EF7%2521660&amp;authkey=AOMmyWI9oSMdTOw/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
-    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <VerifyUploadedFiles>true</VerifyUploadedFiles>
   </PropertyGroup>
 </Project>
