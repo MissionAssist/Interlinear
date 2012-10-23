@@ -165,7 +165,7 @@
             this.Setup.Location = new System.Drawing.Point(4, 22);
             this.Setup.Name = "Setup";
             this.Setup.Padding = new System.Windows.Forms.Padding(3);
-            this.Setup.Size = new System.Drawing.Size(724, 390);
+            this.Setup.Size = new System.Drawing.Size(724, 426);
             this.Setup.TabIndex = 0;
             this.Setup.Text = "Setup";
             this.Setup.UseVisualStyleBackColor = true;
@@ -216,7 +216,7 @@
             this.grpUnicode.Controls.Add(this.btnSegmentUnicode);
             this.grpUnicode.Location = new System.Drawing.Point(0, 139);
             this.grpUnicode.Name = "grpUnicode";
-            this.grpUnicode.Size = new System.Drawing.Size(751, 130);
+            this.grpUnicode.Size = new System.Drawing.Size(724, 130);
             this.grpUnicode.TabIndex = 32;
             this.grpUnicode.TabStop = false;
             this.grpUnicode.Text = "Unicode";
@@ -339,9 +339,9 @@
             this.grpLegacy.Controls.Add(this.txtLegacyWordCount);
             this.grpLegacy.Controls.Add(this.label6);
             this.grpLegacy.Controls.Add(this.btnSegmentLegacy);
-            this.grpLegacy.Location = new System.Drawing.Point(4, 16);
+            this.grpLegacy.Location = new System.Drawing.Point(4, 0);
             this.grpLegacy.Name = "grpLegacy";
-            this.grpLegacy.Size = new System.Drawing.Size(751, 132);
+            this.grpLegacy.Size = new System.Drawing.Size(717, 133);
             this.grpLegacy.TabIndex = 31;
             this.grpLegacy.TabStop = false;
             this.grpLegacy.Text = "Legacy";
@@ -349,9 +349,9 @@
             // btnLegacyToExcel
             // 
             this.btnLegacyToExcel.Enabled = false;
-            this.btnLegacyToExcel.Location = new System.Drawing.Point(355, 82);
+            this.btnLegacyToExcel.Location = new System.Drawing.Point(340, 79);
             this.btnLegacyToExcel.Name = "btnLegacyToExcel";
-            this.btnLegacyToExcel.Size = new System.Drawing.Size(143, 42);
+            this.btnLegacyToExcel.Size = new System.Drawing.Size(173, 42);
             this.btnLegacyToExcel.TabIndex = 18;
             this.btnLegacyToExcel.Text = "Already segmented,  just send to Excel";
             this.btnLegacyToExcel.UseVisualStyleBackColor = true;
@@ -481,9 +481,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(9, 462);
+            this.progressBar1.Location = new System.Drawing.Point(9, 406);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(697, 18);
+            this.progressBar1.Size = new System.Drawing.Size(709, 18);
             this.progressBar1.TabIndex = 29;
             // 
             // boxProgress
@@ -492,7 +492,7 @@
             this.boxProgress.Location = new System.Drawing.Point(9, 6);
             this.boxProgress.Name = "boxProgress";
             this.boxProgress.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.boxProgress.Size = new System.Drawing.Size(709, 407);
+            this.boxProgress.Size = new System.Drawing.Size(709, 394);
             this.boxProgress.TabIndex = 28;
             // 
             // openUnicodeFileDialog
@@ -501,7 +501,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(300, 537);
+            this.btnClose.Location = new System.Drawing.Point(298, 553);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 44);
             this.btnClose.TabIndex = 27;

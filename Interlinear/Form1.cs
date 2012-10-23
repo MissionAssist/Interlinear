@@ -74,7 +74,8 @@ namespace Interlinear
                 }
 
                 OutputText.Text = Path.Combine(Path.GetDirectoryName(InputText.Text), Path.GetFileNameWithoutExtension(InputText.Text) +
-                    " (Segmented)", Path.GetExtension(InputText.Text));
+                    " (Segmented)" + Path.GetExtension(InputText.Text));
+                theSaveFileDialog.FileName = OutputText.Text;
 
                 if (File.Exists(OutputText.Text))
                 {
@@ -173,7 +174,19 @@ namespace Interlinear
             int NumberOfWords;
             int RowCounter = 0;
             ExcelRoot.XlThemeColor CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent1;
-            wrdApp.Documents.Open(theInputFile);
+            try
+            {
+                wrdApp.Documents.Open(theInputFile);
+            }
+            catch (Exception e)
+            {
+                DialogResult theResult = MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tabControl1.SelectTab("Setup");
+                return;
+
+            }
+
+
             // process Excel if desired
             if (SendToExcel.Checked)
             {
@@ -195,6 +208,12 @@ namespace Interlinear
              */
             boxProgress.Items.Add("**** Starting processing " + Path.GetFileName(theInputFile));
             Application.DoEvents();
+            InputDoc = wrdApp.ActiveDocument;
+            InputDoc.ActiveWindow.View.Draft = true;  // Draft View
+            InputDoc.ShowSpellingErrors = false;  // Don't show spelling errors
+            InputDoc.ShowGrammaticalErrors = false; // Don't show grammar errors
+            InputDoc.AutoHyphenation = false;
+            InputDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
             wrdApp.Options.Pagination = false;  // turn off background pagination
             wrdApp.Options.CheckGrammarAsYouType = false;   // Don't check grammar either
             wrdApp.Options.CheckSpellingAsYouType = false;  // Don't try to check spelling
@@ -202,12 +221,6 @@ namespace Interlinear
             wrdApp.ActiveWindow.ActivePane.View.ShowAll = false;  // Don't show special marks
             wrdApp.Selection.WholeStory(); // Make sure we've selected everything
             wrdApp.ScreenUpdating = false; // Turn off screen updating
-            InputDoc = wrdApp.ActiveDocument;
-            InputDoc.ActiveWindow.View.Draft = true;  // Draft View
-            InputDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
-            InputDoc.ShowSpellingErrors = false;  // Don't show spelling errors
-            InputDoc.ShowGrammaticalErrors = false; // Don't show grammar errors
-            InputDoc.AutoHyphenation = false;
             NumberOfWords = InputDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticWords, false);
             boxProgress.Items.Add("The document contains " + NumberOfWords.ToString() + " words");
 
@@ -618,6 +631,7 @@ namespace Interlinear
             excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationManual; // Don't calculate automatically.
             int CharactersMoved = 2;
             int ErrorCounter = 0;
+            int DisplayFrequency = 100; // Display after this number of paragraphs proccessed.
             bool Failure = true;
             string theText;
             System.Text.RegularExpressions.Regex NonBreakingHyphen = new System.Text.RegularExpressions.Regex("\x1E", 
@@ -626,10 +640,13 @@ namespace Interlinear
             boxProgress.Items.Add("There are " + ParagraphCount.ToString() + " paragraphs");
             // Go to the beginning of the document
             Application.DoEvents();
+            DisplayFrequency = Math.Min(ParagraphCount/10, 100);  // Display at least every 100 rows.
             wrdApp.Selection.WholeStory();
             wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
             int cellCounter = 0;
             //string Message = "";
+            DateTime Start = DateTime.Now;
+            DateTime End;
             while (CharactersMoved > 1)
             {
                 CharactersMoved = wrdApp.Selection.EndOf(WordRoot.WdUnits.wdParagraph, WordRoot.WdMovementType.wdExtend); // select to end of paragraph
@@ -645,10 +662,22 @@ namespace Interlinear
                     while (Failure && ErrorCounter < 3)
                     try
                     {
+                        // Set the reading order based on the reading order of the originating paragraph.
+                        switch (wrdApp.Selection.ParagraphFormat.ReadingOrder)
+                        {
+                            case WordRoot.WdReadingOrder.wdReadingOrderLtr:
+                                theCells.ReadingOrder = (int)ExcelRoot.Constants.xlLTR;
+                                break;
+                            case WordRoot.WdReadingOrder.wdReadingOrderRtl:
+                                theCells.ReadingOrder = (int)ExcelRoot.Constants.xlRTL;
+                                break;
+                        }
+
                         theText = NonBreakingHyphen.Replace(wrdApp.Selection.Text, "-");
-                        theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font
+                        theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font          
                         theCells.Value = theText;  // copy the Word selection to Excel
                         theCells.Interior.ThemeColor = CellColour;
+                        theCells.HorizontalAlignment = ExcelRoot.Constants.xlLeft; // make sure we are left alighned
                         ErrorCounter = 0;
                         Failure = false;
                     }
@@ -664,9 +693,11 @@ namespace Interlinear
                     wrdApp.Selection.MoveLeft(WordRoot.WdUnits.wdCharacter, 1, WordRoot.WdMovementType.wdMove); // and back one
                     RowCounter += 2;  // Increment the row
                     cellCounter++;  // and a counter
-                    if (ParagraphCount > 10 && cellCounter % (ParagraphCount/10) == 0)
+                    if (ParagraphCount > 10 && (cellCounter % DisplayFrequency == 0))
                     {
-                        boxProgress.Items.Add("Written " + cellCounter.ToString() + " rows");
+                        End = DateTime.Now;
+                        boxProgress.Items.Add("Written " + cellCounter.ToString() + " rows in " + End.Subtract(Start).TotalSeconds.ToString());
+                        Start = End;
                         Application.DoEvents();
                     }
                     if (cellCounter % 50 == 0)
@@ -680,7 +711,7 @@ namespace Interlinear
             excelApp.CalculateBeforeSave = true;
             excelApp.ActiveWorkbook.Save();
             DateTime EndTime = DateTime.Now;
-            boxProgress.Items.Add("Finished filling " + cellCounter.ToString() + " rows in Excel in " + EndTime.Subtract(StartTime).TotalSeconds.ToString());
+            boxProgress.Items.Add("Finished filling " + cellCounter.ToString() + " rows in Excel in " + EndTime.Subtract(StartTime).ToString());
         }
 
         private void SendToExcel_Click(object sender, EventArgs e)
