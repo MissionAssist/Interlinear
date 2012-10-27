@@ -579,16 +579,17 @@ namespace Interlinear
         private int InitialiseExcel(ExcelApp excelApp, bool EvenRows, ref ExcelRoot.XlThemeColor CellColour, string FileName)
         {
             string HeaderText;
+            string HeaderText1;
             int theRow;
             int RowCounter;
             bool CellFilled = true;
-            string StrippedFileName;
-            StrippedFileName = Path.GetFileName(FileName);  // Get the file name without the directory
+            string StrippedFileName = Path.GetFileName(FileName);  // Get the file name without the directory
+            ExcelRoot.Workbook theWorkbook;
             if (File.Exists(txtExcelOutput.Text))
             {
                 try
                 {
-                    excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
+                    theWorkbook = excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
                 }
                 catch (Exception e)
                 {
@@ -601,32 +602,52 @@ namespace Interlinear
             }
             else
             {
-                excelApp.Workbooks.Add();  // add it
-                excelApp.ActiveWorkbook.ActiveSheet.Columns("A").ColumnWidth = 100;  // and make the first column wide
-                excelApp.ActiveWorkbook.SaveAs(txtExcelOutput.Text);  // save it
+                theWorkbook = excelApp.Workbooks.Add();  // add it
+                if (theWorkbook.Sheets.Count < 3)
+                {
+                    theWorkbook.Sheets.Add(missing, missing, 3 - theWorkbook.Sheets.Count); // Add two sheets.
+                }
+                theWorkbook.Sheets[1].Name = "Interlinear";
+                theWorkbook.Sheets[2].Name = "Legacy";
+                theWorkbook.Sheets[3].Name = "Unicode";
+                theWorkbook.Sheets[1].Columns("B").ColumnWidth = 100;  // and make the second column wide
+                theWorkbook.SaveAs(txtExcelOutput.Text);  // save it
             }
-            // Now initialise the cells
-            ExcelRoot.Worksheet theWorkSheet = excelApp.ActiveSheet;
-            /*
+             /*
              * We start at row 2 if even rows, otherwise row 1
              */
             if (EvenRows)
             {
                 theRow = 2;
                 HeaderText = "Unicode text in even rows from " + StrippedFileName ;
+                HeaderText1 = "Even rows";
                 CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent2;
+                theWorkbook.Sheets[3].Clear(); // Select the sheet and clear it.
+
             }
             else
             {
                 theRow = 1;
                 HeaderText = "Legacy text in odd rows from " + StrippedFileName;
+                HeaderText1 = "Odd rows";
                 CellColour = ExcelRoot.XlThemeColor.xlThemeColorAccent6;
 
             }
-            // Write the header row
+            // Clear the individual sheets
+            ExcelRoot.Worksheet theWorkSheet = theWorkbook.Sheets[theRow + 1];
+            theWorkSheet.Cells.Select();
+            excelApp.Selection.Clear();
+            // Now initialise the interlinear sheet
+            theWorkbook.Sheets[1].Activate();   // make the first sheet active
+            theWorkSheet = theWorkbook.ActiveSheet;
             theWorkSheet.Range["A" + theRow.ToString()].Select();
-            excelApp.ActiveCell.FormulaR1C1 = HeaderText;
-            excelApp.Selection.Interior.ThemeColor = CellColour;
+            theWorkSheet.UsedRange.FormulaR1C1 = HeaderText1;
+            theWorkSheet.UsedRange.Interior.ThemeColor = CellColour;
+
+            theWorkSheet.Range["B" + theRow.ToString()].Select();
+            theWorkSheet.UsedRange.FormulaR1C1 = HeaderText;
+
+            theWorkSheet.UsedRange.Interior.ThemeColor = CellColour;
             //
             // Clear the remaining rows
             //
@@ -637,8 +658,7 @@ namespace Interlinear
                 CellFilled = theCells.Value != null;
                 if (CellFilled)
                 {
-                    theCells.Value = null;
-                    theCells.ClearFormats(); // Clear the formats
+                   theCells.Clear(); // Clear the cell
                 }
                 RowCounter += 2;  // Increment by 2
             }
@@ -648,119 +668,57 @@ namespace Interlinear
         {
             DateTime StartTime = DateTime.Now;
             boxProgress.Items.Add("Starting to fill Excel worksheet");
+            ExcelRoot.Workbook theWorkBook = excelApp.ActiveWorkbook;  // remember the document.
+            excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationManual; // Don't calculate automatically.
             Application.DoEvents();
             // Get document and worksheet
             WordRoot.Document theDoc = wrdApp.ActiveDocument;
-            WordRoot.WdReadingOrder theReadingOrder;
             theDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure it isn't in reading layout.
-            ExcelRoot.Worksheet theWorkSheet = excelApp.ActiveSheet;
-            excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationManual; // Don't calculate automatically.
-            int CharactersMoved = 2;
+            ExcelRoot.Worksheet theWorkSheet = theWorkBook.Sheets[RowCounter + 1];
             int ErrorCounter = 0;
-            int DisplayFrequency = 100; // Display after this number of paragraphs proccessed.
-            bool Failure = true;
-            string theText;
+            bool Failure;
+            /*
             System.Text.RegularExpressions.Regex NonBreakingHyphen = new System.Text.RegularExpressions.Regex("\x1E", 
                 System.Text.RegularExpressions.RegexOptions.Multiline);  // Non-breaking hyphen
+             */
             int ParagraphCount = theDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticParagraphs);
             boxProgress.Items.Add("There are " + ParagraphCount.ToString() + " paragraphs");
             // Go to the beginning of the document
             Application.DoEvents();
             // Initialise the progress bar
-            progressBar1.Maximum = ParagraphCount;
             progressBar1.Value = 0;
-
-            DisplayFrequency = Math.Min(ParagraphCount/10, 100);  // Display at least every 100 rows.
-            wrdApp.Selection.WholeStory();
-            wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
-            int cellCounter = 0;
-            int ProgressCounter = 0;
-            //string Message = "";
-
+            theDoc.ActiveWindow.Selection.WholeStory();
+            GlobalReplace(theDoc.ActiveWindow.Selection, "^~", "-", false, false); // replace non-breaking hyphens with hyphens
+            theDoc.ActiveWindow.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
+            theDoc.ActiveWindow.Selection.WholeStory();  // Select it all
             DateTime Start = DateTime.Now;
-
-            while (CharactersMoved > 1)
+            boxProgress.Items.Add("Copying document...");
+            theDoc.ActiveWindow.Selection.Copy(); // copy it.
+            boxProgress.Items.Add("Document copied in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
+            //string Message = "";
+            Start = DateTime.Now;
+            theWorkSheet = theWorkBook.Sheets[RowCounter +1];
+            Failure = true;  // Assume failure so we go into the loop.
+            while (Failure && ErrorCounter < 3)
             {
-                CharactersMoved = wrdApp.Selection.EndOf(WordRoot.WdUnits.wdParagraph, WordRoot.WdMovementType.wdExtend); // select to end of paragraph
-                //CharactersMoved = wrdApp.Selection.MoveRight(WordRoot.WdUnits.wdParagraph, 1, WordRoot.WdMovementType.wdExtend);
-                if (CharactersMoved > 0)
-                {
-                    //wrdApp.Selection.Copy(); // copy to clipboard
-                    ExcelRoot.Range theCells = theWorkSheet.Cells[RowCounter, 1];  // get the cell
-                    //
-                    //  We'll retry pasting if we hit an error
-                    //
-                    Failure = true;  // Assume failure so we go into the loop.
-                    //DateTime Start1;
-                    while (Failure && ErrorCounter < 3)
                     try
-                    {
-                        // Set the reading order based on the reading order of the originating paragraph.
-                        //Start1 = DateTime.Now;
-                        theReadingOrder = wrdApp.Selection.ParagraphFormat.ReadingOrder; // Get it once for speed.
-                        switch (theReadingOrder)
-                        {
-                            case WordRoot.WdReadingOrder.wdReadingOrderLtr:
-                                theCells.ReadingOrder = (int)ExcelRoot.Constants.xlLTR;
-                                break;
-                            case WordRoot.WdReadingOrder.wdReadingOrderRtl:
-                                theCells.ReadingOrder = (int)ExcelRoot.Constants.xlRTL;
-                                break;
-                            default:
-                                theCells.ReadingOrder = (int)ExcelRoot.Constants.xlContext; // this is the default, but we make sure of it.
-                                break;
-                        }
-                        //boxProgress.Items.Add("Chosen reading order in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
-                        //Start1 = DateTime.Now;
-                        theText = NonBreakingHyphen.Replace(wrdApp.Selection.Text, "-");
-                        //boxProgress.Items.Add("Replaced non-breaking hyphens in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
-                        //Start1 = DateTime.Now;
-                        theCells.Font.Name = wrdApp.Selection.Font.Name;  // and the font
-                        //boxProgress.Items.Add("Font name copied in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
-                        //Start1 = DateTime.Now;
-                        theCells.Value = theText;  // copy the Word selection to Excel
-                        //boxProgress.Items.Add("Data copied in " + DateTime.Now.Subtract(Start1).TotalSeconds.ToString());
-                        //Start1 = DateTime.Now;
-                        theCells.Interior.ThemeColor = CellColour;
-                        theCells.HorizontalAlignment = ExcelRoot.Constants.xlLeft; // make sure we are left alighned
-                        ErrorCounter = 0;
-                        Failure = false;
-                        //Application.DoEvents();
+                {
+                    theWorkSheet.Range["A" + (RowCounter+2).ToString()].PasteSpecial(ExcelRoot.XlPasteType.xlPasteAll); 
                     }
-                    catch (Exception e)
-                    {
-                        boxProgress.Items.Add("Copy error " + e.Message + " in row " + RowCounter.ToString());
-                        ErrorCounter++;
-                        Application.DoEvents();
-                    }
-                   
-                    //
-                    //  This manoeuver should detect the end of the document.
-                    CharactersMoved = wrdApp.Selection.MoveRight(WordRoot.WdUnits.wdCharacter, 2, WordRoot.WdMovementType.wdMove); // move to the next two characters
-                    wrdApp.Selection.MoveLeft(WordRoot.WdUnits.wdCharacter, 1, WordRoot.WdMovementType.wdMove); // and back one
-                    RowCounter += 2;  // Increment the row
-                    cellCounter++;  // and a counter
-                    if (ParagraphCount > 10 && (cellCounter % DisplayFrequency == 0))
-                    {
-                        boxProgress.Items.Add("Written " + cellCounter.ToString() + " rows in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
-                        ProgressCounter += cellCounter;
-                        progressBar1.Value = Math.Min(ProgressCounter, progressBar1.Maximum);  // show progress
-                        Application.DoEvents();
-                    }
-                    if (cellCounter % 50 == 0)
-                    {
-                        Application.DoEvents();
-                    }
-
+                catch (Exception e)
+                {
+                    boxProgress.Items.Add("Copy error " + e.Message + " in row " + RowCounter.ToString());
+                    ErrorCounter++;
+                    Application.DoEvents();
                 }
             }
+            boxProgress.Items.Add("Document pasted in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
+            Application.DoEvents();
             excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationAutomatic; // restore to automatic calculations
             excelApp.CalculateBeforeSave = true;
-            excelApp.ActiveWorkbook.Save();
+            theWorkBook.Save();
             progressBar1.Value = progressBar1.Maximum;
-            TimeSpan ElapsedTime = DateTime.Now.Subtract(StartTime);
-            boxProgress.Items.Add("Finished filling " + cellCounter.ToString() + " rows in Excel in " + ElapsedTime.ToString()
-                + " or " + (cellCounter/ElapsedTime.TotalSeconds).ToString() + " rows per second");
+            boxProgress.Items.Add("Finished filling Excel in " + DateTime.Now.Subtract(StartTime).ToString());
         }
 
         private void SendToExcel_Click(object sender, EventArgs e)
