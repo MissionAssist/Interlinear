@@ -73,6 +73,7 @@
             this.boxProgress = new System.Windows.Forms.ListBox();
             this.openUnicodeFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnInterlinear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
@@ -155,6 +156,7 @@
             // 
             // Setup
             // 
+            this.Setup.Controls.Add(this.btnInterlinear);
             this.Setup.Controls.Add(this.btnBothToExcel);
             this.Setup.Controls.Add(this.label4);
             this.Setup.Controls.Add(this.btnSegmentBoth);
@@ -173,7 +175,7 @@
             // btnBothToExcel
             // 
             this.btnBothToExcel.Enabled = false;
-            this.btnBothToExcel.Location = new System.Drawing.Point(359, 316);
+            this.btnBothToExcel.Location = new System.Drawing.Point(159, 315);
             this.btnBothToExcel.Name = "btnBothToExcel";
             this.btnBothToExcel.Size = new System.Drawing.Size(143, 42);
             this.btnBothToExcel.TabIndex = 35;
@@ -245,15 +247,15 @@
             // 
             // txtUnicodeInput
             // 
-            this.txtUnicodeInput.Location = new System.Drawing.Point(107, 19);
+            this.txtUnicodeInput.Location = new System.Drawing.Point(111, 19);
             this.txtUnicodeInput.Name = "txtUnicodeInput";
-            this.txtUnicodeInput.Size = new System.Drawing.Size(504, 20);
+            this.txtUnicodeInput.Size = new System.Drawing.Size(500, 20);
             this.txtUnicodeInput.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 22);
+            this.label8.Location = new System.Drawing.Point(-2, 19);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(76, 13);
             this.label8.TabIndex = 0;
@@ -273,17 +275,17 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 56);
+            this.label9.Location = new System.Drawing.Point(-2, 56);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 13);
+            this.label9.Size = new System.Drawing.Size(111, 13);
             this.label9.TabIndex = 5;
-            this.label9.Text = "Output File Name";
+            this.label9.Text = "Segmented File Name";
             // 
             // txtUnicodeOutput
             // 
-            this.txtUnicodeOutput.Location = new System.Drawing.Point(107, 53);
+            this.txtUnicodeOutput.Location = new System.Drawing.Point(111, 53);
             this.txtUnicodeOutput.Name = "txtUnicodeOutput";
-            this.txtUnicodeOutput.Size = new System.Drawing.Size(504, 20);
+            this.txtUnicodeOutput.Size = new System.Drawing.Size(500, 20);
             this.txtUnicodeOutput.TabIndex = 6;
             // 
             // GetUnicodeOutput
@@ -378,7 +380,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 22);
+            this.label1.Location = new System.Drawing.Point(3, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
@@ -398,11 +400,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 56);
+            this.label2.Location = new System.Drawing.Point(-3, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 13);
+            this.label2.Size = new System.Drawing.Size(111, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Output File Name";
+            this.label2.Text = "Segmented File Name";
             // 
             // txtLegacyOutput
             // 
@@ -509,6 +511,17 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // btnInterlinear
+            // 
+            this.btnInterlinear.Enabled = false;
+            this.btnInterlinear.Location = new System.Drawing.Point(322, 317);
+            this.btnInterlinear.Name = "btnInterlinear";
+            this.btnInterlinear.Size = new System.Drawing.Size(106, 41);
+            this.btnInterlinear.TabIndex = 36;
+            this.btnInterlinear.Text = "Build Interlinear Worksheet";
+            this.btnInterlinear.UseVisualStyleBackColor = true;
+            this.btnInterlinear.Click += new System.EventHandler(this.btnInterlinear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -581,6 +594,7 @@
         private System.Windows.Forms.Button btnBothToExcel;
         private System.Windows.Forms.Button btnUnicodeToExcel;
         private System.Windows.Forms.Button btnLegacyToExcel;
+        private System.Windows.Forms.Button btnInterlinear;
     }
 }
 
