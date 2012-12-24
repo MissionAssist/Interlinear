@@ -6,7 +6,7 @@
  * It was writting as part of a MissionAssist project to convert documents in legacy fonts to Unicode.  Much of the logic is attributable to
  * Dennis Pepler, but the code here was written by Stephen Palmstrom.
  * 
- * Last modified on 23 October by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
+ * Last modified on 15 December 2012 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
 */
 using System;
 using System.Collections.Generic;
@@ -349,9 +349,12 @@ namespace Interlinear
                 // Clear all tabs, paragraph markers, section breaks, manual line feeds, column breaks and manual page breaks.
                 // ^m also deals with section breaks when wildcards are on.
                 GlobalReplace(theApp.Selection, "[^9^11^13^14^12^m]", theSpace, false, true);
+             
 
                  // Clear all multiple spaces
                 GlobalReplace(theApp.Selection, "  ", theSpace, true, false);
+                // And this strange character found in some documents:  (F020)
+                GlobalReplace(theApp.Selection, "", theSpace, true, false);
  
                 // Clear the final space
                 GlobalReplace(theApp.Selection, " ^p", "", false, false);
@@ -467,24 +470,17 @@ namespace Interlinear
             theSelection.Find.MatchControl = false;
             theSelection.Find.MatchAllWordForms = false;
             theSelection.Find.MatchSoundsLike = false;
-            const string WildCards = "([! ]@ )";
+            const string WildCards = "([! ]@[ |])"; // Word ending in a space
             theSelection.Find.Text = "";  // Clear the find string
             /*
             * Build up the search string
              * 
-             * If the words per line we want at the end are more than seven, we need to do the replacement
+             * If the words per line we want at the end are more than three, we need to do the replacement
              * in two stages as otherwise the wildcard expression gets too complicated.
             */
-            int MaxWordPerLine = 4;
-            if (WordCount <= 7)
-            {
-                MaxWordPerLine = 7; 
-            }
-            for (int i = 1; i <= Math.Min(WordCount, MaxWordPerLine); i++)
-            {
-                theSelection.Find.Text += WildCards;
+            int MaxWordPerLine = 2;
+            theSelection.Find.Text = WildCards + WildCards;  // We can only handle two or three words at a time
 
-            }
 
             // Now do the first replacement
             boxProgress.Items.Add("Starting segmentation first pass");
@@ -502,14 +498,14 @@ namespace Interlinear
 
 
             /*
-             * If the WordCount > 4, we assume 8 etc.
+             * If the WordCount > 2, we assume 4, 6, 8 etc.
              */
-            if (WordCount > 7)
+            if (WordCount > MaxWordPerLine)
             {
                 const string Paragraphs = "(*)^13";  // Match anything ending with a paragraph
                 theSelection.Find.Text = "";
                 theSelection.Find.Replacement.Text = "";
-                for (int i = 1; i <= WordCount / 4; i++)
+                for (int i = 1; i <= WordCount / MaxWordPerLine; i++)
                 {
                     theSelection.Find.Text += Paragraphs; // build up the search string
                     theSelection.Find.Replacement.Text += "\\" + i.ToString();
@@ -656,7 +652,7 @@ namespace Interlinear
             /*
              * Generate the header messages
              */
-            HeaderText[RowCounter - 1] += theMessage[RowCounter - 1] + Path.GetFileName(theDoc.FullName);
+            HeaderText[RowCounter - 1] = theMessage[RowCounter - 1] + Path.GetFileName(theDoc.FullName);
               /*
             System.Text.RegularExpressions.Regex NonBreakingHyphen = new System.Text.RegularExpressions.Regex("\x1E", 
                 System.Text.RegularExpressions.RegexOptions.Multiline);  // Non-breaking hyphen

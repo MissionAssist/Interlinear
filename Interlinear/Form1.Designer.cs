@@ -39,6 +39,7 @@
             this.Wordcount = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
+            this.btnInterlinear = new System.Windows.Forms.Button();
             this.btnBothToExcel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSegmentBoth = new System.Windows.Forms.Button();
@@ -73,7 +74,6 @@
             this.boxProgress = new System.Windows.Forms.ListBox();
             this.openUnicodeFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnInterlinear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
@@ -103,6 +103,11 @@
             // 
             // WordsPerLine
             // 
+            this.WordsPerLine.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.WordsPerLine.Location = new System.Drawing.Point(111, 53);
             this.WordsPerLine.Maximum = new decimal(new int[] {
             20,
@@ -171,6 +176,17 @@
             this.Setup.TabIndex = 0;
             this.Setup.Text = "Setup";
             this.Setup.UseVisualStyleBackColor = true;
+            // 
+            // btnInterlinear
+            // 
+            this.btnInterlinear.Enabled = false;
+            this.btnInterlinear.Location = new System.Drawing.Point(322, 317);
+            this.btnInterlinear.Name = "btnInterlinear";
+            this.btnInterlinear.Size = new System.Drawing.Size(106, 41);
+            this.btnInterlinear.TabIndex = 36;
+            this.btnInterlinear.Text = "Build Interlinear Worksheet";
+            this.btnInterlinear.UseVisualStyleBackColor = true;
+            this.btnInterlinear.Click += new System.EventHandler(this.btnInterlinear_Click);
             // 
             // btnBothToExcel
             // 
@@ -510,17 +526,6 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnInterlinear
-            // 
-            this.btnInterlinear.Enabled = false;
-            this.btnInterlinear.Location = new System.Drawing.Point(322, 317);
-            this.btnInterlinear.Name = "btnInterlinear";
-            this.btnInterlinear.Size = new System.Drawing.Size(106, 41);
-            this.btnInterlinear.TabIndex = 36;
-            this.btnInterlinear.Text = "Build Interlinear Worksheet";
-            this.btnInterlinear.UseVisualStyleBackColor = true;
-            this.btnInterlinear.Click += new System.EventHandler(this.btnInterlinear_Click);
             // 
             // Form1
             // 
