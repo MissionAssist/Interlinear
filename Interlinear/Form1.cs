@@ -6,7 +6,7 @@
  * It was writting as part of a MissionAssist project to convert documents in legacy fonts to Unicode.  Much of the logic is attributable to
  * Dennis Pepler, but the code here was written by Stephen Palmstrom.
  * 
- * Last modified on 15 December 2012 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
+ * Last modified on 1 April 2013 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
 */
 using System;
 using System.Collections.Generic;
@@ -156,6 +156,7 @@ namespace Interlinear
         {
             Button theButton = (Button)sender;
             theButton.Enabled = false;  // Disable as we have started running.
+            btnClose.Enabled = false;
             tabControl1.SelectTab("Progress");
             Application.DoEvents();
             if (theButton.Parent.Text == "Legacy")
@@ -167,6 +168,7 @@ namespace Interlinear
                 SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, true);
             }
             theButton.Enabled = true;  // enable it again
+            btnClose.Enabled = true;
             Application.DoEvents();
 
         }
@@ -176,13 +178,15 @@ namespace Interlinear
             Button theButton = (Button)sender;
             tabControl1.SelectTab("Progress");
             theButton.Enabled = false;
+            btnClose.Enabled = false;
             SegmentFile(txtLegacyInput.Text, txtLegacyOutput.Text, txtLegacyWordCount, chkLegacyToExcel, false);
             SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, true);
             if (chkLegacyToExcel.Checked || chkUnicodeToExcel.Checked)
             {
                 MakeInterlinear(excelApp);  // Make the interlinear worksheet, too
             }
-            theButton.Enabled=true;
+            theButton.Enabled = true;
+            btnClose.Enabled = true;
         }
         private void SegmentFile(String theInputFile, String theOutputFile, TextBox txtNumberOfWords, CheckBox SendToExcel, bool EvenRows)
         {
@@ -194,6 +198,7 @@ namespace Interlinear
             int NumberOfWords;
             int RowCounter = 0;
             progressBar1.Value = 0;
+
             Application.DoEvents();
             try
             {
@@ -280,7 +285,7 @@ namespace Interlinear
                 DateTime StartTime = DateTime.Now;
                 int Counter;
                 boxProgress.Items.Add("Starting to clean the document...");
-                /* Make sure we are in the active pane of the Document
+                 /* Make sure we are in the active pane of the Document
                   * rather than headers, footers, or other spots
                   */
 
@@ -292,36 +297,16 @@ namespace Interlinear
                     }
                 }
                 /*
-                 * Remove all shapes
+                 * Remove all shapes.  We seem to need several passes to remove them all for some reason.
                  * 
                  */
-                Counter = 0;
-                DateTime StartTime2 = DateTime.Now;
-                foreach (WordRoot.Shape theShape in theDoc.Shapes)
-                {
-                
-                    if (theShape.Type == Office.MsoShapeType.msoTextBox)
-                    {
-                        theShape.ConvertToInlineShape();
+                 while (RemoveShapes(theApp, theDoc) > 0) ;
  
-                        theShape.Delete();
-                        Counter++;
-                        if (Counter % 100 == 0)
-                        {
-                            boxProgress.Items.Add("Deleted " + Counter.ToString() + " shapes");
-                            Application.DoEvents();
-                        }
-                    }
-
-                }
-                DateTime EndTime = DateTime.Now;
-                boxProgress.Items.Add("Removed " + Counter.ToString() + " textboxes in " + EndTime.Subtract(StartTime2).TotalSeconds.ToString() + " seconds");
-                Application.DoEvents();
  
                 /*
                  * Remove all frames
                  */
-                StartTime2 = DateTime.Now;
+                DateTime StartTime2 = DateTime.Now;
                 Counter = 0;
                 foreach (WordRoot.Frame theFrame in theDoc.Frames)
                 {
@@ -337,8 +322,28 @@ namespace Interlinear
 
 
                 }
-                EndTime = DateTime.Now;
+                DateTime EndTime = DateTime.Now;
                 boxProgress.Items.Add("Removed " + Counter.ToString() + " frames in " + EndTime.Subtract(StartTime2).TotalSeconds.ToString() + " seconds");
+                Application.DoEvents();                /*
+                 /*
+                  * Convert tables to text
+                  */
+                StartTime2 = DateTime.Now;
+                Counter = 0;
+                foreach (WordRoot.Table theTable in theDoc.Tables)
+                {
+
+                    theTable.Rows.ConvertToText(WordRoot.WdTableFieldSeparator.wdSeparateByTabs, true);
+                    Counter++;
+                    if (Counter % 100 == 0)
+                    {
+                        boxProgress.Items.Add("Converted " + Counter.ToString() + " tables");
+                        Application.DoEvents();
+                    }
+
+                }
+                EndTime = DateTime.Now;
+                boxProgress.Items.Add("Converted " + Counter.ToString() + " tables in " + EndTime.Subtract(StartTime2).TotalSeconds.ToString() + " seconds");
                 Application.DoEvents();
 
 
@@ -723,6 +728,7 @@ namespace Interlinear
             excelApp.Selection.Clear();
             // now fill it in
             ExcelRoot.Range theCells;
+            ExcelRoot.Range SourceCells;
             for (int theRow = 1; theRow <= 2; theRow++)
             {
                 theCells = theWorkSheet.Cells[theRow, 1];
@@ -734,6 +740,9 @@ namespace Interlinear
                 theCells = theWorkSheet.Cells[theRow + 2, 1];
                 theCells.Select();
                 theCells.FormulaR1C1 = "=" + theWorkBook.Sheets[theRow + 1].Name + "!RC";
+                // Copy the font name from the source cells.
+                SourceCells = theWorkBook.Sheets[theRow + 1].cells[theRow + 2, 1];
+                theCells.Font.Name = SourceCells.Font.Name;
                 theCells.Interior.Color = CellColour[theRow - 1];
                 theCells.HorizontalAlignment = ExcelRoot.XlHAlign.xlHAlignLeft;
             }
@@ -838,6 +847,84 @@ namespace Interlinear
         }
 
              
+
+        private int RemoveShapes(WordApp theApp, Document theDoc)
+        {
+                DateTime StartTime2 = DateTime.Now;
+                DateTime EndTime;
+                int TotalCounter = 0;
+                int Counter = 0;
+                int TableCounter = 0;
+                // Remove shapes
+                foreach (WordRoot.Shape theShape in theDoc.Shapes)
+                {
+
+                    if (theShape.Type == Office.MsoShapeType.msoTextBox || theShape.Type == Office.MsoShapeType.msoGroup)
+                    {
+                        if (theShape.Type == Office.MsoShapeType.msoTextBox)
+                        {
+                            theShape.ConvertToInlineShape();
+                            theShape.Delete();
+                        }
+                        else
+                        {
+                            theShape.Select();
+                            theApp.Selection.Delete();
+                        }
+                        Counter++;
+                        if (Counter % 100 == 0)
+                        {
+                            boxProgress.Items.Add("Deleted " + Counter.ToString() + " shapes");
+                            Application.DoEvents();
+                        }
+                    }
+                    else
+                    {
+                        if (theShape.Type == Office.MsoShapeType.msoTable)
+                        // Convert the table to text
+                        {
+                            WordRoot.Table theTable = (WordRoot.Table)theShape;
+                            theTable.Rows.ConvertToText(WordRoot.WdTableFieldSeparator.wdSeparateByTabs, true);
+                            TableCounter++;
+                            if (Counter % 100 == 0)
+                            {
+                                boxProgress.Items.Add("Converted " + TableCounter.ToString() + " tables");
+                                Application.DoEvents();
+                            }
+
+                        }
+                    }
+ 
+                }
+ 
+                EndTime = DateTime.Now;
+                boxProgress.Items.Add("Removed or converted  " + (TableCounter + Counter).ToString() + " shapes in " + EndTime.Subtract(StartTime2).TotalSeconds.ToString() + " seconds");
+                Application.DoEvents();
+                TotalCounter += Counter + TableCounter;
+
+                /*
+                * Remove all inline shapes
+                */
+                StartTime2 = DateTime.Now;
+                Counter = 0;
+                foreach (WordRoot.InlineShape theShape in theDoc.InlineShapes)
+                {
+                    theShape.Delete(); // and delete the frame
+                    Counter++;
+                    if (Counter % 100 == 0)
+                    {
+                        boxProgress.Items.Add("Deleted " + Counter.ToString() + " inline shapes");
+                        Application.DoEvents();
+                    }
+
+
+                }
+                EndTime = DateTime.Now;
+                boxProgress.Items.Add("Removed " + Counter.ToString() + " inline shapes in " + EndTime.Subtract(StartTime2).TotalSeconds.ToString() + " seconds");
+                Application.DoEvents();
+                TotalCounter += Counter;
+                return TotalCounter;
+        }
+                                              
     }
-    
 };
