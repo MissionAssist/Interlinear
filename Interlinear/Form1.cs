@@ -6,7 +6,7 @@
  * It was writting as part of a MissionAssist project to convert documents in legacy fonts to Unicode.  Much of the logic is attributable to
  * Dennis Pepler, but the code here was written by Stephen Palmstrom.
  * 
- * Last modified on 1 April 2013 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
+ * Last modified on 2 April 2013 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
 */
 using System;
 using System.Collections.Generic;
@@ -96,6 +96,9 @@ namespace Interlinear
                 {
                     SegmentButton.Enabled = true;
                 }
+                btnSegmentBoth.Enabled = btnSegmentLegacy.Enabled && btnSegmentUnicode.Enabled;
+                btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text) && txtExcelOutput.Text.Length > 0;
+
 
         };
         }
@@ -157,6 +160,8 @@ namespace Interlinear
             Button theButton = (Button)sender;
             theButton.Enabled = false;  // Disable as we have started running.
             btnClose.Enabled = false;
+            boxProgress.Items.Clear();  // empty the progress box
+
             tabControl1.SelectTab("Progress");
             Application.DoEvents();
             if (theButton.Parent.Text == "Legacy")
@@ -179,6 +184,7 @@ namespace Interlinear
             tabControl1.SelectTab("Progress");
             theButton.Enabled = false;
             btnClose.Enabled = false;
+            boxProgress.Items.Clear();  // empty the progress box
             SegmentFile(txtLegacyInput.Text, txtLegacyOutput.Text, txtLegacyWordCount, chkLegacyToExcel, false);
             SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, true);
             if (chkLegacyToExcel.Checked || chkUnicodeToExcel.Checked)
@@ -198,7 +204,7 @@ namespace Interlinear
             int NumberOfWords;
             int RowCounter = 0;
             progressBar1.Value = 0;
-
+ 
             Application.DoEvents();
             try
             {
@@ -284,6 +290,7 @@ namespace Interlinear
         {
                 DateTime StartTime = DateTime.Now;
                 int Counter;
+                theDoc.Activate();
                 boxProgress.Items.Add("Starting to clean the document...");
                  /* Make sure we are in the active pane of the Document
                   * rather than headers, footers, or other spots
@@ -379,8 +386,7 @@ namespace Interlinear
             Application.DoEvents();
             progressBar1.Value += 1;
             Application.DoEvents();
-
-        }
+         }
         private void QuitWord()
 {
     if (wrdApp != null)
@@ -452,9 +458,7 @@ namespace Interlinear
              * Now segment into the number of words specified by the WordCount paramenter
              */
 
-            // Go to the beginning
-             theSelection.HomeKey(WordRoot.WdUnits.wdStory);
-             boxProgress.Items.Add("Starting segmentation...");
+            boxProgress.Items.Add("Starting segmentation...");
              DateTime StartTime = DateTime.Now;  // Start
              bool Found;
       /*
@@ -510,11 +514,26 @@ namespace Interlinear
                 const string Paragraphs = "(*)^13";  // Match anything ending with a paragraph
                 theSelection.Find.Text = "";
                 theSelection.Find.Replacement.Text = "";
-                for (int i = 1; i <= WordCount / MaxWordPerLine; i++)
+                /*
+                 * Add trailing paragraphs to make sure we have Wordperline/2 paragraphs at the end.
+                 */
+                // Go to the end
+                theSelection.EndKey(WordRoot.WdUnits.wdStory);
+ 
+                 for (int i = 1; i <= WordCount / MaxWordPerLine; i++)
                 {
                     theSelection.Find.Text += Paragraphs; // build up the search string
                     theSelection.Find.Replacement.Text += "\\" + i.ToString();
+                 /*
+                 * Add trailing paragraphs to make sure we have Wordperline/2 paragraphs at the end.
+                 */
+
+                    theSelection.TypeParagraph();
+                    
                 }
+                 // Go to the beginning
+                 theSelection.HomeKey(WordRoot.WdUnits.wdStory);
+ 
                 theSelection.Find.Replacement.Text += "^p^p"; // ending with two paragraph
                 // and do the second paragraph
                 boxProgress.Items.Add("Starting segmentation second pass");
@@ -538,6 +557,11 @@ namespace Interlinear
                */
  
              GlobalReplace(theSelection, " ^p", "^p", false, false);
+            /*
+             * And any more than two paragraph markers together
+             */
+             GlobalReplace(theSelection, "^p^p^p", "^p^p", false, false);
+ 
              
              theApp.ScreenUpdating = true;  // turn on updating
              EndTime = DateTime.Now;
@@ -758,6 +782,7 @@ namespace Interlinear
             theWorkSheet.Paste();
             theWorkBook.Save();  // Save it
             boxProgress.Items.Add("Finished creating interlinear worksheet in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
+            theWorkBook.Close(); // and close the workbook
             Application.DoEvents();
         }
         private void SendToExcel_Click(object sender, EventArgs e)
@@ -843,6 +868,8 @@ namespace Interlinear
 
         private void btnInterlinear_Click(object sender, EventArgs e)
         {
+            boxProgress.Items.Clear();  // empty the progress box
+
             MakeInterlinear(excelApp);
         }
 
