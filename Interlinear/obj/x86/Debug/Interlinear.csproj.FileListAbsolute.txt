@@ -25,3 +25,4 @@ D:\users\Stephen\Documents\Visual Studio 2012\Projects\Interlinear.git\Interline
 D:\users\Stephen\Documents\Visual Studio 2012\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe
 D:\users\Stephen\Documents\Visual Studio 2012\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb
 D:\users\Stephen\Documents\Visual Studio 2012\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csprojResolveAssemblyReference.cache
+D:\Users\stephen\Documents\Visual Studio 2012\Projects\Interlinear.git\Interlinear\bin\Debug\UserGuide.docx

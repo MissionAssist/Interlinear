@@ -74,6 +74,7 @@
             this.boxProgress = new System.Windows.Forms.ListBox();
             this.openUnicodeFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
@@ -260,6 +261,7 @@
             this.chkUnicodeToExcel.TabIndex = 27;
             this.chkUnicodeToExcel.Text = "Send to Excel";
             this.chkUnicodeToExcel.UseVisualStyleBackColor = true;
+            this.chkUnicodeToExcel.CheckStateChanged += new System.EventHandler(this.chkSendtoExcel_Change);
             // 
             // txtUnicodeInput
             // 
@@ -385,6 +387,7 @@
             this.chkLegacyToExcel.TabIndex = 17;
             this.chkLegacyToExcel.Text = "Send to Excel";
             this.chkLegacyToExcel.UseVisualStyleBackColor = true;
+            this.chkLegacyToExcel.CheckStateChanged += new System.EventHandler(this.chkSendtoExcel_Change);
             // 
             // txtLegacyInput
             // 
@@ -527,11 +530,22 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // btnHelp
+            // 
+            this.btnHelp.Location = new System.Drawing.Point(20, 556);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(75, 39);
+            this.btnHelp.TabIndex = 28;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(754, 598);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label3);
@@ -600,6 +614,7 @@
         private System.Windows.Forms.Button btnUnicodeToExcel;
         private System.Windows.Forms.Button btnLegacyToExcel;
         private System.Windows.Forms.Button btnInterlinear;
+        private System.Windows.Forms.Button btnHelp;
     }
 }
 

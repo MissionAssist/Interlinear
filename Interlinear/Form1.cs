@@ -6,7 +6,9 @@
  * It was writting as part of a MissionAssist project to convert documents in legacy fonts to Unicode.  Much of the logic is attributable to
  * Dennis Pepler, but the code here was written by Stephen Palmstrom.
  * 
- * Last modified on 2 April 2013 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
+ * Copyright © MissionAssist 2013
+ * 
+ * Last modified on 12 April 2013 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
 */
 using System;
 using System.Collections.Generic;
@@ -54,6 +56,9 @@ namespace Interlinear
             saveLegacyFileDialog.SupportMultiDottedExtensions = true;
             saveUnicodeFileDialog.SupportMultiDottedExtensions = true;
             Wordcount.SetToolTip(WordsPerLine, "If you want more than eight words per line, they must be in multiples of four");
+            ToolTip HelpTip = new ToolTip();
+            HelpTip.SetToolTip(btnHelp, "Display the User Guide");
+ 
 
         }
 
@@ -62,15 +67,35 @@ namespace Interlinear
             Button theButton = (Button)sender;
             if (theButton.Parent.Text == "Legacy")
             {
-                HandleInputFile(txtLegacyInput, txtLegacyOutput, btnSegmentLegacy, openLegacyFileDialog, saveLegacyFileDialog);
+                HandleInputFile(txtLegacyInput, txtLegacyOutput, btnSegmentLegacy, openLegacyFileDialog, saveLegacyFileDialog,
+                    btnLegacyToExcel, chkLegacyToExcel);
             }
             else
             {
-                HandleInputFile(txtUnicodeInput, txtUnicodeOutput, btnSegmentUnicode, openUnicodeFileDialog,saveUnicodeFileDialog);
+                HandleInputFile(txtUnicodeInput, txtUnicodeOutput, btnSegmentUnicode, openUnicodeFileDialog,saveUnicodeFileDialog,
+                    btnUnicodeToExcel, chkLegacyToExcel);
             }
 
         }
-        private void HandleInputFile(TextBox InputText, TextBox OutputText, Button SegmentButton, OpenFileDialog theOpenFileDialog, SaveFileDialog theSaveFileDialog)
+        private void chkSendtoExcel_Change(object sender, EventArgs e)
+        {
+            // handle a change in the just send to Excel buttons
+            CheckBox theCheckBox = (CheckBox)sender;
+            if (theCheckBox.Parent.Text == "Legacy")
+            {
+                HandleCheckBoxChange(txtLegacyOutput.Text, btnLegacyToExcel, theCheckBox.Checked);
+            }
+            else
+            {
+                HandleCheckBoxChange(txtUnicodeOutput.Text, btnUnicodeToExcel, theCheckBox.Checked);
+            }
+        }
+        private void HandleCheckBoxChange(string OutputText, Button SendtoExcel, bool Checked)
+        {
+            SendtoExcel.Enabled = File.Exists(OutputText) && Checked;
+        }
+        private void HandleInputFile(TextBox InputText, TextBox OutputText, Button SegmentButton, OpenFileDialog theOpenFileDialog, SaveFileDialog theSaveFileDialog,
+            Button ExcelButton, CheckBox SendtoExcel)
         {
             /*
              * Handle the input file dialog.
@@ -91,11 +116,7 @@ namespace Interlinear
                 OutputText.Text = Path.Combine(Path.GetDirectoryName(InputText.Text), Path.GetFileNameWithoutExtension(InputText.Text) +
                     " (Segmented)" + Path.GetExtension(InputText.Text));
                 theSaveFileDialog.FileName = OutputText.Text;
-
-                if (File.Exists(OutputText.Text))
-                {
-                    SegmentButton.Enabled = true;
-                }
+                HandleOutputFile1(InputText.Text, OutputText.Text, SegmentButton, ExcelButton, SendtoExcel);  // process further
                 btnSegmentBoth.Enabled = btnSegmentLegacy.Enabled && btnSegmentUnicode.Enabled;
                 btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text) && txtExcelOutput.Text.Length > 0;
 
@@ -107,21 +128,28 @@ namespace Interlinear
             Button theButton = (Button)sender;
             if (theButton.Parent.Text == "Legacy")
             {
-                HandleOutputFile(txtLegacyInput, txtLegacyOutput, saveLegacyFileDialog, btnSegmentLegacy, btnLegacyToExcel);
+                HandleOutputFile(txtLegacyInput, txtLegacyOutput, saveLegacyFileDialog, btnSegmentLegacy, btnLegacyToExcel, chkLegacyToExcel);
             }
             else
             {
-                HandleOutputFile(txtUnicodeInput, txtUnicodeOutput, saveUnicodeFileDialog, btnSegmentUnicode, btnUnicodeToExcel);
+                HandleOutputFile(txtUnicodeInput, txtUnicodeOutput, saveUnicodeFileDialog, btnSegmentUnicode, btnUnicodeToExcel, chkUnicodeToExcel);
             }
         }
-        private void HandleOutputFile (TextBox theInputBox, TextBox theOutputBox, SaveFileDialog theDialog, Button SegmentButton, Button ExcelButton)
+        private void HandleOutputFile (TextBox theInputBox, TextBox theOutputBox, SaveFileDialog theDialog, Button SegmentButton,
+            Button ExcelButton, CheckBox SendtoExcel)
         {
             if (theDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
 
                 theOutputBox.Text = theDialog.FileName;
-                SegmentButton.Enabled = theOutputBox.Text.Length > 0 && File.Exists(theInputBox.Text);  // only enable if both boxes filled in
-                ExcelButton.Enabled = theOutputBox.Text.Length > 0 && txtExcelOutput.Text.Length > 0;
+                HandleOutputFile1(theInputBox.Text, theOutputBox.Text, SegmentButton, ExcelButton, SendtoExcel);  // process further
+            }
+ 
+        }
+        private void HandleOutputFile1(string InputText, string OutputText, Button SegmentButton, Button ExcelButton, CheckBox SendtoExcel)
+        {
+                SegmentButton.Enabled = OutputText.Length > 0 && File.Exists(InputText);  // only enable if both boxes filled in
+                ExcelButton.Enabled = OutputText.Length > 0 && txtExcelOutput.Text.Length > 0 && File.Exists(OutputText) && SendtoExcel.Checked;
                 /*
                  * If both individual segment buttons are enabled, we enable the segment both button, too.
                  */
@@ -129,8 +157,6 @@ namespace Interlinear
                 btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text) && txtExcelOutput.Text.Length > 0;
 
 
-            }
- 
         }
         private void btnGetExcelOutput_Click(object sender, EventArgs e)
         {
@@ -658,11 +684,22 @@ namespace Interlinear
 
             }
             // Clear the individual sheets
-            theWorkbook.Sheets[theRow + 1].Activate();
-            ExcelRoot.Worksheet theWorkSheet = theWorkbook.ActiveSheet;
-            theWorkSheet.Cells.Select();
-            excelApp.Selection.Clear();
-            return theRow;
+            if (theWorkbook.Sheets.Count < 3)
+            {
+                MessageBox.Show("Not enough worksheets - you haven't chosen the right workbook", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                chkLegacyToExcel.Checked = false;
+                chkUnicodeToExcel.Checked = false;
+                theWorkbook.Close(false);  // and close the workbook
+                return -1;
+            }
+            else
+            {
+                theWorkbook.Sheets[theRow + 1].Activate();
+                ExcelRoot.Worksheet theWorkSheet = theWorkbook.ActiveSheet;
+                theWorkSheet.Cells.Select();
+                excelApp.Selection.Clear();
+                return theRow;
+            }
         }
         private void FillExcel(ExcelApp excelApp, WordApp wrdApp, int RowCounter)
         {
@@ -780,6 +817,7 @@ namespace Interlinear
             theCells = theWorkSheet.Range["A5:A" + (MaxParagraphs + 4).ToString()];
             theCells.Select();
             theWorkSheet.Paste();
+            theWorkSheet.Range["A1:A1"].Select();  // select cell A1
             theWorkBook.Save();  // Save it
             boxProgress.Items.Add("Finished creating interlinear worksheet in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
             theWorkBook.Close(); // and close the workbook
@@ -817,12 +855,20 @@ namespace Interlinear
             
             // We'll send the information to Excel
             int RowCounter = InitialiseExcel(excelApp, EvenRows, FileName);
-            FillExcel(excelApp, wrdApp, RowCounter);
-            boxProgress.Items.Add("Finished sending to Excel.  Go to the setup tab to create the interlinear worksheet");
+            if (RowCounter > 0)
+            {
+                FillExcel(excelApp, wrdApp, RowCounter);
+                boxProgress.Items.Add("Finished sending to Excel.  Go to the setup tab to create the interlinear worksheet");
+            }
+            else
+            {
+                boxProgress.Items.Add("Could not send to Excel - you chose the wrong workbook");
+            }
             theDoc.Close(false);
             theDoc = null;
             btnInterlinear.Enabled = true;
             btnClose.Enabled = true;
+
 
         }
         private void BothToExcel_Click(object sender, EventArgs e)
@@ -830,6 +876,7 @@ namespace Interlinear
             // We'll send the information to Excel
             DateTime Start = DateTime.Now;
             Document theDoc;
+            bool Continue = false;
             tabControl1.SelectTab("Progress");
             btnClose.Enabled = false;
             try
@@ -843,27 +890,46 @@ namespace Interlinear
                 return;
             }
             int RowCounter = InitialiseExcel(excelApp, false, txtLegacyOutput.Text);
-            FillExcel(excelApp, wrdApp, RowCounter);
-            theDoc.Close(false);
-            try 
+            if (RowCounter > 0)
             {
-                theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+                Continue = true;
+                FillExcel(excelApp, wrdApp, RowCounter);
             }
-            catch (Exception ex)
-            {    
-                DialogResult theResult = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tabControl1.SelectTab("Setup");
-                return;
+            else
+            {
+                boxProgress.Items.Add("Could not send to Excel  - you chose the wrong worksheet");
             }
+            theDoc.Close(false);
+            if (Continue)
+            {
+                try
+                {
+                    theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+                }
+                catch (Exception ex)
+                {
+                    DialogResult theResult = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tabControl1.SelectTab("Setup");
+                    return;
+                }
 
-            RowCounter = InitialiseExcel(excelApp, true,  txtUnicodeOutput.Text);
-            FillExcel(excelApp, wrdApp, RowCounter);
-            MakeInterlinear(excelApp); // Make the interlinear worksheet, too.
+                RowCounter = InitialiseExcel(excelApp, true, txtUnicodeOutput.Text);
+                if (RowCounter > 0)
+                {
+                    FillExcel(excelApp, wrdApp, RowCounter);
+                    MakeInterlinear(excelApp); // Make the interlinear worksheet, too.
+                    boxProgress.Items.Add("Finished sending both files to Excel in " + DateTime.Now.Subtract(Start).ToString());
+                }
+                else
+                {
+                    boxProgress.Items.Add("Could not send to Excel - you chose the wrong worksheet");
+
+                }
+            }
             theDoc.Close(false);
             theDoc = null;
             btnInterlinear.Enabled = true;
             btnClose.Enabled = true;
-            boxProgress.Items.Add("Finished sending both files to Excel in " + DateTime.Now.Subtract(Start).ToString());
         }
 
         private void btnInterlinear_Click(object sender, EventArgs e)
@@ -952,6 +1018,25 @@ namespace Interlinear
                 TotalCounter += Counter;
                 return TotalCounter;
         }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            string HelpPath = Path.Combine(Application.StartupPath, "UserGuide.docx");
+            WordApp HelpApp = new Word();
+            try
+            {
+                HelpApp.Visible = true;
+                HelpApp.Documents.Open(HelpPath, missing, true);
+            }
+            catch (Exception theException)
+            {
+                MessageBox.Show("Failed to open help file at " + HelpPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HelpApp.Quit();
+            }
+
+         }
+
+        
                                               
     }
 };
