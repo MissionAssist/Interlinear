@@ -8,7 +8,7 @@
  * 
  * Copyright © MissionAssist 2013
  * 
- * Last modified on 12 April 2013 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
+ * Last modified on 16 April 2013 by Stephen Palmstrom (stephen.palmstrom@btinternet.com).
 */
 using System;
 using System.Collections.Generic;
@@ -58,7 +58,11 @@ namespace Interlinear
             Wordcount.SetToolTip(WordsPerLine, "If you want more than eight words per line, they must be in multiples of four");
             ToolTip HelpTip = new ToolTip();
             HelpTip.SetToolTip(btnHelp, "Display the User Guide");
- 
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                lblVersion.Text = "Version " + System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+
 
         }
 
@@ -220,107 +224,120 @@ namespace Interlinear
             theButton.Enabled = true;
             btnClose.Enabled = true;
         }
+        private void FinalCatch(Exception e)
+        {
+            MessageBox.Show(e.Message + "\r" + e.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            QuitWord();
+            this.Close();
+        }
         private void SegmentFile(String theInputFile, String theOutputFile, TextBox txtNumberOfWords, CheckBox SendToExcel, bool EvenRows)
         {
             /*
              * This is where we do all the segmentation and, if desired, writing to Excel
              */
-
-            DateTime StartTime = DateTime.Now;  // Get the start time
-            int NumberOfWords;
-            int RowCounter = 0;
-            progressBar1.Value = 0;
- 
-            Application.DoEvents();
             try
             {
-                wrdApp.Documents.Open(theInputFile);
-            }
-            catch (Exception e)
-            {
-                DialogResult theResult = MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tabControl1.SelectTab("Setup");
-                return;
+                DateTime StartTime = DateTime.Now;  // Get the start time
+                int NumberOfWords;
+                int RowCounter = 0;
+                progressBar1.Value = 0;
 
-            }
-
-
-            // process Excel if desired
-            if (SendToExcel.Checked)
-            {
-                RowCounter = InitialiseExcel(excelApp, EvenRows, theInputFile);
-                if (RowCounter == 0)
+                Application.DoEvents();
+                try
                 {
-                    return;  // we couldn't open the file
+                    wrdApp.Documents.Open(theInputFile);
+                }
+                catch (Exception e)
+                {
+                    DialogResult theResult = MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tabControl1.SelectTab("Setup");
+                    return;
+
                 }
 
-            }
-             // Size the progressbar depending on how many replacments we do
-            if (WordsPerLine.Value > 7)
-            {
-                progressBar1.Maximum = 3;
-            }
-            else
-            {
-                progressBar1.Maximum = 2;
-            }
-            /*
-             * Set various Word options to optimise performance
-             * 
-             */
-            boxProgress.Items.Add("**** Starting processing " + Path.GetFileName(theInputFile));
-            Application.DoEvents();
-            InputDoc = wrdApp.ActiveDocument;
-            InputDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
-            InputDoc.ActiveWindow.View.Draft = true;  // Draft View
-            InputDoc.ShowSpellingErrors = false;  // Don't show spelling errors
-            InputDoc.ShowGrammaticalErrors = false; // Don't show grammar errors
-            InputDoc.AutoHyphenation = false;
-            wrdApp.Options.Pagination = false;  // turn off background pagination
-            wrdApp.Options.CheckGrammarAsYouType = false;   // Don't check grammar either
-            wrdApp.Options.CheckSpellingAsYouType = false;  // Don't try to check spelling
-            wrdApp.ScreenUpdating = false; // Turn off updating the screen
-            wrdApp.ActiveWindow.ActivePane.View.ShowAll = false;  // Don't show special marks
-            wrdApp.Selection.WholeStory(); // Make sure we've selected everything
-            wrdApp.ScreenUpdating = false; // Turn off screen updating
-            NumberOfWords = InputDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticWords, false);
-            boxProgress.Items.Add("The document contains " + NumberOfWords.ToString() + " words");
 
-            txtNumberOfWords.Text = NumberOfWords.ToString(); // the number of words in the document
-            /*
-             * Now remove text boxes, etc. from the document to clean it up.
-             * We end with a single, huge paragraph
-             */
-            CleanWordText(wrdApp, InputDoc); // Clean the document
+                // process Excel if desired
+                if (SendToExcel.Checked)
+                {
+                    RowCounter = InitialiseExcel(excelApp, EvenRows, theInputFile);
+                    if (RowCounter == 0)
+                    {
+                        return;  // we couldn't open the file
+                    }
 
-            /*
-              * Now start splitting into a number of space-separated words, i.e. segmenting it.
-              */
-            Segment(wrdApp, wrdApp.Selection, (int)WordsPerLine.Value, NumberOfWords);
+                }
+                // Size the progressbar depending on how many replacments we do
+                if (WordsPerLine.Value > 7)
+                {
+                    progressBar1.Maximum = 3;
+                }
+                else
+                {
+                    progressBar1.Maximum = 2;
+                }
+                /*
+                 * Set various Word options to optimise performance
+                 * 
+                 */
+                boxProgress.Items.Add("**** Starting processing " + Path.GetFileName(theInputFile));
+                Application.DoEvents();
+                InputDoc = wrdApp.ActiveDocument;
+                InputDoc.ActiveWindow.View.ReadingLayout = false;  // Make sure we are in edit mode
+                InputDoc.ActiveWindow.View.Draft = true;  // Draft View
+                InputDoc.ShowSpellingErrors = false;  // Don't show spelling errors
+                InputDoc.ShowGrammaticalErrors = false; // Don't show grammar errors
+                InputDoc.AutoHyphenation = false;
+                wrdApp.Options.Pagination = false;  // turn off background pagination
+                wrdApp.Options.CheckGrammarAsYouType = false;   // Don't check grammar either
+                wrdApp.Options.CheckSpellingAsYouType = false;  // Don't try to check spelling
+                wrdApp.ScreenUpdating = false; // Turn off updating the screen
+                wrdApp.ActiveWindow.ActivePane.View.ShowAll = false;  // Don't show special marks
+                wrdApp.Selection.WholeStory(); // Make sure we've selected everything
+                wrdApp.ScreenUpdating = false; // Turn off screen updating
+                NumberOfWords = InputDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticWords, false);
+                boxProgress.Items.Add("The document contains " + NumberOfWords.ToString() + " words");
 
-            InputDoc.SaveAs2(theOutputFile, InputDoc.SaveFormat); // Save in the same format as the input file
-            boxProgress.Items.Add(Path.GetFileName(theOutputFile) + " saved after " + 
-                DateTime.Now.Subtract(StartTime).TotalSeconds.ToString());
-            if (SendToExcel.Checked)
-            {
-                // We'll send the information to Excel
-                FillExcel(excelApp, wrdApp, RowCounter);
+                txtNumberOfWords.Text = NumberOfWords.ToString(); // the number of words in the document
+                /*
+                 * Now remove text boxes, etc. from the document to clean it up.
+                 * We end with a single, huge paragraph
+                 */
+                CleanWordText(wrdApp, InputDoc); // Clean the document
+
+                /*
+                  * Now start splitting into a number of space-separated words, i.e. segmenting it.
+                  */
+                Segment(wrdApp, wrdApp.Selection, (int)WordsPerLine.Value, NumberOfWords);
+
+                InputDoc.SaveAs2(theOutputFile, InputDoc.SaveFormat); // Save in the same format as the input file
+                boxProgress.Items.Add(Path.GetFileName(theOutputFile) + " saved after " +
+                    DateTime.Now.Subtract(StartTime).TotalSeconds.ToString());
+                if (SendToExcel.Checked)
+                {
+                    // We'll send the information to Excel
+                    FillExcel(excelApp, wrdApp, RowCounter);
+                }
+                wrdApp.ScreenUpdating = true; // turn on screen updating
+                wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
+                InputDoc.Close(false);
+                boxProgress.Items.Add("Completed in " + DateTime.Now.Subtract(StartTime).ToString());
             }
-            wrdApp.ScreenUpdating = true; // turn on screen updating
-            wrdApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // go to the beginning
-            InputDoc.Close(false);
-            boxProgress.Items.Add("Completed in " + DateTime.Now.Subtract(StartTime).ToString());
- 
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+            }
         }
         private void CleanWordText(WordApp theApp, Document theDoc )
         {
+            try
+            {
                 DateTime StartTime = DateTime.Now;
                 int Counter;
                 theDoc.Activate();
                 boxProgress.Items.Add("Starting to clean the document...");
-                 /* Make sure we are in the active pane of the Document
-                  * rather than headers, footers, or other spots
-                  */
+                /* Make sure we are in the active pane of the Document
+                 * rather than headers, footers, or other spots
+                 */
 
                 if (theDoc.ActiveWindow.View.Type == WordRoot.WdViewType.wdPrintView)
                 {
@@ -333,9 +350,9 @@ namespace Interlinear
                  * Remove all shapes.  We seem to need several passes to remove them all for some reason.
                  * 
                  */
-                 while (RemoveShapes(theApp, theDoc) > 0) ;
- 
- 
+                while (RemoveShapes(theApp, theDoc) > 0) ;
+
+
                 /*
                  * Remove all frames
                  */
@@ -343,15 +360,15 @@ namespace Interlinear
                 Counter = 0;
                 foreach (WordRoot.Frame theFrame in theDoc.Frames)
                 {
-                        theFrame.TextWrap = false; // Make it no longer wrap text
-                        theFrame.Borders.OutsideLineStyle = WordRoot.WdLineStyle.wdLineStyleNone;
-                        theFrame.Delete(); // and delete the frame
-                        Counter++;
-                        if (Counter % 100 == 0)
-                        {
-                            boxProgress.Items.Add("Deleted " + Counter.ToString() + " shapes");
-                            Application.DoEvents();
-                        }
+                    theFrame.TextWrap = false; // Make it no longer wrap text
+                    theFrame.Borders.OutsideLineStyle = WordRoot.WdLineStyle.wdLineStyleNone;
+                    theFrame.Delete(); // and delete the frame
+                    Counter++;
+                    if (Counter % 100 == 0)
+                    {
+                        boxProgress.Items.Add("Deleted " + Counter.ToString() + " shapes");
+                        Application.DoEvents();
+                    }
 
 
                 }
@@ -387,63 +404,74 @@ namespace Interlinear
                 // Clear all tabs, paragraph markers, section breaks, manual line feeds, column breaks and manual page breaks.
                 // ^m also deals with section breaks when wildcards are on.
                 GlobalReplace(theApp.Selection, "[^9^11^13^14^12^m]", theSpace, false, true);
-             
 
-                 // Clear all multiple spaces
+
+                // Clear all multiple spaces
                 GlobalReplace(theApp.Selection, "  ", theSpace, true, false);
                 // And this strange character found in some documents:  (F020)
                 GlobalReplace(theApp.Selection, "", theSpace, true, false);
- 
+
                 // Clear the final space
                 GlobalReplace(theApp.Selection, " ^p", "", false, false);
                 /*
               * Now left align everything
               */
-             foreach (WordRoot.Paragraph theParagraph in theDoc.Paragraphs)
-             {
-                 theParagraph.Format.Alignment = WordRoot.WdParagraphAlignment.wdAlignParagraphLeft;
-             }
+                foreach (WordRoot.Paragraph theParagraph in theDoc.Paragraphs)
+                {
+                    theParagraph.Format.Alignment = WordRoot.WdParagraphAlignment.wdAlignParagraphLeft;
+                }
 
-  
 
-            EndTime = DateTime.Now;  //
 
-            boxProgress.Items.Add("Cleaned the text in " + EndTime.Subtract(StartTime).TotalSeconds.ToString() + " seconds");
-            Application.DoEvents();
-            progressBar1.Value += 1;
-            Application.DoEvents();
+                EndTime = DateTime.Now;  //
+
+                boxProgress.Items.Add("Cleaned the text in " + EndTime.Subtract(StartTime).TotalSeconds.ToString() + " seconds");
+                Application.DoEvents();
+                progressBar1.Value += 1;
+                Application.DoEvents();
+            }
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+            }
          }
         private void QuitWord()
-{
-    if (wrdApp != null)
-    {
-        try
         {
-            // Shut down Word
-            wrdApp.Quit(ref missing, ref missing, ref missing);
-        }
-        catch
-        { 
-        }
-        try
-        {
-            // Shut down Excel
-            excelApp.ActiveWorkbook.Save();
-            excelApp.Quit();
-        }
-        catch
-        {
-        }
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        wrdApp = null;
-        excelApp = null;
+            if (wrdApp != null)
+            {
+                try
+                {
+                    // Shut down Word
+                    wrdApp.Quit(ref missing, ref missing, ref missing);
+                }
+                catch
+                { 
+                }
+                try
+                {
+                    // Shut down Excel
+                    excelApp.ActiveWorkbook.Save();
+                    excelApp.Quit();
+                }
+                catch
+                {
+                }
+                try
+                {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                }
+                catch
+                { // ignore and continue
+                }
+                wrdApp = null;
+                excelApp = null;
 
-    }
+            }
 
-}
+        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             /*
@@ -483,119 +511,125 @@ namespace Interlinear
              /*
              * Now segment into the number of words specified by the WordCount paramenter
              */
-
-            boxProgress.Items.Add("Starting segmentation...");
-             DateTime StartTime = DateTime.Now;  // Start
-             bool Found;
-      /*
-              * Use wildcards to add the paragraph markers
-              * 
-              */
-            theSelection.Find.ClearFormatting();
-            theSelection.Find.Replacement.Text = "^&^p";  // Replace with what we just found and a paragraph marker
-            theSelection.Find.MatchWildcards =true;
-            theSelection.Find.Forward = true;
-            theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindContinue;
-            theSelection.Find.Format = false;
-            theSelection.Find.MatchCase = false;
-            theSelection.Find.MatchWholeWord = false;
-            theSelection.Find.MatchKashida = false;
-            theSelection.Find.MatchDiacritics = false;
-            theSelection.Find.MatchAlefHamza = false;
-            theSelection.Find.MatchControl = false;
-            theSelection.Find.MatchAllWordForms = false;
-            theSelection.Find.MatchSoundsLike = false;
-            const string WildCards = "([! ]@[ |])"; // Word ending in a space
-            theSelection.Find.Text = "";  // Clear the find string
-            /*
-            * Build up the search string
-             * 
-             * If the words per line we want at the end are more than three, we need to do the replacement
-             * in two stages as otherwise the wildcard expression gets too complicated.
-            */
-            int MaxWordPerLine = 2;
-            theSelection.Find.Text = WildCards + WildCards;  // We can only handle two or three words at a time
-
-
-            // Now do the first replacement
-            boxProgress.Items.Add("Starting segmentation first pass");
-            Application.DoEvents();
-            theApp.ActiveDocument.UndoClear();  // Clear the undo stack
-
-            Found = theSelection.Find.Execute(missing,  missing, missing, missing, missing, missing, missing, missing, missing, missing, WordRoot.WdReplace.wdReplaceAll,
-            missing, missing, missing, missing);
-            DateTime EndTime = DateTime.Now;
-            TimeSpan ElapsedTime = EndTime.Subtract(StartTime);
-            boxProgress.Items.Add("First pass complete in " + ElapsedTime.TotalSeconds.ToString() + " seconds");
-            Application.DoEvents();
-            progressBar1.Value += 1;
-            Application.DoEvents();
-
-
-            /*
-             * If the WordCount > 2, we assume 4, 6, 8 etc.
-             */
-            if (WordCount > MaxWordPerLine)
+            try
             {
-                const string Paragraphs = "(*)^13";  // Match anything ending with a paragraph
-                theSelection.Find.Text = "";
-                theSelection.Find.Replacement.Text = "";
+                boxProgress.Items.Add("Starting segmentation...");
+                DateTime StartTime = DateTime.Now;  // Start
+                bool Found;
                 /*
-                 * Add trailing paragraphs to make sure we have Wordperline/2 paragraphs at the end.
-                 */
-                // Go to the end
-                theSelection.EndKey(WordRoot.WdUnits.wdStory);
- 
-                 for (int i = 1; i <= WordCount / MaxWordPerLine; i++)
-                {
-                    theSelection.Find.Text += Paragraphs; // build up the search string
-                    theSelection.Find.Replacement.Text += "\\" + i.ToString();
-                 /*
-                 * Add trailing paragraphs to make sure we have Wordperline/2 paragraphs at the end.
-                 */
+                        * Use wildcards to add the paragraph markers
+                        * 
+                        */
+                theSelection.Find.ClearFormatting();
+                theSelection.Find.Replacement.Text = "^&^p";  // Replace with what we just found and a paragraph marker
+                theSelection.Find.MatchWildcards = true;
+                theSelection.Find.Forward = true;
+                theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindContinue;
+                theSelection.Find.Format = false;
+                theSelection.Find.MatchCase = false;
+                theSelection.Find.MatchWholeWord = false;
+                theSelection.Find.MatchKashida = false;
+                theSelection.Find.MatchDiacritics = false;
+                theSelection.Find.MatchAlefHamza = false;
+                theSelection.Find.MatchControl = false;
+                theSelection.Find.MatchAllWordForms = false;
+                theSelection.Find.MatchSoundsLike = false;
+                const string WildCards = "([! ]@[ |])"; // Word ending in a space
+                theSelection.Find.Text = "";  // Clear the find string
+                /*
+                * Build up the search string
+                 * 
+                 * If the words per line we want at the end are more than three, we need to do the replacement
+                 * in two stages as otherwise the wildcard expression gets too complicated.
+                */
+                int MaxWordPerLine = 2;
+                theSelection.Find.Text = WildCards + WildCards;  // We can only handle two or three words at a time
 
-                    theSelection.TypeParagraph();
-                    
-                }
-                 // Go to the beginning
-                 theSelection.HomeKey(WordRoot.WdUnits.wdStory);
- 
-                theSelection.Find.Replacement.Text += "^p^p"; // ending with two paragraph
-                // and do the second paragraph
-                boxProgress.Items.Add("Starting segmentation second pass");
-                DateTime StartTime2 = DateTime.Now;
+
+                // Now do the first replacement
+                boxProgress.Items.Add("Starting segmentation first pass");
+                Application.DoEvents();
                 theApp.ActiveDocument.UndoClear();  // Clear the undo stack
+
                 Found = theSelection.Find.Execute(missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, WordRoot.WdReplace.wdReplaceAll,
-                    missing, missing, missing, missing);
-                EndTime = DateTime.Now;
-                ElapsedTime = EndTime.Subtract(StartTime2);
-                boxProgress.Items.Add("Second pass complete in " + ElapsedTime.TotalSeconds.ToString() + " seconds");
+                missing, missing, missing, missing);
+                DateTime EndTime = DateTime.Now;
+                TimeSpan ElapsedTime = EndTime.Subtract(StartTime);
+                boxProgress.Items.Add("First pass complete in " + ElapsedTime.TotalSeconds.ToString() + " seconds");
                 Application.DoEvents();
                 progressBar1.Value += 1;
                 Application.DoEvents();
 
 
+                /*
+                 * If the WordCount > 2, we assume 4, 6, 8 etc.
+                 */
+                if (WordCount > MaxWordPerLine)
+                {
+                    const string Paragraphs = "(*)^13";  // Match anything ending with a paragraph
+                    theSelection.Find.Text = "";
+                    theSelection.Find.Replacement.Text = "";
+                    /*
+                     * Add trailing paragraphs to make sure we have Wordperline/2 paragraphs at the end.
+                     */
+                    // Go to the end
+                    theSelection.EndKey(WordRoot.WdUnits.wdStory);
+
+                    for (int i = 1; i <= WordCount / MaxWordPerLine; i++)
+                    {
+                        theSelection.Find.Text += Paragraphs; // build up the search string
+                        theSelection.Find.Replacement.Text += "\\" + i.ToString();
+                        /*
+                        * Add trailing paragraphs to make sure we have Wordperline/2 paragraphs at the end.
+                        */
+
+                        theSelection.TypeParagraph();
+
+                    }
+                    // Go to the beginning
+                    theSelection.HomeKey(WordRoot.WdUnits.wdStory);
+
+                    theSelection.Find.Replacement.Text += "^p^p"; // ending with two paragraph
+                    // and do the second paragraph
+                    boxProgress.Items.Add("Starting segmentation second pass");
+                    DateTime StartTime2 = DateTime.Now;
+                    theApp.ActiveDocument.UndoClear();  // Clear the undo stack
+                    Found = theSelection.Find.Execute(missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, WordRoot.WdReplace.wdReplaceAll,
+                        missing, missing, missing, missing);
+                    EndTime = DateTime.Now;
+                    ElapsedTime = EndTime.Subtract(StartTime2);
+                    boxProgress.Items.Add("Second pass complete in " + ElapsedTime.TotalSeconds.ToString() + " seconds");
+                    Application.DoEvents();
+                    progressBar1.Value += 1;
+                    Application.DoEvents();
+
+
+                }
+
+                theSelection.Find.MatchWildcards = false;  // Don't leave wildcards hanging
+                /*
+                  * Now remove the trailing spaces
+                  */
+
+                GlobalReplace(theSelection, " ^p", "^p", false, false);
+                /*
+                 * And any more than two paragraph markers together
+                 */
+                GlobalReplace(theSelection, "^p^p^p", "^p^p", false, false);
+
+
+                theApp.ScreenUpdating = true;  // turn on updating
+                EndTime = DateTime.Now;
+                ElapsedTime = EndTime.Subtract(StartTime);
+                progressBar1.Value = progressBar1.Maximum;  // We've finished!
+                boxProgress.Items.Add("Segmentation complete in " + ElapsedTime.TotalSeconds.ToString() + " seconds");
+                int LineCounter = NumberofWords / WordCount;
+                boxProgress.Items.Add((LineCounter / ElapsedTime.TotalSeconds).ToString() + " lines per second");
             }
- 
-             theSelection.Find.MatchWildcards = false;  // Don't leave wildcards hanging
-             /*
-               * Now remove the trailing spaces
-               */
- 
-             GlobalReplace(theSelection, " ^p", "^p", false, false);
-            /*
-             * And any more than two paragraph markers together
-             */
-             GlobalReplace(theSelection, "^p^p^p", "^p^p", false, false);
- 
-             
-             theApp.ScreenUpdating = true;  // turn on updating
-             EndTime = DateTime.Now;
-             ElapsedTime =  EndTime.Subtract(StartTime);
-             progressBar1.Value = progressBar1.Maximum;  // We've finished!
-             boxProgress.Items.Add("Segmentation complete in " +ElapsedTime.TotalSeconds.ToString() + " seconds");
-             int LineCounter = NumberofWords / WordCount;
-             boxProgress.Items.Add((LineCounter/ElapsedTime.TotalSeconds).ToString() + " lines per second");
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+            }
          }
         private void OneColumn(WordRoot._Application theApp)
         {
@@ -643,6 +677,8 @@ namespace Interlinear
             /*
              * We initialise the file if necessary and clear the relevant sheet.
              */
+            try
+            {
             int theRow;
             string StrippedFileName = Path.GetFileName(FileName);  // Get the file name without the directory
             ExcelRoot.Workbook theWorkbook;
@@ -700,9 +736,18 @@ namespace Interlinear
                 excelApp.Selection.Clear();
                 return theRow;
             }
+            }
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+                return -1;
+            }
+
         }
         private void FillExcel(ExcelApp excelApp, WordApp wrdApp, int RowCounter)
         {
+            try
+            {
             DateTime StartTime = DateTime.Now;
             //excelApp.Visible = true;
             boxProgress.Items.Add("Starting to fill Excel worksheet");
@@ -770,12 +815,19 @@ namespace Interlinear
             boxProgress.Items.Add("Excel interlinear worksheet pasted in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
             boxProgress.Items.Add("Finished filling Excel in " + DateTime.Now.Subtract(StartTime).ToString());
             Application.DoEvents();
+            }
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+            }
+
         }
         private void MakeInterlinear(ExcelApp theApp)
         {
             /*
              * Set up the interlinear worksheet
              */
+            try{
             DateTime Start = DateTime.Now;
             tabControl1.SelectTab("Progress");
             boxProgress.Items.Add("Generating interlinear worksheet");
@@ -822,9 +874,17 @@ namespace Interlinear
             boxProgress.Items.Add("Finished creating interlinear worksheet in " + DateTime.Now.Subtract(Start).TotalSeconds.ToString());
             theWorkBook.Close(); // and close the workbook
             Application.DoEvents();
+            }
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+            }
+
         }
         private void SendToExcel_Click(object sender, EventArgs e)
         {
+            try
+            {
             Button theButton = (Button)sender;
             bool EvenRows;
             Document theDoc;
@@ -868,12 +928,19 @@ namespace Interlinear
             theDoc = null;
             btnInterlinear.Enabled = true;
             btnClose.Enabled = true;
+            }
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+            }
 
 
         }
         private void BothToExcel_Click(object sender, EventArgs e)
         {
             // We'll send the information to Excel
+            try
+            {
             DateTime Start = DateTime.Now;
             Document theDoc;
             bool Continue = false;
@@ -930,6 +997,12 @@ namespace Interlinear
             theDoc = null;
             btnInterlinear.Enabled = true;
             btnClose.Enabled = true;
+            }
+            catch (Exception Ex)
+            {
+                FinalCatch(Ex);
+            }
+
         }
 
         private void btnInterlinear_Click(object sender, EventArgs e)
@@ -943,6 +1016,8 @@ namespace Interlinear
 
         private int RemoveShapes(WordApp theApp, Document theDoc)
         {
+            try
+            {
                 DateTime StartTime2 = DateTime.Now;
                 DateTime EndTime;
                 int TotalCounter = 0;
@@ -1017,6 +1092,13 @@ namespace Interlinear
                 Application.DoEvents();
                 TotalCounter += Counter;
                 return TotalCounter;
+            }
+            catch (Exception Ex)
+            {
+                 FinalCatch(Ex);
+                 return 0;
+            }
+
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
@@ -1030,7 +1112,7 @@ namespace Interlinear
             }
             catch (Exception theException)
             {
-                MessageBox.Show("Failed to open help file at " + HelpPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to open help file at " + HelpPath + "\r" + theException.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 HelpApp.Quit();
             }
 

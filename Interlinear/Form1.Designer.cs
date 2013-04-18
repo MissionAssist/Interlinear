@@ -75,6 +75,7 @@
             this.openUnicodeFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
+            this.lblVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
@@ -162,6 +163,7 @@
             // 
             // Setup
             // 
+            this.Setup.Controls.Add(this.lblVersion);
             this.Setup.Controls.Add(this.btnInterlinear);
             this.Setup.Controls.Add(this.btnBothToExcel);
             this.Setup.Controls.Add(this.label4);
@@ -540,6 +542,15 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(546, 410);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(0, 13);
+            this.lblVersion.TabIndex = 37;
+            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -615,6 +626,7 @@
         private System.Windows.Forms.Button btnLegacyToExcel;
         private System.Windows.Forms.Button btnInterlinear;
         private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.Label lblVersion;
     }
 }
 
