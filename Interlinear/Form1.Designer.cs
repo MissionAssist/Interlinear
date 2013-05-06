@@ -39,6 +39,7 @@
             this.Wordcount = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.btnInterlinear = new System.Windows.Forms.Button();
             this.btnBothToExcel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -75,7 +76,6 @@
             this.openUnicodeFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
-            this.lblVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
@@ -179,6 +179,15 @@
             this.Setup.TabIndex = 0;
             this.Setup.Text = "Setup";
             this.Setup.UseVisualStyleBackColor = true;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(546, 410);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(0, 13);
+            this.lblVersion.TabIndex = 37;
+            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnInterlinear
             // 
@@ -541,15 +550,6 @@
             this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
-            // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(546, 410);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(0, 13);
-            this.lblVersion.TabIndex = 37;
-            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Form1
             // 
