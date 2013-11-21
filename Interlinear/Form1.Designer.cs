@@ -39,7 +39,6 @@
             this.Wordcount = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.btnInterlinear = new System.Windows.Forms.Button();
             this.btnBothToExcel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -71,33 +70,46 @@
             this.btnGetExcelOutput = new System.Windows.Forms.Button();
             this.txtExcelOutput = new System.Windows.Forms.TextBox();
             this.Progress = new System.Windows.Forms.TabPage();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.boxProgress = new System.Windows.Forms.ListBox();
             this.openUnicodeFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnHelp = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPauseResume = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
             this.grpUnicode.SuspendLayout();
             this.grpLegacy.SuspendLayout();
             this.Progress.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openLegacyFileDialog
             // 
             this.openLegacyFileDialog.DefaultExt = "doc";
             this.openLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.openLegacyFileDialog.FilterIndex = 2;
             // 
             // saveLegacyFileDialog
             // 
             this.saveLegacyFileDialog.DefaultExt = "doc";
             this.saveLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.saveLegacyFileDialog.FilterIndex = 2;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 55);
+            this.label5.Location = new System.Drawing.Point(20, 66);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 13);
             this.label5.TabIndex = 13;
@@ -110,7 +122,7 @@
             0,
             0,
             0});
-            this.WordsPerLine.Location = new System.Drawing.Point(111, 53);
+            this.WordsPerLine.Location = new System.Drawing.Point(111, 63);
             this.WordsPerLine.Maximum = new decimal(new int[] {
             20,
             0,
@@ -140,9 +152,9 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 9);
+            this.label3.Location = new System.Drawing.Point(6, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(698, 41);
+            this.label3.Size = new System.Drawing.Size(698, 42);
             this.label3.TabIndex = 23;
             this.label3.Text = "Interlinear Comparison";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -150,12 +162,13 @@
             // saveUnicodeFileDialog
             // 
             this.saveUnicodeFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.saveUnicodeFileDialog.FilterIndex = 2;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.Setup);
             this.tabControl1.Controls.Add(this.Progress);
-            this.tabControl1.Location = new System.Drawing.Point(10, 79);
+            this.tabControl1.Location = new System.Drawing.Point(10, 85);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(732, 452);
@@ -163,7 +176,6 @@
             // 
             // Setup
             // 
-            this.Setup.Controls.Add(this.lblVersion);
             this.Setup.Controls.Add(this.btnInterlinear);
             this.Setup.Controls.Add(this.btnBothToExcel);
             this.Setup.Controls.Add(this.label4);
@@ -179,15 +191,6 @@
             this.Setup.TabIndex = 0;
             this.Setup.Text = "Setup";
             this.Setup.UseVisualStyleBackColor = true;
-            // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(546, 410);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(0, 13);
-            this.lblVersion.TabIndex = 37;
-            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnInterlinear
             // 
@@ -501,7 +504,7 @@
             // 
             // Progress
             // 
-            this.Progress.Controls.Add(this.progressBar1);
+            this.Progress.Controls.Add(this.statusStrip1);
             this.Progress.Controls.Add(this.boxProgress);
             this.Progress.Location = new System.Drawing.Point(4, 22);
             this.Progress.Name = "Progress";
@@ -511,12 +514,27 @@
             this.Progress.Text = "Progress";
             this.Progress.UseVisualStyleBackColor = true;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.progressBar1});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 401);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(718, 22);
+            this.statusStrip1.TabIndex = 29;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(9, 406);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(709, 18);
-            this.progressBar1.TabIndex = 29;
+            this.progressBar1.Size = new System.Drawing.Size(400, 16);
             // 
             // boxProgress
             // 
@@ -530,10 +548,12 @@
             // openUnicodeFileDialog
             // 
             this.openUnicodeFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.openUnicodeFileDialog.FilterIndex = 2;
+            this.openUnicodeFileDialog.Multiselect = true;
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(298, 553);
+            this.btnClose.Location = new System.Drawing.Point(460, 545);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 44);
             this.btnClose.TabIndex = 27;
@@ -541,27 +561,87 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnHelp
+            // menuStrip1
             // 
-            this.btnHelp.Location = new System.Drawing.Point(20, 556);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 39);
-            this.btnHelp.TabIndex = 28;
-            this.btnHelp.Text = "Help";
-            this.btnHelp.UseVisualStyleBackColor = true;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(754, 24);
+            this.menuStrip1.TabIndex = 29;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(92, 22);
+            this.toolStripMenuItem1.Text = "Exit";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.documentationToolStripMenuItem,
+            this.licenseToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // documentationToolStripMenuItem
+            // 
+            this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
+            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.documentationToolStripMenuItem.Text = "Documentation";
+            this.documentationToolStripMenuItem.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
+            // 
+            // licenseToolStripMenuItem
+            // 
+            this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
+            this.licenseToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.licenseToolStripMenuItem.Text = "License";
+            this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // btnPauseResume
+            // 
+            this.btnPauseResume.Enabled = false;
+            this.btnPauseResume.Location = new System.Drawing.Point(219, 545);
+            this.btnPauseResume.Name = "btnPauseResume";
+            this.btnPauseResume.Size = new System.Drawing.Size(112, 44);
+            this.btnPauseResume.TabIndex = 30;
+            this.btnPauseResume.Text = "Pause";
+            this.btnPauseResume.UseVisualStyleBackColor = true;
+            this.btnPauseResume.Click += new System.EventHandler(this.btnPauseResume_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 598);
-            this.Controls.Add(this.btnHelp);
+            this.ClientSize = new System.Drawing.Size(754, 601);
+            this.Controls.Add(this.btnPauseResume);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.WordsPerLine);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Interlinear comparison";
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).EndInit();
@@ -573,6 +653,11 @@
             this.grpLegacy.ResumeLayout(false);
             this.grpLegacy.PerformLayout();
             this.Progress.ResumeLayout(false);
+            this.Progress.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -613,7 +698,6 @@
         private System.Windows.Forms.TextBox txtExcelOutput;
         private System.Windows.Forms.TabPage Progress;
         private System.Windows.Forms.ListBox boxProgress;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.OpenFileDialog openUnicodeFileDialog;
         private System.Windows.Forms.Button btnSegmentBoth;
         private System.Windows.Forms.Label label4;
@@ -625,8 +709,17 @@
         private System.Windows.Forms.Button btnUnicodeToExcel;
         private System.Windows.Forms.Button btnLegacyToExcel;
         private System.Windows.Forms.Button btnInterlinear;
-        private System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar1;
+        private System.Windows.Forms.Button btnPauseResume;
     }
 }
 

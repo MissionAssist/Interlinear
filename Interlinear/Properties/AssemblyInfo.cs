@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Interlinear")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This program takes two Microsoft Word documents, cleans them up and copies them line by line into a Microsoft Excel spreadsheet. Distributed under the GNU General Public License (http://www.gnu.org/licenses/gpl.txt) ")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("MissionAssist")]
 [assembly: AssemblyProduct("Interlinear")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.*")]
-[assembly: AssemblyFileVersion("3.0.0.0")]
+[assembly: AssemblyVersion("4.2.*")]
+[assembly: AssemblyFileVersion("4.2.0.0")]
