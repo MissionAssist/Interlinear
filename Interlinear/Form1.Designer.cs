@@ -44,6 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSegmentBoth = new System.Windows.Forms.Button();
             this.grpUnicode = new System.Windows.Forms.GroupBox();
+            this.chkUnicodeAddSpace = new System.Windows.Forms.CheckBox();
             this.btnUnicodeToExcel = new System.Windows.Forms.Button();
             this.chkUnicodeToExcel = new System.Windows.Forms.CheckBox();
             this.txtUnicodeInput = new System.Windows.Forms.TextBox();
@@ -56,6 +57,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btnSegmentUnicode = new System.Windows.Forms.Button();
             this.grpLegacy = new System.Windows.Forms.GroupBox();
+            this.chkLegacyAddSpace = new System.Windows.Forms.CheckBox();
             this.btnLegacyToExcel = new System.Windows.Forms.Button();
             this.chkLegacyToExcel = new System.Windows.Forms.CheckBox();
             this.txtLegacyInput = new System.Windows.Forms.TextBox();
@@ -236,6 +238,7 @@
             // 
             // grpUnicode
             // 
+            this.grpUnicode.Controls.Add(this.chkUnicodeAddSpace);
             this.grpUnicode.Controls.Add(this.btnUnicodeToExcel);
             this.grpUnicode.Controls.Add(this.chkUnicodeToExcel);
             this.grpUnicode.Controls.Add(this.txtUnicodeInput);
@@ -254,12 +257,22 @@
             this.grpUnicode.TabStop = false;
             this.grpUnicode.Text = "Unicode";
             // 
+            // chkUnicodeAddSpace
+            // 
+            this.chkUnicodeAddSpace.AutoSize = true;
+            this.chkUnicodeAddSpace.Location = new System.Drawing.Point(571, 96);
+            this.chkUnicodeAddSpace.Name = "chkUnicodeAddSpace";
+            this.chkUnicodeAddSpace.Size = new System.Drawing.Size(131, 17);
+            this.chkUnicodeAddSpace.TabIndex = 29;
+            this.chkUnicodeAddSpace.Text = "Add space after range";
+            this.chkUnicodeAddSpace.UseVisualStyleBackColor = true;
+            // 
             // btnUnicodeToExcel
             // 
             this.btnUnicodeToExcel.Enabled = false;
-            this.btnUnicodeToExcel.Location = new System.Drawing.Point(359, 79);
+            this.btnUnicodeToExcel.Location = new System.Drawing.Point(344, 79);
             this.btnUnicodeToExcel.Name = "btnUnicodeToExcel";
-            this.btnUnicodeToExcel.Size = new System.Drawing.Size(143, 42);
+            this.btnUnicodeToExcel.Size = new System.Drawing.Size(123, 42);
             this.btnUnicodeToExcel.TabIndex = 28;
             this.btnUnicodeToExcel.Text = "Already segmented,  just send to Excel";
             this.btnUnicodeToExcel.UseVisualStyleBackColor = true;
@@ -269,7 +282,7 @@
             // 
             this.chkUnicodeToExcel.AutoSize = true;
             this.chkUnicodeToExcel.Enabled = false;
-            this.chkUnicodeToExcel.Location = new System.Drawing.Point(523, 100);
+            this.chkUnicodeToExcel.Location = new System.Drawing.Point(473, 97);
             this.chkUnicodeToExcel.Name = "chkUnicodeToExcel";
             this.chkUnicodeToExcel.Size = new System.Drawing.Size(92, 17);
             this.chkUnicodeToExcel.TabIndex = 27;
@@ -362,6 +375,7 @@
             // grpLegacy
             // 
             this.grpLegacy.BackColor = System.Drawing.SystemColors.Control;
+            this.grpLegacy.Controls.Add(this.chkLegacyAddSpace);
             this.grpLegacy.Controls.Add(this.btnLegacyToExcel);
             this.grpLegacy.Controls.Add(this.chkLegacyToExcel);
             this.grpLegacy.Controls.Add(this.txtLegacyInput);
@@ -380,12 +394,22 @@
             this.grpLegacy.TabStop = false;
             this.grpLegacy.Text = "Legacy";
             // 
+            // chkLegacyAddSpace
+            // 
+            this.chkLegacyAddSpace.AutoSize = true;
+            this.chkLegacyAddSpace.Location = new System.Drawing.Point(567, 93);
+            this.chkLegacyAddSpace.Name = "chkLegacyAddSpace";
+            this.chkLegacyAddSpace.Size = new System.Drawing.Size(131, 17);
+            this.chkLegacyAddSpace.TabIndex = 19;
+            this.chkLegacyAddSpace.Text = "Add space after range";
+            this.chkLegacyAddSpace.UseVisualStyleBackColor = true;
+            // 
             // btnLegacyToExcel
             // 
             this.btnLegacyToExcel.Enabled = false;
             this.btnLegacyToExcel.Location = new System.Drawing.Point(340, 79);
             this.btnLegacyToExcel.Name = "btnLegacyToExcel";
-            this.btnLegacyToExcel.Size = new System.Drawing.Size(173, 42);
+            this.btnLegacyToExcel.Size = new System.Drawing.Size(123, 42);
             this.btnLegacyToExcel.TabIndex = 18;
             this.btnLegacyToExcel.Text = "Already segmented,  just send to Excel";
             this.btnLegacyToExcel.UseVisualStyleBackColor = true;
@@ -395,7 +419,7 @@
             // 
             this.chkLegacyToExcel.AutoSize = true;
             this.chkLegacyToExcel.Enabled = false;
-            this.chkLegacyToExcel.Location = new System.Drawing.Point(519, 96);
+            this.chkLegacyToExcel.Location = new System.Drawing.Point(469, 93);
             this.chkLegacyToExcel.Name = "chkLegacyToExcel";
             this.chkLegacyToExcel.Size = new System.Drawing.Size(92, 17);
             this.chkLegacyToExcel.TabIndex = 17;
@@ -720,6 +744,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar progressBar1;
         private System.Windows.Forms.Button btnPauseResume;
+        private System.Windows.Forms.CheckBox chkUnicodeAddSpace;
+        private System.Windows.Forms.CheckBox chkLegacyAddSpace;
     }
 }
 

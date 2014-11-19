@@ -6,7 +6,7 @@
  * It was writting as part of a MissionAssist project to convert documents in legacy fonts to Unicode.  Much of the logic is attributable to
  * Dennis Pepler, but the code here was written by Stephen Palmstrom.
  * 
- * Copyright © MissionAssist 2013 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
+ * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
  * Last modified on 9 September 2013 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
  * 
@@ -282,11 +282,11 @@ namespace Interlinear
             Application.DoEvents();
             if (theButton.Parent.Text == "Legacy")
             {
-                SegmentFile(txtLegacyInput.Text, txtLegacyOutput.Text, txtLegacyWordCount, chkLegacyToExcel, false);
+                SegmentFile(txtLegacyInput.Text, txtLegacyOutput.Text, txtLegacyWordCount, chkLegacyToExcel, chkLegacyAddSpace, false);
             }
             else
             {
-                SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, true);
+                SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, chkUnicodeAddSpace, true);
             }
             theButton.Enabled = true;  // enable it again
             btnClose.Enabled = true;
@@ -302,8 +302,8 @@ namespace Interlinear
             theButton.Enabled = false;
             btnClose.Enabled = false;
             boxProgress.Items.Clear();  // empty the progress box
-            SegmentFile(txtLegacyInput.Text, txtLegacyOutput.Text, txtLegacyWordCount, chkLegacyToExcel, false);
-            SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, true);
+            SegmentFile(txtLegacyInput.Text, txtLegacyOutput.Text, txtLegacyWordCount, chkLegacyToExcel, chkLegacyAddSpace, false);
+            SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, chkUnicodeAddSpace, true);
             if (chkLegacyToExcel.Checked || chkUnicodeToExcel.Checked)
             {
                 //MakeInterlinear(excelApp);  // Make the interlinear worksheet, too
@@ -319,7 +319,7 @@ namespace Interlinear
             QuitWord(false);  // don't save the output
             this.Close();
         }
-        private void SegmentFile(String theInputFile, String theOutputFile, TextBox txtNumberOfWords, CheckBox SendToExcel, bool EvenRows)
+        private void SegmentFile(String theInputFile, String theOutputFile, TextBox txtNumberOfWords, CheckBox SendToExcel, CheckBox AddSpaceAfterRange, bool EvenRows)
         {
             /*
              * This is where we do all the segmentation and, if desired, writing to Excel
@@ -330,13 +330,14 @@ namespace Interlinear
                 theStopwatch.Start();
                 toolStripStatusLabel1.Text = "Starting...";
                 int NumberOfWords;
+                AddSpaceAfterRange.Enabled = false;  // We don't want this changing during our run.
                 int RowCounter = 0;
                 progressBar1.Value = 0;
 
                 Application.DoEvents();
                 try
                 {
-                    InputDoc = wrdApp.Documents.Open(theInputFile, missing, true);  // Read only
+                    InputDoc = wrdApp.Documents.OpenNoRepairDialog(theInputFile, missing, true);  // Read only, and we don't want the repair dialog
                     File.Delete(theOutputFile); // delete the output file
                     OutputDoc = wrdApp.Documents.Add();  // a new blank document
                     OutputDoc.SaveAs2(theOutputFile, InputDoc.SaveFormat);  // Save the output document
@@ -420,7 +421,7 @@ namespace Interlinear
                     WordRoot.Range tmpStory = rngStory;
                     do
                     {
-                        CharacterCounter = InsertAfter(tmpStory, CharacterCounter, theStopwatch, theStopwatch2);
+                        CharacterCounter = InsertAfter(tmpStory, CharacterCounter, AddSpaceAfterRange.Checked, theStopwatch, theStopwatch2);
                         if (tmpStory.StoryType == WordRoot.WdStoryType.wdTextFrameStory)
                         {
                             TextFrames.Add(tmpStory);  // Remember the text frame
@@ -461,7 +462,7 @@ namespace Interlinear
                                 }
                                 if (NotFound)
                                 {
-                                    CharacterCounter = InsertAfter(theRange, CharacterCounter, theStopwatch, theStopwatch2);  // Add it to the document
+                                    CharacterCounter = InsertAfter(theRange, CharacterCounter, AddSpaceAfterRange.Checked, theStopwatch, theStopwatch2);  // Add it to the document
                                 }
            
 
@@ -524,13 +525,14 @@ namespace Interlinear
             {
                 FinalCatch(Ex);
             }
+            AddSpaceAfterRange.Enabled = true; // Enable us to change settings again.
         }
         private bool CompareRanges(WordRoot.Range RangeOne, WordRoot.Range RangeTwo)
         {
             // Compare two ranges
             return (RangeOne.Font.Name == RangeTwo.Font.Name && RangeOne.Text == RangeTwo.Text);
         }
-        private int InsertAfter(WordRoot.Range theRange, int CharacterCounter, Stopwatch theStopwatch, Stopwatch theStopwatch2)
+        private int InsertAfter(WordRoot.Range theRange, int CharacterCounter, bool AddSpaceAfterRange, Stopwatch theStopwatch, Stopwatch theStopwatch2)
         {   
             /*
              * If the paragraph has a single font, insert the whole story followed by a space with the single font.
@@ -549,7 +551,7 @@ namespace Interlinear
             //boxProgress.Items.Add("Looked for symbol in " + theStopwatch3.ElapsedMilliseconds.ToString("f2") + " and found " + FoundSymbol.ToString());
             if (theRange.Font.Name != "")
             {
-                CharacterCounter = InsertAfter2(theRange, true, CharacterCounter, ref tmpCounter, theStopwatch, theStopwatch2, theStopwatch3, FoundSymbol);
+                CharacterCounter = InsertAfter2(theRange, AddSpaceAfterRange, CharacterCounter, ref tmpCounter, theStopwatch, theStopwatch2, theStopwatch3, FoundSymbol);
                 return CharacterCounter;
             }
             else
@@ -559,7 +561,7 @@ namespace Interlinear
                 {
                     if (theParagraph.Range.Font.Name != "")
                     {
-                        CharacterCounter = InsertAfter2(theParagraph.Range, true, CharacterCounter, ref tmpCounter, theStopwatch, theStopwatch2, 
+                        CharacterCounter = InsertAfter2(theParagraph.Range, AddSpaceAfterRange, CharacterCounter, ref tmpCounter, theStopwatch, theStopwatch2, 
                             theStopwatch3, FoundSymbol);
                     }
                     else
@@ -568,7 +570,7 @@ namespace Interlinear
                         {
                             if (theWord.Font.Name != "")
                             {
-                                CharacterCounter = InsertAfter2(theWord, true, CharacterCounter, ref tmpCounter, theStopwatch, theStopwatch2,
+                                CharacterCounter = InsertAfter2(theWord, AddSpaceAfterRange, CharacterCounter, ref tmpCounter, theStopwatch, theStopwatch2,
                                     theStopwatch3, FoundSymbol);
                             }
                             else
@@ -1284,21 +1286,21 @@ namespace Interlinear
             string FileName;
             btnClose.Enabled = false;
             tabControl1.SelectTab("Progress");
-            theExcelOptions.OptimiseApp(excelApp);  // optimise Excel
             try
             {
                 if (theButton.Parent.Text == "Legacy")
                 {
                     EvenRows = false;
-                    theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
+                    theDoc = wrdApp.Documents.OpenNoRepairDialog(txtLegacyOutput.Text, true);
                     FileName = txtLegacyOutput.Text;
                 }
                 else
                 {
                     EvenRows = true;
-                    theDoc = wrdApp.Documents.Open(txtUnicodeOutput.Text);
+                    theDoc = wrdApp.Documents.OpenNoRepairDialog(txtUnicodeOutput.Text, true);
                     FileName = txtUnicodeInput.Text;
                  }
+
             }
             catch (Exception ex)
             {
