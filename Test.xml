@@ -1,0 +1,3254 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<?mso-application progid="Word.Document"?>
+<w:wordDocument xmlns:aml="http://schemas.microsoft.com/aml/2001/core" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml" xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wsp="http://schemas.microsoft.com/office/word/2003/wordml/sp2" xmlns:sl="http://schemas.microsoft.com/schemaLibrary/2003/core" w:macrosPresent="no" w:embeddedObjPresent="no" w:ocxPresent="no" xml:space="preserve">
+  <w:ignoreSubtree w:val="http://schemas.microsoft.com/office/word/2003/wordml/sp2" />
+  <o:DocumentProperties>
+    <o:Version>15</o:Version>
+  </o:DocumentProperties>
+  <w:fonts>
+    <w:defaultFonts w:ascii="Calibri" w:fareast="Calibri" w:h-ansi="Calibri" w:cs="Times New Roman" />
+    <w:font w:name="Times New Roman">
+      <w:panose-1 w:val="02020603050405020304" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="E0002AFF" w:usb-1="C0007843" w:usb-2="00000009" w:usb-3="00000000" w:csb-0="000001FF" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Arial">
+      <w:panose-1 w:val="020B0604020202020204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="E0002AFF" w:usb-1="C0007843" w:usb-2="00000009" w:usb-3="00000000" w:csb-0="000001FF" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Symbol">
+      <w:panose-1 w:val="05050102010706020507" />
+      <w:charset w:val="02" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Cambria Math">
+      <w:panose-1 w:val="02040503050406030204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="E00002FF" w:usb-1="420024FF" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="0000019F" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Calibri Light">
+      <w:panose-1 w:val="020F0302020204030204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="A00002EF" w:usb-1="4000207B" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="0000019F" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Calibri">
+      <w:panose-1 w:val="020F0502020204030204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="E00002FF" w:usb-1="4000ACFF" w:usb-2="00000001" w:usb-3="00000000" w:csb-0="0000019F" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Footlight MT Light">
+      <w:panose-1 w:val="0204060206030A020304" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Elementary Heavy SF">
+      <w:panose-1 w:val="020BE200000000000000" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Troutkings BTN">
+      <w:panose-1 w:val="020E0604070104040807" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Californian FB">
+      <w:panose-1 w:val="0207040306080B030204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Tennessee Heavy SF">
+      <w:panose-1 w:val="020BE200000000000000" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="A_steve A_steve SILDoulosL">
+      <w:panose-1 w:val="00000400000000000000" />
+      <w:charset w:val="02" />
+      <w:family w:val="auto" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Napa Heavy SF">
+      <w:panose-1 w:val="020BE200000000000000" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Horizon BT">
+      <w:panose-1 w:val="020C0708030708060507" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="800000AF" w:usb-1="1000204A" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000011" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="High Tower Text">
+      <w:panose-1 w:val="02040502050506030303" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Formal436 BT">
+      <w:panose-1 w:val="03060802040302020203" />
+      <w:charset w:val="00" />
+      <w:family w:val="Script" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="800000AF" w:usb-1="1000204A" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000011" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Freehand575 BT">
+      <w:panose-1 w:val="03080702030306060204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Script" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="800000AF" w:usb-1="1000204A" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000011" w:csb-1="00000000" />
+    </w:font>
+  </w:fonts>
+  <w:lists>
+    <w:listDef w:listDefId="0">
+      <w:lsid w:val="212535F5" />
+      <w:plt w:val="HybridMultilevel" />
+      <w:tmpl w:val="4B660A6C" />
+      <w:lvl w:ilvl="0" w:tplc="0809000F">
+        <w:start w:val="1" />
+        <w:lvlText w:val="%1." />
+        <w:lvlJc w:val="left" />
+        <w:pPr>
+          <w:ind w:left="720" w:hanging="360" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="1" w:tplc="08090019" w:tentative="on">
+        <w:start w:val="1" />
+        <w:nfc w:val="4" />
+        <w:lvlText w:val="%2." />
+        <w:lvlJc w:val="left" />
+        <w:pPr>
+          <w:ind w:left="1440" w:hanging="360" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="2" w:tplc="0809001B" w:tentative="on">
+        <w:start w:val="1" />
+        <w:nfc w:val="2" />
+        <w:lvlText w:val="%3." />
+        <w:lvlJc w:val="right" />
+        <w:pPr>
+          <w:ind w:left="2160" w:hanging="180" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="3" w:tplc="0809000F" w:tentative="on">
+        <w:start w:val="1" />
+        <w:lvlText w:val="%4." />
+        <w:lvlJc w:val="left" />
+        <w:pPr>
+          <w:ind w:left="2880" w:hanging="360" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="4" w:tplc="08090019" w:tentative="on">
+        <w:start w:val="1" />
+        <w:nfc w:val="4" />
+        <w:lvlText w:val="%5." />
+        <w:lvlJc w:val="left" />
+        <w:pPr>
+          <w:ind w:left="3600" w:hanging="360" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="5" w:tplc="0809001B" w:tentative="on">
+        <w:start w:val="1" />
+        <w:nfc w:val="2" />
+        <w:lvlText w:val="%6." />
+        <w:lvlJc w:val="right" />
+        <w:pPr>
+          <w:ind w:left="4320" w:hanging="180" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="6" w:tplc="0809000F" w:tentative="on">
+        <w:start w:val="1" />
+        <w:lvlText w:val="%7." />
+        <w:lvlJc w:val="left" />
+        <w:pPr>
+          <w:ind w:left="5040" w:hanging="360" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="7" w:tplc="08090019" w:tentative="on">
+        <w:start w:val="1" />
+        <w:nfc w:val="4" />
+        <w:lvlText w:val="%8." />
+        <w:lvlJc w:val="left" />
+        <w:pPr>
+          <w:ind w:left="5760" w:hanging="360" />
+        </w:pPr>
+      </w:lvl>
+      <w:lvl w:ilvl="8" w:tplc="0809001B" w:tentative="on">
+        <w:start w:val="1" />
+        <w:nfc w:val="2" />
+        <w:lvlText w:val="%9." />
+        <w:lvlJc w:val="right" />
+        <w:pPr>
+          <w:ind w:left="6480" w:hanging="180" />
+        </w:pPr>
+      </w:lvl>
+    </w:listDef>
+    <w:list w:ilfo="1">
+      <w:ilst w:val="0" />
+    </w:list>
+  </w:lists>
+  <w:styles>
+    <w:versionOfBuiltInStylenames w:val="7" />
+    <w:latentStyles w:defLockedState="off" w:latentStyleCount="371">
+      <w:lsdException w:name="Normal" />
+      <w:lsdException w:name="heading 1" />
+      <w:lsdException w:name="heading 2" />
+      <w:lsdException w:name="heading 3" />
+      <w:lsdException w:name="heading 4" />
+      <w:lsdException w:name="heading 5" />
+      <w:lsdException w:name="heading 6" />
+      <w:lsdException w:name="heading 7" />
+      <w:lsdException w:name="heading 8" />
+      <w:lsdException w:name="heading 9" />
+      <w:lsdException w:name="index 1" />
+      <w:lsdException w:name="index 2" />
+      <w:lsdException w:name="index 3" />
+      <w:lsdException w:name="index 4" />
+      <w:lsdException w:name="index 5" />
+      <w:lsdException w:name="index 6" />
+      <w:lsdException w:name="index 7" />
+      <w:lsdException w:name="index 8" />
+      <w:lsdException w:name="index 9" />
+      <w:lsdException w:name="toc 1" />
+      <w:lsdException w:name="toc 2" />
+      <w:lsdException w:name="toc 3" />
+      <w:lsdException w:name="toc 4" />
+      <w:lsdException w:name="toc 5" />
+      <w:lsdException w:name="toc 6" />
+      <w:lsdException w:name="toc 7" />
+      <w:lsdException w:name="toc 8" />
+      <w:lsdException w:name="toc 9" />
+      <w:lsdException w:name="Normal Indent" />
+      <w:lsdException w:name="footnote text" />
+      <w:lsdException w:name="annotation text" />
+      <w:lsdException w:name="header" />
+      <w:lsdException w:name="footer" />
+      <w:lsdException w:name="index heading" />
+      <w:lsdException w:name="caption" />
+      <w:lsdException w:name="table of figures" />
+      <w:lsdException w:name="envelope address" />
+      <w:lsdException w:name="envelope return" />
+      <w:lsdException w:name="footnote reference" />
+      <w:lsdException w:name="annotation reference" />
+      <w:lsdException w:name="line number" />
+      <w:lsdException w:name="page number" />
+      <w:lsdException w:name="endnote reference" />
+      <w:lsdException w:name="endnote text" />
+      <w:lsdException w:name="table of authorities" />
+      <w:lsdException w:name="macro" />
+      <w:lsdException w:name="toa heading" />
+      <w:lsdException w:name="List" />
+      <w:lsdException w:name="List Bullet" />
+      <w:lsdException w:name="List Number" />
+      <w:lsdException w:name="List 2" />
+      <w:lsdException w:name="List 3" />
+      <w:lsdException w:name="List 4" />
+      <w:lsdException w:name="List 5" />
+      <w:lsdException w:name="List Bullet 2" />
+      <w:lsdException w:name="List Bullet 3" />
+      <w:lsdException w:name="List Bullet 4" />
+      <w:lsdException w:name="List Bullet 5" />
+      <w:lsdException w:name="List Number 2" />
+      <w:lsdException w:name="List Number 3" />
+      <w:lsdException w:name="List Number 4" />
+      <w:lsdException w:name="List Number 5" />
+      <w:lsdException w:name="Title" />
+      <w:lsdException w:name="Closing" />
+      <w:lsdException w:name="Signature" />
+      <w:lsdException w:name="Default Paragraph Font" />
+      <w:lsdException w:name="Body Text" />
+      <w:lsdException w:name="Body Text Indent" />
+      <w:lsdException w:name="List Continue" />
+      <w:lsdException w:name="List Continue 2" />
+      <w:lsdException w:name="List Continue 3" />
+      <w:lsdException w:name="List Continue 4" />
+      <w:lsdException w:name="List Continue 5" />
+      <w:lsdException w:name="Message Header" />
+      <w:lsdException w:name="Subtitle" />
+      <w:lsdException w:name="Salutation" />
+      <w:lsdException w:name="Date" />
+      <w:lsdException w:name="Body Text First Indent" />
+      <w:lsdException w:name="Body Text First Indent 2" />
+      <w:lsdException w:name="Note Heading" />
+      <w:lsdException w:name="Body Text 2" />
+      <w:lsdException w:name="Body Text 3" />
+      <w:lsdException w:name="Body Text Indent 2" />
+      <w:lsdException w:name="Body Text Indent 3" />
+      <w:lsdException w:name="Block Text" />
+      <w:lsdException w:name="Hyperlink" />
+      <w:lsdException w:name="FollowedHyperlink" />
+      <w:lsdException w:name="Strong" />
+      <w:lsdException w:name="Emphasis" />
+      <w:lsdException w:name="Document Map" />
+      <w:lsdException w:name="Plain Text" />
+      <w:lsdException w:name="E-mail Signature" />
+      <w:lsdException w:name="HTML Top of Form" />
+      <w:lsdException w:name="HTML Bottom of Form" />
+      <w:lsdException w:name="Normal (Web)" />
+      <w:lsdException w:name="HTML Acronym" />
+      <w:lsdException w:name="HTML Address" />
+      <w:lsdException w:name="HTML Cite" />
+      <w:lsdException w:name="HTML Code" />
+      <w:lsdException w:name="HTML Definition" />
+      <w:lsdException w:name="HTML Keyboard" />
+      <w:lsdException w:name="HTML Preformatted" />
+      <w:lsdException w:name="HTML Sample" />
+      <w:lsdException w:name="HTML Typewriter" />
+      <w:lsdException w:name="HTML Variable" />
+      <w:lsdException w:name="Normal Table" />
+      <w:lsdException w:name="annotation subject" />
+      <w:lsdException w:name="No List" />
+      <w:lsdException w:name="Outline List 1" />
+      <w:lsdException w:name="Outline List 2" />
+      <w:lsdException w:name="Outline List 3" />
+      <w:lsdException w:name="Table Simple 1" />
+      <w:lsdException w:name="Table Simple 2" />
+      <w:lsdException w:name="Table Simple 3" />
+      <w:lsdException w:name="Table Classic 1" />
+      <w:lsdException w:name="Table Classic 2" />
+      <w:lsdException w:name="Table Classic 3" />
+      <w:lsdException w:name="Table Classic 4" />
+      <w:lsdException w:name="Table Colorful 1" />
+      <w:lsdException w:name="Table Colorful 2" />
+      <w:lsdException w:name="Table Colorful 3" />
+      <w:lsdException w:name="Table Columns 1" />
+      <w:lsdException w:name="Table Columns 2" />
+      <w:lsdException w:name="Table Columns 3" />
+      <w:lsdException w:name="Table Columns 4" />
+      <w:lsdException w:name="Table Columns 5" />
+      <w:lsdException w:name="Table Grid 1" />
+      <w:lsdException w:name="Table Grid 2" />
+      <w:lsdException w:name="Table Grid 3" />
+      <w:lsdException w:name="Table Grid 4" />
+      <w:lsdException w:name="Table Grid 5" />
+      <w:lsdException w:name="Table Grid 6" />
+      <w:lsdException w:name="Table Grid 7" />
+      <w:lsdException w:name="Table Grid 8" />
+      <w:lsdException w:name="Table List 1" />
+      <w:lsdException w:name="Table List 2" />
+      <w:lsdException w:name="Table List 3" />
+      <w:lsdException w:name="Table List 4" />
+      <w:lsdException w:name="Table List 5" />
+      <w:lsdException w:name="Table List 6" />
+      <w:lsdException w:name="Table List 7" />
+      <w:lsdException w:name="Table List 8" />
+      <w:lsdException w:name="Table 3D effects 1" />
+      <w:lsdException w:name="Table 3D effects 2" />
+      <w:lsdException w:name="Table 3D effects 3" />
+      <w:lsdException w:name="Table Contemporary" />
+      <w:lsdException w:name="Table Elegant" />
+      <w:lsdException w:name="Table Professional" />
+      <w:lsdException w:name="Table Subtle 1" />
+      <w:lsdException w:name="Table Subtle 2" />
+      <w:lsdException w:name="Table Web 1" />
+      <w:lsdException w:name="Table Web 2" />
+      <w:lsdException w:name="Table Web 3" />
+      <w:lsdException w:name="Balloon Text" />
+      <w:lsdException w:name="Table Grid" />
+      <w:lsdException w:name="Table Theme" />
+      <w:lsdException w:name="Placeholder Text" />
+      <w:lsdException w:name="No Spacing" />
+      <w:lsdException w:name="Light Shading" />
+      <w:lsdException w:name="Light List" />
+      <w:lsdException w:name="Light Grid" />
+      <w:lsdException w:name="Medium Shading 1" />
+      <w:lsdException w:name="Medium Shading 2" />
+      <w:lsdException w:name="Medium List 1" />
+      <w:lsdException w:name="Medium List 2" />
+      <w:lsdException w:name="Medium Grid 1" />
+      <w:lsdException w:name="Medium Grid 2" />
+      <w:lsdException w:name="Medium Grid 3" />
+      <w:lsdException w:name="Dark List" />
+      <w:lsdException w:name="Colorful Shading" />
+      <w:lsdException w:name="Colorful List" />
+      <w:lsdException w:name="Colorful Grid" />
+      <w:lsdException w:name="Light Shading Accent 1" />
+      <w:lsdException w:name="Light List Accent 1" />
+      <w:lsdException w:name="Light Grid Accent 1" />
+      <w:lsdException w:name="Medium Shading 1 Accent 1" />
+      <w:lsdException w:name="Medium Shading 2 Accent 1" />
+      <w:lsdException w:name="Medium List 1 Accent 1" />
+      <w:lsdException w:name="Revision" />
+      <w:lsdException w:name="List Paragraph" />
+      <w:lsdException w:name="Quote" />
+      <w:lsdException w:name="Intense Quote" />
+      <w:lsdException w:name="Medium List 2 Accent 1" />
+      <w:lsdException w:name="Medium Grid 1 Accent 1" />
+      <w:lsdException w:name="Medium Grid 2 Accent 1" />
+      <w:lsdException w:name="Medium Grid 3 Accent 1" />
+      <w:lsdException w:name="Dark List Accent 1" />
+      <w:lsdException w:name="Colorful Shading Accent 1" />
+      <w:lsdException w:name="Colorful List Accent 1" />
+      <w:lsdException w:name="Colorful Grid Accent 1" />
+      <w:lsdException w:name="Light Shading Accent 2" />
+      <w:lsdException w:name="Light List Accent 2" />
+      <w:lsdException w:name="Light Grid Accent 2" />
+      <w:lsdException w:name="Medium Shading 1 Accent 2" />
+      <w:lsdException w:name="Medium Shading 2 Accent 2" />
+      <w:lsdException w:name="Medium List 1 Accent 2" />
+      <w:lsdException w:name="Medium List 2 Accent 2" />
+      <w:lsdException w:name="Medium Grid 1 Accent 2" />
+      <w:lsdException w:name="Medium Grid 2 Accent 2" />
+      <w:lsdException w:name="Medium Grid 3 Accent 2" />
+      <w:lsdException w:name="Dark List Accent 2" />
+      <w:lsdException w:name="Colorful Shading Accent 2" />
+      <w:lsdException w:name="Colorful List Accent 2" />
+      <w:lsdException w:name="Colorful Grid Accent 2" />
+      <w:lsdException w:name="Light Shading Accent 3" />
+      <w:lsdException w:name="Light List Accent 3" />
+      <w:lsdException w:name="Light Grid Accent 3" />
+      <w:lsdException w:name="Medium Shading 1 Accent 3" />
+      <w:lsdException w:name="Medium Shading 2 Accent 3" />
+      <w:lsdException w:name="Medium List 1 Accent 3" />
+      <w:lsdException w:name="Medium List 2 Accent 3" />
+      <w:lsdException w:name="Medium Grid 1 Accent 3" />
+      <w:lsdException w:name="Medium Grid 2 Accent 3" />
+      <w:lsdException w:name="Medium Grid 3 Accent 3" />
+      <w:lsdException w:name="Dark List Accent 3" />
+      <w:lsdException w:name="Colorful Shading Accent 3" />
+      <w:lsdException w:name="Colorful List Accent 3" />
+      <w:lsdException w:name="Colorful Grid Accent 3" />
+      <w:lsdException w:name="Light Shading Accent 4" />
+      <w:lsdException w:name="Light List Accent 4" />
+      <w:lsdException w:name="Light Grid Accent 4" />
+      <w:lsdException w:name="Medium Shading 1 Accent 4" />
+      <w:lsdException w:name="Medium Shading 2 Accent 4" />
+      <w:lsdException w:name="Medium List 1 Accent 4" />
+      <w:lsdException w:name="Medium List 2 Accent 4" />
+      <w:lsdException w:name="Medium Grid 1 Accent 4" />
+      <w:lsdException w:name="Medium Grid 2 Accent 4" />
+      <w:lsdException w:name="Medium Grid 3 Accent 4" />
+      <w:lsdException w:name="Dark List Accent 4" />
+      <w:lsdException w:name="Colorful Shading Accent 4" />
+      <w:lsdException w:name="Colorful List Accent 4" />
+      <w:lsdException w:name="Colorful Grid Accent 4" />
+      <w:lsdException w:name="Light Shading Accent 5" />
+      <w:lsdException w:name="Light List Accent 5" />
+      <w:lsdException w:name="Light Grid Accent 5" />
+      <w:lsdException w:name="Medium Shading 1 Accent 5" />
+      <w:lsdException w:name="Medium Shading 2 Accent 5" />
+      <w:lsdException w:name="Medium List 1 Accent 5" />
+      <w:lsdException w:name="Medium List 2 Accent 5" />
+      <w:lsdException w:name="Medium Grid 1 Accent 5" />
+      <w:lsdException w:name="Medium Grid 2 Accent 5" />
+      <w:lsdException w:name="Medium Grid 3 Accent 5" />
+      <w:lsdException w:name="Dark List Accent 5" />
+      <w:lsdException w:name="Colorful Shading Accent 5" />
+      <w:lsdException w:name="Colorful List Accent 5" />
+      <w:lsdException w:name="Colorful Grid Accent 5" />
+      <w:lsdException w:name="Light Shading Accent 6" />
+      <w:lsdException w:name="Light List Accent 6" />
+      <w:lsdException w:name="Light Grid Accent 6" />
+      <w:lsdException w:name="Medium Shading 1 Accent 6" />
+      <w:lsdException w:name="Medium Shading 2 Accent 6" />
+      <w:lsdException w:name="Medium List 1 Accent 6" />
+      <w:lsdException w:name="Medium List 2 Accent 6" />
+      <w:lsdException w:name="Medium Grid 1 Accent 6" />
+      <w:lsdException w:name="Medium Grid 2 Accent 6" />
+      <w:lsdException w:name="Medium Grid 3 Accent 6" />
+      <w:lsdException w:name="Dark List Accent 6" />
+      <w:lsdException w:name="Colorful Shading Accent 6" />
+      <w:lsdException w:name="Colorful List Accent 6" />
+      <w:lsdException w:name="Colorful Grid Accent 6" />
+      <w:lsdException w:name="Subtle Emphasis" />
+      <w:lsdException w:name="Intense Emphasis" />
+      <w:lsdException w:name="Subtle Reference" />
+      <w:lsdException w:name="Intense Reference" />
+      <w:lsdException w:name="Book Title" />
+      <w:lsdException w:name="Bibliography" />
+      <w:lsdException w:name="TOC Heading" />
+      <w:lsdException w:name="Plain Table 1" />
+      <w:lsdException w:name="Plain Table 2" />
+      <w:lsdException w:name="Plain Table 3" />
+      <w:lsdException w:name="Plain Table 4" />
+      <w:lsdException w:name="Plain Table 5" />
+      <w:lsdException w:name="Grid Table Light" />
+      <w:lsdException w:name="Grid Table 1 Light" />
+      <w:lsdException w:name="Grid Table 2" />
+      <w:lsdException w:name="Grid Table 3" />
+      <w:lsdException w:name="Grid Table 4" />
+      <w:lsdException w:name="Grid Table 5 Dark" />
+      <w:lsdException w:name="Grid Table 6 Colorful" />
+      <w:lsdException w:name="Grid Table 7 Colorful" />
+      <w:lsdException w:name="Grid Table 1 Light Accent 1" />
+      <w:lsdException w:name="Grid Table 2 Accent 1" />
+      <w:lsdException w:name="Grid Table 3 Accent 1" />
+      <w:lsdException w:name="Grid Table 4 Accent 1" />
+      <w:lsdException w:name="Grid Table 5 Dark Accent 1" />
+      <w:lsdException w:name="Grid Table 6 Colorful Accent 1" />
+      <w:lsdException w:name="Grid Table 7 Colorful Accent 1" />
+      <w:lsdException w:name="Grid Table 1 Light Accent 2" />
+      <w:lsdException w:name="Grid Table 2 Accent 2" />
+      <w:lsdException w:name="Grid Table 3 Accent 2" />
+      <w:lsdException w:name="Grid Table 4 Accent 2" />
+      <w:lsdException w:name="Grid Table 5 Dark Accent 2" />
+      <w:lsdException w:name="Grid Table 6 Colorful Accent 2" />
+      <w:lsdException w:name="Grid Table 7 Colorful Accent 2" />
+      <w:lsdException w:name="Grid Table 1 Light Accent 3" />
+      <w:lsdException w:name="Grid Table 2 Accent 3" />
+      <w:lsdException w:name="Grid Table 3 Accent 3" />
+      <w:lsdException w:name="Grid Table 4 Accent 3" />
+      <w:lsdException w:name="Grid Table 5 Dark Accent 3" />
+      <w:lsdException w:name="Grid Table 6 Colorful Accent 3" />
+      <w:lsdException w:name="Grid Table 7 Colorful Accent 3" />
+      <w:lsdException w:name="Grid Table 1 Light Accent 4" />
+      <w:lsdException w:name="Grid Table 2 Accent 4" />
+      <w:lsdException w:name="Grid Table 3 Accent 4" />
+      <w:lsdException w:name="Grid Table 4 Accent 4" />
+      <w:lsdException w:name="Grid Table 5 Dark Accent 4" />
+      <w:lsdException w:name="Grid Table 6 Colorful Accent 4" />
+      <w:lsdException w:name="Grid Table 7 Colorful Accent 4" />
+      <w:lsdException w:name="Grid Table 1 Light Accent 5" />
+      <w:lsdException w:name="Grid Table 2 Accent 5" />
+      <w:lsdException w:name="Grid Table 3 Accent 5" />
+      <w:lsdException w:name="Grid Table 4 Accent 5" />
+      <w:lsdException w:name="Grid Table 5 Dark Accent 5" />
+      <w:lsdException w:name="Grid Table 6 Colorful Accent 5" />
+      <w:lsdException w:name="Grid Table 7 Colorful Accent 5" />
+      <w:lsdException w:name="Grid Table 1 Light Accent 6" />
+      <w:lsdException w:name="Grid Table 2 Accent 6" />
+      <w:lsdException w:name="Grid Table 3 Accent 6" />
+      <w:lsdException w:name="Grid Table 4 Accent 6" />
+      <w:lsdException w:name="Grid Table 5 Dark Accent 6" />
+      <w:lsdException w:name="Grid Table 6 Colorful Accent 6" />
+      <w:lsdException w:name="Grid Table 7 Colorful Accent 6" />
+      <w:lsdException w:name="List Table 1 Light" />
+      <w:lsdException w:name="List Table 2" />
+      <w:lsdException w:name="List Table 3" />
+      <w:lsdException w:name="List Table 4" />
+      <w:lsdException w:name="List Table 5 Dark" />
+      <w:lsdException w:name="List Table 6 Colorful" />
+      <w:lsdException w:name="List Table 7 Colorful" />
+      <w:lsdException w:name="List Table 1 Light Accent 1" />
+      <w:lsdException w:name="List Table 2 Accent 1" />
+      <w:lsdException w:name="List Table 3 Accent 1" />
+      <w:lsdException w:name="List Table 4 Accent 1" />
+      <w:lsdException w:name="List Table 5 Dark Accent 1" />
+      <w:lsdException w:name="List Table 6 Colorful Accent 1" />
+      <w:lsdException w:name="List Table 7 Colorful Accent 1" />
+      <w:lsdException w:name="List Table 1 Light Accent 2" />
+      <w:lsdException w:name="List Table 2 Accent 2" />
+      <w:lsdException w:name="List Table 3 Accent 2" />
+      <w:lsdException w:name="List Table 4 Accent 2" />
+      <w:lsdException w:name="List Table 5 Dark Accent 2" />
+      <w:lsdException w:name="List Table 6 Colorful Accent 2" />
+      <w:lsdException w:name="List Table 7 Colorful Accent 2" />
+      <w:lsdException w:name="List Table 1 Light Accent 3" />
+      <w:lsdException w:name="List Table 2 Accent 3" />
+      <w:lsdException w:name="List Table 3 Accent 3" />
+      <w:lsdException w:name="List Table 4 Accent 3" />
+      <w:lsdException w:name="List Table 5 Dark Accent 3" />
+      <w:lsdException w:name="List Table 6 Colorful Accent 3" />
+      <w:lsdException w:name="List Table 7 Colorful Accent 3" />
+      <w:lsdException w:name="List Table 1 Light Accent 4" />
+      <w:lsdException w:name="List Table 2 Accent 4" />
+      <w:lsdException w:name="List Table 3 Accent 4" />
+      <w:lsdException w:name="List Table 4 Accent 4" />
+      <w:lsdException w:name="List Table 5 Dark Accent 4" />
+      <w:lsdException w:name="List Table 6 Colorful Accent 4" />
+      <w:lsdException w:name="List Table 7 Colorful Accent 4" />
+      <w:lsdException w:name="List Table 1 Light Accent 5" />
+      <w:lsdException w:name="List Table 2 Accent 5" />
+      <w:lsdException w:name="List Table 3 Accent 5" />
+      <w:lsdException w:name="List Table 4 Accent 5" />
+      <w:lsdException w:name="List Table 5 Dark Accent 5" />
+      <w:lsdException w:name="List Table 6 Colorful Accent 5" />
+      <w:lsdException w:name="List Table 7 Colorful Accent 5" />
+      <w:lsdException w:name="List Table 1 Light Accent 6" />
+      <w:lsdException w:name="List Table 2 Accent 6" />
+      <w:lsdException w:name="List Table 3 Accent 6" />
+      <w:lsdException w:name="List Table 4 Accent 6" />
+      <w:lsdException w:name="List Table 5 Dark Accent 6" />
+      <w:lsdException w:name="List Table 6 Colorful Accent 6" />
+      <w:lsdException w:name="List Table 7 Colorful Accent 6" />
+    </w:latentStyles>
+    <w:style w:type="paragraph" w:default="on" w:styleId="Normal">
+      <w:name w:val="Normal" />
+      <w:pPr>
+        <w:spacing w:after="160" w:line="259" w:line-rule="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+        <w:sz w:val="22" />
+        <w:sz-cs w:val="22" />
+        <w:lang w:val="EN-GB" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading1">
+      <w:name w:val="heading 1" />
+      <wx:uiName wx:val="Heading 1" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:link w:val="Heading1Char" />
+      <w:rsid w:val="003D7291" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:spacing w:before="240" w:after="0" />
+        <w:outlineLvl w:val="0" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Calibri Light" w:fareast="Times New Roman" w:h-ansi="Calibri Light" />
+        <wx:font wx:val="Calibri Light" />
+        <w:color w:val="2E74B5" />
+        <w:sz w:val="32" />
+        <w:sz-cs w:val="32" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:default="on" w:styleId="DefaultParagraphFont">
+      <w:name w:val="Default Paragraph Font" />
+    </w:style>
+    <w:style w:type="table" w:default="on" w:styleId="TableNormal">
+      <w:name w:val="Normal Table" />
+      <wx:uiName wx:val="Table Normal" />
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+        <w:lang w:val="EN-GB" w:fareast="EN-GB" w:bidi="AR-SA" />
+      </w:rPr>
+      <w:tblPr>
+        <w:tblInd w:w="0" w:type="dxa" />
+        <w:tblCellMar>
+          <w:top w:w="0" w:type="dxa" />
+          <w:left w:w="108" w:type="dxa" />
+          <w:bottom w:w="0" w:type="dxa" />
+          <w:right w:w="108" w:type="dxa" />
+        </w:tblCellMar>
+      </w:tblPr>
+    </w:style>
+    <w:style w:type="list" w:default="on" w:styleId="NoList">
+      <w:name w:val="No List" />
+    </w:style>
+    <w:style w:type="character" w:styleId="Heading1Char">
+      <w:name w:val="Heading 1 Char" />
+      <w:link w:val="Heading1" />
+      <w:rsid w:val="003D7291" />
+      <w:rPr>
+        <w:rFonts w:ascii="Calibri Light" w:fareast="Times New Roman" w:h-ansi="Calibri Light" w:cs="Times New Roman" />
+        <w:color w:val="2E74B5" />
+        <w:sz w:val="32" />
+        <w:sz-cs w:val="32" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="FootnoteText">
+      <w:name w:val="footnote text" />
+      <wx:uiName wx:val="Footnote Text" />
+      <w:basedOn w:val="Normal" />
+      <w:link w:val="FootnoteTextChar" />
+      <w:rsid w:val="003D7291" />
+      <w:pPr>
+        <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+        <w:sz w:val="20" />
+        <w:sz-cs w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="FootnoteTextChar">
+      <w:name w:val="Footnote Text Char" />
+      <w:link w:val="FootnoteText" />
+      <w:rsid w:val="003D7291" />
+      <w:rPr>
+        <w:sz w:val="20" />
+        <w:sz-cs w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="FootnoteReference">
+      <w:name w:val="footnote reference" />
+      <wx:uiName wx:val="Footnote Reference" />
+      <w:rsid w:val="003D7291" />
+      <w:rPr>
+        <w:vertAlign w:val="superscript" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Header">
+      <w:name w:val="header" />
+      <wx:uiName wx:val="Header" />
+      <w:basedOn w:val="Normal" />
+      <w:link w:val="HeaderChar" />
+      <w:rsid w:val="003D7291" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="center" w:pos="4513" />
+          <w:tab w:val="right" w:pos="9026" />
+        </w:tabs>
+        <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="HeaderChar">
+      <w:name w:val="Header Char" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:link w:val="Header" />
+      <w:rsid w:val="003D7291" />
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Footer">
+      <w:name w:val="footer" />
+      <wx:uiName wx:val="Footer" />
+      <w:basedOn w:val="Normal" />
+      <w:link w:val="FooterChar" />
+      <w:rsid w:val="003D7291" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="center" w:pos="4513" />
+          <w:tab w:val="right" w:pos="9026" />
+        </w:tabs>
+        <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="FooterChar">
+      <w:name w:val="Footer Char" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:link w:val="Footer" />
+      <w:rsid w:val="003D7291" />
+    </w:style>
+    <w:style w:type="table" w:styleId="TableGrid">
+      <w:name w:val="Table Grid" />
+      <w:basedOn w:val="TableNormal" />
+      <w:rsid w:val="006F7254" />
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+      </w:rPr>
+      <w:tblPr>
+        <w:tblInd w:w="0" w:type="dxa" />
+        <w:tblBorders>
+          <w:top w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+          <w:left w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+          <w:bottom w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+          <w:right w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+          <w:insideH w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+          <w:insideV w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+        </w:tblBorders>
+        <w:tblCellMar>
+          <w:top w:w="0" w:type="dxa" />
+          <w:left w:w="108" w:type="dxa" />
+          <w:bottom w:w="0" w:type="dxa" />
+          <w:right w:w="108" w:type="dxa" />
+        </w:tblCellMar>
+      </w:tblPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="EndnoteText">
+      <w:name w:val="endnote text" />
+      <wx:uiName wx:val="Endnote Text" />
+      <w:basedOn w:val="Normal" />
+      <w:link w:val="EndnoteTextChar" />
+      <w:rsid w:val="001C1F42" />
+      <w:pPr>
+        <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+        <w:sz w:val="20" />
+        <w:sz-cs w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="EndnoteTextChar">
+      <w:name w:val="Endnote Text Char" />
+      <w:link w:val="EndnoteText" />
+      <w:rsid w:val="001C1F42" />
+      <w:rPr>
+        <w:sz w:val="20" />
+        <w:sz-cs w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="EndnoteReference">
+      <w:name w:val="endnote reference" />
+      <wx:uiName wx:val="Endnote Reference" />
+      <w:rsid w:val="001C1F42" />
+      <w:rPr>
+        <w:vertAlign w:val="superscript" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ListParagraph">
+      <w:name w:val="List Paragraph" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00540E03" />
+      <w:pPr>
+        <w:ind w:left="720" />
+        <w:contextualSpacing />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Caption">
+      <w:name w:val="caption" />
+      <wx:uiName wx:val="Caption" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00AD338F" />
+      <w:pPr>
+        <w:spacing w:after="200" w:line="240" w:line-rule="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Calibri" />
+        <w:i />
+        <w:i-cs />
+        <w:color w:val="44546A" />
+        <w:sz w:val="18" />
+        <w:sz-cs w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="CitedForm">
+      <w:name w:val="Cited Form" />
+      <w:rsid w:val="006D0446" />
+      <w:rPr>
+        <w:i />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+  </w:styles>
+  <w:shapeDefaults>
+    <o:shapedefaults v:ext="edit" spidmax="2051" />
+    <o:shapelayout v:ext="edit">
+      <o:idmap v:ext="edit" data="1" />
+    </o:shapelayout>
+  </w:shapeDefaults>
+  <w:docPr>
+    <w:view w:val="normal" />
+    <w:zoom w:percent="100" />
+    <w:doNotEmbedSystemFonts />
+    <w:revisionView w:ink-annotations="off" />
+    <w:defaultTabStop w:val="720" />
+    <w:punctuationKerning />
+    <w:characterSpacingControl w:val="DontCompress" />
+    <w:optimizeForBrowser />
+    <w:allowPNG />
+    <w:savePreviewPicture />
+    <w:validateAgainstSchema />
+    <w:saveInvalidXML w:val="off" />
+    <w:ignoreMixedContent w:val="off" />
+    <w:alwaysShowPlaceholderText w:val="off" />
+    <w:hdrShapeDefaults>
+      <o:shapedefaults v:ext="edit" spidmax="2051" />
+      <o:shapelayout v:ext="edit">
+        <o:idmap v:ext="edit" data="2" />
+      </o:shapelayout>
+    </w:hdrShapeDefaults>
+    <w:footnotePr>
+      <w:footnote w:type="separator">
+        <w:p wsp:rsidR="004A70C1" wsp:rsidRDefault="004A70C1" wsp:rsidP="003D7291">
+          <w:pPr>
+            <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+          </w:pPr>
+          <w:r>
+            <w:separator />
+          </w:r>
+        </w:p>
+      </w:footnote>
+      <w:footnote w:type="continuation-separator">
+        <w:p wsp:rsidR="004A70C1" wsp:rsidRDefault="004A70C1" wsp:rsidP="003D7291">
+          <w:pPr>
+            <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+          </w:pPr>
+          <w:r>
+            <w:continuationSeparator />
+          </w:r>
+        </w:p>
+      </w:footnote>
+    </w:footnotePr>
+    <w:endnotePr>
+      <w:endnote w:type="separator">
+        <w:p wsp:rsidR="004A70C1" wsp:rsidRDefault="004A70C1" wsp:rsidP="003D7291">
+          <w:pPr>
+            <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+          </w:pPr>
+          <w:r>
+            <w:separator />
+          </w:r>
+        </w:p>
+      </w:endnote>
+      <w:endnote w:type="continuation-separator">
+        <w:p wsp:rsidR="004A70C1" wsp:rsidRDefault="004A70C1" wsp:rsidP="003D7291">
+          <w:pPr>
+            <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+          </w:pPr>
+          <w:r>
+            <w:continuationSeparator />
+          </w:r>
+        </w:p>
+      </w:endnote>
+    </w:endnotePr>
+    <w:compat>
+      <w:breakWrappedTables />
+      <w:snapToGridInCell />
+      <w:wrapTextWithPunct />
+      <w:useAsianBreakRules />
+      <w:dontGrowAutofit />
+    </w:compat>
+    <wsp:rsids>
+      <wsp:rsidRoot wsp:val="003641EA" />
+      <wsp:rsid wsp:val="00156549" />
+      <wsp:rsid wsp:val="001C1F42" />
+      <wsp:rsid wsp:val="001E60D2" />
+      <wsp:rsid wsp:val="00291457" />
+      <wsp:rsid wsp:val="002D506D" />
+      <wsp:rsid wsp:val="0032743C" />
+      <wsp:rsid wsp:val="003342CE" />
+      <wsp:rsid wsp:val="003635DA" />
+      <wsp:rsid wsp:val="003641EA" />
+      <wsp:rsid wsp:val="003D7291" />
+      <wsp:rsid wsp:val="00421279" />
+      <wsp:rsid wsp:val="004924EB" />
+      <wsp:rsid wsp:val="0049666F" />
+      <wsp:rsid wsp:val="004A70C1" />
+      <wsp:rsid wsp:val="00512EF3" />
+      <wsp:rsid wsp:val="00540E03" />
+      <wsp:rsid wsp:val="005A4DB9" />
+      <wsp:rsid wsp:val="00624263" />
+      <wsp:rsid wsp:val="006A63FE" />
+      <wsp:rsid wsp:val="006D0446" />
+      <wsp:rsid wsp:val="006F7254" />
+      <wsp:rsid wsp:val="00766730" />
+      <wsp:rsid wsp:val="008C0236" />
+      <wsp:rsid wsp:val="008E1F2A" />
+      <wsp:rsid wsp:val="008F1AA4" />
+      <wsp:rsid wsp:val="009002C0" />
+      <wsp:rsid wsp:val="009352AD" />
+      <wsp:rsid wsp:val="00967BB6" />
+      <wsp:rsid wsp:val="009727F7" />
+      <wsp:rsid wsp:val="009E6E3D" />
+      <wsp:rsid wsp:val="009F4290" />
+      <wsp:rsid wsp:val="00AC55AE" />
+      <wsp:rsid wsp:val="00AD338F" />
+      <wsp:rsid wsp:val="00AF4A54" />
+      <wsp:rsid wsp:val="00B33BB4" />
+      <wsp:rsid wsp:val="00B61B20" />
+      <wsp:rsid wsp:val="00B80A98" />
+      <wsp:rsid wsp:val="00C263CA" />
+      <wsp:rsid wsp:val="00CA55A1" />
+      <wsp:rsid wsp:val="00D337BD" />
+      <wsp:rsid wsp:val="00D354C9" />
+      <wsp:rsid wsp:val="00D4421B" />
+      <wsp:rsid wsp:val="00DD4509" />
+      <wsp:rsid wsp:val="00DE1354" />
+      <wsp:rsid wsp:val="00E130EC" />
+      <wsp:rsid wsp:val="00F37936" />
+      <wsp:rsid wsp:val="00FB285C" />
+    </wsp:rsids>
+  </w:docPr>
+  <w:body>
+    <wx:sect>
+      <wx:sub-section>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="0049666F" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="Heading1" />
+          </w:pPr>
+          <w:r wsp:rsidRPr="0049666F">
+            <w:t>This is as test of character counting </w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="0049666F">
+            <w:rPr>
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:sym w:font="Symbol" w:char="F0D2" />
+          </w:r>
+          <w:r wsp:rsidRPr="0049666F">
+            <w:rPr>
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:sym w:font="Symbol" w:char="F0D3" />
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:r>
+            <w:t>We plan to check if footnotes etc. are counted in</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rStyle w:val="FootnoteReference" />
+            </w:rPr>
+            <w:footnote>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+                <w:pPr>
+                  <w:pStyle w:val="FootnoteText" />
+                </w:pPr>
+                <w:r>
+                  <w:rPr>
+                    <w:rStyle w:val="FootnoteReference" />
+                  </w:rPr>
+                  <w:footnoteRef />
+                </w:r>
+                <w:r>
+                  <w:t> </w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00CA55A1">
+                  <w:rPr>
+                    <w:rFonts w:ascii="Footlight MT Light" w:h-ansi="Footlight MT Light" />
+                    <wx:font wx:val="Footlight MT Light" />
+                  </w:rPr>
+                  <w:t>This is a footnote 123456890</w:t>
+                </w:r>
+              </w:p>
+            </w:footnote>
+          </w:r>
+          <w:r>
+            <w:t>.  We also want to check graphics and end notes</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rStyle w:val="EndnoteReference" />
+            </w:rPr>
+            <w:endnote>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+                <w:pPr>
+                  <w:pStyle w:val="EndnoteText" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="Elementary Heavy SF" w:h-ansi="Elementary Heavy SF" />
+                    <wx:font wx:val="Elementary Heavy SF" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r>
+                  <w:rPr>
+                    <w:rStyle w:val="EndnoteReference" />
+                  </w:rPr>
+                  <w:endnoteRef />
+                </w:r>
+                <w:r>
+                  <w:t> </w:t>
+                </w:r>
+                <w:r>
+                  <w:rPr>
+                    <w:rFonts w:ascii="Elementary Heavy SF" w:h-ansi="Elementary Heavy SF" />
+                    <wx:font wx:val="Elementary Heavy SF" />
+                  </w:rPr>
+                  <w:t>Endnote: T</w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="001C1F42">
+                  <w:rPr>
+                    <w:rFonts w:ascii="Elementary Heavy SF" w:h-ansi="Elementary Heavy SF" />
+                    <wx:font wx:val="Elementary Heavy SF" />
+                  </w:rPr>
+                  <w:t>he quick brown fox jumped over the lazy dog</w:t>
+                </w:r>
+              </w:p>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+                <w:pPr>
+                  <w:pStyle w:val="EndnoteText" />
+                </w:pPr>
+              </w:p>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+                <w:pPr>
+                  <w:pStyle w:val="EndnoteText" />
+                </w:pPr>
+              </w:p>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00766730" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+                <w:pPr>
+                  <w:pStyle w:val="EndnoteText" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+                    <wx:font wx:val="Times New Roman" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="24" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:endnote>
+          </w:r>
+          <w:r>
+            <w:t>.</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="ListParagraph" />
+            <w:listPr>
+              <w:ilvl w:val="0" />
+              <w:ilfo w:val="1" />
+              <wx:t wx:val="1." />
+              <wx:font wx:val="Times New Roman" />
+            </w:listPr>
+          </w:pPr>
+          <w:r>
+            <w:t>This is a list</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="ListParagraph" />
+            <w:listPr>
+              <w:ilvl w:val="0" />
+              <w:ilfo w:val="1" />
+              <wx:t wx:val="2." />
+              <wx:font wx:val="Times New Roman" />
+            </w:listPr>
+          </w:pPr>
+          <w:r>
+            <w:t>To check how we can handle them.</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+          </w:pPr>
+          <w:r>
+            <w:t>Document body. The quick brown fox jumped over the lazy dog. !”£$%^&amp;*()_+{}[]=</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:t> And Arial</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:t>We have a tab characters here</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:tab />
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:tab />
+            <w:t>to see how they is counted.</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:t>And a graphic. And a combining character į́</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="004A70C1" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:keepNext />
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:noProof />
+            </w:rPr>
+            <w:pict>
+              <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe">
+                <v:stroke joinstyle="miter" />
+                <v:path gradientshapeok="t" o:connecttype="rect" />
+              </v:shapetype>
+              <v:shape id="_x0000_s1027" type="#_x0000_t202" style="position:absolute;margin-left:200.25pt;margin-top:311.7pt;width:185.9pt;height:110.6pt;z-index:2;visibility:visible;mso-wrap-style:square;mso-width-percent:400;mso-height-percent:200;mso-wrap-distance-left:9pt;mso-wrap-distance-top:3.6pt;mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:3.6pt;mso-position-horizontal:absolute;mso-position-horizontal-relative:text;mso-position-vertical:absolute;mso-position-vertical-relative:text;mso-width-percent:400;mso-height-percent:200;mso-width-relative:margin;mso-height-relative:margin;v-text-anchor:top" o:gfxdata="UEsDBBQABgAIAAAAIQC2gziS/gAAAOEBAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbJSRQU7DMBBF&#xA;90jcwfIWJU67QAgl6YK0S0CoHGBkTxKLZGx5TGhvj5O2G0SRWNoz/78nu9wcxkFMGNg6quQqL6RA&#xA;0s5Y6ir5vt9lD1JwBDIwOMJKHpHlpr69KfdHjyxSmriSfYz+USnWPY7AufNIadK6MEJMx9ApD/oD&#xA;OlTrorhX2lFEilmcO2RdNtjC5xDF9pCuTyYBB5bi6bQ4syoJ3g9WQ0ymaiLzg5KdCXlKLjvcW893&#xA;SUOqXwnz5DrgnHtJTxOsQfEKIT7DmDSUCaxw7Rqn8787ZsmRM9e2VmPeBN4uqYvTtW7jvijg9N/y&#xA;JsXecLq0q+WD6m8AAAD//wMAUEsDBBQABgAIAAAAIQA4/SH/1gAAAJQBAAALAAAAX3JlbHMvLnJl&#xA;bHOkkMFqwzAMhu+DvYPRfXGawxijTi+j0GvpHsDYimMaW0Yy2fr2M4PBMnrbUb/Q94l/f/hMi1qR&#xA;JVI2sOt6UJgd+ZiDgffL8ekFlFSbvV0oo4EbChzGx4f9GRdb25HMsYhqlCwG5lrLq9biZkxWOiqY&#xA;22YiTra2kYMu1l1tQD30/bPm3wwYN0x18gb45AdQl1tp5j/sFB2T0FQ7R0nTNEV3j6o9feQzro1i&#xA;OWA14Fm+Q8a1a8+Bvu/d/dMb2JY5uiPbhG/ktn4cqGU/er3pcvwCAAD//wMAUEsDBBQABgAIAAAA&#xA;IQCOJja8IwIAAEUEAAAOAAAAZHJzL2Uyb0RvYy54bWysU9uO2yAQfa/Uf0C8N3acSzdWnNU221SV&#xA;thdptx+AMY5RgaFAYm+/fgecTaNt+1KVB8Qww2HmnJn19aAVOQrnJZiKTic5JcJwaKTZV/Tbw+7N&#xA;FSU+MNMwBUZU9FF4er15/Wrd21IU0IFqhCMIYnzZ24p2IdgyyzzvhGZ+AlYYdLbgNAtoun3WONYj&#xA;ulZZkefLrAfXWAdceI+3t6OTbhJ+2woevrStF4GoimJuIe0u7XXcs82alXvHbCf5KQ32D1loJg1+&#xA;eoa6ZYGRg5O/QWnJHXhow4SDzqBtJRepBqxmmr+o5r5jVqRakBxvzzT5/wfLPx+/OiKbis4oMUyj&#xA;RA9iCOQdDKSI7PTWlxh0bzEsDHiNKqdKvb0D/t0TA9uOmb24cQ76TrAGs5vGl9nF0xHHR5C6/wQN&#xA;fsMOARLQ0DodqUMyCKKjSo9nZWIqHC+L2TJfzdDF0Ted5/NlkbTLWPn83DofPgjQJB4q6lD6BM+O&#xA;dz7EdFj5HBJ/86Bks5NKJcPt661y5MiwTXZppQpehClD+oquFsViZOCvEHlaf4LQMmC/K6krenUO&#xA;YmXk7b1pUjcGJtV4xpSVOREZuRtZDEM9nISpoXlESh2MfY1ziIcO3E9KeuzpivofB+YEJeqjQVlW&#xA;0/k8DkEy5ou3yCFxl5760sMMR6iKBkrG4zakwUmE2RuUbycTsVHnMZNTrtirie/TXMVhuLRT1K/p&#xA;3zwBAAD//wMAUEsDBBQABgAIAAAAIQCEQvyu3wAAAAsBAAAPAAAAZHJzL2Rvd25yZXYueG1sTI/B&#xA;TsMwEETvSPyDtUjcqE0a0iqNU1URXCu1ReK6jd0kYK9D7KTh7zEnelzN08zbYjtbwyY9+M6RhOeF&#xA;AKapdqqjRsL76e1pDcwHJIXGkZbwoz1sy/u7AnPlrnTQ0zE0LJaQz1FCG0Kfc+7rVlv0C9dritnF&#xA;DRZDPIeGqwGvsdwangiRcYsdxYUWe121uv46jlbCeKp206FKPj+mvUr32StaNN9SPj7Muw2woOfw&#xA;D8OfflSHMjqd3UjKMyMhFeIlohKyZJkCi8RqlSyBnSWs0zQDXhb89ofyFwAA//8DAFBLAQItABQA&#xA;BgAIAAAAIQC2gziS/gAAAOEBAAATAAAAAAAAAAAAAAAAAAAAAABbQ29udGVudF9UeXBlc10ueG1s&#xA;UEsBAi0AFAAGAAgAAAAhADj9If/WAAAAlAEAAAsAAAAAAAAAAAAAAAAALwEAAF9yZWxzLy5yZWxz&#xA;UEsBAi0AFAAGAAgAAAAhAI4mNrwjAgAARQQAAA4AAAAAAAAAAAAAAAAALgIAAGRycy9lMm9Eb2Mu&#xA;eG1sUEsBAi0AFAAGAAgAAAAhAIRC/K7fAAAACwEAAA8AAAAAAAAAAAAAAAAAfQQAAGRycy9kb3du&#xA;cmV2LnhtbFBLBQYAAAAABAAEAPMAAACJBQAAAAA=&#xA;">
+                <v:textbox style="mso-fit-shape-to-text:t">
+                  <w:txbxContent>
+                    <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="009352AD" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+                      <w:pPr>
+                        <w:rPr>
+                          <w:rFonts w:ascii="Troutkings BTN" w:h-ansi="Troutkings BTN" />
+                          <wx:font wx:val="Troutkings BTN" />
+                        </w:rPr>
+                      </w:pPr>
+                      <w:r>
+                        <w:rPr>
+                          <w:rFonts w:ascii="Troutkings BTN" w:h-ansi="Troutkings BTN" />
+                          <wx:font wx:val="Troutkings BTN" />
+                        </w:rPr>
+                        <w:t>Text box 2: </w:t>
+                      </w:r>
+                      <w:r wsp:rsidRPr="009352AD">
+                        <w:rPr>
+                          <w:rFonts w:ascii="Troutkings BTN" w:h-ansi="Troutkings BTN" />
+                          <wx:font wx:val="Troutkings BTN" />
+                        </w:rPr>
+                        <w:t>The quick brown fox jumped over the lazy dog.</w:t>
+                      </w:r>
+                    </w:p>
+                  </w:txbxContent>
+                </v:textbox>
+                <w10:wrap type="square" />
+              </v:shape>
+            </w:pict>
+          </w:r>
+          <w:r wsp:rsidRPr="008541BB">
+            <w:rPr>
+              <w:noProof />
+              <w:lang w:fareast="EN-GB" />
+            </w:rPr>
+            <w:pict>
+              <v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+                <v:stroke joinstyle="miter" />
+                <v:formulas>
+                  <v:f eqn="if lineDrawn pixelLineWidth 0" />
+                  <v:f eqn="sum @0 1 0" />
+                  <v:f eqn="sum 0 0 @1" />
+                  <v:f eqn="prod @2 1 2" />
+                  <v:f eqn="prod @3 21600 pixelWidth" />
+                  <v:f eqn="prod @3 21600 pixelHeight" />
+                  <v:f eqn="sum @0 0 1" />
+                  <v:f eqn="prod @6 1 2" />
+                  <v:f eqn="prod @7 21600 pixelWidth" />
+                  <v:f eqn="sum @8 21600 0" />
+                  <v:f eqn="prod @7 21600 pixelHeight" />
+                  <v:f eqn="sum @10 21600 0" />
+                </v:formulas>
+                <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect" />
+                <o:lock v:ext="edit" aspectratio="t" />
+              </v:shapetype>
+              <w:binData w:name="wordml://03000001.png" xml:space="preserve">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\r\n</w:binData>
+              <v:shape id="Picture 1" o:spid="_x0000_i1025" type="#_x0000_t75" style="width:451.5pt;height:270pt;visibility:visible;mso-wrap-style:square">
+                <v:imagedata src="wordml://03000001.png" o:title="" />
+              </v:shape>
+            </w:pict>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00AD338F" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="Caption" />
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" w:cs="Arial" />
+              <wx:font wx:val="Californian FB" />
+            </w:rPr>
+          </w:pPr>
+          <w:r wsp:rsidRPr="00AD338F">
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" />
+              <wx:font wx:val="Californian FB" />
+            </w:rPr>
+            <w:t>Figure </w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00AD338F">
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" />
+              <wx:font wx:val="Californian FB" />
+            </w:rPr>
+            <w:fldChar w:fldCharType="begin" />
+          </w:r>
+          <w:r wsp:rsidRPr="00AD338F">
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" />
+              <wx:font wx:val="Californian FB" />
+            </w:rPr>
+            <w:instrText> SEQ Figure \\* ARABIC </w:instrText>
+          </w:r>
+          <w:r wsp:rsidRPr="00AD338F">
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" />
+              <wx:font wx:val="Californian FB" />
+            </w:rPr>
+            <w:fldChar w:fldCharType="separate" />
+          </w:r>
+          <w:r wsp:rsidRPr="00AD338F">
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" />
+              <wx:font wx:val="Californian FB" />
+              <w:noProof />
+            </w:rPr>
+            <w:t>1</w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00AD338F">
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" />
+              <wx:font wx:val="Californian FB" />
+            </w:rPr>
+            <w:fldChar w:fldCharType="end" />
+          </w:r>
+          <w:r wsp:rsidRPr="00AD338F">
+            <w:rPr>
+              <w:rFonts w:ascii="Californian FB" w:h-ansi="Californian FB" />
+              <wx:font wx:val="Californian FB" />
+            </w:rPr>
+            <w:t> this is a caption</w:t>
+          </w:r>
+        </w:p>
+        <w:tbl>
+          <w:tblPr>
+            <w:tblW w:w="0" w:type="auto" />
+            <w:tblBorders>
+              <w:top w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+              <w:left w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+              <w:bottom w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+              <w:right w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+              <w:insideH w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+              <w:insideV w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+            </w:tblBorders>
+            <w:tblLook w:val="04A0" />
+          </w:tblPr>
+          <w:tblGrid>
+            <w:gridCol w:w="4508" />
+            <w:gridCol w:w="4508" />
+          </w:tblGrid>
+          <w:tr wsp:rsidR="004A70C1" wsp:rsidRPr="004A70C1" wsp:rsidTr="004A70C1">
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="4508" w:type="dxa" />
+                <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidRDefault="00DE1354" wsp:rsidP="004A70C1">
+                <w:pPr>
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="004A70C1">
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                  <w:t>This is a table</w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="4508" w:type="dxa" />
+                <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidRDefault="00DE1354" wsp:rsidP="004A70C1">
+                <w:pPr>
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="004A70C1">
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                  <w:t>With some text</w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+          </w:tr>
+          <w:tr wsp:rsidR="004A70C1" wsp:rsidRPr="004A70C1" wsp:rsidTr="004A70C1">
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="4508" w:type="dxa" />
+                <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidRDefault="00DE1354" wsp:rsidP="004A70C1">
+                <w:pPr>
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="004A70C1">
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                  <w:t>And some more text</w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="4508" w:type="dxa" />
+                <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidRDefault="00DE1354" wsp:rsidP="004A70C1">
+                <w:pPr>
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="004A70C1">
+                  <w:rPr>
+                    <w:rFonts w:ascii="Tennessee Heavy SF" w:h-ansi="Tennessee Heavy SF" />
+                    <wx:font wx:val="Tennessee Heavy SF" />
+                  </w:rPr>
+                  <w:t>And some more text</w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+          </w:tr>
+        </w:tbl>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="004A70C1" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="EndnoteText" />
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:noProof />
+            </w:rPr>
+            <w:pict>
+              <v:shape id="Text Box 2" o:spid="_x0000_s1026" type="#_x0000_t202" style="position:absolute;margin-left:0;margin-top:3.8pt;width:185.9pt;height:110.6pt;z-index:1;visibility:visible;mso-wrap-style:square;mso-width-percent:400;mso-height-percent:200;mso-wrap-distance-left:9pt;mso-wrap-distance-top:3.6pt;mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:3.6pt;mso-position-horizontal:left;mso-position-horizontal-relative:margin;mso-position-vertical:absolute;mso-position-vertical-relative:text;mso-width-percent:400;mso-height-percent:200;mso-width-relative:margin;mso-height-relative:margin;v-text-anchor:top" o:gfxdata="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&#xA;cmV2LnhtbFBLBQYAAAAABAAEAPMAAACJBQAAAAA=&#xA;">
+                <v:textbox style="mso-fit-shape-to-text:t">
+                  <w:txbxContent>
+                    <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+                      <w:r>
+                        <w:rPr>
+                          <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+                          <wx:font wx:val="Times New Roman" />
+                        </w:rPr>
+                        <w:t>Text box 1: </w:t>
+                      </w:r>
+                      <w:r wsp:rsidRPr="001E60D2">
+                        <w:rPr>
+                          <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+                          <wx:font wx:val="Times New Roman" />
+                        </w:rPr>
+                        <w:t>The quick brown fox jumped over the lazy dog.</w:t>
+                      </w:r>
+                    </w:p>
+                  </w:txbxContent>
+                </v:textbox>
+                <w10:wrap type="square" anchorx="margin" />
+              </v:shape>
+            </w:pict>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="EndnoteText" />
+          </w:pPr>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F054" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F068" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F069" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F073" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F069" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F073" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F061" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06C" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F065" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F067" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F061" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F063" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F079" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F066" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06F" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06E" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F074" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F041" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F05F" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F073" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F074" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F065" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F076" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F065" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F05F" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F041" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F03A" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:sym w:font="Symbol" w:char="F0D3" />
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F043" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06F" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F070" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F079" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F072" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F069" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F067" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F068" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F074" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+              <wx:font wx:val="A_steve A_steve SILDoulosL" />
+              <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F020" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t></w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:fareast="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:sym w:font="Symbol" w:char="F0D3" />
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="EndnoteText" />
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+            </w:rPr>
+          </w:pPr>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00766730" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:pStyle w:val="EndnoteText" />
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+          </w:pPr>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+              <w:sz w:val="24" />
+              <w:sz-cs w:val="24" />
+            </w:rPr>
+            <w:t>This is Times New Roman: </w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:fareast="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:sym w:font="Symbol" w:char="F0D2" />
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:fareast="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:sym w:font="Symbol" w:char="F0D3" />
+          </w:r>
+          <w:r wsp:rsidRPr="00766730">
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:fareast="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t> Copyright</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:fareast="Times New Roman" w:h-ansi="Times New Roman" />
+              <wx:font wx:val="Times New Roman" />
+              <w:sz w:val="24" />
+              <w:lang w:val="EN-US" w:fareast="EN-GB" />
+            </w:rPr>
+            <w:t> ©  </w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+            <w:br w:type="page" />
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+          </w:pPr>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+            <w:t>Non-break space and a non</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+            <w:noBreakHyphen />
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+            <w:noBreakHyphen />
+            <w:t>breaking hyphens, an optional hy</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Napa Heavy SF" w:h-ansi="Napa Heavy SF" />
+              <wx:font wx:val="Napa Heavy SF" />
+            </w:rPr>
+            <w:softHyphen />
+            <w:t>phen, a Section§ and a paragraph¶… No width optional break‌ and no-width non‍break.</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:sectPr wsp:rsidR="00DE1354">
+              <w:hdr w:type="odd">
+                <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="004A70C1">
+                  <w:pPr>
+                    <w:pStyle w:val="Header" />
+                  </w:pPr>
+                  <w:r>
+                    <w:rPr>
+                      <w:noProof />
+                    </w:rPr>
+                    <w:pict>
+                      <v:rect id="Rectangle 197" o:spid="_x0000_s2050" style="position:absolute;margin-left:0;margin-top:0;width:468.5pt;height:21.25pt;z-index:-2;visibility:visible;mso-wrap-style:square;mso-width-percent:0;mso-height-percent:0;mso-wrap-distance-left:9.35pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9.35pt;mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;mso-position-horizontal-relative:page;mso-position-vertical:absolute;mso-position-vertical-relative:page;mso-width-percent:0;mso-height-percent:0;mso-width-relative:margin;mso-height-relative:page;v-text-anchor:middle" o:gfxdata="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&#xA;" o:allowoverlap="f" fillcolor="#5b9bd5" stroked="f" strokeweight="1pt">
+                        <v:textbox style="mso-fit-shape-to-text:t">
+                          <w:txbxContent>
+                            <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidRDefault="00DE1354">
+                              <w:pPr>
+                                <w:pStyle w:val="Header" />
+                                <w:jc w:val="center" />
+                                <w:rPr>
+                                  <w:caps />
+                                  <w:color w:val="FFFFFF" />
+                                </w:rPr>
+                              </w:pPr>
+                              <w:r wsp:rsidRPr="004A70C1">
+                                <w:rPr>
+                                  <w:rFonts w:ascii="Horizon BT" w:h-ansi="Horizon BT" />
+                                  <wx:font wx:val="Horizon BT" />
+                                  <w:caps />
+                                  <w:color w:val="FFFFFF" />
+                                </w:rPr>
+                                <w:t>This is the document Header text box 123456689</w:t>
+                              </w:r>
+                            </w:p>
+                          </w:txbxContent>
+                        </v:textbox>
+                        <w10:wrap type="square" anchorx="page" anchory="page" />
+                      </v:rect>
+                    </w:pict>
+                  </w:r>
+                  <w:r wsp:rsidR="00DE1354">
+                    <w:rPr>
+                      <w:rFonts w:ascii="High Tower Text" w:h-ansi="High Tower Text" />
+                      <wx:font wx:val="High Tower Text" />
+                    </w:rPr>
+                    <w:t>This is a header</w:t>
+                  </w:r>
+                </w:p>
+              </w:hdr>
+              <w:ftr w:type="odd">
+                <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidRDefault="00DE1354">
+                  <w:pPr>
+                    <w:pStyle w:val="Footer" />
+                    <w:jc w:val="center" />
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                      <w:caps />
+                      <w:noProof />
+                      <w:color w:val="5B9BD5" />
+                    </w:rPr>
+                  </w:pPr>
+                  <w:r wsp:rsidRPr="004A70C1">
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                      <w:caps />
+                      <w:color w:val="5B9BD5" />
+                    </w:rPr>
+                    <w:fldChar w:fldCharType="begin" />
+                  </w:r>
+                  <w:r wsp:rsidRPr="004A70C1">
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                      <w:caps />
+                      <w:color w:val="5B9BD5" />
+                    </w:rPr>
+                    <w:instrText> PAGE   \\* MERGEFORMAT </w:instrText>
+                  </w:r>
+                  <w:r wsp:rsidRPr="004A70C1">
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                      <w:caps />
+                      <w:color w:val="5B9BD5" />
+                    </w:rPr>
+                    <w:fldChar w:fldCharType="separate" />
+                  </w:r>
+                  <w:r wsp:rsidRPr="004A70C1">
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                      <w:caps />
+                      <w:noProof />
+                      <w:color w:val="5B9BD5" />
+                    </w:rPr>
+                    <w:t>2</w:t>
+                  </w:r>
+                  <w:r wsp:rsidRPr="004A70C1">
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                      <w:caps />
+                      <w:noProof />
+                      <w:color w:val="5B9BD5" />
+                    </w:rPr>
+                    <w:fldChar w:fldCharType="end" />
+                  </w:r>
+                </w:p>
+                <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00CA55A1" wsp:rsidRDefault="004A70C1">
+                  <w:pPr>
+                    <w:pStyle w:val="Footer" />
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                    </w:rPr>
+                  </w:pPr>
+                  <w:r>
+                    <w:rPr>
+                      <w:noProof />
+                    </w:rPr>
+                    <w:pict>
+                      <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe">
+                        <v:stroke joinstyle="miter" />
+                        <v:path gradientshapeok="t" o:connecttype="rect" />
+                      </v:shapetype>
+                      <v:shape id="Text Box 2" o:spid="_x0000_s2049" type="#_x0000_t202" style="position:absolute;margin-left:0;margin-top:14.4pt;width:185.9pt;height:110.6pt;z-index:2;visibility:visible;mso-wrap-style:square;mso-width-percent:400;mso-height-percent:200;mso-wrap-distance-left:9pt;mso-wrap-distance-top:3.6pt;mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:3.6pt;mso-position-horizontal:center;mso-position-horizontal-relative:text;mso-position-vertical:absolute;mso-position-vertical-relative:text;mso-width-percent:400;mso-height-percent:200;mso-width-relative:margin;mso-height-relative:margin;v-text-anchor:top" o:gfxdata="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&#xA;ZXYueG1sUEsFBgAAAAAEAAQA8wAAAIgFAAAAAA==&#xA;">
+                        <v:textbox style="mso-fit-shape-to-text:t">
+                          <w:txbxContent>
+                            <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00C263CA" wsp:rsidRDefault="00DE1354">
+                              <w:pPr>
+                                <w:rPr>
+                                  <w:rFonts w:ascii="Freehand575 BT" w:h-ansi="Freehand575 BT" />
+                                  <wx:font wx:val="Freehand575 BT" />
+                                </w:rPr>
+                              </w:pPr>
+                              <w:r>
+                                <w:rPr>
+                                  <w:rFonts w:ascii="Freehand575 BT" w:h-ansi="Freehand575 BT" />
+                                  <wx:font wx:val="Freehand575 BT" />
+                                </w:rPr>
+                                <w:t>Textbox in footer: </w:t>
+                              </w:r>
+                              <w:r wsp:rsidRPr="00C263CA">
+                                <w:rPr>
+                                  <w:rFonts w:ascii="Freehand575 BT" w:h-ansi="Freehand575 BT" />
+                                  <wx:font wx:val="Freehand575 BT" />
+                                </w:rPr>
+                                <w:t>The quick brown fox jumped over the lazy dog.</w:t>
+                              </w:r>
+                            </w:p>
+                          </w:txbxContent>
+                        </v:textbox>
+                        <w10:wrap type="square" />
+                      </v:shape>
+                    </w:pict>
+                  </w:r>
+                  <w:r wsp:rsidR="00DE1354" wsp:rsidRPr="00CA55A1">
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                    </w:rPr>
+                    <w:t>This is a footer</w:t>
+                  </w:r>
+                  <w:r wsp:rsidR="00DE1354">
+                    <w:rPr>
+                      <w:rFonts w:ascii="Formal436 BT" w:h-ansi="Formal436 BT" />
+                      <wx:font wx:val="Formal436 BT" />
+                    </w:rPr>
+                    <w:t> </w:t>
+                  </w:r>
+                </w:p>
+              </w:ftr>
+              <w:pgSz w:w="11906" w:h="16838" />
+              <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0" />
+              <w:cols w:space="708" />
+              <w:docGrid w:line-pitch="360" />
+            </w:sectPr>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:t>And here is a  non breaking space,  a soft</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:br />
+            <w:t>return and text wrapping</w:t>
+          </w:r>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:br w:type="text-wrapping" w:clear="all" />
+            <w:t>.</w:t>
+          </w:r>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+          </w:pPr>
+        </w:p>
+        <w:tbl>
+          <w:tblPr>
+            <w:tblW w:w="0" w:type="auto" />
+            <w:tblLayout w:type="Fixed" />
+          </w:tblPr>
+          <w:tblGrid>
+            <w:gridCol w:w="1008" />
+            <w:gridCol w:w="469" />
+            <w:gridCol w:w="580" />
+            <w:gridCol w:w="580" />
+            <w:gridCol w:w="469" />
+            <w:gridCol w:w="580" />
+            <w:gridCol w:w="580" />
+            <w:gridCol w:w="580" />
+            <w:gridCol w:w="469" />
+            <w:gridCol w:w="1846" />
+          </w:tblGrid>
+          <w:tr wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidTr="0053470F">
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="1008" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F028" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F032" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F02E" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F031" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F029" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="469" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F02B" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="469" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F02B" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="469" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="1846" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F05B" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F073" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F079" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06C" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06C" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F061" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F062" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F069" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F063" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F05D" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+          </w:tr>
+          <w:tr wsp:rsidR="00DE1354" wsp:rsidRPr="004A70C1" wsp:rsidTr="0053470F">
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="1008" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="469" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F02B" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="469" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F02B" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="580" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F02B" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="469" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:jc w:val="center" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+              </w:p>
+            </w:tc>
+            <w:tc>
+              <w:tcPr>
+                <w:tcW w:w="1846" w:type="dxa" />
+                <w:tcBorders>
+                  <w:top w:val="nil" />
+                  <w:left w:val="nil" />
+                  <w:bottom w:val="nil" />
+                  <w:right w:val="nil" />
+                </w:tcBorders>
+              </w:tcPr>
+              <w:p wsp:rsidR="00DE1354" wsp:rsidRPr="00F37936" wsp:rsidRDefault="00DE1354" wsp:rsidP="0053470F">
+                <w:pPr>
+                  <w:overflowPunct w:val="off" />
+                  <w:autoSpaceDE w:val="off" />
+                  <w:autoSpaceDN w:val="off" />
+                  <w:adjustRightInd w:val="off" />
+                  <w:spacing w:after="0" w:line="240" w:line-rule="auto" />
+                  <w:textAlignment w:val="baseline" />
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F05B" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F076" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06F" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F063" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F06F" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F069" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F064" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="00F37936">
+                  <w:rPr>
+                    <w:rFonts w:ascii="A_steve A_steve SILDoulosL" w:fareast="Times New Roman" w:h-ansi="A_steve A_steve SILDoulosL" />
+                    <wx:font wx:val="A_steve A_steve SILDoulosL" />
+                    <wx:sym wx:font="A_steve A_steve SILDoulosL" wx:char="F05D" />
+                    <w:sz w:val="24" />
+                    <w:sz-cs w:val="20" />
+                    <w:lang w:val="EN-US" w:fareast="EN-GB" />
+                  </w:rPr>
+                  <w:t></w:t>
+                </w:r>
+              </w:p>
+            </w:tc>
+          </w:tr>
+        </w:tbl>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+          </w:pPr>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+          </w:pPr>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:sectPr wsp:rsidR="00DE1354">
+              <w:pgSz w:w="11906" w:h="16838" />
+              <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0" />
+              <w:cols w:space="708" />
+              <w:docGrid w:line-pitch="360" />
+            </w:sectPr>
+          </w:pPr>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:sectPr wsp:rsidR="00DE1354" wsp:rsidSect="009F4290">
+              <w:type w:val="continuous" />
+              <w:pgSz w:w="11906" w:h="16838" />
+              <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0" />
+              <w:cols w:space="708" />
+              <w:docGrid w:line-pitch="360" />
+            </w:sectPr>
+          </w:pPr>
+        </w:p>
+        <w:p wsp:rsidR="00DE1354" wsp:rsidRDefault="00DE1354" wsp:rsidP="00DE1354">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+            <w:sectPr wsp:rsidR="00DE1354" wsp:rsidSect="009F4290">
+              <w:type w:val="even-page" />
+              <w:pgSz w:w="11906" w:h="16838" />
+              <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0" />
+              <w:cols w:space="708" />
+              <w:docGrid w:line-pitch="360" />
+            </w:sectPr>
+          </w:pPr>
+        </w:p>
+        <w:p wsp:rsidR="004A70C1" wsp:rsidRPr="00DE1354" wsp:rsidRDefault="004A70C1">
+          <w:pPr>
+            <w:rPr>
+              <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial" />
+              <wx:font wx:val="Arial" />
+            </w:rPr>
+          </w:pPr>
+        </w:p>
+      </wx:sub-section>
+      <w:sectPr wsp:rsidR="004A70C1" wsp:rsidRPr="00DE1354" wsp:rsidSect="009F4290">
+        <w:type w:val="odd-page" />
+        <w:pgSz w:w="11906" w:h="16838" />
+        <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0" />
+        <w:cols w:space="708" />
+        <w:docGrid w:line-pitch="360" />
+      </w:sectPr>
+    </wx:sect>
+  </w:body>
+</w:wordDocument>
