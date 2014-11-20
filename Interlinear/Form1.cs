@@ -8,7 +8,7 @@
  * 
  * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
- * Last modified on 9 September 2013 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
+ * Last modified on 20 November 2014 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
  * 
  * Acknowledgement is due to Dennis Pepler who worked out how to scan stories etc.
 */
@@ -337,10 +337,13 @@ namespace Interlinear
                 Application.DoEvents();
                 try
                 {
+                    boxProgress.Items.Add("Opening " + theInputFile);
+                    Application.DoEvents();
                     InputDoc = wrdApp.Documents.OpenNoRepairDialog(theInputFile, missing, true);  // Read only, and we don't want the repair dialog
+                    boxProgress.Items.Add("Opened input file");
                     File.Delete(theOutputFile); // delete the output file
                     OutputDoc = wrdApp.Documents.Add();  // a new blank document
-                    OutputDoc.SaveAs2(theOutputFile, InputDoc.SaveFormat);  // Save the output document
+                    OutputDoc.SaveAs(theOutputFile, InputDoc.SaveFormat);  // Save the output document
                 }
                 catch (Exception e)
                 {
@@ -1584,7 +1587,14 @@ namespace Interlinear
 
          }
 
-
+        public void ReportProgress(string theMessage)
+        {
+            if (chkDebug.Checked)
+            {
+                boxProgress.Items.Add(theMessage);
+                Application.DoEvents();
+            }
+        }
         
                                               
     }
@@ -1625,6 +1635,8 @@ namespace Interlinear
         private bool ReplaceText;
         private bool ReplaceTextFromSpellingChecker;
         private bool TabIndentKey;
+        private int  SaveInterval;
+
 
 
         public WordAppOptions(WordApp theApp)
@@ -1644,6 +1656,7 @@ namespace Interlinear
             AutoFormatAsYouTypeReplacePlainTextEmphasis = theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis;
             AutoFormatAsYouTypeReplaceQuotes = theApp.Options.AutoFormatAsYouTypeReplaceQuotes;
             AutoFormatAsYouTypeReplaceSymbols = theApp.Options.AutoFormatAsYouTypeReplaceSymbols;
+            SaveInterval = theApp.Options.SaveInterval;
             CheckGrammarAsYouType = theApp.Options.CheckGrammarAsYouType;
             CheckSpellingAsYouType = theApp.Options.CheckSpellingAsYouType;
             CorrectKeyboardSetting = theApp.AutoCorrect.CorrectKeyboardSetting;
@@ -1692,6 +1705,7 @@ namespace Interlinear
             theApp.AutoCorrect.ReplaceText = false;
             theApp.AutoCorrect.ReplaceTextFromSpellingChecker = false;
             theApp.Options.TabIndentKey = false;
+            theApp.Options.SaveInterval = 0;  // turn off autosave
 
 
         }
@@ -1726,6 +1740,11 @@ namespace Interlinear
             theApp.AutoCorrect.ReplaceText = ReplaceText;
             theApp.AutoCorrect.ReplaceTextFromSpellingChecker = ReplaceTextFromSpellingChecker;
             theApp.Options.TabIndentKey = TabIndentKey;
+            if (SaveInterval == 0)
+            {
+                SaveInterval = 10;
+            }
+            theApp.Options.SaveInterval = SaveInterval;
 
         }
     };
@@ -1778,7 +1797,7 @@ namespace Interlinear
             theApp.Calculation = (ExcelRoot.XlCalculation)Calculation;
             theApp.AutoFormatAsYouTypeReplaceHyperlinks = AutoFormatAsYouTypeReplaceHyperlinks;
         }
+ 
     }
-
 
 };

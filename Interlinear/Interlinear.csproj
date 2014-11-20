@@ -17,18 +17,20 @@
     <PublishUrl>C:\Users\Stephen\SharePoint\Unicode Conversion Programs - Progr 1\Interlinear\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>https://missionassist.sharepoint.com/Unicode%2520Conversion/Programs/Program%2520Folders/Forms/AllItems.aspx%3fRootFolder=%252FUnicode%2520Conversion%252FPrograms%252FProgram%2520Folders%252FInterlinear/</UpdateUrl>
     <ProductName>Interlinear</ProductName>
     <PublisherName>MissionAssist</PublisherName>
     <SuiteName>Unicode Conversion</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>4.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -69,7 +71,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
