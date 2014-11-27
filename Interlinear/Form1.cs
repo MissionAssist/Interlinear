@@ -8,7 +8,7 @@
  * 
  * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
- * Last modified on 20 November 2014 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
+ * Last modified on 24 November 2014 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
  * 
  * Acknowledgement is due to Dennis Pepler who worked out how to scan stories etc.
 */
@@ -337,10 +337,10 @@ namespace Interlinear
                 Application.DoEvents();
                 try
                 {
-                    boxProgress.Items.Add("Opening " + theInputFile);
+                    //boxProgress.Items.Add("Opening " + theInputFile);
                     Application.DoEvents();
                     InputDoc = wrdApp.Documents.OpenNoRepairDialog(theInputFile, missing, true);  // Read only, and we don't want the repair dialog
-                    boxProgress.Items.Add("Opened input file");
+                    //boxProgress.Items.Add("Opened input file");
                     File.Delete(theOutputFile); // delete the output file
                     OutputDoc = wrdApp.Documents.Add();  // a new blank document
                     OutputDoc.SaveAs(theOutputFile, InputDoc.SaveFormat);  // Save the output document
@@ -1376,7 +1376,15 @@ namespace Interlinear
                 FillExcel(excelApp, wrdApp, theDoc, RowCounter);
                 //MakeInterlinear(excelApp); // Make the interlinear worksheet, too.
                 excelApp.ActiveWorkbook.Close(); // Close the workbook
-                boxProgress.Items.Add("Finished sending both files to Excel in " + theStopwatch.Elapsed.ToString("HH.mm.ss.f"));
+                try
+                {
+                    boxProgress.Items.Add("Finished sending both files to Excel in " + theStopwatch.Elapsed.ToString("HH.mm.ss.f"));
+
+                }
+                catch (Exception ex)
+                {
+                    boxProgress.Items.Add(ex.Message + " Time string was " + theStopwatch.Elapsed.ToString());
+                }
                 theStopwatch.Stop();
                 theStopwatch = null;
                 theDoc = null;
@@ -1587,14 +1595,7 @@ namespace Interlinear
 
          }
 
-        public void ReportProgress(string theMessage)
-        {
-            if (chkDebug.Checked)
-            {
-                boxProgress.Items.Add(theMessage);
-                Application.DoEvents();
-            }
-        }
+       
         
                                               
     }

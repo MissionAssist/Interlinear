@@ -86,7 +86,6 @@
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPauseResume = new System.Windows.Forms.Button();
-            this.chkDebug = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
@@ -654,22 +653,11 @@
             this.btnPauseResume.UseVisualStyleBackColor = true;
             this.btnPauseResume.Click += new System.EventHandler(this.btnPauseResume_Click);
             // 
-            // chkDebug
-            // 
-            this.chkDebug.AutoSize = true;
-            this.chkDebug.Location = new System.Drawing.Point(208, 66);
-            this.chkDebug.Name = "chkDebug";
-            this.chkDebug.Size = new System.Drawing.Size(126, 17);
-            this.chkDebug.TabIndex = 31;
-            this.chkDebug.Text = "Debug messages on.";
-            this.chkDebug.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(754, 601);
-            this.Controls.Add(this.chkDebug);
             this.Controls.Add(this.btnPauseResume);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControl1);
@@ -758,7 +746,6 @@
         private System.Windows.Forms.Button btnPauseResume;
         private System.Windows.Forms.CheckBox chkUnicodeAddSpace;
         private System.Windows.Forms.CheckBox chkLegacyAddSpace;
-        private System.Windows.Forms.CheckBox chkDebug;
     }
 }
 
