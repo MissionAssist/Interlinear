@@ -8,7 +8,7 @@
  * 
  * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
- * Last modified on 24 November 2014 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
+ * Last modified on 29 November 2014 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
  * 
  * Acknowledgement is due to Dennis Pepler who worked out how to scan stories etc.
 */
@@ -58,25 +58,61 @@ namespace Interlinear
         private int MaxParagraphs = 0;
         private bool Paused = false;
         private bool CloseApp = false;
+        private bool WordWasRunning = false;
+        private bool ExcelWasRunning = false;
         //  Directories
         private string LegacyInputDir = "";
         private string LegacyOutputDir = "";
         private string UnicodeInputDir = "";
         private string UnicodeOutputDir = "";
         private string ExcelDir = "";
-
+        private List<string> theExtensions = new List<string>();
         const string userRoot = "HKEY_CURRENT_USER";
         const string subkey = "Software\\MissionAssist\\Interlinear";
         const string keyName = userRoot + "\\" + subkey;
-
+        
 
         public Form1()
         {
             InitializeComponent();
-            wrdApp = new Word();
+            /*
+             * Set up the extensions
+             */
+            theExtensions.Add(".doc");
+            theExtensions.Add(".docx");
+            theExtensions.Add(".rtf");
+            try
+            {
+                wrdApp = System.Runtime.InteropServices.Marshal.GetActiveObject(
+                    "Word.Application") as Word;
+                WordWasRunning = true; // Remember we were running Word
+            }
+                  catch
+            {
+            /*
+             * Word isn't running, so we run it.
+             */
+                wrdApp = new Word();
+                WordWasRunning = false;
+            }
             wrdApp.Visible = false;
             theOptions = new WordAppOptions(wrdApp);  // Save Word setting
-            excelApp = new Excel();  // open Excel
+            try
+            {
+                excelApp = System.Runtime.InteropServices.Marshal.GetActiveObject(
+                    "Excel.Application") as Excel;
+                ExcelWasRunning = true; // Remember we were running Excel
+            }
+            catch
+            {
+                /*
+                 * Excel isn't running, so we run it.
+                 */
+                excelApp = new Excel();
+                ExcelWasRunning = false;
+            }
+            excelApp.Visible = false;
+
             //excelApp.Visible = false; 
             saveLegacyFileDialog.SupportMultiDottedExtensions = true;
             saveUnicodeFileDialog.SupportMultiDottedExtensions = true;
@@ -181,14 +217,20 @@ namespace Interlinear
             {
                 InputText.Text = theOpenFileDialog.FileName;
                 SegmentButton.Enabled = true & OutputText.Text.Length > 0;
-                if (Path.GetExtension(InputText.Text) == ".doc")
+                /*
+                 * Assume that the extension of all the Word files is the same.
+                 */
+                string theExtension = Path.GetExtension(InputText.Text);
+                int theIndex = 1;
+                foreach (string theString in theExtensions)
                 {
-                    theSaveFileDialog.FilterIndex = 1; // .doc
+                    if (theString == theExtension)
+                    {
+                        break;
+                    }
+                    theIndex++;
                 }
-                else
-                {
-                    theSaveFileDialog.FilterIndex = 2; // .docx
-                }
+                SetFilterIndex(theIndex);
                 if (OutputText.Text == "")
                 {
                     // the text box is empty so we fill it.
@@ -292,6 +334,10 @@ namespace Interlinear
             btnClose.Enabled = true;
             Application.DoEvents();
             System.Media.SystemSounds.Beep.Play();  // and beep
+            if (chkCloseOnCompletion.Checked)
+            {
+                btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+            }
 
         }
         private void btnSegmentBoth_Click(object sender, EventArgs e)
@@ -311,6 +357,10 @@ namespace Interlinear
             theButton.Enabled = true;
             btnClose.Enabled = true;
             System.Media.SystemSounds.Beep.Play();  // and beep
+            if (chkCloseOnCompletion.Checked)
+            {
+                btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+            }
 
         }
         private void FinalCatch(Exception e)
@@ -507,20 +557,20 @@ namespace Interlinear
                 Segment(wrdApp, OutputDoc.ActiveWindow.Selection, (int)WordsPerLine.Value, NumberOfWords);
                 OutputDoc.Save();
                 boxProgress.Items.Add(Path.GetFileName(theOutputFile) + " saved in " + theStopwatch.Elapsed.ToString("hh\\:mm\\:ss\\.f"));
-                 if (SendToExcel.Checked)
+                theOptions.RestoreApp(wrdApp); // Restore the settings
+                if (SendToExcel.Checked)
                  {
                      // We'll send the information to Excel
                      FillExcel(excelApp, wrdApp, OutputDoc, RowCounter);
-                 }
-                 else
+                 } else
                  {
                      OutputDoc.Close();  // and close it
-                     OutputDoc = null;  // and free up the memory
                  }
+                OutputDoc = null;  // and free up the memory
+
                 wrdApp.ScreenUpdating = true; // turn on screen updating
                 btnPauseResume.Enabled = false;
                 progressBar1.Value = 0;
-                theOptions.RestoreApp(wrdApp); // Restore the settings
                 boxProgress.Items.Add("Completed in " + theStopwatch.Elapsed.ToString("hh\\:mm\\:ss\\.f"));
                 toolStripStatusLabel1.Text = "Completed";
             }
@@ -607,6 +657,7 @@ namespace Interlinear
             theRange.TextRetrievalMode.IncludeFieldCodes = false;
             theRange.TextRetrievalMode.IncludeHiddenText = true;
             string tmpString = theRange.Text;
+            bool trailingSpace = false;
             string XMLText = "";
             bool Inserted = false;
             WordRoot.Font theFont = new WordRoot.Font();
@@ -621,7 +672,7 @@ namespace Interlinear
             XmlNodeList theNodeList;
             if (FoundSymbol && tmpString != "\r\a") // no point in looking if the range doesn't have a symbol
             {
-                try
+               try
                 {
                     XMLText = theRange.get_XML(false);
                     if (XMLText.Contains("<w:sym"))
@@ -633,6 +684,8 @@ namespace Interlinear
                         nsManager.AddNamespace("w", wordmlNamespace);
                         nsManager.AddNamespace("wx", wordmlNamespace);
                         XmlNode theRoot = theXMLDocument.DocumentElement;
+                        trailingSpace = tmpString.EndsWith(theSpace);  // we seem to lose trailing spaces from ranges with symbols.
+ 
                         /*
                          * Look for text or symbols in the range
                          */
@@ -685,7 +738,7 @@ namespace Interlinear
 
             }
             //boxProgress.Items.Add("Copied text after " + theStopwatch4.ElapsedTicks);
-            if (AddSpace)
+            if (AddSpace || trailingSpace )
             {
                OutputDoc.ActiveWindow.Selection.InsertAfter(theSpace);
                //OutputDoc.ActiveWindow.Selection.Range.Font = theRange.Font; // Set the font of the text we have just inserted.
@@ -837,6 +890,7 @@ namespace Interlinear
             {
                 try
                 {
+                    theOptions.RestoreApp(wrdApp); // restore the settings
                     if (InputDoc != null)
                     {
                         InputDoc.Close(false);
@@ -848,11 +902,19 @@ namespace Interlinear
                         OutputDoc = null;
                     }
                     // Shut down Word
-                    theOptions.RestoreApp(wrdApp); // restore the settings
-                    wrdApp.Quit(ref missing, ref missing, ref missing);
+                    if (WordWasRunning)
+                    {
+                        wrdApp.Visible = true;  // See Word again
+                    }
+                    else
+                    {
+                        wrdApp.Quit(ref missing, ref missing, ref missing);
+                    }
+                    
                 }
-                catch
-                { 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
                 try
                 {
@@ -866,7 +928,15 @@ namespace Interlinear
                         }
                         excelApp.ActiveWorkbook.Close(Save);
                     }
-                    excelApp.Quit();
+                    if (ExcelWasRunning)
+                    {
+                        excelApp.Visible = true;
+                    }
+                    else
+                    {
+                        excelApp.Quit();
+                    }
+                    
                 }
                 catch
                 {
@@ -1218,7 +1288,15 @@ namespace Interlinear
                      */
                     bool Failure = true;  // Assume failure
                     int ErrorCounter = 0;
-                    theParagraph.Range.Copy();  // copy the range
+                    try
+                    {
+                        theParagraph.Range.Copy();  // copy the range
+                    }
+                    catch (Exception Ex)
+                    {
+                        MessageBox.Show(Ex.Message);
+                    }
+
                     PauseForThought(CopyStopwatch, theStopwatch, theStopwatch2);
                     while (Failure && ErrorCounter < 5)
                     {
@@ -1327,9 +1405,12 @@ namespace Interlinear
             }
 
             theDoc = null;
-            btnInterlinear.Enabled = true;
             btnClose.Enabled = true;
             System.Media.SystemSounds.Beep.Play();  // and beep
+            if (chkCloseOnCompletion.Checked)
+            {
+                btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+            }
 
             }
             catch (Exception Ex)
@@ -1378,7 +1459,7 @@ namespace Interlinear
                 excelApp.ActiveWorkbook.Close(); // Close the workbook
                 try
                 {
-                    boxProgress.Items.Add("Finished sending both files to Excel in " + theStopwatch.Elapsed.ToString("HH.mm.ss.f"));
+                    boxProgress.Items.Add("Finished sending both files to Excel in " + theStopwatch.Elapsed.ToString("G"));
 
                 }
                 catch (Exception ex)
@@ -1390,6 +1471,11 @@ namespace Interlinear
                 theDoc = null;
                 btnClose.Enabled = true;
                 System.Media.SystemSounds.Beep.Play();  // and beep
+                if (chkCloseOnCompletion.Checked)
+                {
+                    btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+                }
+
             }
             catch (Exception Ex)
             {
@@ -1398,12 +1484,6 @@ namespace Interlinear
 
         }
 
-        private void btnInterlinear_Click(object sender, EventArgs e)
-        {
-            boxProgress.Items.Clear();  // empty the progress box
-
-            //MakeInterlinear(excelApp);
-        }
 
              
 
@@ -1595,8 +1675,44 @@ namespace Interlinear
 
          }
 
-       
-        
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+        /*
+         * Clear the text boxes.
+         */
+            ClearTextBoxes(this.Controls);
+        }
+
+        private void ClearTextBoxes(Control.ControlCollection theControls)
+        /*
+        * Clear the text boxes
+        */
+        {
+            foreach (Control theControl in theControls)
+            {
+                if (theControl is TextBox)
+                {
+                    TextBox theTextBox = (TextBox)theControl;
+                    theTextBox.Clear(); //clear it
+                }
+                else
+                {
+                    ClearTextBoxes(theControl.Controls);
+                }
+ 
+            }
+        }
+        private void SetFilterIndex(int theIndex)
+        /*
+         * Set the filter index of the Word file dialogs
+         */
+        {
+            openLegacyFileDialog.FilterIndex = theIndex;
+            saveLegacyFileDialog.FilterIndex = theIndex;
+            openUnicodeFileDialog.FilterIndex = theIndex;
+            saveUnicodeFileDialog.FilterIndex = theIndex;
+        }   
+         
                                               
     }
 
@@ -1636,7 +1752,6 @@ namespace Interlinear
         private bool ReplaceText;
         private bool ReplaceTextFromSpellingChecker;
         private bool TabIndentKey;
-        private int  SaveInterval;
 
 
 
@@ -1657,7 +1772,6 @@ namespace Interlinear
             AutoFormatAsYouTypeReplacePlainTextEmphasis = theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis;
             AutoFormatAsYouTypeReplaceQuotes = theApp.Options.AutoFormatAsYouTypeReplaceQuotes;
             AutoFormatAsYouTypeReplaceSymbols = theApp.Options.AutoFormatAsYouTypeReplaceSymbols;
-            SaveInterval = theApp.Options.SaveInterval;
             CheckGrammarAsYouType = theApp.Options.CheckGrammarAsYouType;
             CheckSpellingAsYouType = theApp.Options.CheckSpellingAsYouType;
             CorrectKeyboardSetting = theApp.AutoCorrect.CorrectKeyboardSetting;
@@ -1706,8 +1820,7 @@ namespace Interlinear
             theApp.AutoCorrect.ReplaceText = false;
             theApp.AutoCorrect.ReplaceTextFromSpellingChecker = false;
             theApp.Options.TabIndentKey = false;
-            theApp.Options.SaveInterval = 0;  // turn off autosave
-
+ 
 
         }
         public void RestoreApp(WordApp theApp)
@@ -1741,11 +1854,6 @@ namespace Interlinear
             theApp.AutoCorrect.ReplaceText = ReplaceText;
             theApp.AutoCorrect.ReplaceTextFromSpellingChecker = ReplaceTextFromSpellingChecker;
             theApp.Options.TabIndentKey = TabIndentKey;
-            if (SaveInterval == 0)
-            {
-                SaveInterval = 10;
-            }
-            theApp.Options.SaveInterval = SaveInterval;
 
         }
     };

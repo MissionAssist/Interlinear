@@ -37,9 +37,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.saveUnicodeFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.Wordcount = new System.Windows.Forms.ToolTip(this.components);
+            this.chkCloseOnCompletion = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
-            this.btnInterlinear = new System.Windows.Forms.Button();
             this.btnBothToExcel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSegmentBoth = new System.Windows.Forms.Button();
@@ -80,6 +80,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,14 +99,14 @@
             // 
             // openLegacyFileDialog
             // 
-            this.openLegacyFileDialog.DefaultExt = "doc";
-            this.openLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.openLegacyFileDialog.DefaultExt = "docx";
+            this.openLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf";
             this.openLegacyFileDialog.FilterIndex = 2;
             // 
             // saveLegacyFileDialog
             // 
-            this.saveLegacyFileDialog.DefaultExt = "doc";
-            this.saveLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.saveLegacyFileDialog.DefaultExt = "docx";
+            this.saveLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf";
             this.saveLegacyFileDialog.FilterIndex = 2;
             // 
             // label5
@@ -163,8 +164,21 @@
             // 
             // saveUnicodeFileDialog
             // 
-            this.saveUnicodeFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.saveUnicodeFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf";
             this.saveUnicodeFileDialog.FilterIndex = 2;
+            // 
+            // chkCloseOnCompletion
+            // 
+            this.chkCloseOnCompletion.AutoSize = true;
+            this.chkCloseOnCompletion.Location = new System.Drawing.Point(581, 330);
+            this.chkCloseOnCompletion.Name = "chkCloseOnCompletion";
+            this.chkCloseOnCompletion.Size = new System.Drawing.Size(121, 17);
+            this.chkCloseOnCompletion.TabIndex = 37;
+            this.chkCloseOnCompletion.Text = "Close on completion";
+            this.chkCloseOnCompletion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Wordcount.SetToolTip(this.chkCloseOnCompletion, "This closes the application when it has finished doing what you have asked it to " +
+        "do.");
+            this.chkCloseOnCompletion.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -178,7 +192,7 @@
             // 
             // Setup
             // 
-            this.Setup.Controls.Add(this.btnInterlinear);
+            this.Setup.Controls.Add(this.chkCloseOnCompletion);
             this.Setup.Controls.Add(this.btnBothToExcel);
             this.Setup.Controls.Add(this.label4);
             this.Setup.Controls.Add(this.btnSegmentBoth);
@@ -194,21 +208,10 @@
             this.Setup.Text = "Setup";
             this.Setup.UseVisualStyleBackColor = true;
             // 
-            // btnInterlinear
-            // 
-            this.btnInterlinear.Enabled = false;
-            this.btnInterlinear.Location = new System.Drawing.Point(322, 317);
-            this.btnInterlinear.Name = "btnInterlinear";
-            this.btnInterlinear.Size = new System.Drawing.Size(106, 41);
-            this.btnInterlinear.TabIndex = 36;
-            this.btnInterlinear.Text = "Build Interlinear Worksheet";
-            this.btnInterlinear.UseVisualStyleBackColor = true;
-            this.btnInterlinear.Click += new System.EventHandler(this.btnInterlinear_Click);
-            // 
             // btnBothToExcel
             // 
             this.btnBothToExcel.Enabled = false;
-            this.btnBothToExcel.Location = new System.Drawing.Point(159, 315);
+            this.btnBothToExcel.Location = new System.Drawing.Point(396, 316);
             this.btnBothToExcel.Name = "btnBothToExcel";
             this.btnBothToExcel.Size = new System.Drawing.Size(143, 42);
             this.btnBothToExcel.TabIndex = 35;
@@ -228,7 +231,7 @@
             // btnSegmentBoth
             // 
             this.btnSegmentBoth.Enabled = false;
-            this.btnSegmentBoth.Location = new System.Drawing.Point(9, 315);
+            this.btnSegmentBoth.Location = new System.Drawing.Point(164, 316);
             this.btnSegmentBoth.Name = "btnSegmentBoth";
             this.btnSegmentBoth.Size = new System.Drawing.Size(107, 43);
             this.btnSegmentBoth.TabIndex = 33;
@@ -374,7 +377,7 @@
             // 
             // grpLegacy
             // 
-            this.grpLegacy.BackColor = System.Drawing.SystemColors.Control;
+            this.grpLegacy.BackColor = System.Drawing.Color.Transparent;
             this.grpLegacy.Controls.Add(this.chkLegacyAddSpace);
             this.grpLegacy.Controls.Add(this.btnLegacyToExcel);
             this.grpLegacy.Controls.Add(this.chkLegacyToExcel);
@@ -571,7 +574,7 @@
             // 
             // openUnicodeFileDialog
             // 
-            this.openUnicodeFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
+            this.openUnicodeFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf";
             this.openUnicodeFileDialog.FilterIndex = 2;
             this.openUnicodeFileDialog.Multiselect = true;
             // 
@@ -599,15 +602,25 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
             this.toolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.AutoToolTip = true;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(166, 22);
+            this.toolStripMenuItem2.Text = "New Comparison";
+            this.toolStripMenuItem2.ToolTipText = "Clear the text boxes so you can start a new comparison.";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(92, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.toolStripMenuItem1.Text = "Exit";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -732,7 +745,6 @@
         private System.Windows.Forms.Button btnBothToExcel;
         private System.Windows.Forms.Button btnUnicodeToExcel;
         private System.Windows.Forms.Button btnLegacyToExcel;
-        private System.Windows.Forms.Button btnInterlinear;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -746,6 +758,8 @@
         private System.Windows.Forms.Button btnPauseResume;
         private System.Windows.Forms.CheckBox chkUnicodeAddSpace;
         private System.Windows.Forms.CheckBox chkLegacyAddSpace;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.CheckBox chkCloseOnCompletion;
     }
 }
 
