@@ -41,17 +41,19 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.btnSaveStyles = new System.Windows.Forms.Button();
+            this.btnSaveErrorList = new System.Windows.Forms.Button();
             this.btnAggregateFile = new System.Windows.Forms.Button();
+            this.btnSaveFontList = new System.Windows.Forms.Button();
+            this.btnSaveXML = new System.Windows.Forms.Button();
             this.AggregateStatsBox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFonts = new System.Windows.Forms.TabPage();
-            this.btnSaveFontList = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.FontList = new System.Windows.Forms.ListBox();
             this.btnListFonts = new System.Windows.Forms.Button();
             this.tabStyles = new System.Windows.Forms.TabPage();
-            this.btnSaveStyles = new System.Windows.Forms.Button();
             this.listStyles = new System.Windows.Forms.DataGridView();
             this.Style = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.theDefaultFont = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +61,6 @@
             this.btnGetStyles = new System.Windows.Forms.Button();
             this.ErrorTab = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnSaveErrorList = new System.Windows.Forms.Button();
             this.listNormalisedErrors = new System.Windows.Forms.DataGridView();
             this.MappedCharacter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PossibleCharacter = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,7 +95,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnGetInput = new System.Windows.Forms.Button();
             this.InputFileBox = new System.Windows.Forms.TextBox();
-            this.btnSaveXML = new System.Windows.Forms.Button();
             this.XMLFileBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -123,13 +123,12 @@
             this.BulkFontListFileBox = new System.Windows.Forms.TextBox();
             this.BulkStyleListBox = new System.Windows.Forms.TextBox();
             this.btnBulkErrorList = new System.Windows.Forms.Button();
-            this.BulkErrorListbox = new System.Windows.Forms.TextBox();
+            this.BulkErrorListBox = new System.Windows.Forms.TextBox();
             this.btnBulkFontListFile = new System.Windows.Forms.Button();
             this.btnBulkStyleListFile = new System.Windows.Forms.Button();
             this.toolStripContainer2 = new System.Windows.Forms.ToolStripContainer();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveXMLDialogue = new System.Windows.Forms.SaveFileDialog();
-            this.toolTipCombine = new System.Windows.Forms.ToolTip(this.components);
             this.OpenGlyphFileDialogue = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.FolderDialogue = new System.Windows.Forms.FolderBrowserDialog();
@@ -212,11 +211,11 @@
             // btnAnalyse
             // 
             this.btnAnalyse.Enabled = false;
-            this.btnAnalyse.Location = new System.Drawing.Point(631, 360);
+            this.btnAnalyse.Location = new System.Drawing.Point(639, 109);
             this.btnAnalyse.Name = "btnAnalyse";
-            this.btnAnalyse.Size = new System.Drawing.Size(101, 33);
+            this.btnAnalyse.Size = new System.Drawing.Size(103, 49);
             this.btnAnalyse.TabIndex = 8;
-            this.btnAnalyse.Text = "Analyse";
+            this.btnAnalyse.Text = "Count the characters and save";
             this.btnAnalyse.UseVisualStyleBackColor = true;
             this.btnAnalyse.Click += new System.EventHandler(this.btnAnalyse_Click);
             // 
@@ -248,7 +247,11 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.AutoScroll = true;
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnSaveStyles);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnSaveErrorList);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.btnAggregateFile);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnSaveFontList);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.btnSaveXML);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.AggregateStatsBox);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.label13);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.tabControl1);
@@ -287,6 +290,30 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
+            // btnSaveStyles
+            // 
+            this.btnSaveStyles.Enabled = false;
+            this.btnSaveStyles.Location = new System.Drawing.Point(642, 211);
+            this.btnSaveStyles.Name = "btnSaveStyles";
+            this.btnSaveStyles.Size = new System.Drawing.Size(100, 24);
+            this.btnSaveStyles.TabIndex = 3;
+            this.btnSaveStyles.Text = "Save style list";
+            this.toolTip1.SetToolTip(this.btnSaveStyles, "Get the list of fonts and save it to a file");
+            this.btnSaveStyles.UseVisualStyleBackColor = true;
+            this.btnSaveStyles.Click += new System.EventHandler(this.btnGetStyles_Click);
+            // 
+            // btnSaveErrorList
+            // 
+            this.btnSaveErrorList.Enabled = false;
+            this.btnSaveErrorList.Location = new System.Drawing.Point(643, 236);
+            this.btnSaveErrorList.Name = "btnSaveErrorList";
+            this.btnSaveErrorList.Size = new System.Drawing.Size(99, 23);
+            this.btnSaveErrorList.TabIndex = 1;
+            this.btnSaveErrorList.Text = "Save data";
+            this.toolTip1.SetToolTip(this.btnSaveErrorList, "Save the suggested composed character list.");
+            this.btnSaveErrorList.UseVisualStyleBackColor = true;
+            this.btnSaveErrorList.Click += new System.EventHandler(this.btnSaveErrorList_Click);
+            // 
             // btnAggregateFile
             // 
             this.btnAggregateFile.Location = new System.Drawing.Point(554, 567);
@@ -296,6 +323,30 @@
             this.btnAggregateFile.Text = "Browse";
             this.btnAggregateFile.UseVisualStyleBackColor = true;
             this.btnAggregateFile.Click += new System.EventHandler(this.btnGetOutput_Click);
+            // 
+            // btnSaveFontList
+            // 
+            this.btnSaveFontList.Enabled = false;
+            this.btnSaveFontList.Location = new System.Drawing.Point(642, 184);
+            this.btnSaveFontList.Name = "btnSaveFontList";
+            this.btnSaveFontList.Size = new System.Drawing.Size(100, 23);
+            this.btnSaveFontList.TabIndex = 21;
+            this.btnSaveFontList.Text = "Save font list";
+            this.toolTip1.SetToolTip(this.btnSaveFontList, "Get the list of fonts and save it to a file");
+            this.btnSaveFontList.UseVisualStyleBackColor = true;
+            this.btnSaveFontList.Click += new System.EventHandler(this.btnListFonts_Click);
+            // 
+            // btnSaveXML
+            // 
+            this.btnSaveXML.Enabled = false;
+            this.btnSaveXML.Location = new System.Drawing.Point(645, 265);
+            this.btnSaveXML.Name = "btnSaveXML";
+            this.btnSaveXML.Size = new System.Drawing.Size(100, 24);
+            this.btnSaveXML.TabIndex = 28;
+            this.btnSaveXML.Text = "Save XML";
+            this.toolTip1.SetToolTip(this.btnSaveXML, "Save the XML file.");
+            this.btnSaveXML.UseVisualStyleBackColor = true;
+            this.btnSaveXML.Click += new System.EventHandler(this.btnSaveXML_Click);
             // 
             // AggregateStatsBox
             // 
@@ -329,7 +380,6 @@
             // 
             // tabFonts
             // 
-            this.tabFonts.Controls.Add(this.btnSaveFontList);
             this.tabFonts.Controls.Add(this.label4);
             this.tabFonts.Controls.Add(this.FontList);
             this.tabFonts.Controls.Add(this.btnListFonts);
@@ -340,17 +390,6 @@
             this.tabFonts.TabIndex = 0;
             this.tabFonts.Text = "Get fonts";
             this.tabFonts.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveFontList
-            // 
-            this.btnSaveFontList.Enabled = false;
-            this.btnSaveFontList.Location = new System.Drawing.Point(10, 98);
-            this.btnSaveFontList.Name = "btnSaveFontList";
-            this.btnSaveFontList.Size = new System.Drawing.Size(119, 45);
-            this.btnSaveFontList.TabIndex = 21;
-            this.btnSaveFontList.Text = "Save font list";
-            this.btnSaveFontList.UseVisualStyleBackColor = true;
-            this.btnSaveFontList.Click += new System.EventHandler(this.btnListFonts_Click);
             // 
             // label4
             // 
@@ -382,7 +421,6 @@
             // 
             // tabStyles
             // 
-            this.tabStyles.Controls.Add(this.btnSaveStyles);
             this.tabStyles.Controls.Add(this.listStyles);
             this.tabStyles.Controls.Add(this.label5);
             this.tabStyles.Controls.Add(this.btnGetStyles);
@@ -393,17 +431,6 @@
             this.tabStyles.TabIndex = 1;
             this.tabStyles.Text = "Get Styles";
             this.tabStyles.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveStyles
-            // 
-            this.btnSaveStyles.Enabled = false;
-            this.btnSaveStyles.Location = new System.Drawing.Point(3, 125);
-            this.btnSaveStyles.Name = "btnSaveStyles";
-            this.btnSaveStyles.Size = new System.Drawing.Size(102, 24);
-            this.btnSaveStyles.TabIndex = 3;
-            this.btnSaveStyles.Text = "Save styles";
-            this.btnSaveStyles.UseVisualStyleBackColor = true;
-            this.btnSaveStyles.Click += new System.EventHandler(this.btnGetStyles_Click);
             // 
             // listStyles
             // 
@@ -460,7 +487,7 @@
             this.btnGetStyles.Enabled = false;
             this.btnGetStyles.Location = new System.Drawing.Point(3, 95);
             this.btnGetStyles.Name = "btnGetStyles";
-            this.btnGetStyles.Size = new System.Drawing.Size(102, 24);
+            this.btnGetStyles.Size = new System.Drawing.Size(102, 43);
             this.btnGetStyles.TabIndex = 0;
             this.btnGetStyles.Text = "Get styles";
             this.btnGetStyles.UseVisualStyleBackColor = true;
@@ -469,7 +496,6 @@
             // ErrorTab
             // 
             this.ErrorTab.Controls.Add(this.label11);
-            this.ErrorTab.Controls.Add(this.btnSaveErrorList);
             this.ErrorTab.Controls.Add(this.listNormalisedErrors);
             this.ErrorTab.Location = new System.Drawing.Point(4, 22);
             this.ErrorTab.Name = "ErrorTab";
@@ -487,17 +513,6 @@
             this.label11.Size = new System.Drawing.Size(71, 65);
             this.label11.TabIndex = 2;
             this.label11.Text = "This lists the\r\nsuggested\r\ncharacters to\r\nuse after\r\nnormalisation.";
-            // 
-            // btnSaveErrorList
-            // 
-            this.btnSaveErrorList.Enabled = false;
-            this.btnSaveErrorList.Location = new System.Drawing.Point(7, 98);
-            this.btnSaveErrorList.Name = "btnSaveErrorList";
-            this.btnSaveErrorList.Size = new System.Drawing.Size(87, 53);
-            this.btnSaveErrorList.TabIndex = 1;
-            this.btnSaveErrorList.Text = "Save data";
-            this.btnSaveErrorList.UseVisualStyleBackColor = true;
-            this.btnSaveErrorList.Click += new System.EventHandler(this.btnSaveErrorList_Click);
             // 
             // listNormalisedErrors
             // 
@@ -522,7 +537,7 @@
             // 
             // PossibleCharacter
             // 
-            this.PossibleCharacter.HeaderText = "Possible Character";
+            this.PossibleCharacter.HeaderText = "Suggested Character(s)";
             this.PossibleCharacter.Name = "PossibleCharacter";
             this.PossibleCharacter.ReadOnly = true;
             this.PossibleCharacter.Width = 200;
@@ -623,9 +638,9 @@
             // btnSaveAggregateStats
             // 
             this.btnSaveAggregateStats.Enabled = false;
-            this.btnSaveAggregateStats.Location = new System.Drawing.Point(631, 564);
+            this.btnSaveAggregateStats.Location = new System.Drawing.Point(632, 564);
             this.btnSaveAggregateStats.Name = "btnSaveAggregateStats";
-            this.btnSaveAggregateStats.Size = new System.Drawing.Size(101, 26);
+            this.btnSaveAggregateStats.Size = new System.Drawing.Size(100, 26);
             this.btnSaveAggregateStats.TabIndex = 50;
             this.btnSaveAggregateStats.Text = "Save aggregate";
             this.toolTip1.SetToolTip(this.btnSaveAggregateStats, "Save aggregate statistics");
@@ -653,7 +668,7 @@
             // btnPause
             // 
             this.btnPause.Enabled = false;
-            this.btnPause.Location = new System.Drawing.Point(631, 405);
+            this.btnPause.Location = new System.Drawing.Point(630, 426);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(101, 30);
             this.btnPause.TabIndex = 11;
@@ -695,7 +710,7 @@
             this.CombDecomposedChars.Size = new System.Drawing.Size(184, 17);
             this.CombDecomposedChars.TabIndex = 29;
             this.CombDecomposedChars.Text = "Combine decomposed characters";
-            this.toolTipCombine.SetToolTip(this.CombDecomposedChars, "Some characters have to be mapped to two Unicode characters that are displayed to" +
+            this.toolTip1.SetToolTip(this.CombDecomposedChars, "Some characters have to be mapped to two Unicode characters that are displayed to" +
         "gether as a single glyph. \r\nChecking this box causes the program to try to count" +
         " them as a single character.");
             this.CombDecomposedChars.UseVisualStyleBackColor = true;
@@ -797,7 +812,7 @@
             this.IndivOrBulk.Location = new System.Drawing.Point(10, 81);
             this.IndivOrBulk.Name = "IndivOrBulk";
             this.IndivOrBulk.SelectedIndex = 0;
-            this.IndivOrBulk.Size = new System.Drawing.Size(732, 234);
+            this.IndivOrBulk.Size = new System.Drawing.Size(627, 234);
             this.IndivOrBulk.TabIndex = 52;
             // 
             // IndividualFile
@@ -805,7 +820,6 @@
             this.IndividualFile.Controls.Add(this.label2);
             this.IndividualFile.Controls.Add(this.btnGetInput);
             this.IndividualFile.Controls.Add(this.InputFileBox);
-            this.IndividualFile.Controls.Add(this.btnSaveXML);
             this.IndividualFile.Controls.Add(this.XMLFileBox);
             this.IndividualFile.Controls.Add(this.label3);
             this.IndividualFile.Controls.Add(this.label6);
@@ -824,7 +838,7 @@
             this.IndividualFile.Location = new System.Drawing.Point(4, 22);
             this.IndividualFile.Name = "IndividualFile";
             this.IndividualFile.Padding = new System.Windows.Forms.Padding(3);
-            this.IndividualFile.Size = new System.Drawing.Size(724, 208);
+            this.IndividualFile.Size = new System.Drawing.Size(619, 208);
             this.IndividualFile.TabIndex = 0;
             this.IndividualFile.Text = "Individual";
             this.IndividualFile.UseVisualStyleBackColor = true;
@@ -834,7 +848,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 30);
+            this.label2.Location = new System.Drawing.Point(11, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 29;
@@ -842,7 +856,7 @@
             // 
             // btnGetInput
             // 
-            this.btnGetInput.Location = new System.Drawing.Point(537, 27);
+            this.btnGetInput.Location = new System.Drawing.Point(537, 11);
             this.btnGetInput.Name = "btnGetInput";
             this.btnGetInput.Size = new System.Drawing.Size(75, 23);
             this.btnGetInput.TabIndex = 45;
@@ -852,22 +866,11 @@
             // 
             // InputFileBox
             // 
-            this.InputFileBox.Location = new System.Drawing.Point(123, 27);
+            this.InputFileBox.Location = new System.Drawing.Point(123, 11);
             this.InputFileBox.Name = "InputFileBox";
             this.InputFileBox.Size = new System.Drawing.Size(408, 20);
             this.InputFileBox.TabIndex = 44;
             this.InputFileBox.TextChanged += new System.EventHandler(this.InputFileBox_TextChanged);
-            // 
-            // btnSaveXML
-            // 
-            this.btnSaveXML.Enabled = false;
-            this.btnSaveXML.Location = new System.Drawing.Point(626, 158);
-            this.btnSaveXML.Name = "btnSaveXML";
-            this.btnSaveXML.Size = new System.Drawing.Size(92, 30);
-            this.btnSaveXML.TabIndex = 28;
-            this.btnSaveXML.Text = "Save XML";
-            this.btnSaveXML.UseVisualStyleBackColor = true;
-            this.btnSaveXML.Click += new System.EventHandler(this.btnSaveXML_Click);
             // 
             // XMLFileBox
             // 
@@ -899,9 +902,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(11, 141);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 13);
+            this.label10.Size = new System.Drawing.Size(81, 13);
             this.label10.TabIndex = 33;
-            this.label10.Text = "Error list file";
+            this.label10.Text = "Suggestions file";
             // 
             // label8
             // 
@@ -992,13 +995,13 @@
             this.Bulk.Controls.Add(this.BulkFontListFileBox);
             this.Bulk.Controls.Add(this.BulkStyleListBox);
             this.Bulk.Controls.Add(this.btnBulkErrorList);
-            this.Bulk.Controls.Add(this.BulkErrorListbox);
+            this.Bulk.Controls.Add(this.BulkErrorListBox);
             this.Bulk.Controls.Add(this.btnBulkFontListFile);
             this.Bulk.Controls.Add(this.btnBulkStyleListFile);
             this.Bulk.Location = new System.Drawing.Point(4, 22);
             this.Bulk.Name = "Bulk";
             this.Bulk.Padding = new System.Windows.Forms.Padding(3);
-            this.Bulk.Size = new System.Drawing.Size(724, 208);
+            this.Bulk.Size = new System.Drawing.Size(619, 208);
             this.Bulk.TabIndex = 1;
             this.Bulk.Text = "Bulk";
             this.Bulk.UseVisualStyleBackColor = true;
@@ -1007,9 +1010,9 @@
             // btnSelectFiles
             // 
             this.btnSelectFiles.Enabled = false;
-            this.btnSelectFiles.Location = new System.Drawing.Point(630, 5);
+            this.btnSelectFiles.Location = new System.Drawing.Point(512, 10);
             this.btnSelectFiles.Name = "btnSelectFiles";
-            this.btnSelectFiles.Size = new System.Drawing.Size(87, 35);
+            this.btnSelectFiles.Size = new System.Drawing.Size(75, 23);
             this.btnSelectFiles.TabIndex = 68;
             this.btnSelectFiles.Text = "Select files";
             this.btnSelectFiles.UseVisualStyleBackColor = true;
@@ -1017,10 +1020,12 @@
             // 
             // OutputFileSuffixBox
             // 
-            this.OutputFileSuffixBox.Location = new System.Drawing.Point(502, 41);
+            this.OutputFileSuffixBox.Location = new System.Drawing.Point(484, 41);
             this.OutputFileSuffixBox.Name = "OutputFileSuffixBox";
-            this.OutputFileSuffixBox.Size = new System.Drawing.Size(122, 20);
+            this.OutputFileSuffixBox.Size = new System.Drawing.Size(103, 20);
             this.OutputFileSuffixBox.TabIndex = 65;
+            this.toolTip1.SetToolTip(this.OutputFileSuffixBox, "Characters appended to the individual character stats file names following the in" +
+        "put file name.");
             this.OutputFileSuffixBox.TextChanged += new System.EventHandler(this.OutputFileSuffixBox_TextChanged);
             // 
             // label21
@@ -1043,9 +1048,9 @@
             // 
             // btnInputFolder
             // 
-            this.btnInputFolder.Location = new System.Drawing.Point(549, 13);
+            this.btnInputFolder.Location = new System.Drawing.Point(427, 12);
             this.btnInputFolder.Name = "btnInputFolder";
-            this.btnInputFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnInputFolder.Size = new System.Drawing.Size(53, 23);
             this.btnInputFolder.TabIndex = 63;
             this.btnInputFolder.Text = "Browse";
             this.btnInputFolder.UseVisualStyleBackColor = true;
@@ -1055,7 +1060,7 @@
             // 
             this.InputFolderBox.Location = new System.Drawing.Point(135, 13);
             this.InputFolderBox.Name = "InputFolderBox";
-            this.InputFolderBox.Size = new System.Drawing.Size(407, 20);
+            this.InputFolderBox.Size = new System.Drawing.Size(284, 20);
             this.InputFolderBox.TabIndex = 62;
             this.InputFolderBox.TextChanged += new System.EventHandler(this.InputFolderBox_TextChanged);
             // 
@@ -1071,7 +1076,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(23, 66);
+            this.label17.Location = new System.Drawing.Point(23, 78);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(59, 13);
             this.label17.TabIndex = 49;
@@ -1080,7 +1085,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(23, 101);
+            this.label18.Location = new System.Drawing.Point(23, 115);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(61, 13);
             this.label18.TabIndex = 52;
@@ -1089,11 +1094,11 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(23, 127);
+            this.label19.Location = new System.Drawing.Point(23, 138);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(60, 13);
+            this.label19.Size = new System.Drawing.Size(81, 13);
             this.label19.TabIndex = 59;
-            this.label19.Text = "Error list file";
+            this.label19.Text = "Suggestions file";
             // 
             // btnCharStatFolder
             // 
@@ -1114,21 +1119,23 @@
             // 
             // BulkFontListFileBox
             // 
-            this.BulkFontListFileBox.Location = new System.Drawing.Point(135, 67);
+            this.BulkFontListFileBox.Location = new System.Drawing.Point(135, 79);
             this.BulkFontListFileBox.Name = "BulkFontListFileBox";
-            this.BulkFontListFileBox.Size = new System.Drawing.Size(408, 20);
+            this.BulkFontListFileBox.Size = new System.Drawing.Size(367, 20);
             this.BulkFontListFileBox.TabIndex = 50;
+            this.toolTip1.SetToolTip(this.BulkFontListFileBox, "Where the list of fonts is saved.");
             // 
             // BulkStyleListBox
             // 
-            this.BulkStyleListBox.Location = new System.Drawing.Point(134, 94);
+            this.BulkStyleListBox.Location = new System.Drawing.Point(134, 108);
             this.BulkStyleListBox.Name = "BulkStyleListBox";
-            this.BulkStyleListBox.Size = new System.Drawing.Size(408, 20);
+            this.BulkStyleListBox.Size = new System.Drawing.Size(368, 20);
             this.BulkStyleListBox.TabIndex = 53;
+            this.toolTip1.SetToolTip(this.BulkStyleListBox, "Where the list of styles is saved.");
             // 
             // btnBulkErrorList
             // 
-            this.btnBulkErrorList.Location = new System.Drawing.Point(549, 122);
+            this.btnBulkErrorList.Location = new System.Drawing.Point(512, 136);
             this.btnBulkErrorList.Name = "btnBulkErrorList";
             this.btnBulkErrorList.Size = new System.Drawing.Size(75, 23);
             this.btnBulkErrorList.TabIndex = 61;
@@ -1136,17 +1143,18 @@
             this.btnBulkErrorList.UseVisualStyleBackColor = true;
             this.btnBulkErrorList.Click += new System.EventHandler(this.btnGetOutput_Click);
             // 
-            // BulkErrorListbox
+            // BulkErrorListBox
             // 
-            this.BulkErrorListbox.Location = new System.Drawing.Point(134, 121);
-            this.BulkErrorListbox.Name = "BulkErrorListbox";
-            this.BulkErrorListbox.Size = new System.Drawing.Size(408, 20);
-            this.BulkErrorListbox.TabIndex = 60;
-            this.BulkErrorListbox.TextChanged += new System.EventHandler(this.BulkErrorListbox_TextChanged);
+            this.BulkErrorListBox.Location = new System.Drawing.Point(134, 135);
+            this.BulkErrorListBox.Name = "BulkErrorListBox";
+            this.BulkErrorListBox.Size = new System.Drawing.Size(368, 20);
+            this.BulkErrorListBox.TabIndex = 60;
+            this.toolTip1.SetToolTip(this.BulkErrorListBox, "File where suggested character data are saved.");
+            this.BulkErrorListBox.TextChanged += new System.EventHandler(this.BulkErrorListbox_TextChanged);
             // 
             // btnBulkFontListFile
             // 
-            this.btnBulkFontListFile.Location = new System.Drawing.Point(549, 66);
+            this.btnBulkFontListFile.Location = new System.Drawing.Point(512, 78);
             this.btnBulkFontListFile.Name = "btnBulkFontListFile";
             this.btnBulkFontListFile.Size = new System.Drawing.Size(75, 23);
             this.btnBulkFontListFile.TabIndex = 51;
@@ -1156,7 +1164,7 @@
             // 
             // btnBulkStyleListFile
             // 
-            this.btnBulkStyleListFile.Location = new System.Drawing.Point(549, 93);
+            this.btnBulkStyleListFile.Location = new System.Drawing.Point(512, 107);
             this.btnBulkStyleListFile.Name = "btnBulkStyleListFile";
             this.btnBulkStyleListFile.Size = new System.Drawing.Size(75, 23);
             this.btnBulkStyleListFile.TabIndex = 54;
@@ -1184,17 +1192,12 @@
             // 
             // toolTip1
             // 
-            this.toolTip1.ToolTipTitle = "Analyse by Font";
+            this.toolTip1.BackColor = System.Drawing.Color.Khaki;
             // 
             // saveXMLDialogue
             // 
             this.saveXMLDialogue.DefaultExt = "xml";
             this.saveXMLDialogue.Filter = "XML File | *.xml";
-            // 
-            // toolTipCombine
-            // 
-            this.toolTipCombine.BackColor = System.Drawing.Color.Khaki;
-            this.toolTipCombine.ToolTipTitle = "Combine decomposed characters";
             // 
             // OpenGlyphFileDialogue
             // 
@@ -1295,7 +1298,6 @@
         private System.Windows.Forms.SaveFileDialog saveXMLDialogue;
         private System.Windows.Forms.Button btnSaveXML;
         private System.Windows.Forms.CheckBox CombDecomposedChars;
-        private System.Windows.Forms.ToolTip toolTipCombine;
         private System.Windows.Forms.OpenFileDialog OpenGlyphFileDialogue;
         private System.Windows.Forms.Button btnErrorList;
         private System.Windows.Forms.TextBox ErrorListBox;
@@ -1331,8 +1333,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnSaveErrorList;
         private System.Windows.Forms.DataGridView listNormalisedErrors;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MappedCharacter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PossibleCharacter;
         private System.Windows.Forms.Button btnGetEncoding;
         private System.Windows.Forms.TextBox EncodingTextBox;
         private System.Windows.Forms.Button btnGetFont;
@@ -1355,7 +1355,7 @@
         private System.Windows.Forms.TextBox BulkFontListFileBox;
         private System.Windows.Forms.TextBox BulkStyleListBox;
         private System.Windows.Forms.Button btnBulkErrorList;
-        private System.Windows.Forms.TextBox BulkErrorListbox;
+        private System.Windows.Forms.TextBox BulkErrorListBox;
         private System.Windows.Forms.Button btnBulkFontListFile;
         private System.Windows.Forms.Button btnBulkStyleListFile;
         private System.Windows.Forms.Button btnAggregateFile;
@@ -1364,6 +1364,8 @@
         private System.Windows.Forms.Button btnSelectFiles;
         private System.Windows.Forms.FolderBrowserDialog FolderDialogue;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MappedCharacter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PossibleCharacter;
     }
 }
 

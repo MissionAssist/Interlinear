@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>W:\spalmstrom\Programs\CharacterCounter\</PublishUrl>
+    <PublishUrl>C:\Users\Stephen\SharePoint\Unicode Conversion Programs - Progr 1\CharacterCounter\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -22,8 +22,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
+    <ProductName>Character Counter</ProductName>
+    <PublisherName>MissionAssist</PublisherName>
+    <SuiteName>Unicode Conversion</SuiteName>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>4.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -51,7 +54,7 @@
     <StartupObject>CharacterCounter.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>746EB4C311983BFA911D97A5369D55A3B749EDFE</ManifestCertificateThumbprint>

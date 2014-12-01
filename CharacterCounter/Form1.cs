@@ -7,7 +7,7 @@
  *  
  *  The copyright is owned by MissionAssist as the work was carried out on their behalf.
  * 
- *  Written by Stephen Palmstrom, last modified 15 October 2013
+ *  Written by Stephen Palmstrom, last modified 29 November 2014
  *  
  */
 using System;
@@ -62,6 +62,8 @@ namespace CharacterCounter
 
         private bool AggregateSaved = false;
         private bool Individual = true;
+        private bool WordWasRunning = false;
+        private bool ExcelWasRunning = false;
 
         private int FileType = WordDoc;
         //private XmlDocument theXMLDocument = new XmlDocument();  // make it global so we can save it.
@@ -129,11 +131,35 @@ namespace CharacterCounter
             InitializeComponent();
             Application.ApplicationExit += new EventHandler(this.CloseApps);
             // Start Word and Excel
-
-            wrdApp = new Word();
-            // Turn off as much as possible.
+            try
+            {
+                wrdApp = System.Runtime.InteropServices.Marshal.GetActiveObject(
+                    "Word.Application") as Word;
+                WordWasRunning = true; // Remember we were running Word
+            }
+            catch
+            {
+                /*
+                 * Word isn't running, so we run it.
+                 */
+                wrdApp = new Word();
+                WordWasRunning = false;
+            }
             wrdApp.Visible = false;
-            excelApp = new Excel();
+            try
+            {
+                excelApp = System.Runtime.InteropServices.Marshal.GetActiveObject(
+                    "Excel.Application") as Excel;
+                ExcelWasRunning = true; // Remember we were running Excel
+            }
+            catch
+            {
+                /*
+                 * Excel isn't running, so we run it.
+                 */
+                excelApp = new Excel();
+                ExcelWasRunning = false;
+            }
             excelApp.Visible = false;
             /*
              * If the registry subkey doesn't exist, create it
@@ -348,7 +374,7 @@ namespace CharacterCounter
                     break;
                 case "btnBulkErrorList":
                     theDialogue = saveExcelDialogue;
-                    theTextBox = BulkErrorListbox;
+                    theTextBox = BulkErrorListBox;
                     theDialogue.InitialDirectory = ErrorDir;
                     theButton = btnSaveErrorList;
                     ValueName = "ErrorDir";
@@ -388,27 +414,47 @@ namespace CharacterCounter
             toolStripStatusLabel1.Text = "Shutting down...";
             Application.DoEvents();
             // Close Excel and Word, but don't flag an error if they are already closed.
-            try
-            {
-                //NAR(wrdApp);  // release any objects like documents to make sure we can quit.
-                wrdApp.Quit();
-                wrdApp = null;
-            }
-            catch
-            {
-            }
-            try
-            {
-                excelApp.Quit();
-                NAR(excelApp);  // release any objects like workbooks because Excel doesn't always quit.
-                System.Threading.Thread.Sleep(5000); // and sleep five seconds
-                excelApp.Quit(); // try again
-                excelApp = null;
+            try {
+                     if (WordWasRunning)
+                    {
+                        wrdApp.Visible = true;  // See Word again
+                    }
+                    else
+                    {
+                        wrdApp.Quit(ref missing, ref missing, ref missing);
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                try
+                {
+                    // Shut down Excel
+                    if (excelApp.ActiveWorkbook != null)
+                    {
+                        excelApp.ActiveWorkbook.Close(true);
+                    }
+                    if (ExcelWasRunning)
+                    {
+                        excelApp.Visible = true;
+                    }
+                    else
+                    {
+                        excelApp.Quit();
+                        NAR(excelApp);  // release any objects like workbooks because Excel doesn't always quit.
+                        System.Threading.Thread.Sleep(5000); // and sleep five seconds
+                        excelApp.Quit(); // try again
+                        excelApp = null;
+                    }
+                    
+                }
+                catch
+                {
+                }
 
-            }
-            catch
-            {
-            }
+
             this.Close();
 
         }
@@ -589,6 +635,7 @@ namespace CharacterCounter
                 try
                 {
                     theWorkbook = excelApp.Workbooks.Add();  // Create it
+                    excelApp.Visible = false;  // make sure it is invisible.
                     Retry = false;
                 }
                 catch (COMException ComEx)
@@ -786,6 +833,7 @@ namespace CharacterCounter
             }
             toolStripStatusLabel1.Text = "Writing to " + Path.GetFileName(theFileName);
             ExcelRoot.Workbook theWorkBook = excelApp.Workbooks.Add();
+            excelApp.Visible = false;  // make sure we hide it.
             ExcelRoot.Worksheet theSheet = theWorkBook.ActiveSheet;
             theSheet.Range["A1"].Value = theHeader;
             theSheet.Range["A1"].Font.Bold = true;
@@ -806,30 +854,30 @@ namespace CharacterCounter
             btnClose.Enabled = false;
             int RowCounter = 2;
             // Write the contents of a list box to Excel
-            if (!DeleteFile(theFileName))
+            if (DeleteFile(theFileName))
             {
-                return;
-            }
-            toolStripStatusLabel1.Text = "Writing to " + Path.GetFileName(theFileName);
-            ExcelRoot.Workbook theWorkBook = excelApp.Workbooks.Add();
-            ExcelRoot.Worksheet theSheet = theWorkBook.ActiveSheet;
-            theSheet.Range["A1"].Value = theDataGridView.Columns[0].HeaderText;
-            theSheet.Range["B1"].Value = theDataGridView.Columns[1].HeaderText;
-            theSheet.Range["A1:B1"].Font.Bold = true;
-            theSheet.Range["A1:B1"].HorizontalAlignment = ExcelRoot.XlHAlign.xlHAlignCenter;
-            theSheet.Range["A:B"].EntireColumn.ColumnWidth = 100;
+                toolStripStatusLabel1.Text = "Writing to " + Path.GetFileName(theFileName);
+                ExcelRoot.Workbook theWorkBook = excelApp.Workbooks.Add();
+                excelApp.Visible = false;
+                ExcelRoot.Worksheet theSheet = theWorkBook.ActiveSheet;
+                theSheet.Range["A1"].Value = theDataGridView.Columns[0].HeaderText;
+                theSheet.Range["B1"].Value = theDataGridView.Columns[1].HeaderText;
+                theSheet.Range["A1:B1"].Font.Bold = true;
+                theSheet.Range["A1:B1"].HorizontalAlignment = ExcelRoot.XlHAlign.xlHAlignCenter;
+                theSheet.Range["A:B"].EntireColumn.ColumnWidth = 100;
 
-            foreach (DataGridViewRow theRow in theDataGridView.Rows)
-            {
+                foreach (DataGridViewRow theRow in theDataGridView.Rows)
+                {
 
-                theSheet.Range["A" + RowCounter.ToString()].Value = theRow.Cells[0].Value;
-                theSheet.Range["B" + RowCounter.ToString()].Value = theRow.Cells[1].Value;
-                RowCounter++;
+                    theSheet.Range["A" + RowCounter.ToString()].Value = theRow.Cells[0].Value;
+                    theSheet.Range["B" + RowCounter.ToString()].Value = theRow.Cells[1].Value;
+                    RowCounter++;
+                }
+                theWorkBook.SaveAs(theFileName);
+                theWorkBook.Close();
+                toolStripStatusLabel1.Text = "Finished writing to " + Path.GetFileName(theFileName);
+                System.Media.SystemSounds.Beep.Play();  // and beep
             }
-            theWorkBook.SaveAs(theFileName);
-            theWorkBook.Close();
-            toolStripStatusLabel1.Text = "Finished writing to " + Path.GetFileName(theFileName);
-            System.Media.SystemSounds.Beep.Play();  // and beep
             btnClose.Enabled = true;
             return;
         }
@@ -1286,29 +1334,33 @@ namespace CharacterCounter
                     }
                 }
             }
-            // Now the styles that don't - we have to get the font of the style on which they are based.
+            // Now the styles that don't have fonts- we have to get the font of the style on which they are based.
+            // but first we load those that aren't based on a style 
             foreach (XmlNode theStyle in theNodeList)
             {
                 string theStyleID = theStyle.Attributes["w:styleId"].Value;
                 XmlNode theFont = theStyle.SelectSingleNode("w:rPr/wx:font", nsManager);
-                if (theFont == null)
+                XmlNode theBasedOnStyle = theStyle.SelectSingleNode("w:basedOn", nsManager);
+                if (theFont == null && theBasedOnStyle == null)
                 {
-                    // Get the font based on what the style is based on
-                    XmlNode theBasedOnStyle = theStyle.SelectSingleNode("w:basedOn", nsManager);
-                    if (theBasedOnStyle != null)
-                    {
-                        // Save the font name for the style on which this one is based.
-                        string basedOnStyleID = theBasedOnStyle.Attributes["w:val"].Value;
-                        string theFontName = theStyleDictionary[basedOnStyleID];
-                        theStyleDictionary[theStyleID] = theFontName;
-                    }
-                    else
-                    {
-                        // Use the default paragraph font
-                        theStyleDictionary[theStyleID] = theStyleDictionary["DefaultParagraphFont"];
-                    }
+                    // Use the default paragraph font
+                    theStyleDictionary[theStyleID] = theStyleDictionary["DefaultParagraphFont"];
                 }
             }
+            // Now look at the styles that don't have fonts but are based on other styles, and give them the fonts from the styles on which they were based
+            foreach (XmlNode theStyle in theNodeList)
+            {
+                string theStyleID = theStyle.Attributes["w:styleId"].Value;
+                XmlNode theFont = theStyle.SelectSingleNode("w:rPr/wx:font", nsManager);
+                XmlNode theBasedOnStyle = theStyle.SelectSingleNode("w:basedOn", nsManager);
+                if (theFont == null && theBasedOnStyle != null)
+                {
+                    // Use the default paragraph font
+                    string theBasedOnStyleID = theBasedOnStyle.Attributes["w:val"].Value;
+                    theStyleDictionary[theStyleID] = theStyleDictionary[theBasedOnStyleID];
+                }
+            }
+
         }
 
         private string GetNodePath(XmlNode theNode, string InputType)
@@ -2017,7 +2069,7 @@ namespace CharacterCounter
 
                 if (theGlyphDictionary.Keys.Contains(FontName))
                 {
-                    theGlyphDictionary[FontName] += "|" + theChar;
+                    theGlyphDictionary[FontName] += theChar;
                 }
                 else
                 {
@@ -2051,7 +2103,17 @@ namespace CharacterCounter
 
         private void btnSaveErrorList_Click(object sender, EventArgs e)
         {
-            WriteDataGridView(ErrorListBox.Text, listNormalisedErrors);
+            string theErrorListFile = "";
+            if (Individual)
+            {
+                theErrorListFile = ErrorListBox.Text;
+            }
+            else
+            {
+                theErrorListFile = BulkErrorListBox.Text;
+            }
+
+            WriteDataGridView(theErrorListFile, listNormalisedErrors);
             Registry.SetValue(keyName, "ErrorDir", ErrorDir);
 
         }
@@ -2152,6 +2214,8 @@ namespace CharacterCounter
             {
                 Individual = true;
                 ClearLists();
+                btnSaveXML.Enabled = XMLFileBox.Text != ""; ;  //reveal the XML file button
+                btnSaveXML.Visible = true;
             }
         }
 
@@ -2164,9 +2228,11 @@ namespace CharacterCounter
                 OutputFolderBox.Text = OutputDir;
                 btnSaveFontList.Enabled = BulkFontListFileBox.Text != "";
                 btnSaveStyles.Enabled = BulkStyleListBox.Text != "";
-                btnSaveErrorList.Enabled = BulkErrorListbox.Text != "";
+                btnSaveErrorList.Enabled = BulkErrorListBox.Text != "";
                 btnGetFont.Enabled = true;
                 btnGetEncoding.Enabled = true;
+                btnSaveXML.Enabled = false;  // hide the XML file button.
+                btnSaveXML.Visible = false;
 
                 ClearLists();
             }
@@ -2234,7 +2300,7 @@ namespace CharacterCounter
 
                     btnSaveFontList.Enabled = BulkFontListFileBox.Text != "" && btnListFonts.Enabled;
                     btnSaveStyles.Enabled = BulkStyleListBox.Text != "" && btnGetStyles.Enabled;
-                    btnSaveErrorList.Enabled = BulkErrorListbox.Text != "" && openInputDialogue.FileNames.Count() > 0;
+                    btnSaveErrorList.Enabled = BulkErrorListBox.Text != "" && openInputDialogue.FileNames.Count() > 0;
                 }
                 else
                 {

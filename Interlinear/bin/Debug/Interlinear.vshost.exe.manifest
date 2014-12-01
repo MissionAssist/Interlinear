@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="Interlinear.exe" version="4.3.0.11" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Interlinear" version="4.4.5446.31287" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="Interlinear" version="4.4.5446.31350" language="neutral" processorArchitecture="x86" />
     <commandLine file="Interlinear.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -78,13 +78,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interlinear.exe" size="136704">
-      <assemblyIdentity name="Interlinear" version="4.4.5446.31287" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="Interlinear" version="4.4.5446.31350" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>MlVcF+9Ym+OwL3sW0a/ikE+8/lk=</dsig:DigestValue>
+        <dsig:DigestValue>mjWPifkmu1TqLDbrt6UKJcRgDdY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
