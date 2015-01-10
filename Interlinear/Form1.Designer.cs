@@ -38,6 +38,9 @@
             this.saveUnicodeFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.Wordcount = new System.Windows.Forms.ToolTip(this.components);
             this.chkCloseOnCompletion = new System.Windows.Forms.CheckBox();
+            this.boxExtension = new System.Windows.Forms.ComboBox();
+            this.UpdownZoom = new System.Windows.Forms.NumericUpDown();
+            this.updownThreshold = new System.Windows.Forms.NumericUpDown();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
             this.btnBothToExcel = new System.Windows.Forms.Button();
@@ -87,7 +90,12 @@
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPauseResume = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpdownZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
             this.grpUnicode.SuspendLayout();
@@ -100,7 +108,7 @@
             // openLegacyFileDialog
             // 
             this.openLegacyFileDialog.DefaultExt = "docx";
-            this.openLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf";
+            this.openLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf|Text files|*.txt";
             this.openLegacyFileDialog.FilterIndex = 2;
             // 
             // saveLegacyFileDialog
@@ -179,6 +187,77 @@
             this.Wordcount.SetToolTip(this.chkCloseOnCompletion, "This closes the application when it has finished doing what you have asked it to " +
         "do.");
             this.chkCloseOnCompletion.UseVisualStyleBackColor = true;
+            // 
+            // boxExtension
+            // 
+            this.boxExtension.DisplayMember = "Text";
+            this.boxExtension.FormattingEnabled = true;
+            this.boxExtension.Items.AddRange(new object[] {
+            ".doc",
+            ".docx",
+            ".rtf",
+            ",txt"});
+            this.boxExtension.Location = new System.Drawing.Point(312, 68);
+            this.boxExtension.Name = "boxExtension";
+            this.boxExtension.Size = new System.Drawing.Size(53, 21);
+            this.boxExtension.TabIndex = 31;
+            this.boxExtension.Text = ".docx";
+            this.Wordcount.SetToolTip(this.boxExtension, "The default input file extension you want to use.");
+            this.boxExtension.ValueMember = "Text";
+            this.boxExtension.SelectedIndexChanged += new System.EventHandler(this.boxExtension_SelectedIndexChanged);
+            // 
+            // UpdownZoom
+            // 
+            this.UpdownZoom.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.UpdownZoom.Location = new System.Drawing.Point(487, 68);
+            this.UpdownZoom.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.UpdownZoom.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.UpdownZoom.Name = "UpdownZoom";
+            this.UpdownZoom.Size = new System.Drawing.Size(45, 20);
+            this.UpdownZoom.TabIndex = 33;
+            this.Wordcount.SetToolTip(this.UpdownZoom, "The amount of enlargement the Excel fiel will have.");
+            this.UpdownZoom.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.UpdownZoom.ValueChanged += new System.EventHandler(this.UpdownZoom_ValueChanged);
+            // 
+            // updownThreshold
+            // 
+            this.updownThreshold.Location = new System.Drawing.Point(690, 66);
+            this.updownThreshold.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.updownThreshold.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.updownThreshold.Name = "updownThreshold";
+            this.updownThreshold.Size = new System.Drawing.Size(47, 20);
+            this.updownThreshold.TabIndex = 36;
+            this.Wordcount.SetToolTip(this.updownThreshold, "If the character copy rate drops below this, we pause to let Word catch up.");
+            this.updownThreshold.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.updownThreshold.ValueChanged += new System.EventHandler(this.updownThreshold_ValueChanged);
             // 
             // tabControl1
             // 
@@ -666,11 +745,44 @@
             this.btnPauseResume.UseVisualStyleBackColor = true;
             this.btnPauseResume.Click += new System.EventHandler(this.btnPauseResume_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(175, 71);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(131, 13);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "Default input file extension";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(384, 70);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(91, 13);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Excel zoom factor";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(538, 71);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(149, 13);
+            this.label12.TabIndex = 35;
+            this.label12.Text = "Character copy rate threshold.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 601);
+            this.ClientSize = new System.Drawing.Size(754, 611);
+            this.Controls.Add(this.updownThreshold);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.UpdownZoom);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.boxExtension);
             this.Controls.Add(this.btnPauseResume);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControl1);
@@ -682,6 +794,8 @@
             this.Name = "Form1";
             this.Text = "Interlinear comparison";
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpdownZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.Setup.ResumeLayout(false);
             this.Setup.PerformLayout();
@@ -760,6 +874,12 @@
         private System.Windows.Forms.CheckBox chkLegacyAddSpace;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.CheckBox chkCloseOnCompletion;
+        private System.Windows.Forms.ComboBox boxExtension;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown UpdownZoom;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown updownThreshold;
     }
 }
 
