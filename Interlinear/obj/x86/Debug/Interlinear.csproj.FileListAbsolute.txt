@@ -50,6 +50,3 @@ D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interline
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csprojResolveAssemblyReference.cache
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\Microsoft.Office.Tools.Common.v9.0.dll
-D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\Microsoft.Office.Tools.Excel.v9.0.dll
-D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\Microsoft.Office.Tools.v9.0.dll
-D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\Microsoft.Office.Tools.Word.v9.0.dll
