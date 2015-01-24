@@ -8,7 +8,7 @@
  * 
  * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
- * Last modified on 9 January 2015 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
+ * Last modified on 23 January 2015 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
  * 
  * Acknowledgement is due to Dennis Pepler who worked out how to scan stories etc.
 */
@@ -67,7 +67,7 @@ namespace Interlinear
         private string UnicodeOutputDir = "";
         private string ExcelDir = "";
         private int DefaultExtensionIndex = 1;
-        private int ExcelZoom = 100;
+        private int FontSize = 16;
         private int CopyPauseThreshold = 5;
         private List<string> theExtensions = new List<string>();
         const string userRoot = "HKEY_CURRENT_USER";
@@ -85,7 +85,9 @@ namespace Interlinear
             theExtensions.Add(".docx");
             theExtensions.Add(".rtf");
             theExtensions.Add("*.txt");
+            theExtensions.Add("*.odt");
             openUnicodeFileDialog.Filter = openLegacyFileDialog.Filter;  // make both filters the same
+            saveUnicodeFileDialog.Filter = saveLegacyFileDialog.Filter;
             try
             {
                 wrdApp = System.Runtime.InteropServices.Marshal.GetActiveObject(
@@ -141,10 +143,10 @@ namespace Interlinear
                 ExcelDir = GetDirectory("ExcelDir", UnicodeOutputDir);
                 // sort out some settings
                 DefaultExtensionIndex = GetValue("DefaultExtensionIndex", DefaultExtensionIndex);
-                ExcelZoom = GetValue("ExcelZoom", ExcelZoom);
+                FontSize = GetValue("FontSize", FontSize);
                 CopyPauseThreshold = GetValue("CopyPauseThreshold", CopyPauseThreshold);
                 boxExtension.SelectedIndex = DefaultExtensionIndex;
-                UpdownZoom.Value = ExcelZoom;
+                UpdownFontSize.Value = FontSize;
                 updownThreshold.Value = CopyPauseThreshold;
  
                 openLegacyFileDialog.DefaultExt = boxExtension.Items[DefaultExtensionIndex].ToString();
@@ -1058,8 +1060,8 @@ namespace Interlinear
             }
             // Save some Registry settings
             Registry.SetValue(keyName, "DefaultExtensionIndex", DefaultExtensionIndex);
-            Registry.SetValue(keyName, "ExcelZoom", ExcelZoom);
-            Registry.SetValue(keyName, "CopyPauseThreshold", CopyPauseThreshold);
+            Registry.SetValue(keyName, "FontSize", FontSize, RegistryValueKind.DWord);
+            Registry.SetValue(keyName, "CopyPauseThreshold", CopyPauseThreshold, RegistryValueKind.DWord);
             CloseApp = true;            
             QuitWord(!WasPaused);  // Save the output if we did'nt come here from a paused state
             this.Close();  // and close the application
@@ -1452,10 +1454,9 @@ namespace Interlinear
                 CopyStopwatch.Stop();
                 CopyStopwatch = null;
                 theDoc.Close(false);
-                theWorkSheet.Columns["A"].Font.Size = 11;  // setting the size in one go may be faster than line by line
+                theWorkSheet.Columns["A"].Font.Size = UpdownFontSize.Value;  // setting the size in one go may be faster than line by line
                 theWorkSheet.Range["A1"].Select();  // go to the start of the worksheet
                 theExcelOptions.RestoreApp(excelApp); // Restore the Excel settings we saved earlier
-                excelApp.ActiveWindow.Zoom = UpdownZoom.Value;
                 theWorkBook.Save();
                 boxProgress.Items.Add("Excel interlinear worksheet filled in " + (theStopwatch2.Elapsed).ToString("hh\\:mm\\:ss\\.f"));
                 theStopwatch2.Stop();
@@ -1835,7 +1836,7 @@ namespace Interlinear
         private void UpdownZoom_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown theUpdown = (NumericUpDown)sender;
-            ExcelZoom = (int)theUpdown.Value;
+            FontSize = (int)theUpdown.Value;
         }
 
         private void updownThreshold_ValueChanged(object sender, EventArgs e)

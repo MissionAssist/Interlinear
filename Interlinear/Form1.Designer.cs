@@ -39,7 +39,7 @@
             this.Wordcount = new System.Windows.Forms.ToolTip(this.components);
             this.chkCloseOnCompletion = new System.Windows.Forms.CheckBox();
             this.boxExtension = new System.Windows.Forms.ComboBox();
-            this.UpdownZoom = new System.Windows.Forms.NumericUpDown();
+            this.UpdownFontSize = new System.Windows.Forms.NumericUpDown();
             this.updownThreshold = new System.Windows.Forms.NumericUpDown();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
@@ -94,7 +94,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpdownZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpdownFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
@@ -108,13 +108,14 @@
             // openLegacyFileDialog
             // 
             this.openLegacyFileDialog.DefaultExt = "docx";
-            this.openLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf|Text files|*.txt";
+            this.openLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf|Text files|*.txt|" +
+    "OpenDocument Text|*.odt";
             this.openLegacyFileDialog.FilterIndex = 2;
             // 
             // saveLegacyFileDialog
             // 
             this.saveLegacyFileDialog.DefaultExt = "docx";
-            this.saveLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf";
+            this.saveLegacyFileDialog.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx";
             this.saveLegacyFileDialog.FilterIndex = 2;
             // 
             // label5
@@ -148,6 +149,7 @@
             this.WordsPerLine.Size = new System.Drawing.Size(37, 20);
             this.WordsPerLine.TabIndex = 14;
             this.WordsPerLine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Wordcount.SetToolTip(this.WordsPerLine, "The number of words (i.e. text separated by spaces) on each line.");
             this.WordsPerLine.Value = new decimal(new int[] {
             8,
             0,
@@ -206,34 +208,30 @@
             this.boxExtension.ValueMember = "Text";
             this.boxExtension.SelectedIndexChanged += new System.EventHandler(this.boxExtension_SelectedIndexChanged);
             // 
-            // UpdownZoom
+            // UpdownFontSize
             // 
-            this.UpdownZoom.Increment = new decimal(new int[] {
-            5,
+            this.UpdownFontSize.Location = new System.Drawing.Point(487, 68);
+            this.UpdownFontSize.Maximum = new decimal(new int[] {
+            32,
             0,
             0,
             0});
-            this.UpdownZoom.Location = new System.Drawing.Point(487, 68);
-            this.UpdownZoom.Maximum = new decimal(new int[] {
-            400,
+            this.UpdownFontSize.Minimum = new decimal(new int[] {
+            8,
             0,
             0,
             0});
-            this.UpdownZoom.Minimum = new decimal(new int[] {
-            50,
+            this.UpdownFontSize.Name = "UpdownFontSize";
+            this.UpdownFontSize.Size = new System.Drawing.Size(45, 20);
+            this.UpdownFontSize.TabIndex = 33;
+            this.Wordcount.SetToolTip(this.UpdownFontSize, "The size of the font in the Excel workbook.  A large font makes it easier to chec" +
+        "k on accents.");
+            this.UpdownFontSize.Value = new decimal(new int[] {
+            16,
             0,
             0,
             0});
-            this.UpdownZoom.Name = "UpdownZoom";
-            this.UpdownZoom.Size = new System.Drawing.Size(45, 20);
-            this.UpdownZoom.TabIndex = 33;
-            this.Wordcount.SetToolTip(this.UpdownZoom, "The amount of enlargement the Excel fiel will have.");
-            this.UpdownZoom.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.UpdownZoom.ValueChanged += new System.EventHandler(this.UpdownZoom_ValueChanged);
+            this.UpdownFontSize.ValueChanged += new System.EventHandler(this.UpdownZoom_ValueChanged);
             // 
             // updownThreshold
             // 
@@ -759,9 +757,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(384, 70);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(91, 13);
+            this.label11.Size = new System.Drawing.Size(49, 13);
             this.label11.TabIndex = 34;
-            this.label11.Text = "Excel zoom factor";
+            this.label11.Text = "Font size";
             // 
             // label12
             // 
@@ -780,7 +778,7 @@
             this.Controls.Add(this.updownThreshold);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.UpdownZoom);
+            this.Controls.Add(this.UpdownFontSize);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.boxExtension);
             this.Controls.Add(this.btnPauseResume);
@@ -794,7 +792,7 @@
             this.Name = "Form1";
             this.Text = "Interlinear comparison";
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UpdownZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpdownFontSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.Setup.ResumeLayout(false);
@@ -876,7 +874,7 @@
         private System.Windows.Forms.CheckBox chkCloseOnCompletion;
         private System.Windows.Forms.ComboBox boxExtension;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown UpdownZoom;
+        private System.Windows.Forms.NumericUpDown UpdownFontSize;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown updownThreshold;
