@@ -42,6 +42,7 @@
             this.UpdownFontSize = new System.Windows.Forms.NumericUpDown();
             this.updownThreshold = new System.Windows.Forms.NumericUpDown();
             this.UpdownInterval = new System.Windows.Forms.NumericUpDown();
+            this.DebugCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
             this.btnBothToExcel = new System.Windows.Forms.Button();
@@ -95,7 +96,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.DebugCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdownFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).BeginInit();
@@ -202,7 +202,8 @@
             ".doc",
             ".docx",
             ".rtf",
-            ",txt"});
+            ".txt",
+            ".odt"});
             this.boxExtension.Location = new System.Drawing.Point(277, 63);
             this.boxExtension.Name = "boxExtension";
             this.boxExtension.Size = new System.Drawing.Size(53, 21);
@@ -264,7 +265,7 @@
             0,
             0,
             0});
-            this.UpdownInterval.Location = new System.Drawing.Point(668, 60);
+            this.UpdownInterval.Location = new System.Drawing.Point(684, 56);
             this.UpdownInterval.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -275,6 +276,17 @@
             this.UpdownInterval.TabIndex = 38;
             this.Wordcount.SetToolTip(this.UpdownInterval, "The interval between saving the output file in seconds.\r\nZero means don\'t save.");
             this.UpdownInterval.ValueChanged += new System.EventHandler(this.UpdownInterval_ValueChanged);
+            // 
+            // DebugCheckBox
+            // 
+            this.DebugCheckBox.AutoSize = true;
+            this.DebugCheckBox.Location = new System.Drawing.Point(23, 89);
+            this.DebugCheckBox.Name = "DebugCheckBox";
+            this.DebugCheckBox.Size = new System.Drawing.Size(64, 17);
+            this.DebugCheckBox.TabIndex = 39;
+            this.DebugCheckBox.Text = "Debug?";
+            this.Wordcount.SetToolTip(this.DebugCheckBox, "Check this if you want to display progress as the copying process proceeds.");
+            this.DebugCheckBox.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -632,7 +644,7 @@
             this.Progress.Location = new System.Drawing.Point(4, 22);
             this.Progress.Name = "Progress";
             this.Progress.Padding = new System.Windows.Forms.Padding(3);
-            this.Progress.Size = new System.Drawing.Size(724, 426);
+            this.Progress.Size = new System.Drawing.Size(724, 386);
             this.Progress.TabIndex = 1;
             this.Progress.Text = "Progress";
             this.Progress.UseVisualStyleBackColor = true;
@@ -642,7 +654,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.progressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 401);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 361);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(718, 22);
             this.statusStrip1.TabIndex = 29;
@@ -792,22 +804,11 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(582, 57);
+            this.label13.Location = new System.Drawing.Point(601, 53);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(67, 26);
             this.label13.TabIndex = 37;
             this.label13.Text = "Output file\r\nsave interval";
-            // 
-            // DebugCheckBox
-            // 
-            this.DebugCheckBox.AutoSize = true;
-            this.DebugCheckBox.Location = new System.Drawing.Point(23, 89);
-            this.DebugCheckBox.Name = "DebugCheckBox";
-            this.DebugCheckBox.Size = new System.Drawing.Size(64, 17);
-            this.DebugCheckBox.TabIndex = 39;
-            this.DebugCheckBox.Text = "Debug?";
-            this.Wordcount.SetToolTip(this.DebugCheckBox, "Check this if you want to display progress as the copying process proceeds.");
-            this.DebugCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

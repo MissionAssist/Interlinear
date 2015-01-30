@@ -663,10 +663,25 @@ namespace Interlinear
                     else
                     {
                         int NumberOfWords = theParagraph.Range.Words.Count;
-                        for (int WordCounter = 1; WordCounter <= NumberOfWords; WordCounter++)
+                        int WordCounter = 0;
+                        foreach (WordRoot.Range theWord in theParagraph.Range.Words)
                         {
-                            WordRoot.Range theWord = theParagraph.Range.Words[WordCounter];
-                            if (theWord.Text != null) // no point in trying to process a null word.
+
+                            WordCounter++;
+                            if (WordCounter > NumberOfWords)
+                            {
+                                boxProgress.Items.Add("******");
+                                boxProgress.Items.Add("Suspect string found here - problem after word " + (WordCounter - 1).ToString() + " of [" + theParagraph.Range.Text + "]");
+                                boxProgress.Items.Add("Suggest you save as a .docx and repeat this process");
+                                boxProgress.Items.Add("******");
+                                if(MessageBox.Show("Do you want to continue?", "Warning - problem found", MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.No)
+                                {
+                                    btnPauseResume_Click(btnPauseResume, null);
+                                }
+                                Application.DoEvents();
+                                break; // do no more, we're in an infinite loop.
+                            }
+                            if (theWord.Text != null && WordCounter <= NumberOfWords) // no point in trying to process a null word.
                             {
                                 if (theWord.Font.Name != "")
                                 {
@@ -681,14 +696,6 @@ namespace Interlinear
                                         CharacterCounter = InsertAfter2(theCharacter, false, CharacterCounter, ref tmpCounter, theStopwatch,
                                             theStopwatch2, theStopwatch3, theStopwatch5, FoundSymbol);
                                     }
-                                }
-                            }
-                            else
-                            {
-                                if (DebugCheckBox.Checked)
-                                {
-                                    boxProgress.Items.Add("Null text found in [" + theParagraph.Range.Text + "]");
-                                    Application.DoEvents();
                                 }
                             }
 
