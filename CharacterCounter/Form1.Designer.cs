@@ -163,8 +163,8 @@
             // openInputDialogue
             // 
             this.openInputDialogue.DefaultExt = "docx";
-            this.openInputDialogue.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|Rich Text Format|*.rtf|All files|" +
-    " *.*";
+            this.openInputDialogue.Filter = "Word 2000 files |*.doc|Word 2007+ files |*.docx|RTF files|*.rtf|Text files|*.txt|" +
+    "OpenDocument Text|*.odt|OpenAll files| *.*";
             this.openInputDialogue.FilterIndex = 2;
             this.openInputDialogue.Title = "Input File";
             // 

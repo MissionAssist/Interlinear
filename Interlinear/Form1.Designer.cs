@@ -41,6 +41,7 @@
             this.boxExtension = new System.Windows.Forms.ComboBox();
             this.UpdownFontSize = new System.Windows.Forms.NumericUpDown();
             this.updownThreshold = new System.Windows.Forms.NumericUpDown();
+            this.UpdownInterval = new System.Windows.Forms.NumericUpDown();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
             this.btnBothToExcel = new System.Windows.Forms.Button();
@@ -93,9 +94,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.DebugCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdownFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpdownInterval)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Setup.SuspendLayout();
             this.grpUnicode.SuspendLayout();
@@ -134,7 +138,7 @@
             0,
             0,
             0});
-            this.WordsPerLine.Location = new System.Drawing.Point(111, 63);
+            this.WordsPerLine.Location = new System.Drawing.Point(96, 63);
             this.WordsPerLine.Maximum = new decimal(new int[] {
             20,
             0,
@@ -167,7 +171,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(6, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(698, 42);
+            this.label3.Size = new System.Drawing.Size(698, 37);
             this.label3.TabIndex = 23;
             this.label3.Text = "Interlinear Comparison";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -199,7 +203,7 @@
             ".docx",
             ".rtf",
             ",txt"});
-            this.boxExtension.Location = new System.Drawing.Point(312, 68);
+            this.boxExtension.Location = new System.Drawing.Point(277, 63);
             this.boxExtension.Name = "boxExtension";
             this.boxExtension.Size = new System.Drawing.Size(53, 21);
             this.boxExtension.TabIndex = 31;
@@ -210,7 +214,7 @@
             // 
             // UpdownFontSize
             // 
-            this.UpdownFontSize.Location = new System.Drawing.Point(487, 68);
+            this.UpdownFontSize.Location = new System.Drawing.Point(390, 63);
             this.UpdownFontSize.Maximum = new decimal(new int[] {
             32,
             0,
@@ -235,21 +239,17 @@
             // 
             // updownThreshold
             // 
-            this.updownThreshold.Location = new System.Drawing.Point(690, 66);
+            this.updownThreshold.Location = new System.Drawing.Point(548, 61);
             this.updownThreshold.Maximum = new decimal(new int[] {
             15,
-            0,
-            0,
-            0});
-            this.updownThreshold.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
             this.updownThreshold.Name = "updownThreshold";
             this.updownThreshold.Size = new System.Drawing.Size(47, 20);
             this.updownThreshold.TabIndex = 36;
-            this.Wordcount.SetToolTip(this.updownThreshold, "If the character copy rate drops below this, we pause to let Word catch up.");
+            this.Wordcount.SetToolTip(this.updownThreshold, "If the character copy rate drops below this, we pause to let Word catch up.  Zero" +
+        " means we never stop to let Word catch up.");
             this.updownThreshold.Value = new decimal(new int[] {
             5,
             0,
@@ -257,14 +257,33 @@
             0});
             this.updownThreshold.ValueChanged += new System.EventHandler(this.updownThreshold_ValueChanged);
             // 
+            // UpdownInterval
+            // 
+            this.UpdownInterval.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.UpdownInterval.Location = new System.Drawing.Point(668, 60);
+            this.UpdownInterval.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.UpdownInterval.Name = "UpdownInterval";
+            this.UpdownInterval.Size = new System.Drawing.Size(42, 20);
+            this.UpdownInterval.TabIndex = 38;
+            this.Wordcount.SetToolTip(this.UpdownInterval, "The interval between saving the output file in seconds.\r\nZero means don\'t save.");
+            this.UpdownInterval.ValueChanged += new System.EventHandler(this.UpdownInterval_ValueChanged);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.Setup);
             this.tabControl1.Controls.Add(this.Progress);
-            this.tabControl1.Location = new System.Drawing.Point(10, 85);
+            this.tabControl1.Location = new System.Drawing.Point(10, 123);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(732, 452);
+            this.tabControl1.Size = new System.Drawing.Size(732, 412);
             this.tabControl1.TabIndex = 26;
             // 
             // Setup
@@ -280,7 +299,7 @@
             this.Setup.Location = new System.Drawing.Point(4, 22);
             this.Setup.Name = "Setup";
             this.Setup.Padding = new System.Windows.Forms.Padding(3);
-            this.Setup.Size = new System.Drawing.Size(724, 426);
+            this.Setup.Size = new System.Drawing.Size(724, 386);
             this.Setup.TabIndex = 0;
             this.Setup.Text = "Setup";
             this.Setup.UseVisualStyleBackColor = true;
@@ -746,7 +765,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(175, 71);
+            this.label7.Location = new System.Drawing.Point(141, 66);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(131, 13);
             this.label7.TabIndex = 32;
@@ -755,7 +774,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(384, 70);
+            this.label11.Location = new System.Drawing.Point(338, 65);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 13);
             this.label11.TabIndex = 34;
@@ -764,17 +783,40 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(538, 71);
+            this.label12.Location = new System.Drawing.Point(441, 56);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(149, 13);
+            this.label12.Size = new System.Drawing.Size(100, 26);
             this.label12.TabIndex = 35;
-            this.label12.Text = "Character copy rate threshold.";
+            this.label12.Text = "Character copy rate\r\nthreshold.";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(582, 57);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(67, 26);
+            this.label13.TabIndex = 37;
+            this.label13.Text = "Output file\r\nsave interval";
+            // 
+            // DebugCheckBox
+            // 
+            this.DebugCheckBox.AutoSize = true;
+            this.DebugCheckBox.Location = new System.Drawing.Point(23, 89);
+            this.DebugCheckBox.Name = "DebugCheckBox";
+            this.DebugCheckBox.Size = new System.Drawing.Size(64, 17);
+            this.DebugCheckBox.TabIndex = 39;
+            this.DebugCheckBox.Text = "Debug?";
+            this.Wordcount.SetToolTip(this.DebugCheckBox, "Check this if you want to display progress as the copying process proceeds.");
+            this.DebugCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(754, 611);
+            this.Controls.Add(this.DebugCheckBox);
+            this.Controls.Add(this.UpdownInterval);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.updownThreshold);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -794,6 +836,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdownFontSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpdownInterval)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.Setup.ResumeLayout(false);
             this.Setup.PerformLayout();
@@ -878,6 +921,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown updownThreshold;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown UpdownInterval;
+        private System.Windows.Forms.CheckBox DebugCheckBox;
     }
 }
 
