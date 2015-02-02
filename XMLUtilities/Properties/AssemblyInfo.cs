@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Interlinear")]
-[assembly: AssemblyDescription("This program takes two Microsoft Word documents, cleans them up and copies them line by line into a Microsoft Excel spreadsheet. Distributed under the GNU General Public License (http://www.gnu.org/licenses/gpl.txt) ")]
+[assembly: AssemblyTitle("XMLUtilities")]
+[assembly: AssemblyDescription("A group of utiility calls to help handle Office documents using XML")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MissionAssist")]
-[assembly: AssemblyProduct("Interlinear")]
+[assembly: AssemblyProduct("XMLUtiliites")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3fb181d6-6818-4fdd-9fa5-a1ea2cb98c76")]
+[assembly: Guid("ef9c0db8-a9e1-4cc6-aec4-898d5f1b3b81")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.0.*")]
-[assembly: AssemblyFileVersion("5.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

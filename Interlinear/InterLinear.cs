@@ -8,7 +8,7 @@
  * 
  * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
- * Last modified on 30 January 2015 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
+ * Last modified on 2 February 2015 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
  * 
  * Acknowledgement is due to Dennis Pepler who worked out how to scan stories etc.
 */
@@ -26,8 +26,14 @@ using System.Data.Common;
 using System.Threading;
 using System.Diagnostics;
 using Microsoft.Win32;
-using System.Xml;
+
 using System.Xml.XPath;
+using System.Xml.Linq;
+using System.Xml;
+using XMLUtilities;
+
+
+
 using WordApp = Microsoft.Office.Interop.Word._Application;
 using WordRoot = Microsoft.Office.Interop.Word;
 using Word = Microsoft.Office.Interop.Word.Application;
@@ -36,14 +42,12 @@ using ExcelApp = Microsoft.Office.Interop.Excel._Application;
 using ExcelRoot = Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel.Application;
 using WorkBook = Microsoft.Office.Interop.Excel._Workbook;
-
-
 using Office = Microsoft.Office.Core;
 
 
 namespace Interlinear
 {
-    public partial class Form1 : Form
+    public partial class InterLinear : Form
     {
         private WordApp wrdApp;
         WordAppOptions theOptions;
@@ -75,8 +79,7 @@ namespace Interlinear
         const string subkey = "Software\\MissionAssist\\Interlinear";
         const string keyName = userRoot + "\\" + subkey;
 
-
-        public Form1()
+        public InterLinear()
         {
             InitializeComponent();
             /*
@@ -420,19 +423,19 @@ namespace Interlinear
                 int RowCounter = 0;
                 progressBar1.Value = 0;
                 Application.DoEvents();
+                XMLUtility XMLFunctions = new XMLUtility();
                 try
                 {
                     //boxProgress.Items.Add("Opening " + theInputFile);
                     Application.DoEvents();
                     InputDoc = wrdApp.Documents.OpenNoRepairDialog(theInputFile, false, true);  // Read only, and we don't want the repair dialog, nor format prompts.
-                    //boxProgress.Items.Add("Opened input file");
                     File.Delete(theOutputFile); // delete the output file
                     OutputDoc = wrdApp.Documents.Add();  // a new blank document
                     OutputDoc.SaveAs(theOutputFile, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatXMLDocument);  // Save the output document as .docx
                 }
                 catch (Exception e)
                 {
-                    DialogResult theResult = MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult theResult = MessageBox.Show(e.Message, "Error on opening file", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tabControl1.SelectTab("Setup");
                     return;
 
@@ -481,9 +484,13 @@ namespace Interlinear
 
                 txtNumberOfWords.Text = NumberOfWords.ToString(); // the number of words in the document
                 /*
-                 * Start copying the text from the input document to the output document
+                 * Get the styles in the document
                  */
+
+                
                 /*
+                 * Start copying the text from the input document to the output document
+                 * 
                  * This makes sure we pick up all Stories in the document
                  */
                 WordRoot.WdStoryType StoryJunk = InputDoc.Sections[1].Headers[(WordRoot.WdHeaderFooterIndex)1].Range.StoryType;
