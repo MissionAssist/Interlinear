@@ -1,6 +1,6 @@
 ﻿namespace Interlinear
 {
-    partial class Form1
+    partial class Interlinear
     {
         /// <summary>
         /// Required designer variable.

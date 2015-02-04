@@ -40,7 +40,6 @@ D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interline
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\Interlinear.exe.lastcodeanalysissucceeded
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.ResolveComReference.cache
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.AboutBox1.resources
-D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.Form1.resources
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.Properties.Resources.resources
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.GenerateResource.Cache
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.TrustInfo.xml
@@ -50,3 +49,4 @@ D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interline
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csprojResolveAssemblyReference.cache
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\Microsoft.Office.Tools.Common.v9.0.dll
+D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.Interlinear.resources
