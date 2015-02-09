@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="Interlinear.exe" version="5.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Interlinear" version="5.0.5512.41185" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="Interlinear" version="5.0.5518.22307" language="neutral" processorArchitecture="x86" />
     <commandLine file="Interlinear.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interlinear.exe" size="145920">
-      <assemblyIdentity name="Interlinear" version="5.0.5512.41185" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interlinear.exe" size="152064">
+      <assemblyIdentity name="Interlinear" version="5.0.5518.22307" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>UUdbnkQ11aw8x4OOGlTV1l2VMVk=</dsig:DigestValue>
+        <dsig:DigestValue>KkKcmZNPz3B0n6xarlub219x6fM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,13 +110,13 @@
       <dsig:DigestValue>hiS82uVbru8AzRHV38+mD2hxCgI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Interlinear.docx" size="324548">
+  <file name="Interlinear.docx" size="402665">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>dKhzgOfhSpFMXK6/ZafauCvcets=</dsig:DigestValue>
+      <dsig:DigestValue>p9fdjf9KtxPIe+lAL/F4n/4R1NI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Interlinear.exe.config" size="77">

@@ -8,7 +8,7 @@
  * 
  * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
- * Last modified on 2 February 2015 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
+ * Last modified on 9 February 2015 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
  * 
  * Acknowledgement is due to Dennis Pepler who worked out how to scan stories etc.
 */
@@ -48,7 +48,6 @@ namespace Interlinear
         private WordApp wrdApp;
         WordAppOptions theOptions;
         private Document InputDoc;
-        private Document OutputDoc;
         private ExcelApp excelApp;
         private ExcelAppOptions theExcelOptions;
         object missing = Type.Missing;
@@ -427,8 +426,10 @@ namespace Interlinear
                     InputDoc = wrdApp.Documents.OpenNoRepairDialog(theInputFile, false, true);  // Read only, and we don't want the repair dialog, nor format prompts.
                     //boxProgress.Items.Add("Opened input file");
                     File.Delete(theOutputFile); // delete the output file
-                    OutputDoc = wrdApp.Documents.Add();  // a new blank document
-                    OutputDoc.SaveAs(theOutputFile, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatXMLDocument);  // Save the output document as .docx
+                  /*
+                   * We now save the input file as the output file.  This will save copying the main story to the output file.
+                   */
+                    InputDoc.SaveAs2(theOutputFile, WordRoot.WdSaveFormat.wdFormatXMLDocument);
                 }
                 catch (Exception e)
                 {
@@ -439,16 +440,6 @@ namespace Interlinear
                 }
 
 
-                // process Excel if desired
-                if (SendToExcel.Checked)
-                {
-                    RowCounter = InitialiseExcel(excelApp, EvenRows, theInputFile);
-                    if (RowCounter == 0)
-                    {
-                        return;  // we couldn't open the file
-                    }
-
-                }
                 // Size the progressbar depending on how many replacments we do
                 if (WordsPerLine.Value > 7)
                 {
@@ -466,7 +457,7 @@ namespace Interlinear
                 btnPauseResume.Enabled = true;
                 Application.DoEvents();
                 //OptimiseDoc(InputDoc);
-                OptimiseDoc(OutputDoc);
+                OptimiseDoc(InputDoc);
                 theOptions.OptimiseApp(wrdApp);  // Optimise the application
                 wrdApp.ScreenUpdating = false; // Turn off updating the screen
                 wrdApp.ActiveWindow.ActivePane.View.ShowAll = false;  // Don't show special marks
@@ -490,33 +481,70 @@ namespace Interlinear
                 /*
                  * Now go through each story and write it to the output document
                  */
-                boxProgress.Items.Add("Starting to copy the document");
+                boxProgress.Items.Add("Starting to copy headers, footers etc.");
                 System.Diagnostics.Stopwatch theStopwatch2 = new System.Diagnostics.Stopwatch();
                 theStopwatch2.Start();
                 progressBar1.Value = 0;
                 int TotalCharacters = InputDoc.Characters.Count;
                 progressBar1.Maximum = TotalCharacters;
-                boxProgress.Items.Add("Estimated total of " + TotalCharacters.ToString() + " characters");
+                boxProgress.Items.Add("The document has an estimated total of " + TotalCharacters.ToString() + " characters");
                 // Select the beginning of the
-                OutputDoc.ActiveWindow.Selection.WholeStory();  // Select the whole document to start with.
+                InputDoc.ActiveWindow.Selection.WholeStory();  // Select the whole document to start with.
                 int RangeCounter = 0;
                 int CharacterCounter = 0;
+                // Zeroth pass through the stories to guess at the number of characters.
+                int CharacterCounter1 = 0;
+                foreach (WordRoot.Range rngStory in InputDoc.StoryRanges)
+                {
+                    WordRoot.Range tmpStory = rngStory;
+                    do
+                    {
+                        if (tmpStory.StoryType != WordRoot.WdStoryType.wdMainTextStory)
+                        {
+                            CharacterCounter1 += tmpStory.Text.Length;
+                        }
+                        tmpStory = tmpStory.NextStoryRange;  // trace through a link of substories
+                    }
+                    while (tmpStory != null);
+                }
+                boxProgress.Items.Add("we need to copy an estimated total of " + CharacterCounter1.ToString() + " characters");
                 //
-                //  First pass through the stories in the document.
+                //  First pass through the stories in the document and copy tnose that are not the main text.
                 //
                 foreach (WordRoot.Range rngStory in InputDoc.StoryRanges)
                 {
                     WordRoot.Range tmpStory = rngStory;
                     do
                     {
-                        //boxProgress.Items.Add("Processing story " + tmpStory.StoryType);
-                        Application.DoEvents();
-                        CleanWordText (wrdApp, rngStory); // clean the text
-                        CharacterCounter = InsertAfter(tmpStory, CharacterCounter, AddSpaceAfterRange.Checked,
-                            theStopwatch, theStopwatch2);
-                        if (tmpStory.StoryType == WordRoot.WdStoryType.wdTextFrameStory)
+                        if (tmpStory.StoryType != WordRoot.WdStoryType.wdMainTextStory)
                         {
-                            TextFrames.Add(tmpStory);  // Remember the story
+                            //  We don't need to copy the main story.
+                            //boxProgress.Items.Add("Processing story " + tmpStory.StoryType);
+                            Application.DoEvents();
+                            //CleanWordText (wrdApp, rngStory); // clean the text
+                            CharacterCounter = InsertAfter(tmpStory, CharacterCounter, AddSpaceAfterRange.Checked,
+                                theStopwatch, theStopwatch2);
+                            if (tmpStory.StoryType == WordRoot.WdStoryType.wdTextFrameStory)
+                            {
+                                TextFrames.Add(tmpStory);  // Remember the story
+                            }
+                            switch (rngStory.StoryType)
+                            {
+                                    // You can't delete the text from footnotes.
+                                case WordRoot.WdStoryType.wdFootnoteContinuationNoticeStory:
+                                case WordRoot.WdStoryType.wdFootnoteContinuationSeparatorStory:
+                                case WordRoot.WdStoryType.wdFootnoteSeparatorStory:
+                                case WordRoot.WdStoryType.wdFootnotesStory:
+                                case WordRoot.WdStoryType.wdEndnoteContinuationNoticeStory:
+                                case WordRoot.WdStoryType.wdEndnoteContinuationSeparatorStory:
+                                case WordRoot.WdStoryType.wdEndnoteSeparatorStory:
+                                case WordRoot.WdStoryType.wdEndnotesStory:
+                                    break;
+                                default:
+                            rngStory.Text = "";  // Clear the story
+                                    break;
+                            }
+                                    
                         }
                         tmpStory = tmpStory.NextStoryRange;  // trace through a link of substories
                     }
@@ -531,41 +559,46 @@ namespace Interlinear
                     WordRoot.Range tmpStory = rngStory;
                     do
                     {
-                        for (int i = 1; i <= tmpStory.ShapeRange.Count; i++)
+                        if (tmpStory.StoryType != WordRoot.WdStoryType.wdMainTextStory)
                         {
-                            /*
-                            * we've remembered the text frames and check on fonts and text
-                            * - if both agree with previously found frames, we skpt them.
-                            */
-                            if (tmpStory.ShapeRange[i].TextFrame.HasText != 0)
+                            //  We don't need to copy the main story.
+                            //boxProgress.Items.Add("Processing story " + tmpStory.StoryType);
+                            for (int i = 1; i <= tmpStory.ShapeRange.Count; i++)
                             {
-                                try
+                                /*
+                                * we've remembered the text frames and check on fonts and text
+                                * - if both agree with previously found frames, we skpt them.
+                                */
+                                if (tmpStory.ShapeRange[i].TextFrame.HasText != 0)
                                 {
-                                    WordRoot.Range theRange = tmpStory.ShapeRange[i].TextFrame.TextRange;
-                                    bool NotFound = true;  // Assume we didn't find it.
-                                    foreach (WordRoot.Range theOldRange in TextFrames)
+                                    try
                                     {
-
-                                        if (CompareRanges(theOldRange, theRange))
+                                        WordRoot.Range theRange = tmpStory.ShapeRange[i].TextFrame.TextRange;
+                                        bool NotFound = true;  // Assume we didn't find it.
+                                        foreach (WordRoot.Range theOldRange in TextFrames)
                                         {
-                                            // We've already copied this range
-                                            NotFound = false;
-                                            break;
+
+                                            if (CompareRanges(theOldRange, theRange))
+                                            {
+                                                // We've already copied this range
+                                                NotFound = false;
+                                                break;
+                                            }
                                         }
+                                        if (NotFound)
+                                        {
+                                            //CleanWordText(wrdApp, theRange); // clean the text
+                                            CharacterCounter = InsertAfter(theRange, CharacterCounter, AddSpaceAfterRange.Checked, theStopwatch, theStopwatch2);  // Add it to the document
+                                        }
+
+
                                     }
-                                    if (NotFound)
+                                    catch (Exception theException)
                                     {
-                                        CleanWordText(wrdApp, theRange); // clean the text
-                                        CharacterCounter = InsertAfter(theRange, CharacterCounter, AddSpaceAfterRange.Checked, theStopwatch, theStopwatch2);  // Add it to the document
+                                        // to help us debug errors
+                                        DialogResult theResult = MessageBox.Show(theException.Message + "\r Index is" + i.ToString(),
+                                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
-
-
-                                }
-                                catch (Exception theException)
-                                {
-                                    // to help us debug errors
-                                    DialogResult theResult = MessageBox.Show(theException.Message + "\r Index is" + i.ToString(),
-                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                         }
@@ -574,10 +607,7 @@ namespace Interlinear
                     }
                     while (tmpStory != null);
                 }
-
-                InputDoc.Close(false);  // and close the input document as we no longer need it.
-                InputDoc = null;  // and free up memory
-                OutputDoc.Save();  // and save the output document
+                SaveDocument(InputDoc, theOutputFile, " stories copied");
                 long ElapsedTime = theStopwatch2.ElapsedMilliseconds;
                 toolStripStatusLabel1.Text = "Copy complete.";
                 progressBar1.Value = 0;
@@ -586,48 +616,35 @@ namespace Interlinear
                 theStopwatch2 = null;
                 btnPauseResume.Enabled = false;
                 Application.DoEvents();
-                OutputDoc.Activate();  // Make sure the document is active.
-                foreach (WordRoot.Range theStory in OutputDoc.StoryRanges)
-                {
-                    if (theStory.StoryType == WordRoot.WdStoryType.wdMainTextStory)
-                    {
-                        theStory.Select(); // Select it
-
-                    }
-                    else
-                    {
-                        // we seem to be generating headers and footers that are also being loaded into the main story.
-                        theStory.Delete();  // delete it
-                    }
-                }
-                //wrdApp.Visible = true;
-                /*
+                InputDoc.Activate();  // Make sure the document is active.
+                InputDoc.StoryRanges[WordRoot.WdStoryType.wdMainTextStory].Select();  // Select the main story
+                 /*
                  * Clean up the document
                  */
-                OutputDoc.Select();
-                CleanWordText(wrdApp, wrdApp.Selection.Range);
-                OutputDoc.Save();
-                /*
-                 * Make sure we select the main story range of the output document
-                 */
-
+                CharacterCounter = CleanWordText(wrdApp, InputDoc, theOutputFile, CharacterCounter);
+                SaveDocument(InputDoc, theOutputFile, " document cleaned"); 
                 /*
                   * Now start splitting into a number of space-separated words, i.e. segmenting it.
                   */
-                Segment(wrdApp, OutputDoc.ActiveWindow.Selection, (int)WordsPerLine.Value, NumberOfWords);
-                OutputDoc.Save();
+                Segment(wrdApp, InputDoc, theOutputFile, (int)WordsPerLine.Value, NumberOfWords);
+                SaveDocument(InputDoc, theOutputFile, "", true);
                 boxProgress.Items.Add(Path.GetFileName(theOutputFile) + " saved in " + theStopwatch.Elapsed.ToString("hh\\:mm\\:ss\\.f"));
                 theOptions.RestoreApp(wrdApp); // Restore the settings
                 if (SendToExcel.Checked)
-                {
+                {                // process Excel if desired
+                    RowCounter = InitialiseExcel(excelApp, EvenRows, theInputFile);
+                    if (RowCounter == 0)
+                    {
+                        return;  // we couldn't open the file
+                    }
                     // We'll send the information to Excel
-                    FillExcel(excelApp, wrdApp, OutputDoc, RowCounter);
+                    FillExcel(excelApp, wrdApp, InputDoc, RowCounter);
                 }
                 else
                 {
-                    OutputDoc.Close();  // and close it
+                    InputDoc.Close();  // and close it
                 }
-                OutputDoc = null;  // and free up the memory
+                InputDoc = null;  // and free up the memory
 
                 wrdApp.ScreenUpdating = true; // turn on screen updating
                 btnPauseResume.Enabled = false;
@@ -640,6 +657,42 @@ namespace Interlinear
                 FinalCatch(Ex);
             }
             AddSpaceAfterRange.Enabled = true; // Enable us to change settings again.
+        }
+        private void SaveDocument (Document InputDocument, string theOutputFile, string theComment, bool LastCall = false)
+        {
+            /*
+             * Save the document.  If we have checked the debug, we save an intermediate version so we can see how we fare.
+             */
+            if (DebugCheckBox.Checked)
+            {
+                string theFilename = Path.Combine(Path.GetDirectoryName(theOutputFile), Path.GetFileNameWithoutExtension(theOutputFile) + theComment + Path.GetExtension(theOutputFile));
+                InputDoc.SaveAs2(theFilename, WordRoot.WdSaveFormat.wdFormatXMLDocument);
+                boxProgress.Items.Add(Path.GetFileName(theFilename) + " saved");
+                //InputDoc.SaveAs2(theOutputFile, WordRoot.WdSaveFormat.wdFormatXMLDocument);
+                //toolStripStatusLabel1.Text = "File saved. Sleeping to let Word catch up...";
+                //SleepForABit(15);
+            }
+            else
+            {
+                if (LastCall)
+                {
+                    InputDoc.Save();  // and save the output document if it is the last call in the run
+                }
+            }
+
+        }
+        private void SleepForABit(int theDelay)
+        {
+            progressBar1.Maximum = theDelay*100;
+            for (int Counter = 0; Counter < progressBar1.Maximum; Counter++)
+            {
+
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(10); //Sleep 10 seconds to let Word catch up
+            }
+            toolStripStatusLabel1.Text = "Continuing...";
+            progressBar1.Value = 0;
+
         }
          private bool CompareRanges(WordRoot.Range RangeOne, WordRoot.Range RangeTwo)
         {
@@ -657,8 +710,8 @@ namespace Interlinear
              */
             int tmpCounter = CharacterCounter;
             int SaveInterval = SaveOutputInterval * 1000;
-            OutputDoc.ActiveWindow.View.Type = WordRoot.WdViewType.wdPrintView; // we need this to move to the main story.
-            OutputDoc.ActiveWindow.ActivePane.View.SeekView = WordRoot.WdSeekView.wdSeekMainDocument; // Go to the main page
+            InputDoc.ActiveWindow.View.Type = WordRoot.WdViewType.wdPrintView; // we need this to move to the main story.
+            InputDoc.ActiveWindow.ActivePane.View.SeekView = WordRoot.WdSeekView.wdSeekMainDocument; // Go to the main page
             Stopwatch theStopwatch3 = new Stopwatch();
             Stopwatch theStopwatch4 = new Stopwatch();
             theStopwatch4.Start();
@@ -670,12 +723,12 @@ namespace Interlinear
                     theStopwatch3.Restart();
                     int DeltaChars = tmpString.Length;
                     CharacterCounter += DeltaChars;
-                    OutputDoc.ActiveWindow.Selection.Collapse(WordRoot.WdCollapseDirection.wdCollapseEnd);  // Make sure it doesn't get overwritten when we paste.
-                    OutputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, false);  // Make sure we are at the end of the story.
-                    OutputDoc.ActiveWindow.Selection.FormattedText = theParagraph.Range.FormattedText; // Copy the text in a formatted form
+                    InputDoc.ActiveWindow.Selection.Collapse(WordRoot.WdCollapseDirection.wdCollapseEnd);  // Make sure it doesn't get overwritten when we paste.
+                    InputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, false);  // Make sure we are at the end of the story.
+                    InputDoc.ActiveWindow.Selection.FormattedText = theParagraph.Range.FormattedText; // Copy the text in a formatted form
                     try 
                     {
-                        OutputDoc.UndoClear();  // Clear the undo buffer lest we fill it.
+                        InputDoc.UndoClear();  // Clear the undo buffer lest we fill it.
                     }
                     catch (Exception Ex)
                     {
@@ -697,7 +750,7 @@ namespace Interlinear
                     if (SaveInterval > 0 && theStopwatch4.ElapsedMilliseconds > SaveInterval)
                     {
                         // Save the Word document
-                        OutputDoc.Save();
+                        InputDoc.Save();
                         theStopwatch4.Restart();
                     }
                     if (rate1 < (float)CopyPauseThreshold)
@@ -782,7 +835,7 @@ namespace Interlinear
                         theNodeList = theRoot.SelectNodes(@"(/*/*/*/*/w:r/w:t | /*/*/*/*/w:r/w:sym | /*/*/*/*/w:r/w:tab | /*/*/*/*/w:r/w:br)", nsManager);
                         foreach (XmlNode theData in theNodeList)
                         {
-                            OutputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, false);  // Make sure we are at the end of the story.
+                            InputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, false);  // Make sure we are at the end of the story.
                             // we look the range structures
                             switch (theData.Name)
                             {
@@ -791,24 +844,24 @@ namespace Interlinear
                                     tmpString = theData.InnerText;
                                     theFont = theRange.Font;
                                     CharacterCounter += tmpString.Length;
-                                    OutputDoc.ActiveWindow.Selection.InsertAfter(tmpString);
-                                    OutputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, true);  // Make sure we are at the end of the story.
-                                    OutputDoc.ActiveWindow.Selection.Range.Font = theFont; // Set the font of the text we have just inserted.
+                                    InputDoc.ActiveWindow.Selection.InsertAfter(tmpString);
+                                    InputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, true);  // Make sure we are at the end of the story.
+                                    InputDoc.ActiveWindow.Selection.Range.Font = theFont; // Set the font of the text we have just inserted.
                                     break;
                                 case "w:sym":
                                     // We have a symbol so we shall insert it
                                     string FontName = theData.Attributes["w:font"].Value;
                                     string theSymbolValue = theData.Attributes["w:char"].Value;
                                     int theChar = Convert.ToInt16(theSymbolValue, 16);  // get the character number
-                                    OutputDoc.ActiveWindow.Selection.InsertSymbol(theChar, FontName, true);  // insert the symbol
+                                    InputDoc.ActiveWindow.Selection.InsertSymbol(theChar, FontName, true);  // insert the symbol
                                     CharacterCounter++;// increment it
                                     break;
                                 case "w:tab":
-                                    OutputDoc.ActiveWindow.Selection.InsertAfter("\t");  // Insert a tab
+                                    InputDoc.ActiveWindow.Selection.InsertAfter("\t");  // Insert a tab
                                     CharacterCounter++;
                                     break;
                                 case "w:br":
-                                    OutputDoc.ActiveWindow.Selection.InsertAfter("\n");  // Insert a tab
+                                    InputDoc.ActiveWindow.Selection.InsertAfter("\n");  // Insert a tab
                                     CharacterCounter++;
                                     break;
 
@@ -821,25 +874,25 @@ namespace Interlinear
                 if (!Inserted)
                 {
                     // We have normal text or are in a table
-                    OutputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, false);  // Make sure we are at the end of the story.
+                    InputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, false);  // Make sure we are at the end of the story.
                     CharacterCounter += tmpString.Length;
-                    OutputDoc.ActiveWindow.Selection.InsertAfter(tmpString);
-                    OutputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, true);  // Make sure we are at the end of the story.
-                    OutputDoc.ActiveWindow.Selection.Range.Font = theFont; // Set the font of the text we have just inserted.
+                    InputDoc.ActiveWindow.Selection.InsertAfter(tmpString);
+                    InputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, true);  // Make sure we are at the end of the story.
+                    InputDoc.ActiveWindow.Selection.Range.Font = theFont; // Set the font of the text we have just inserted.
 
 
                 }
                 //boxProgress.Items.Add("Copied text after " + theStopwatch4.ElapsedTicks);
                 if (AddSpace || trailingSpace)
                 {
-                    OutputDoc.ActiveWindow.Selection.InsertAfter(theSpace);
-                    //OutputDoc.ActiveWindow.Selection.Range.Font = theRange.Font; // Set the font of the text we have just inserted.
+                    InputDoc.ActiveWindow.Selection.InsertAfter(theSpace);
+                    //InputDoc.ActiveWindow.Selection.Range.Font = theRange.Font; // Set the font of the text we have just inserted.
 
                 }
 
 
 
-                //OutputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, 1);  // Move the selection to the end.
+                //InputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, 1);  // Move the selection to the end.
                 //boxProgress.Items.Add("Inserted " + theRange.Text + " " + theStopwatch3.Elapsed);
                 //theStopwatch4.Stop();
                 //theStopwatch4 = null;
@@ -893,7 +946,7 @@ namespace Interlinear
 
         }
 
-        private void CleanWordText(WordApp theApp, WordRoot.Range theRange)
+        private int CleanWordText(WordApp theApp, Document theDoc, string theOutputFile, int CharacterCounter)
         {
             // Clean up the various stories.
             try
@@ -904,42 +957,15 @@ namespace Interlinear
                 boxProgress.Items.Add("Starting to clean the document...");
                 progressBar1.Value = 0;
                 //theRange.Select();
+                Stopwatch theStopWatch2 = new Stopwatch();
                 //theApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);
-                /*
-                 * Remove all shapes.  We seem to need several passes to remove them all for some reason.
-                 * 
-                 */
-                while (RemoveShapes(theApp, theRange.Document) > 0) ;
-                /*
-                 * Remove all frames
-                 */
-                System.Diagnostics.Stopwatch theStopWatch2 = new System.Diagnostics.Stopwatch();
-                theStopWatch2.Start();
-                int Counter = 0;
-                foreach (WordRoot.Frame theFrame in theRange.Frames)
-                {
-                    theFrame.Select();
-                    theFrame.TextWrap = false; // Make it no longer wrap text
-                    theFrame.Borders.OutsideLineStyle = WordRoot.WdLineStyle.wdLineStyleNone;
-                    theFrame.Delete(); // and delete the frame
-                    Counter++;
-                    if (Counter % 100 == 0)
-                    {
-                        boxProgress.Items.Add("Deleted " + Counter.ToString() + " frames");
-                        Application.DoEvents();
-                    }
-
-
-                }
-
-                boxProgress.Items.Add("Removed " + Counter.ToString() + " frames in " + (theStopWatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
-                Application.DoEvents();
-                /*
+                   /*
                    * Convert tables to text
                    */
                 theStopWatch2.Restart();
-                Counter = 0;
-                foreach (WordRoot.Table theTable in theRange.Tables)
+                int Counter = 0;
+                // Remove the tables
+                foreach (WordRoot.Table theTable in theDoc.Tables)
                 {
 
                     theTable.Rows.ConvertToText(WordRoot.WdTableFieldSeparator.wdSeparateByTabs, true);
@@ -954,29 +980,98 @@ namespace Interlinear
                 boxProgress.Items.Add("Converted " + Counter.ToString() + " tables in " + (theStopWatch2.ElapsedMilliseconds / 1000.0).ToString()
                     + " seconds");
                 Application.DoEvents();
+                /*
+                 * Remove all shapes and get any text
+                 */
+                CharacterCounter = RemoveShapes(theApp, theDoc, CharacterCounter);
 
+               /*
+                 * Remove all frames
+                 */
+                theStopWatch2.Restart();
+                Counter = 0;
+                foreach (WordRoot.Frame theFrame in theDoc.Frames)
+                {
+                    try
+                    {
+                    theFrame.TextWrap = false; // Make it no longer wrap text
+                    theFrame.Borders.OutsideLineStyle = WordRoot.WdLineStyle.wdLineStyleNone;
+                    theFrame.Delete(); // and delete the frame
+                    Counter++;
+                    }
+                    catch(Exception ex)
+                    {
+                        boxProgress.Items.Add("Could not remove frame " + ex.Message);
+                    }
+                    if (Counter % 100 == 0)
+                    {
+                        boxProgress.Items.Add("Deleted " + Counter.ToString() + " frames");
+                        Application.DoEvents();
+                    }
+                }
+                theDoc.UndoClear(); ;// clear the undo buffer
+                boxProgress.Items.Add("Removed " + Counter.ToString() + " frames in " + (theStopWatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                /*
+                 * We have copied the footnote text, so we now remove the footnotes
+                 */
+                Counter = 0;
+                theStopWatch2.Restart();
+                foreach (WordRoot.Footnote theFootnote in theDoc.Footnotes)
+                {
+                    theFootnote.Delete(); // Delete it
+                    Counter++;
+                }
+                theDoc.UndoClear(); ;// clear the undo buffer
+                boxProgress.Items.Add("Removed " + Counter.ToString() + " footnotes in " + (theStopWatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                /*
+                 * We have copied the endnote text, so we now remove the endnotes
+                 */
+                Counter = 0;
+                theStopWatch2.Restart();
+                foreach (WordRoot.Endnote theEndnote in theDoc.Endnotes)
+                {
+                    theEndnote.Delete(); // Delete it
+                    Counter++;
+                theDoc.UndoClear(); ;// clear the undo buffer
+                }
+                theDoc.UndoClear(); ;// clear the undo buffer
+                boxProgress.Items.Add("Removed " + Counter.ToString() + " endnotes in " + (theStopWatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                Application.DoEvents();
+                // Remove field codes and replace them with their text equivalents
+                theStopWatch2.Restart();
+                Counter = 0;
+                foreach(WordRoot.Field theField in theDoc.Fields)
+                {
+                    string theValue = theField.Result.Text;
+                    theField.Select();
+                    theApp.Selection.InsertAfter(theValue);
+                    theField.Delete();
+                    Counter++;
+                }
+                theDoc.UndoClear(); ;// clear the undo buffer
+                boxProgress.Items.Add("Removed " + Counter.ToString() + " field codes in " + (theStopWatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                Application.DoEvents();
                 // Go to the beginning
                 theApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);
                 //  Make one column
                 OneColumn(theApp);
                 // Clear all tabs, paragraph markers, section breaks, manual line feeds, column breaks and manual page breaks.
                 // ^m also deals with section breaks when wildcards are on.
-
-                GlobalReplace(theApp.Selection, "[^3^4^9^11^13^14^12^m]", theSpace, false, true);
+                SaveDocument(InputDoc, theOutputFile, " partially cleaned", false);
+                GlobalReplace(theApp.Selection, "[^3^4^9^11^13^14^12^m]", theSpace, false, true, " Removing section breaks etc.");
                 // And this character found in some documents:  (F020) or a symbol space.
                 GlobalReplace(theApp.Selection, "", theSpace, false, false);
-                // Clear all multiple spaces or symbol spaces
-                GlobalReplace(theApp.Selection, "[ ]{2}", theSpace, true, true);
+                // Clear all multiple spaces
+                GlobalReplace(theApp.Selection, "[ ]{2,}", theSpace, false, true, " Remove multiple spaces");
 
                 /*
               * Now left align everything
               */
-                foreach (WordRoot.Paragraph theParagraph in theRange.Paragraphs)
+                foreach (WordRoot.Paragraph theParagraph in theDoc.Paragraphs)
                 {
                     theParagraph.Format.Alignment = WordRoot.WdParagraphAlignment.wdAlignParagraphLeft;
                 }
-
-
+ 
 
 
                 boxProgress.Items.Add("Cleaned the text in " + (theStopWatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
@@ -988,6 +1083,7 @@ namespace Interlinear
             {
                 FinalCatch(Ex);
             }
+            return CharacterCounter;
         }
         private void QuitWord(bool Save)
         {
@@ -1000,11 +1096,6 @@ namespace Interlinear
                     {
                         InputDoc.Close(false);
                         InputDoc = null;
-                    }
-                    if (OutputDoc != null)
-                    {
-                        OutputDoc.Close(Save);
-                        OutputDoc = null;
                     }
                     // Shut down Word
                     if (WordWasRunning)
@@ -1084,7 +1175,8 @@ namespace Interlinear
             QuitWord(!WasPaused);  // Save the output if we did'nt come here from a paused state
             this.Close();  // and close the application
         }
-        private void GlobalReplace(WordRoot.Selection theSelection, string SearchChars, string ReplacementChars, bool Repeat, bool Wildcards)
+        private void GlobalReplace(WordRoot.Selection theSelection, string SearchChars, string ReplacementChars, bool Repeat, bool Wildcards,
+            string theComment = "")
         {
             // Do a global replacement
             System.Diagnostics.Stopwatch theStopwatch = new System.Diagnostics.Stopwatch();
@@ -1094,9 +1186,16 @@ namespace Interlinear
             theSelection.Find.Replacement.Text = ReplacementChars;
             theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindContinue;
             theSelection.Find.MatchWildcards = Wildcards;
+            theSelection.Find.Forward = true;
+            theSelection.Find.Format = false;
+            theSelection.Find.MatchCase = false;
+            theSelection.Find.MatchWholeWord = false;
+            theSelection.Find.MatchDiacritics = false;
+            theSelection.Document.UndoClear(); // Clear the undo buffer
             //
             // If we want to keep searching, we'll do so
             //
+            boxProgress.Items.Add("Starting global replacement of " + SearchChars + " with [" + ReplacementChars + "] " + theComment);
             while (Found)
             {
                 Found = theSelection.Find.Execute(missing, false, false, missing, false, false, missing, missing, missing, missing, WordRoot.WdReplace.wdReplaceAll,
@@ -1105,13 +1204,15 @@ namespace Interlinear
                 Application.DoEvents();
             }
             theSelection.Find.MatchWildcards = false;  // the default
-            boxProgress.Items.Add("Globally replaced " + SearchChars +  " with " + ReplacementChars + " in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+            boxProgress.Items.Add("Globally replaced " +SearchChars + " by [ " + ReplacementChars + "] in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
             Application.DoEvents();
 
 
         }
-        private void Segment(WordApp theApp, WordRoot.Selection theSelection, int WordCount, int NumberofWords)
+        private void Segment(WordApp theApp, Document theDoc, string theOutputFile, int WordCount, int NumberofWords)
         {
+            theDoc.StoryRanges[WordRoot.WdStoryType.wdMainTextStory].Select();
+            WordRoot.Selection theSelection = theApp.Selection;
             /*
             * Now segment into the number of words specified by the WordCount paramenter
             */
@@ -1119,6 +1220,8 @@ namespace Interlinear
             {
                 boxProgress.Items.Add("Starting segmentation...");
                 Stopwatch theStopwatch = new Stopwatch();
+                Stopwatch theStopwatch_overall = new Stopwatch();
+                theStopwatch_overall.Start();
                 theStopwatch.Start();
                  /*
                         * Use wildcards to add the paragraph markers
@@ -1137,13 +1240,19 @@ namespace Interlinear
                 theSelection.Find.MatchAllWordForms = false;
                 theSelection.Find.MatchSoundsLike = false;
 
-                const string TrailingSpaceParagraph = @"\1^p";
-                const string WildCards = "([ ])"; // space or symbol space
-                const string EnclosedSpace = "([ ])([!^13])";  // space followed by anytbing that is not a paragraph.
-                const string NoTrailingSpace = "([! ])[^13]";  // paragraph without a trailing space.
-                const string SpaceParagraphOtherItem = @"\1^p\2"; // space followed by paragraph followed by another item.
-                const string AddTrailingSpace = @"\1 ^p"; // add a trailing space to a paragraph that didn't have one.
+                const string theParagraph = @"^p";
+                const string TheSpace = " "; // space
+                const string EnclosedSpace = "([ ])([!^13])";  // space followed by anytbing that is not a paragraph.
+                const string ParagraphOtherItem = @"^p\2"; // space followed by paragraph followed by another item.
+                //const string LeadingEquals = @"^p="; // i.e. and equals sign after a paragraph
+                //const string LeadingSingleQuoteEquals = @"^p'=";
                 theSelection.Find.Text = "";  // Clear the find string
+                /*
+                * And make sure we don't have two consequitive paragraphs
+                */
+                GlobalReplace(theSelection, "[^13]{2,}", "^p", false, true, " remove consequitive paragraphs.");
+                /*
+  
                 /*
                 * Build up the search string
                  * 
@@ -1151,30 +1260,33 @@ namespace Interlinear
                  * in two stages as otherwise the wildcard expression gets too complicated.
                 */
                 int MaxWordPerLine = 1;
-                theSelection.Find.Text = WildCards;  // We shall only handle one word at a time.
+                theSelection.Find.Text = TheSpace;  // We shall only handle one word at a time.
 
 
                 // Now do the first replacement
-                boxProgress.Items.Add("Starting segmentation first pass - make each word a paragraph");
+                boxProgress.Items.Add("Starting segmentation first pass");
                 //wrdApp.Visible = true;
                 Application.DoEvents();
                 theApp.ActiveDocument.UndoClear();  // Clear the undo stack
                 //theApp.ScreenUpdating = true;
-                GlobalReplace(theSelection, WildCards, TrailingSpaceParagraph, false, true);
+                GlobalReplace(theSelection, TheSpace, theParagraph, false, false, " Make each word a paragraph");
                 boxProgress.Items.Add("First pass complete in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
                  progressBar1.Value += 1;
                 Application.DoEvents();
-                OutputDoc.Save();
+                InputDoc.Save();
 
                 //  We now remove any spaces we failed to find before.
                 theStopwatch.Restart();
-                GlobalReplace(theSelection, EnclosedSpace, SpaceParagraphOtherItem, false, true);
+                GlobalReplace(theSelection, EnclosedSpace, ParagraphOtherItem, false, true, " removing any other enclosed spaces we didn't replace");
                 boxProgress.Items.Add("Second pass complete in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
                 Application.DoEvents();
-                theStopwatch.Restart();
-                GlobalReplace(theSelection, NoTrailingSpace, AddTrailingSpace, false, true);
-                boxProgress.Items.Add("Third pass complete in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                SaveDocument(InputDoc, theOutputFile, " one word per paragraph");
                 Application.DoEvents();
+                /*
+                 * Trim any trailing spaces at the end of lines
+                 */
+                 GlobalReplace(theSelection, "[ ]{1,}[^13]", "^p", false, true, " Remove trailing spaces at the end of lines");
+  
                 /*
                  * If the WordCount > 2, we assume 4, 6, 8 etc.
                  */
@@ -1187,59 +1299,67 @@ namespace Interlinear
                     // Go to the end
                     theSelection.EndKey(WordRoot.WdUnits.wdStory);
                     string SearchString = "";
-                    string ReplacementString = "";
+                    string ReplacementString = @"'"; // We start every line with a leading single quote to tell Excel it is text.
+                    // Build the search string.
                     for (int i = 1; i <= WordCount / MaxWordPerLine; i++)
                     {
                         SearchString += Paragraphs; // build up the search string
-                        ReplacementString += @"\" + i.ToString();
+                        ReplacementString += @"\" + i.ToString() + theSpace;  // and the replacement string
                         /*
                         * Add trailing paragraphs to make sure we have Wordperline/2 paragraphs at the end.
                         */
                         theSelection.TypeParagraph();
 
                     }
-                    ReplacementString += @"^p";  // Add a paragraph marker.
+                    ReplacementString += @"^p";  // Add a paragraph marker at the end
                     // Go to the beginning
                     theSelection.HomeKey(WordRoot.WdUnits.wdStory);
-
+ 
                     theSelection.Find.Replacement.Text += "^p"; // ending with one paragraph
                     // and do the second paragraph
-                    boxProgress.Items.Add("Starting segmentation fourth pass - actual segmentation");
-                    
-                    Stopwatch theStopwatch2 = new Stopwatch();
-                    theStopwatch2.Start();
+                    boxProgress.Items.Add("Starting segmentation third pass - actual segmentation");                   
+                    theStopwatch.Restart();
                     theApp.ActiveDocument.UndoClear();  // Clear the undo stack
                     GlobalReplace(theSelection, SearchString, ReplacementString, false, true);
-                    boxProgress.Items.Add("Fourth pass complete in " + ((float)theStopwatch2.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds");
+                    boxProgress.Items.Add("Third pass complete in " + ((float)theStopwatch.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds");
                     Application.DoEvents();
-                    theStopwatch2.Stop();
-                    theStopwatch2 = null;
                     progressBar1.Value += 1;
+
                     Application.DoEvents();
+                    /*
+                    * Excel treats all lines starting with an = sign as a formula, so we shall, as a workaround
+                    * add a single quote before such lines.  In future, we analyse formula and change the text accordingly,
+                    * but that will require more programming
+                    */
+                    //theStopwatch.Restart();
+                    //GlobalReplace(theSelection, LeadingEquals, LeadingSingleQuoteEquals, false, false, " Replace leading equals sings with quote equals");
+                    //boxProgress.Items.Add("Fifth pass complete in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                    //SaveDocument(InputDoc, theOutputFile, " one paragraph per word");
+                    //Application.DoEvents();
+                    //progressBar1.Value += 1;
 
 
                 }
 
                 theSelection.Find.MatchWildcards = false;  // Don't leave wildcards hanging
-                /*
-                  * Now remove the trailing spaces
-                  */
-
-                GlobalReplace(theSelection, " ^p", "^p", false, false);
-                /*
+             /*
                  * And make sure we don't have two consequitive paragraphs
                  */
-                GlobalReplace(theSelection, "^p^p", "^p", false, false);
+                GlobalReplace(theSelection, "[^13]{2,}", "^p", false, true, " Remove consequitive paragraphs");
+                /*
+                 * Trim any trailing spaces at the end of lines
+                 */
+                GlobalReplace(theSelection, "[ ]{1,}[^13]", "^p", false, true, " Remove trailing spaces at the end of lines");
                 /*
                  * Delete the double paragraphs at the end
                  */
-                GlobalReplace(theSelection, "^p^p", "", true, false);
+                GlobalReplace(theSelection, "^p^p", "", false, false);
 
 
 
                 theApp.ScreenUpdating = true;  // turn on updating
                 progressBar1.Value = progressBar1.Maximum;  // We've finished!
-                long ElapsedTicks = theStopwatch.ElapsedTicks;
+                long ElapsedTicks = theStopwatch_overall.ElapsedTicks;
                 boxProgress.Items.Add("Segmentation complete in " + ((float)ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds");
                 int LineCounter = NumberofWords / WordCount;
                 boxProgress.Items.Add(((float)LineCounter * Stopwatch.Frequency / ElapsedTicks).ToString("f2") + " lines per second");
@@ -1269,7 +1389,8 @@ namespace Interlinear
             theApp.Selection.PageSetup.TextColumns.SetCount(1); // one column
             theApp.Selection.PageSetup.TextColumns.EvenlySpaced = -1;  // Evenly spaced
             theApp.Selection.PageSetup.TextColumns.LineBetween = 0;  // no lines between
-            theApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // Go to beginnng
+            theApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);  // Go to beginning
+            theApp.Selection.Document.UndoClear(); // clear the undo buffer
         }
         private void WordsPerLine_ValueChanged(object sender, EventArgs e)
         {
@@ -1288,7 +1409,7 @@ namespace Interlinear
             {
                 WordsPerLine.Increment = 1;
             }
-
+            
         }
 
         private int InitialiseExcel(ExcelApp excelApp, bool EvenRows, string FileName)
@@ -1298,6 +1419,9 @@ namespace Interlinear
              */
 
             bool hasValue = false;
+            excelApp.Visible = false;
+            Stopwatch theStopwatch = new Stopwatch();
+            theStopwatch.Start();
             boxProgress.Items.Add("Clearing worksheet...");
             try
             {
@@ -1309,6 +1433,7 @@ namespace Interlinear
                     try
                     {
                         theWorkbook = excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
+                        excelApp.Visible = false;  // make sure it isn't visible.
                     }
                     catch (Exception e)
                     {
@@ -1322,6 +1447,7 @@ namespace Interlinear
                 else
                 {
                     theWorkbook = excelApp.Workbooks.Add();  // add it
+                    excelApp.Visible = false;  // Make sure it stays invisible
                     excelApp.ActiveWindow.Zoom = 100; // Don't zoom it.
                     theWorkbook.SaveAs(txtExcelOutput.Text);  // save it
                 }
@@ -1357,6 +1483,9 @@ namespace Interlinear
 
 
                 } while (hasValue);
+                boxProgress.Items.Add("Worksheet cleared in " + ((float)theStopwatch.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds");
+                theStopwatch.Stop();
+                theStopwatch = null;
                 return theRow;
             }
             catch (Exception Ex)
@@ -1364,9 +1493,8 @@ namespace Interlinear
                 FinalCatch(Ex);
                 return -1;
             }
-
         }
-        private void FillExcel(ExcelApp excelApp, WordApp wrdApp, Document theDoc, int RowCounter)
+         private void FillExcel(ExcelApp excelApp, WordApp wrdApp, Document theDoc, int RowCounter)
         {
             /*
              * Here is where we fill the Excel spreadsheet
@@ -1433,25 +1561,30 @@ namespace Interlinear
                     {
                         try
                         {
+  
                             theWorkSheet.Paste(theWorkSheet.Range[theCellRef]);  // Paste to it.
+                            theWorkSheet.Range[theCellRef].NumberFormat = "@";  // and make it have a text format so lines starting with = don't error.
+                            //theWorkSheet.Range[theCellRef].FormulaR1C1 = theParagraph.Range.Text; // setting the formula should make the cell visioble
                             Clipboard.Clear();  // clear the clipboard
+                            
                             Failure = false;
 
                         }
                         catch (Exception e)
                         {
                             boxProgress.Items.Add("Paste error " + e.Message + " in row " + theRow.ToString() + ". Retrying...");
-                            Thread.Sleep(5);  // wait 10 milliseconds
+                            Thread.Sleep(10*(ErrorCounter+1));  // wait 20 milliseconds
                             ErrorCounter++;
                             if (ErrorCounter >= 5)
                             {
                                 boxProgress.Items.Add("*****  Failed to paste " + theRow.ToString() + " " + theParagraph.Range.ToString());
                             }
-                            Application.DoEvents();
                         }
                     }
                     //theWorkSheet.Range[theCellRef].Font.Size = 11;  // But make it just 11 
+                    //theWorkSheet.Range[theCellRef].Value = theParagraph.Range.FormattedText; // copy the text - this loses the formatting.
                     theWorkSheet.Range[theCellRef].Interior.Color = CellColour[RowCounter - 1];
+                    Application.DoEvents();
                     theRow += 2;
                     if (Counter % 10 == 0)
                     {
@@ -1504,13 +1637,13 @@ namespace Interlinear
                     if (theButton.Parent.Text == "Legacy")
                     {
                         EvenRows = false;
-                        theDoc = wrdApp.Documents.OpenNoRepairDialog(txtLegacyOutput.Text, true);
+                        theDoc = wrdApp.Documents.OpenNoRepairDialog(txtLegacyOutput.Text, true, true);
                         FileName = txtLegacyOutput.Text;
                     }
                     else
                     {
                         EvenRows = true;
-                        theDoc = wrdApp.Documents.OpenNoRepairDialog(txtUnicodeOutput.Text, true);
+                        theDoc = wrdApp.Documents.OpenNoRepairDialog(txtUnicodeOutput.Text, true, true);
                         FileName = txtUnicodeInput.Text;
                     }
 
@@ -1619,87 +1752,154 @@ namespace Interlinear
 
 
 
-        private int RemoveShapes(WordApp theApp, Document theDoc)
+        private int RemoveShapes(WordApp theApp, Document theDoc, int CharacterCounter)
         {
             try
             {
                 Stopwatch theStopwatch2 = new Stopwatch();
                 theStopwatch2.Start();
-                int TotalCounter = 0;
-                int Counter = 0;
-                int TableCounter = 0;
-                // Remove shapes
-                foreach (WordRoot.Shape theShape in theDoc.Shapes)
+                WordRoot.Range theRange = theDoc.StoryRanges[WordRoot.WdStoryType.wdMainTextStory];
+                theRange.Select();
+                theApp.Selection.EndKey(WordRoot.WdUnits.wdStory, false); // Move to the end
+                // Remove shapes going through the document.
+                while (theDoc.Shapes.Count + theDoc.InlineShapes.Count > 0) // keep looping till we have deleted all the shapes
                 {
-
-                    if (theShape.Type == Office.MsoShapeType.msoTextBox || theShape.Type == Office.MsoShapeType.msoGroup)
+                    int Counter = 0;
+                    int TableCounter = 0;
+                    int TextCounter = 0;
+                    foreach (WordRoot.Shape theShape in theDoc.Shapes)
                     {
-                        if (theShape.Type == Office.MsoShapeType.msoTextBox)
+                        switch (theShape.Type)
                         {
-                            theShape.ConvertToInlineShape();
-                            theShape.Delete();
+                            case Office.MsoShapeType.msoAutoShape:
+                            case Office.MsoShapeType.msoCallout:
+                            case Office.MsoShapeType.msoCanvas:
+                            case Office.MsoShapeType.msoChart:
+                            case Office.MsoShapeType.msoComment:
+                            case Office.MsoShapeType.msoContentApp:
+                            case Office.MsoShapeType.msoDiagram:
+                            case Office.MsoShapeType.msoEmbeddedOLEObject:
+                            case Office.MsoShapeType.msoFormControl:
+                            case Office.MsoShapeType.msoFreeform:
+                            case Office.MsoShapeType.msoInk:
+                            case Office.MsoShapeType.msoInkComment:
+                            case Office.MsoShapeType.msoShapeTypeMixed:
+                            case Office.MsoShapeType.msoSmartArt:
+                                // if they aren't implemented, forget it.
+                                try
+                                {
+                                    if (theShape.TextFrame.HasText == 1)
+                                    {
+                                        theRange.Collapse(WordRoot.WdCollapseDirection.wdCollapseEnd);
+                                        theRange.FormattedText = theShape.TextFrame.TextRange.FormattedText;  // add formatted text
+                                        theRange.FormattedText.InsertParagraphAfter(); // make sure we end with a paragraph
+                                        TextCounter += theShape.TextFrame.TextRange.FormattedText.Text.Length;
+                                        if (DebugCheckBox.Checked)
+                                        {
+                                            boxProgress.Items.Add("Found" + theShape.TextFrame.TextRange.FormattedText);
+                                        }
+                                    }
+
+                                }
+                                catch
+                                {
+
+                                }
+                                try
+                                {
+                                    if (theShape.TextFrame2.HasText == Office.MsoTriState.msoTrue)
+                                    {
+                                        theRange.Collapse(WordRoot.WdCollapseDirection.wdCollapseEnd);
+                                        theRange.InsertAfter(theShape.TextFrame2.TextRange.Text); // It looks like TextFrame2 doesn't have formatted text
+                                        theRange.InsertParagraphAfter();
+                                        TextCounter += theShape.TextFrame2.TextRange.Text.Length;
+                                        if (DebugCheckBox.Checked)
+                                        {
+                                            boxProgress.Items.Add("Found" + theShape.TextFrame2.TextRange.Text);
+                                        }
+
+                                    }
+                                }
+                                catch
+                                {
+
+                                }
+                                //theShape.Select();
+                                theShape.Delete();
+                                break;
+                            case Office.MsoShapeType.msoLine:
+                            case Office.MsoShapeType.msoLinkedOLEObject:
+                            case Office.MsoShapeType.msoLinkedPicture:
+                            case Office.MsoShapeType.msoMedia:
+                            case Office.MsoShapeType.msoOLEControlObject:
+                            case Office.MsoShapeType.msoPicture:
+                            case Office.MsoShapeType.msoPlaceholder:
+                            case Office.MsoShapeType.msoScriptAnchor:
+                            case Office.MsoShapeType.msoSlicer:
+                            case Office.MsoShapeType.msoTextEffect:
+                            case Office.MsoShapeType.msoWebVideo:
+                                theShape.Delete();
+                                break;
+                            case Office.MsoShapeType.msoTable:
+                                WordRoot.Table theTable = (WordRoot.Table)theShape;
+                                theTable.Rows.ConvertToText(WordRoot.WdTableFieldSeparator.wdSeparateByTabs, true);
+                                TableCounter++;
+                                if (Counter % 100 == 0)
+                                {
+                                    boxProgress.Items.Add("Converted " + TableCounter.ToString() + " tables");
+                                    Application.DoEvents();
+                                }
+                                break;
+                            case Office.MsoShapeType.msoTextBox:
+                                theShape.ConvertToInlineShape();
+                                theShape.Delete();
+                                break;
+                            case Office.MsoShapeType.msoGroup:
+                                //theShape.Select();
+                                theApp.Selection.Delete();
+                                break;
+                            default:
+                                theShape.Delete();
+                                break;
+
                         }
-                        else
-                        {
-                            theShape.Select();
-                            theApp.Selection.Delete();
-                        }
+
+
+
+                    }
+
+                    boxProgress.Items.Add("Removed or converted  " + (TableCounter + Counter).ToString() + " shapes in " + (theStopwatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                    boxProgress.Items.Add("and copied " + TextCounter.ToString() + " characters");
+                    Application.DoEvents();
+                    CharacterCounter += TextCounter;
+                    /*
+                    * Remove all inline shapes
+                    */
+                    theStopwatch2.Restart();
+                    Counter = 0;
+                    foreach (WordRoot.InlineShape theShape in theDoc.InlineShapes)
+                    {
+                        theShape.Delete(); // and delete the frame
                         Counter++;
                         if (Counter % 100 == 0)
                         {
-                            boxProgress.Items.Add("Deleted " + Counter.ToString() + " shapes");
+                            boxProgress.Items.Add("Deleted " + Counter.ToString() + " inline shapes");
                             Application.DoEvents();
                         }
                     }
-                    else
-                    {
-                        if (theShape.Type == Office.MsoShapeType.msoTable)
-                        // Convert the table to text
-                        {
-                            WordRoot.Table theTable = (WordRoot.Table)theShape;
-                            theTable.Rows.ConvertToText(WordRoot.WdTableFieldSeparator.wdSeparateByTabs, true);
-                            TableCounter++;
-                            if (Counter % 100 == 0)
-                            {
-                                boxProgress.Items.Add("Converted " + TableCounter.ToString() + " tables");
-                                Application.DoEvents();
-                            }
 
-                        }
-                    }
+                     boxProgress.Items.Add("Removed " + Counter.ToString() + " inline shapes in " + (theStopwatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+
+                    Application.DoEvents();
 
                 }
 
-                boxProgress.Items.Add("Removed or converted  " + (TableCounter + Counter).ToString() + " shapes in " + (theStopwatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
-                Application.DoEvents();
-                TotalCounter += Counter + TableCounter;
-
-                /*
-                * Remove all inline shapes
-                */
-                theStopwatch2.Restart();
-                Counter = 0;
-                foreach (WordRoot.InlineShape theShape in theDoc.InlineShapes)
-                {
-                    theShape.Delete(); // and delete the frame
-                    Counter++;
-                    if (Counter % 100 == 0)
-                    {
-                        boxProgress.Items.Add("Deleted " + Counter.ToString() + " inline shapes");
-                        Application.DoEvents();
-                    }
-
-
-                }
-                boxProgress.Items.Add("Removed " + Counter.ToString() + " inline shapes in " + (theStopwatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
-                Application.DoEvents();
-                TotalCounter += Counter;
-                return TotalCounter;
+                return CharacterCounter;
             }
             catch (Exception Ex)
             {
                 FinalCatch(Ex);
-                return 0;
+                return CharacterCounter;
             }
 
         }
@@ -1918,39 +2118,52 @@ namespace Interlinear
 
         public WordAppOptions(WordApp theApp)
         {
-            // Save the current Word settings
-            AutoFormatAsYouTypeApplyBorders = theApp.Options.AutoFormatAsYouTypeApplyBorders;
-            AutoFormatAsYouTypeApplyBulletedLists = theApp.Options.AutoFormatAsYouTypeApplyBulletedLists;
-            AutoFormatAsYouTypeApplyHeadings = theApp.Options.AutoFormatAsYouTypeApplyHeadings;
-            AutoFormatAsYouTypeApplyNumberedLists = theApp.Options.AutoFormatAsYouTypeApplyNumberedLists;
-            AutoFormatAsYouTypeApplyTables = theApp.Options.AutoFormatAsYouTypeApplyTables;
-            AutoFormatAsYouTypeAutoLetterWizard = theApp.Options.AutoFormatAsYouTypeAutoLetterWizard;
-            AutoFormatAsYouTypeDefineStyles = theApp.Options.AutoFormatAsYouTypeDefineStyles;
-            AutoFormatAsYouTypeFormatListItemBeginning = theApp.Options.AutoFormatAsYouTypeFormatListItemBeginning;
-            AutoFormatAsYouTypeReplaceFractions = theApp.Options.AutoFormatAsYouTypeReplaceFractions;
-            AutoFormatAsYouTypeReplaceHyperlinks = theApp.Options.AutoFormatAsYouTypeReplaceHyperlinks;
-            AutoFormatAsYouTypeReplaceOrdinals = theApp.Options.AutoFormatAsYouTypeReplaceOrdinals;
-            AutoFormatAsYouTypeReplacePlainTextEmphasis = theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis;
-            AutoFormatAsYouTypeReplaceQuotes = theApp.Options.AutoFormatAsYouTypeReplaceQuotes;
-            AutoFormatAsYouTypeReplaceSymbols = theApp.Options.AutoFormatAsYouTypeReplaceSymbols;
-            CheckGrammarAsYouType = theApp.Options.CheckGrammarAsYouType;
-            CheckSpellingAsYouType = theApp.Options.CheckSpellingAsYouType;
-            CorrectKeyboardSetting = theApp.AutoCorrect.CorrectKeyboardSetting;
-            CorrectCapsLock = theApp.AutoCorrect.CorrectCapsLock;
-            CorrectDays = theApp.AutoCorrect.CorrectDays;
-            CorrectInitialCaps = theApp.AutoCorrect.CorrectInitialCaps;
-            CorrectSentenceCaps = theApp.AutoCorrect.CorrectSentenceCaps;
-            CorrectTableCells = theApp.AutoCorrect.CorrectTableCells;
-            DisplayAutoCorrectOptions = theApp.AutoCorrect.DisplayAutoCorrectOptions;
-            LabelSmartTags = theApp.Options.LabelSmartTags;
-            Pagination = theApp.Options.Pagination;
-            RepeatWord = theApp.Options.RepeatWord;
-            ReplaceText = theApp.AutoCorrect.ReplaceText;
-            ReplaceTextFromSpellingChecker = theApp.AutoCorrect.ReplaceTextFromSpellingChecker;
-            TabIndentKey = theApp.Options.TabIndentKey;
+            if (theApp.Documents.Count >  0 && theApp.ActiveDocument != null)
+            {
+                try
+                {
+                    // Save the current Word settings
+                    AutoFormatAsYouTypeApplyBorders = theApp.Options.AutoFormatAsYouTypeApplyBorders;
+                    AutoFormatAsYouTypeApplyBulletedLists = theApp.Options.AutoFormatAsYouTypeApplyBulletedLists;
+                    AutoFormatAsYouTypeApplyHeadings = theApp.Options.AutoFormatAsYouTypeApplyHeadings;
+                    AutoFormatAsYouTypeApplyNumberedLists = theApp.Options.AutoFormatAsYouTypeApplyNumberedLists;
+                    AutoFormatAsYouTypeApplyTables = theApp.Options.AutoFormatAsYouTypeApplyTables;
+                    AutoFormatAsYouTypeAutoLetterWizard = theApp.Options.AutoFormatAsYouTypeAutoLetterWizard;
+                    AutoFormatAsYouTypeDefineStyles = theApp.Options.AutoFormatAsYouTypeDefineStyles;
+                    AutoFormatAsYouTypeFormatListItemBeginning = theApp.Options.AutoFormatAsYouTypeFormatListItemBeginning;
+                    AutoFormatAsYouTypeReplaceFractions = theApp.Options.AutoFormatAsYouTypeReplaceFractions;
+                    AutoFormatAsYouTypeReplaceHyperlinks = theApp.Options.AutoFormatAsYouTypeReplaceHyperlinks;
+                    AutoFormatAsYouTypeReplaceOrdinals = theApp.Options.AutoFormatAsYouTypeReplaceOrdinals;
+                    AutoFormatAsYouTypeReplacePlainTextEmphasis = theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis;
+                    AutoFormatAsYouTypeReplaceQuotes = theApp.Options.AutoFormatAsYouTypeReplaceQuotes;
+                    AutoFormatAsYouTypeReplaceSymbols = theApp.Options.AutoFormatAsYouTypeReplaceSymbols;
+                    CheckGrammarAsYouType = theApp.Options.CheckGrammarAsYouType;
+                    CheckSpellingAsYouType = theApp.Options.CheckSpellingAsYouType;
+                    CorrectKeyboardSetting = theApp.AutoCorrect.CorrectKeyboardSetting;
+                    CorrectCapsLock = theApp.AutoCorrect.CorrectCapsLock;
+                    CorrectDays = theApp.AutoCorrect.CorrectDays;
+                    CorrectInitialCaps = theApp.AutoCorrect.CorrectInitialCaps;
+                    CorrectSentenceCaps = theApp.AutoCorrect.CorrectSentenceCaps;
+                    CorrectTableCells = theApp.AutoCorrect.CorrectTableCells;
+                    DisplayAutoCorrectOptions = theApp.AutoCorrect.DisplayAutoCorrectOptions;
+                    LabelSmartTags = theApp.Options.LabelSmartTags;
+                    Pagination = theApp.Options.Pagination;
+                    RepeatWord = theApp.Options.RepeatWord;
+                    ReplaceText = theApp.AutoCorrect.ReplaceText;
+                    ReplaceTextFromSpellingChecker = theApp.AutoCorrect.ReplaceTextFromSpellingChecker;
+                    TabIndentKey = theApp.Options.TabIndentKey;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message + ex.StackTrace, "Error in WordAppOptions", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
         public void OptimiseApp(WordApp theApp)
         {
+            if (theApp.Documents.Count > 0 && theApp.ActiveDocument != null)
+            {
+                try{
             theApp.Options.AutoFormatAsYouTypeApplyBorders = false;
             theApp.Options.AutoFormatAsYouTypeApplyBulletedLists = false;
             theApp.Options.AutoFormatAsYouTypeApplyHeadings = false;
@@ -1984,12 +2197,20 @@ namespace Interlinear
             // Don't show spelling and grammar errors.
             theApp.ActiveDocument.ShowGrammaticalErrors = true;
             theApp.ActiveDocument.ShowSpellingErrors = true;
-
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message + ex.StackTrace, "Error in OptimiseApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
 
         }
         public void RestoreApp(WordApp theApp)
         {
-            theApp.Options.AutoFormatAsYouTypeApplyBorders = AutoFormatAsYouTypeApplyBorders;
+            if (theApp.Documents.Count > 0 && theApp.ActiveDocument != null)
+            {
+                try{
+           theApp.Options.AutoFormatAsYouTypeApplyBorders = AutoFormatAsYouTypeApplyBorders;
             theApp.Options.AutoFormatAsYouTypeApplyBulletedLists = AutoFormatAsYouTypeApplyBulletedLists;
             theApp.Options.AutoFormatAsYouTypeApplyHeadings = AutoFormatAsYouTypeApplyHeadings;
             theApp.Options.AutoFormatAsYouTypeApplyNumberedLists = AutoFormatAsYouTypeApplyNumberedLists;
@@ -2018,6 +2239,12 @@ namespace Interlinear
             theApp.AutoCorrect.ReplaceText = ReplaceText;
             theApp.AutoCorrect.ReplaceTextFromSpellingChecker = ReplaceTextFromSpellingChecker;
             theApp.Options.TabIndentKey = TabIndentKey;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message + ex.StackTrace, "Error in RestoreApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
 
         }
     };

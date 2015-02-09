@@ -240,22 +240,17 @@
             // 
             // updownThreshold
             // 
-            this.updownThreshold.Location = new System.Drawing.Point(548, 61);
-            this.updownThreshold.Maximum = new decimal(new int[] {
-            15,
+            this.updownThreshold.Increment = new decimal(new int[] {
+            5,
             0,
             0,
             0});
+            this.updownThreshold.Location = new System.Drawing.Point(548, 61);
             this.updownThreshold.Name = "updownThreshold";
             this.updownThreshold.Size = new System.Drawing.Size(47, 20);
             this.updownThreshold.TabIndex = 36;
             this.Wordcount.SetToolTip(this.updownThreshold, "If the character copy rate drops below this, we pause to let Word catch up.  Zero" +
         " means we never stop to let Word catch up.");
-            this.updownThreshold.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             this.updownThreshold.ValueChanged += new System.EventHandler(this.updownThreshold_ValueChanged);
             // 
             // UpdownInterval
@@ -810,7 +805,7 @@
             this.label13.TabIndex = 37;
             this.label13.Text = "Output file\r\nsave interval";
             // 
-            // Form1
+            // Interlinear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -832,7 +827,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "Interlinear";
             this.Text = "Interlinear comparison";
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdownFontSize)).EndInit();
