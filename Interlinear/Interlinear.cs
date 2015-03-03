@@ -1564,7 +1564,10 @@ namespace Interlinear
   
                             theWorkSheet.Paste(theWorkSheet.Range[theCellRef]);  // Paste to it.
                             theWorkSheet.Range[theCellRef].NumberFormat = "@";  // and make it have a text format so lines starting with = don't error.
-                            //theWorkSheet.Range[theCellRef].FormulaR1C1 = theParagraph.Range.Text; // setting the formula should make the cell visioble
+                            //theWorkSheet.Range[theCellRef].FormulaR1C1 = theParagraph.Range.Text; // setting the formula should make the cell visible
+                            theWorkSheet.Range[theCellRef].VerticalAlignment = ExcelRoot.XlVAlign.xlVAlignTop; // Top
+                            theWorkSheet.Range[theCellRef].HorizontalAlignment = ExcelRoot.XlHAlign.xlHAlignGeneral;  // General align
+                            theWorkSheet.Range[theCellRef].HorizontalAlignment = ExcelRoot.XlHAlign.xlHAlignLeft; // and left
                             Clipboard.Clear();  // clear the clipboard
                             
                             Failure = false;
@@ -1573,9 +1576,9 @@ namespace Interlinear
                         catch (Exception e)
                         {
                             boxProgress.Items.Add("Paste error " + e.Message + " in row " + theRow.ToString() + ". Retrying...");
-                            Thread.Sleep(10*(ErrorCounter+1));  // wait 20 milliseconds
+                            Thread.Sleep(100*(ErrorCounter+1));  // wait milliseconds
                             ErrorCounter++;
-                            if (ErrorCounter >= 5)
+                            if (ErrorCounter >= 10)
                             {
                                 boxProgress.Items.Add("*****  Failed to paste " + theRow.ToString() + " " + theParagraph.Range.ToString());
                             }

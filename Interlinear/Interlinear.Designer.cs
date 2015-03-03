@@ -96,6 +96,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.WordsPerLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdownFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.updownThreshold)).BeginInit();
@@ -648,7 +649,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.progressBar1});
+            this.progressBar1,
+            this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(3, 361);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(718, 22);
@@ -672,7 +674,7 @@
             this.boxProgress.Location = new System.Drawing.Point(9, 6);
             this.boxProgress.Name = "boxProgress";
             this.boxProgress.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.boxProgress.Size = new System.Drawing.Size(709, 394);
+            this.boxProgress.Size = new System.Drawing.Size(709, 355);
             this.boxProgress.TabIndex = 28;
             // 
             // openUnicodeFileDialog
@@ -805,6 +807,11 @@
             this.label13.TabIndex = 37;
             this.label13.Text = "Output file\r\nsave interval";
             // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            // 
             // Interlinear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -920,6 +927,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown UpdownInterval;
         private System.Windows.Forms.CheckBox DebugCheckBox;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
     }
 }
 
