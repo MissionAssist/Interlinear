@@ -15,7 +15,7 @@ namespace Interlinear
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InterLinear());
+            Application.Run(new Interlinear());
         }
     }
 }

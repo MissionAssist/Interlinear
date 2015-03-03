@@ -31,7 +31,7 @@ namespace XMLUtilities
         public Dictionary<string, string> theStyleDictionary = new Dictionary<string, string>(10); // to hold all defined styles
         public Dictionary<string, string> theDefaultStyleDictionary = new Dictionary<string, string>(5); // to hold all default styles
         public Dictionary<string, XmlDocument> theXMLDictionary = new Dictionary<string, XmlDocument>(10); // To hold the XML documents
-        private XmlNamespaceManager nsManager;
+        private XmlNamespaceManager nsManager = null;
         private XmlDocument theXMLDocument;
         private XmlNode theRoot = null;
 
@@ -146,31 +146,32 @@ namespace XMLUtilities
             }
 
         }
-        public RichText[] GetText(XmlNode theParagraph)
+        public List<RichText> GetText(XmlNode theParagraph)
         {
             /*
              * We get a test string and its corresponding font.
              */
             XmlNodeList theNodeList = theParagraph.SelectNodes(@"//w:body//w:p", nsManager);  // Find the paragraphs
             string theParagraphFont = null;
+            string TextString = null;
             List<RichText> theRichText = new List<RichText>();
             foreach (XmlNode theParagraphData in theNodeList)
             {
                 string theParagraphStyleID = XmlLookup(theParagraphData, "w:pPr/w:pStyle", nsManager, "w:val", "DefaultParagraphFont");
-                theRichText.Add(new RichText());
-                theRichText.Font = null;
+                RichText TextElement = new RichText();
+                TextElement.Font = null;
                 if (theStyleDictionary.Keys.Contains(theParagraphStyleID))
                 {
-                    theRichText.Font = theStyleDictionary[theParagraphStyleID];
-                }
+                    TextElement.Font = theStyleDictionary[theParagraphStyleID];
+              }
                 else
                 {
-                    theRichText.Font = GetDefaultFont(theStyleDictionary, theParagraphData);
+                    TextElement.Font = GetDefaultFont(theStyleDictionary, theParagraphData);
                 }
                 //}
-                theParagraphFont = theRichText.Font;  // Remember the paragraph font for the end of line.
+                theParagraphFont = TextElement.Font;  // Remember the paragraph font for the end of line.
                 XmlNodeList theRanges = theParagraphData.SelectNodes("w:r", nsManager);
-                theRichText.Text = "";
+                TextElement.Text = "";
                 /*
                  * We go through the document a range at a time.  If we find a symbol whose font is the same as that of an existing range
                  * we concatenate the symbol to that range.
@@ -182,17 +183,17 @@ namespace XMLUtilities
                     if (theSymbol != null)
                     {
                         // we have a symbol
-                        theRichText.Font = theSymbol.Attributes["w:font"].Value;
+                        TextElement.Font = theSymbol.Attributes["w:font"].Value;
                         string theSymbolValue = theSymbol.Attributes["w:char"].Value;
                         char theChar = Convert.ToChar(Convert.ToUInt16(theSymbolValue, 16));  // get the character number
-                        if (theRichText.Font == OldFontName)
+                        if (TextElement.Font == OldFontName)
                         {
                             // Concatenate the text string
-                            theRichText.Text += Convert.ToString(theChar); // make it a string concatenating it with previous symbols.
+                            TextElement.Text += Convert.ToString(theChar); // make it a string concatenating it with previous symbols.
                         }
                         else
                         {
-                            OldtheRichText.Font = theRichText.Font;
+                            OldFontName = TextElement.Font;
                             TextString = Convert.ToString(theChar); // make it a string concatenating it with previous symbols. 
                         }
 
@@ -201,19 +202,19 @@ namespace XMLUtilities
                     {
 
                         // See if there is a font defined in the range and use that
-                        theRichText.Font = XmlLookup(theRangeData, "w:rPr/wx:font", nsManager, "wx:val", "");
-                        if (theRichText.Font == "")
+                        TextElement.Font = XmlLookup(theRangeData, "w:rPr/wx:font", nsManager, "wx:val", "");
+                        if (TextElement.Font == "")
                         {
                             string theStyleID = XmlLookup(theRangeData, "w:rPr/w:rStyle", nsManager, "w:val", "");
                             if (theStyleID != "" && theStyleDictionary.Keys.Contains(theStyleID))
                             {
                                 // If we have no style nor do we have a font for the style, we do nothing
                                 // Otherwise we get the font name for the style.
-                                theRichText.Font = theStyleDictionary[theStyleID];
+                                TextElement.Font = theStyleDictionary[theStyleID];
                             }
                             else
                             {
-                                theRichText.Font = theParagraphFont; // we pick up the paragraph font
+                                TextElement.Font = theParagraphFont; // we pick up the paragraph font
                             }
                         }
 
@@ -221,22 +222,24 @@ namespace XMLUtilities
                         XmlNode theText = theRangeData.SelectSingleNode("w:t", nsManager);
                         if (theText != null)
                         {
-                            if (theRichText.Font == OldtheRichText.Font)
+                            if (TextElement.Font == OldFontName)
                             {
                                 TextString += theText.InnerText;
                             }
                             else
                             {
-                                OldtheRichText.Font = theRichText.Font;
+                                OldFontName = TextElement.Font;
                                 TextString = theText.InnerText;
                             }
                         }
 
                     }
                 }
+                TextElement.Text = TextString;
+                theRichText.Add(TextElement);
+
             }
-            theRichText.Text = TextString;
-            theRichText.Font = theRichText.Font;
+
             return theRichText;
         }
 
