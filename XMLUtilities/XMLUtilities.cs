@@ -30,7 +30,6 @@ namespace XMLUtilities
          */
         public Dictionary<string, string> theStyleDictionary = new Dictionary<string, string>(10); // to hold all defined styles
         public Dictionary<string, string> theDefaultStyleDictionary = new Dictionary<string, string>(5); // to hold all default styles
-        public Dictionary<string, XmlDocument> theXMLDictionary = new Dictionary<string, XmlDocument>(10); // To hold the XML documents
         private XmlNamespaceManager nsManager = null;
         private XmlDocument theXMLDocument;
         private XmlNode theRoot = null;
@@ -45,6 +44,19 @@ namespace XMLUtilities
             theWordDocument.Select();
             theXMLDocument.LoadXml(wrdApp.Selection.get_XML(false));
             theRoot = theXMLDocument.DocumentElement;  // the root node
+            if (theXMLDocument != null)
+            {
+                nsManager = new XmlNamespaceManager(theXMLDocument.NameTable);
+                nsManager.AddNamespace("wx", wordmlxNamespace);
+                nsManager.AddNamespace("w", wordmlNamespace);
+                // If successful add the root to the dictionary
+            }
+            else
+            {
+                // We failed
+
+            }
+
             GetStylesInUse(theRoot, nsManager, theStyleDictionary);  // Load the styles
 
         }
@@ -56,7 +68,6 @@ namespace XMLUtilities
             // the destructor
             theStyleDictionary = null;
             theDefaultStyleDictionary = null;
-            theXMLDictionary = null;
         }
 
 
@@ -146,12 +157,15 @@ namespace XMLUtilities
             }
 
         }
-        public List<RichText> GetText(XmlNode theParagraph)
+        public List<RichText> GetText(WordRoot.Paragraph theParagraph)
         {
             /*
-             * We get a test string and its corresponding font.
+             * We get a text string and its corresponding font.
              */
-            XmlNodeList theNodeList = theParagraph.SelectNodes(@"//w:body//w:p", nsManager);  // Find the paragraphs
+            XmlDocument theXMLDoc = new XmlDocument();
+            theXMLDoc.LoadXml(theParagraph.Range.WordOpenXML);
+            XmlNode theXMLNode = theXMLDoc.DocumentElement;
+            XmlNodeList theNodeList =  theXMLNode.SelectNodes(@"//w:body//w:p", nsManager);  // Find the paragraphs
             string theParagraphFont = null;
             string TextString = null;
             List<RichText> theRichText = new List<RichText>();

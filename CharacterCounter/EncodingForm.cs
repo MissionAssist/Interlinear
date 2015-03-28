@@ -22,7 +22,7 @@ namespace CharacterCounter
         {
             // Load the encodings
             int Counter = 0;
-            string theEncodingName = ((Form1)Owner).GetEncoding();
+            string theEncodingName = ((CharacterCounter)Owner).GetEncoding();
             if (theEncodingName == "")
             {
                 theEncodingName = "Western European (Windows)";  // Equivalent to ANSI
@@ -42,7 +42,7 @@ namespace CharacterCounter
         private void btnOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            Form1 theOwner = (Form1)this.Owner;
+            CharacterCounter theOwner = (CharacterCounter)this.Owner;
             theOwner.SetEncoding(EncodingListBox.SelectedItem.ToString());
             this.Close();
         }

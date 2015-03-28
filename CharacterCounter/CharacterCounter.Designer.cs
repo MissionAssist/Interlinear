@@ -1,6 +1,6 @@
 ﻿namespace CharacterCounter
 {
-    partial class Form1
+    partial class CharacterCounter
     {
         /// <summary>
         /// Required designer variable.

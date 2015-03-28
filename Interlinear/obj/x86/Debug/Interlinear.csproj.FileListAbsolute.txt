@@ -50,7 +50,6 @@ D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interline
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csprojResolveAssemblyReference.cache
-D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interop.Microsoft.Office.Interop.InfoPath.dll
-D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interop.MSXML2.dll
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\XMLUtilities.dll
 D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\XMLUtilities.pdb
+D:\Users\Stephen\Documents\Visual Studio 2013\Projects\Interlinear.git\Interlinear\bin\Debug\DocX.dll

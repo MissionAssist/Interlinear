@@ -42,7 +42,7 @@ using WorkBook = Microsoft.Office.Interop.Excel._Workbook;
 
 namespace CharacterCounter
 {
-    public partial class Form1 : Form
+    public partial class CharacterCounter : Form
     {
         // Some global variables
         private WordApp wrdApp;
@@ -126,7 +126,7 @@ namespace CharacterCounter
         const int TextDoc = 0;
         const int WordDoc = 1;
 
-        public Form1()
+        public CharacterCounter()
         {
             InitializeComponent();
             Application.ApplicationExit += new EventHandler(this.CloseApps);
