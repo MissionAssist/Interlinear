@@ -7,7 +7,7 @@
  *  
  *  The copyright is owned by MissionAssist as the work was carried out on their behalf.
  * 
- *  Written by Stephen Palmstrom, last modified 29 November 2014
+ *  Written by Stephen Palmstrom, last modified 11 December 2015
  *  
  */
 using System;
@@ -175,7 +175,9 @@ namespace CharacterCounter
             try
             {
                 InputDir = GetDirectory("InputDir");
+                InputFolderBox.Text = InputDir;
                 OutputDir = GetDirectory("OutputDir", InputDir);
+                OutputFolderBox.Text = OutputDir;
                 StyleDir = GetDirectory("StyleDir", OutputDir);
                 FontDir = GetDirectory("FontDir", OutputDir);
                 XMLDir = GetDirectory("XMLDir", OutputDir);
@@ -235,14 +237,28 @@ namespace CharacterCounter
             {
                 case "btnGetInput":
                     openInputDialogue.Multiselect = false;
-                    openInputDialogue.InitialDirectory = InputDir;
+                    if (InputFileBox.Text != "")
+                    {
+                        openInputDialogue.InitialDirectory = InputFileBox.Text;
+                    }
+                    else
+                    {
+                        openInputDialogue.InitialDirectory = InputDir;
+                    }
                     if (openInputDialogue.ShowDialog() == DialogResult.OK)
                     {
                         InputFileBox.Text = openInputDialogue.FileName;
                     }
                     break;
                 case "btnDecompGlyph":
-                    OpenGlyphFileDialogue.InitialDirectory = GlyphDir;
+                    if (DecompGlyphBox.Text != "")
+                    {
+                        OpenGlyphFileDialogue.InitialDirectory = DecompGlyphBox.Text;
+                    }
+                    else
+                    {
+                        OpenGlyphFileDialogue.InitialDirectory = GlyphDir;
+                    }
                     if (OpenGlyphFileDialogue.ShowDialog() == DialogResult.OK)
                     {
                         DecompGlyphBox.Text = OpenGlyphFileDialogue.FileName;
@@ -321,6 +337,7 @@ namespace CharacterCounter
             string ValueName = "";
             TextBox theTextBox = null;
             Button theButton = null;
+            UpdateFolders(); // update the output folders if relevant box checked.
             switch (theControl.Name)
             {
                 case "btnOutputFile":
@@ -1749,21 +1766,26 @@ namespace CharacterCounter
                 theBox.Select();
                 return;
             }
+            InputFileName = Path.GetFileName(theBox.Text);
             if (InputFileName != null)
             {
                 theXMLDictionary.Remove(InputFileName);
                 theTextDictionary.Remove(InputFileName);
             }
+            else
+            {
+                return;
+            }
             InputFileName = Path.GetFileName(InputFileBox.Text);  // Remember the file name for later.
             // Suggest names for the output files
             OutputFileBox.Text = Path.Combine(OutputDir, Path.GetFileNameWithoutExtension(InputFileBox.Text)) + ".xlsx";
-            ErrorListBox.Text = Path.Combine(ErrorDir, Path.GetFileNameWithoutExtension(InputFileBox.Text)) + " (Suggested Chars).xlsx";
             InputDir = Path.GetDirectoryName(openInputDialogue.FileName);
             Registry.SetValue(keyName, "InputDir", InputDir);
             btnAnalyse.Enabled = true;
             btnPause.Enabled = false;
             saveExcelDialogue.FileName = OutputFileBox.Text;
             FileType = GetFileType(InputFileBox.Text, false);
+            UpdateFolders(); // update the output folders if relevant box checked.
             if (FileType == WordDoc)
             {
                 // Only enable these if we are analysing Word documents.
@@ -1771,6 +1793,8 @@ namespace CharacterCounter
                 FontListFileBox.Text = Path.Combine(FontDir, Path.GetFileNameWithoutExtension(InputFileBox.Text)) + " (Fonts).xlsx";
                 XMLFileBox.Text = Path.Combine(XMLDir, Path.GetFileNameWithoutExtension(InputFileBox.Text)) + ".xml";
             }
+
+            ErrorListBox.Text = Path.Combine(ErrorDir, Path.GetFileNameWithoutExtension(InputFileBox.Text)) + " (Suggested Chars).xlsx";
 
             listStyles.Rows.Clear(); // clear the styles
             FontList.Items.Clear(); // and the fonts
@@ -1782,6 +1806,27 @@ namespace CharacterCounter
             btnAnalyse.Enabled = true;  // Let you analyse the new file.
 
 
+        }
+        private void UpdateFolders()
+        {
+            // Update the output folders if desired
+            if (checkUpdateOutputFolders.Checked)
+            {
+                // Update all the output folders and their registry settings
+                StyleDir = SetRegistry(keyName, "StyleDir", OutputDir);
+                FontDir = SetRegistry(keyName, "FontDir", OutputDir);
+                XMLDir = SetRegistry(keyName, "XMLDir", OutputDir);
+                ErrorDir = SetRegistry(keyName, "ErrorDir", OutputDir);
+                AggregateDir = SetRegistry(keyName, "AggregateDir", OutputDir);
+                Registry.SetValue(keyName, "OutputDir", OutputDir); 
+                checkUpdateOutputFolders.Checked = false;  // Clear the checkbox so we aren't continually updating.
+            }
+
+        }
+        private string SetRegistry(string keyName, string valueName, string Value)
+        {
+            Registry.SetValue(keyName, valueName, Value);
+            return Value;
         }
 
         private void btnGetStyles_Click(object sender, EventArgs e)
@@ -1884,26 +1929,39 @@ namespace CharacterCounter
                         }
                         else
                         {
-                            MessageBox.Show(ComEx.Message + "\r" + ComEx.StackTrace, "Word failed to open!", MessageBoxButtons.OK);
+                            MessageBox.Show(WordFile + " failed to open \r" + ComEx.Message + "\r" + ComEx.StackTrace, "Word failed to open!", MessageBoxButtons.OK);
                             CloseApps(); // Shut down
                         }
                     }
                 }
                 theDocument.Select();
-                theXMLDocument.LoadXml(wrdApp.Selection.get_XML(false));
+                try
+                {
+                    toolStripStatusLabel1.Text = "Loading " + Path.GetFileName(WordFile) + "...";
+                    //string XMLDoc = wrdApp.Selection.get_XML(false);
+                    string XMLDoc = wrdApp.Selection.XML[false];
+                    theXMLDocument.LoadXml(XMLDoc);
+                    XMLDoc = null;
+                }
+                catch (XmlException Ex)
+                {
+                    MessageBox.Show("Error loading into " + WordFile + " into XML\r" + Ex.Message + "\r Hex error code :" + Ex.HResult.ToString("X")
+                         + "\r Source " + Ex.Source + "\r Line number: " + Ex.LineNumber + "\r Line position: " + Ex.LinePosition, "Error loading XML", MessageBoxButtons.OK);
+                    CloseApps(); // Shut down
+                }
                 theDocument.Close();  // We no longer need it.
                 theDocument = null;
             }
             catch (Exception Ex)
             {
-                MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Error opening document", MessageBoxButtons.OK);
-                toolStripStatusLabel1.Text = "Failed to open document after " +
+                MessageBox.Show("Error opening " + WordFile + "\r" + Ex.Message + "\r" + Ex.StackTrace, "Error opening document", MessageBoxButtons.OK);
+                toolStripStatusLabel1.Text = "Failed to open document after\r" +
                     ((float)theStopWatch.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds";
                 theStopWatch.Stop();
                 theStopWatch = null;
                 return null;
             }
-            toolStripStatusLabel1.Text = "Loaded document after " + ((float)theStopWatch.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds";
+            toolStripStatusLabel1.Text = "Loaded" + Path.GetFileName(WordFile) + " after " + ((float)theStopWatch.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds";
             theStopWatch.Stop();
             theStopWatch = null;
             return theXMLDocument;
@@ -2051,7 +2109,7 @@ namespace CharacterCounter
                 }
                 catch (Exception Ex)
                 {
-                    Retrying = MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Error opening glyph file", MessageBoxButtons.RetryCancel);
+                    Retrying = MessageBox.Show("Error opening glyph file "  + DecompGlyphBox.Text + " " + Ex.Message + "\r" + Ex.StackTrace, "Error opening glyph file", MessageBoxButtons.RetryCancel);
                     if (Retrying == DialogResult.Cancel)
                     {
                         return false;
@@ -2136,6 +2194,8 @@ namespace CharacterCounter
                 theEncodingDictionary[theEncodingInfo.DisplayName] = theEncoding; // save it in the dictionary
             }
             this.SetEncoding(Registry.GetValue(keyName, "Encoding", "Western European (Windows)").ToString());  // the default is ANSI Code Page 1252
+            Enable_Controls(this.IndivOrBulk.TabPages["IndividualFile"], true); // Enable the individual controls
+            Enable_Controls(this.IndivOrBulk.TabPages["Bulk"], false); // and disable the bulk controls
 
 
         }
@@ -2216,9 +2276,25 @@ namespace CharacterCounter
                 ClearLists();
                 btnSaveXML.Enabled = XMLFileBox.Text != ""; ;  //reveal the XML file button
                 btnSaveXML.Visible = true;
+                Enable_Controls(sender, true);
+                Enable_Controls(((TabControl)((Control)sender).Parent).TabPages["Bulk"], false);  // Disable bulk
             }
         }
+        private void Enable_Controls(object sender, bool Enable)
+        {
+            Control theSender = (Control)sender;
+            foreach (Control theControl in theSender.Controls)
+            {
+                Type theType = theControl.GetType();
+                if (theType.Name == "TextBox" || theType.Name == "Button" )
+                {
+                    theControl.Enabled = Enable;
+                    theControl.Visible = Enable;
+                    theControl.TabStop = Enable;
+                }
+            }
 
+        }
         private void Bulk_Entered(object sender, EventArgs e)
         {
             if (Individual == true)
@@ -2233,7 +2309,8 @@ namespace CharacterCounter
                 btnGetEncoding.Enabled = true;
                 btnSaveXML.Enabled = false;  // hide the XML file button.
                 btnSaveXML.Visible = false;
-
+                Enable_Controls(sender, true);
+                Enable_Controls(((TabControl)((Control)sender).Parent).TabPages["IndividualFile"], false);  // Disable the individual.
                 ClearLists();
             }
         }
@@ -2315,7 +2392,14 @@ namespace CharacterCounter
         private void btnCharStatFolder_Click(object sender, EventArgs e)
         {
             FolderDialogue.Description = "Select the directory to receive the individual files";
-            FolderDialogue.SelectedPath = GetDirectory("OutputDir");
+            if (OutputFolderBox.Text != "")
+            {
+                FolderDialogue.SelectedPath = OutputFolderBox.Text;
+            }
+            else
+            {
+                FolderDialogue.SelectedPath = GetDirectory("OutputDir");
+            }
             FolderDialogue.ShowNewFolderButton = true;
             if (FolderDialogue.ShowDialog() == DialogResult.OK)
             {
@@ -2331,13 +2415,6 @@ namespace CharacterCounter
 
         private void OutputDirBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox theBox = (TextBox)sender;
-            OutputDir = theBox.Text;
-            Registry.SetValue(keyName, "OutputDir", OutputDir);
-            if (theBox.Text != "" && openInputDialogue.FileNames.Count() > 0)
-            {
-                btnAnalyse.Enabled = true;
-            }
 
         }
 
@@ -2361,7 +2438,7 @@ namespace CharacterCounter
 
         }
 
-
+       
 
 
 
