@@ -129,7 +129,7 @@ namespace CharacterCounter
         public CharacterCounter()
         {
             InitializeComponent();
-            Application.ApplicationExit += new EventHandler(this.CloseApps);
+            System.Windows.Forms.Application.ApplicationExit += new EventHandler(this.CloseApps);
             // Start Word and Excel
             try
             {
@@ -187,7 +187,7 @@ namespace CharacterCounter
             }
             catch (Exception Ex)
             {
-                MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Failed to get directories", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Failed to get directories", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CloseApps();
             }
             //
@@ -217,7 +217,7 @@ namespace CharacterCounter
             }
             catch (Exception Ex)
             {
-                MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace + "\rkeyName " + keyName + "\rValueName " + ValueName +
+                System.Windows.Forms.MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace + "\rkeyName " + keyName + "\rValueName " + ValueName +
                 "\rDefaultPath " + DefaultPath, "Can't read registry", MessageBoxButtons.OK);
                 CloseApps();
             }
@@ -332,7 +332,7 @@ namespace CharacterCounter
             // Handle the output files
             //
             Control theControl = (Control)sender;  // cast the sender as a control.
-            SaveFileDialog theDialogue = null;
+            System.Windows.Forms.SaveFileDialog theDialogue = null;
             string theDirectory = "";
             string ValueName = "";
             TextBox theTextBox = null;
@@ -422,14 +422,14 @@ namespace CharacterCounter
         private void btnClose_Click(object sender, EventArgs e)
         {
             CloseApp = true;
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
             this.Close();
-            Application.Exit();
+            System.Windows.Forms.Application.Exit();
         }
         private void CloseApps(object sender = null, EventArgs e = null)
         {
             toolStripStatusLabel1.Text = "Shutting down...";
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
             // Close Excel and Word, but don't flag an error if they are already closed.
             try {
                      if (WordWasRunning)
@@ -444,7 +444,7 @@ namespace CharacterCounter
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                System.Windows.Forms.MessageBox.Show(ex.Message);
                 }
                 try
                 {
@@ -512,7 +512,7 @@ namespace CharacterCounter
                     // This is so we can remember the textboxes as we find them.
                     TimeSpan TimeToFinish = TimeSpan.Zero;
                     toolStripStatusLabel1.Text = "Analysing " + theFile + "...";
-                    Application.DoEvents();
+                    System.Windows.Forms.Application.DoEvents();
                     /*
                      * Open the Word file
                      */
@@ -526,7 +526,7 @@ namespace CharacterCounter
                     Paused = false;
                     theFirstFont = "";
                     toolStripProgressBar1.Value = 0;
-                    Application.DoEvents();
+                    System.Windows.Forms.Application.DoEvents();
                     /*
                      * We now load the document and analyse it
                      */
@@ -594,7 +594,7 @@ namespace CharacterCounter
             catch (Exception theException)
             {
                 // Catch any unexpected errors
-                MessageBox.Show(theException.Message + theException.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(theException.Message + theException.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CloseApps(this);
             }
 
@@ -634,13 +634,13 @@ namespace CharacterCounter
             // We write the results to Excel.
             btnPause.Enabled = false;  // We can no longer pause
             btnClose.Enabled = false;  // nor can we click on close
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
             if (!Path.IsPathRooted(OutputFile))
             {
                 OutputFile = Path.Combine(OutputDir, OutputFile);  // Make it a complete directory
             }
             toolStripStatusLabel1.Text = "Writing to Excel workbook " + Path.GetFileName(OutputFile) + "...";
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
             if (!DeleteFile(OutputFile))
             {
                 return false; // Do no more if not successfully deleted.
@@ -664,7 +664,7 @@ namespace CharacterCounter
                     }
                     else
                     {
-                        MessageBox.Show(ComEx.Message + "\r" + ComEx.StackTrace, "Failed to open Excel", MessageBoxButtons.OK);
+                        System.Windows.Forms.MessageBox.Show(ComEx.Message + "\r" + ComEx.StackTrace, "Failed to open Excel", MessageBoxButtons.OK);
                         CloseApps();
                         return false;
                     }
@@ -750,7 +750,7 @@ namespace CharacterCounter
                 theSheet.Cells[theRow, Column].Value = kvp.Value;  // the count
                 theRow++;
                 toolStripProgressBar1.Value = theRow - 2;
-                Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
             }
             theWorkbook.SaveAs(OutputFile);  // Save before sorting
             string theRowString = (theRow - 1).ToString();
@@ -830,7 +830,7 @@ namespace CharacterCounter
                 }
                 catch (Exception Ex)
                 {
-                    Success = MessageBox.Show(Ex.Message, "Failed to delete Excel file", MessageBoxButtons.RetryCancel);
+                    Success = System.Windows.Forms.MessageBox.Show(Ex.Message, "Failed to delete Excel file", MessageBoxButtons.RetryCancel);
                     if (Success == DialogResult.Cancel)
                     {
                         return false; // Don't try to save to Excel
@@ -963,7 +963,7 @@ namespace CharacterCounter
 
             toolStripProgressBar1.Maximum = RangeCharacterCount;  // To show progress, but the count isn't accurate.
             btnPause.Enabled = true;
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
             /*
                 * Look for text or symbols in the document
             */
@@ -1135,7 +1135,7 @@ namespace CharacterCounter
                     catch (Exception Ex)
                     {
 
-                        MessageBox.Show(Ex.Message + "\r\r" + Ex.StackTrace, "Error in character counting - analysed by font", MessageBoxButtons.OK);
+                        System.Windows.Forms.MessageBox.Show(Ex.Message + "\r\r" + Ex.StackTrace, "Error in character counting - analysed by font", MessageBoxButtons.OK);
                         CloseApps(this);
 
                     }
@@ -1236,7 +1236,7 @@ namespace CharacterCounter
                     catch (Exception Ex)
                     {
 
-                        MessageBox.Show(Ex.Message + "\r\r" + Ex.StackTrace, "Error in character counting - not analysed by font", MessageBoxButtons.OK);
+                        System.Windows.Forms.MessageBox.Show(Ex.Message + "\r\r" + Ex.StackTrace, "Error in character counting - not analysed by font", MessageBoxButtons.OK);
                         CloseApps(this);
 
                     }
@@ -1246,7 +1246,7 @@ namespace CharacterCounter
 
             catch (Exception Ex)
             {
-                MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Error in analysing text", MessageBoxButtons.OK);
+                System.Windows.Forms.MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Error in analysing text", MessageBoxButtons.OK);
                 CloseApps(this);
             }
             listNormalisedErrors.Sort(listNormalisedErrors.Columns[0], ListSortDirection.Ascending);  // Sort first
@@ -1427,7 +1427,7 @@ namespace CharacterCounter
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "\r" + ex.StackTrace);
+                    System.Windows.Forms.MessageBox.Show(ex.Message + "\r" + ex.StackTrace);
                     string tmpMessage = ex.Message;
                     CloseApps(null, null);
                 }
@@ -1506,7 +1506,7 @@ namespace CharacterCounter
                 string[] theRow = new string[] { theString, theNormalisedString };
                 listNormalisedErrors.Rows.Add(theRow);
                 tabControl1.SelectedTab = tabControl1.TabPages[2];
-                Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
             }
 
         }
@@ -1546,7 +1546,7 @@ namespace CharacterCounter
 
         private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string HelpPath = Path.Combine(Application.StartupPath, "CharacterCounter.docx");
+            string HelpPath = Path.Combine(System.Windows.Forms.Application.StartupPath, "CharacterCounter.docx");
             System.Diagnostics.Process.Start(HelpPath);
         }
 
@@ -1558,7 +1558,7 @@ namespace CharacterCounter
 
         private void LicenseMenuItem_Click(object sender, EventArgs e)
         {
-            string HelpPath = Path.Combine(Application.StartupPath, "gpl.txt");
+            string HelpPath = Path.Combine(System.Windows.Forms.Application.StartupPath, "gpl.txt");
             System.Diagnostics.Process.Start("Wordpad.exe", '"' + HelpPath + '"');
         }
 
@@ -1577,7 +1577,7 @@ namespace CharacterCounter
                 btnPause.Text = "Pause";
             }
 
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
         }
 
 
@@ -1646,7 +1646,7 @@ namespace CharacterCounter
                 toolStripStatusLabel1.Text = CharacterCount.ToString() + " of about " + RangeCharacterCount.ToString()
                     + " chars. Approx time to finish analysis: " + TimeToFinish.ToString(@"hh\:mm\:ss"); ;
                 toolStripProgressBar1.Value = Math.Min(CharacterCount, toolStripProgressBar1.Maximum);
-                Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
                 while (Paused)
                 {
                     if (theStopwatch.IsRunning)
@@ -1663,7 +1663,7 @@ namespace CharacterCounter
                         theDocument.Close(false);  //Close the document
                         return;  // exit
                     }
-                    Application.DoEvents();
+                    System.Windows.Forms.Application.DoEvents();
 
                 }
                 if (!theStopwatch.IsRunning)
@@ -1681,7 +1681,7 @@ namespace CharacterCounter
             // list the fonts in the documnent
             Control theControl = (Control)sender;
             theControl.Enabled = false;
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
             Stopwatch theStopwatch = new Stopwatch();
             theStopwatch.Start();
             btnClose.Enabled = false;  // Disable the close - we are analysing
@@ -1694,7 +1694,7 @@ namespace CharacterCounter
             XmlNode theRoot = null;
             List<string> theFontTable = new List<string>();
             toolStripStatusLabel1.Text = "Listing fonts in " + Path.GetFileName(InputFileBox.Text) + "...";
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
             /*
              * Open the Word file(s)
              *
@@ -1726,7 +1726,7 @@ namespace CharacterCounter
                             FontList.Items.Add(theFont);
                         }
                         toolStripStatusLabel1.Text = "Finished loading fonts from " + theFile;
-                        Application.DoEvents();
+                        System.Windows.Forms.Application.DoEvents();
                     }
                 }
             }
@@ -1762,7 +1762,7 @@ namespace CharacterCounter
             TextBox theBox = (TextBox)sender;
             if (theBox.Text != "" && !File.Exists(theBox.Text))
             {
-                MessageBox.Show("File does not exist", "Error", MessageBoxButtons.OK);
+                System.Windows.Forms.MessageBox.Show("File does not exist", "Error", MessageBoxButtons.OK);
                 theBox.Select();
                 return;
             }
@@ -1900,7 +1900,7 @@ namespace CharacterCounter
 
             }
             theControl.Enabled = true;
-            Application.DoEvents();
+            System.Windows.Forms.Application.DoEvents();
 
         }
         private XmlDocument LoadWordDocument(string WordFile)
@@ -1929,7 +1929,7 @@ namespace CharacterCounter
                         }
                         else
                         {
-                            MessageBox.Show(WordFile + " failed to open \r" + ComEx.Message + "\r" + ComEx.StackTrace, "Word failed to open!", MessageBoxButtons.OK);
+                            System.Windows.Forms.MessageBox.Show(WordFile + " failed to open \r" + ComEx.Message + "\r" + ComEx.StackTrace, "Word failed to open!", MessageBoxButtons.OK);
                             CloseApps(); // Shut down
                         }
                     }
@@ -1945,7 +1945,7 @@ namespace CharacterCounter
                 }
                 catch (XmlException Ex)
                 {
-                    MessageBox.Show("Error loading into " + WordFile + " into XML\r" + Ex.Message + "\r Hex error code :" + Ex.HResult.ToString("X")
+                    System.Windows.Forms.MessageBox.Show("Error loading into " + WordFile + " into XML\r" + Ex.Message + "\r Hex error code :" + Ex.HResult.ToString("X")
                          + "\r Source " + Ex.Source + "\r Line number: " + Ex.LineNumber + "\r Line position: " + Ex.LinePosition, "Error loading XML", MessageBoxButtons.OK);
                     CloseApps(); // Shut down
                 }
@@ -1954,7 +1954,7 @@ namespace CharacterCounter
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Error opening " + WordFile + "\r" + Ex.Message + "\r" + Ex.StackTrace, "Error opening document", MessageBoxButtons.OK);
+                System.Windows.Forms.MessageBox.Show("Error opening " + WordFile + "\r" + Ex.Message + "\r" + Ex.StackTrace, "Error opening document", MessageBoxButtons.OK);
                 toolStripStatusLabel1.Text = "Failed to open document after\r" +
                     ((float)theStopWatch.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds";
                 theStopWatch.Stop();
@@ -2047,7 +2047,7 @@ namespace CharacterCounter
                 }
                 catch (Exception Ex)
                 {
-                    Retry = MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Word failed to open!", MessageBoxButtons.RetryCancel);
+                    Retry = System.Windows.Forms.MessageBox.Show(Ex.Message + "\r" + Ex.StackTrace, "Word failed to open!", MessageBoxButtons.RetryCancel);
                     if (Retry == DialogResult.Cancel)
                     {
                         toolStripStatusLabel1.Text = "Document load cancelled after " + ((float)theStopWatch.ElapsedTicks / Stopwatch.Frequency).ToString("f2") + " seconds";
@@ -2078,7 +2078,7 @@ namespace CharacterCounter
                 }
                 catch (Exception Ex)
                 {
-                    Retrying = MessageBox.Show(Ex.Message, "Failed to save XML file", MessageBoxButtons.RetryCancel);
+                    Retrying = System.Windows.Forms.MessageBox.Show(Ex.Message, "Failed to save XML file", MessageBoxButtons.RetryCancel);
                     if (Retrying == System.Windows.Forms.DialogResult.Cancel)
                     {
                         toolStripStatusLabel1.Text = "Failed to save XML file " + Path.GetFileName(XMLFileBox.Text);
@@ -2109,7 +2109,7 @@ namespace CharacterCounter
                 }
                 catch (Exception Ex)
                 {
-                    Retrying = MessageBox.Show("Error opening glyph file "  + DecompGlyphBox.Text + " " + Ex.Message + "\r" + Ex.StackTrace, "Error opening glyph file", MessageBoxButtons.RetryCancel);
+                    Retrying = System.Windows.Forms.MessageBox.Show("Error opening glyph file "  + DecompGlyphBox.Text + " " + Ex.Message + "\r" + Ex.StackTrace, "Error opening glyph file", MessageBoxButtons.RetryCancel);
                     if (Retrying == DialogResult.Cancel)
                     {
                         return false;
@@ -2262,7 +2262,7 @@ namespace CharacterCounter
 
         private void CombiningCharacters_Click(object sender, EventArgs e)
         {
-            string HelpPath = Path.Combine(Application.StartupPath, "CombiningCharacters.xlsm");
+            string HelpPath = Path.Combine(System.Windows.Forms.Application.StartupPath, "CombiningCharacters.xlsm");
             System.Diagnostics.Process.Start(HelpPath);
 
         }
