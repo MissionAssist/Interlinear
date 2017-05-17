@@ -77,3 +77,7 @@ D:\Users\Stephen\SkyDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\
 D:\Users\Stephen\SkyDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.application
 D:\Users\Stephen\SkyDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe
 D:\Users\Stephen\SkyDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb
+D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\bin\Debug\Interlinear.exe.config
+D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.ResolveComReference.cache
+D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe
+D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb

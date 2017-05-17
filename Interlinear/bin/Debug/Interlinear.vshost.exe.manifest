@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="Interlinear.exe" version="5.1.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Interlinear" version="5.1.5553.17701" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="Interlinear" version="5.1.5822.35472" language="neutral" processorArchitecture="x86" />
     <commandLine file="Interlinear.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interlinear.exe" size="152576">
-      <assemblyIdentity name="Interlinear" version="5.1.5553.17701" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interlinear.exe" size="147456">
+      <assemblyIdentity name="Interlinear" version="5.1.5822.35472" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>y0mITJpo41Ko/OLFZzB1cAvmyPhSP5ctboUre9NMbqw=</dsig:DigestValue>
+        <dsig:DigestValue>1jzdN7C3f2GE/iu0qzQwzlH8QmUZM5bJY284NYGveQU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -121,7 +121,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>P79Eq9jLF+1KNC2Lu36G52kZJp5H0jXd/A+jo6vHBic=</dsig:DigestValue>
+        <dsig:DigestValue>mf8VTtjO+9KJI2yrW1Ja7FjkT5B/8U1D7z0WeX7W9FE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
