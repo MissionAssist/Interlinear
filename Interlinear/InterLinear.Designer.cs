@@ -45,12 +45,12 @@
             this.DebugCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Setup = new System.Windows.Forms.TabPage();
-            this.btnBothToExcel = new System.Windows.Forms.Button();
+            this.BtnBothToExcel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnSegmentBoth = new System.Windows.Forms.Button();
+            this.BtnSegmentBoth = new System.Windows.Forms.Button();
             this.grpUnicode = new System.Windows.Forms.GroupBox();
             this.chkUnicodeAddSpace = new System.Windows.Forms.CheckBox();
-            this.btnUnicodeToExcel = new System.Windows.Forms.Button();
+            this.BtnUnicodeToExcel = new System.Windows.Forms.Button();
             this.chkUnicodeToExcel = new System.Windows.Forms.CheckBox();
             this.txtUnicodeInput = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -60,10 +60,10 @@
             this.GetUnicodeOutput = new System.Windows.Forms.Button();
             this.txtUnicodeWordCount = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnSegmentUnicode = new System.Windows.Forms.Button();
+            this.BtnSegmentUnicode = new System.Windows.Forms.Button();
             this.grpLegacy = new System.Windows.Forms.GroupBox();
             this.chkLegacyAddSpace = new System.Windows.Forms.CheckBox();
-            this.btnLegacyToExcel = new System.Windows.Forms.Button();
+            this.BtnLegacyToExcel = new System.Windows.Forms.Button();
             this.chkLegacyToExcel = new System.Windows.Forms.CheckBox();
             this.txtLegacyInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -73,7 +73,7 @@
             this.btnGetLegacyOutputFile = new System.Windows.Forms.Button();
             this.txtLegacyWordCount = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnSegmentLegacy = new System.Windows.Forms.Button();
+            this.BtnSegmentLegacy = new System.Windows.Forms.Button();
             this.btnGetExcelOutput = new System.Windows.Forms.Button();
             this.txtExcelOutput = new System.Windows.Forms.TextBox();
             this.Progress = new System.Windows.Forms.TabPage();
@@ -82,7 +82,7 @@
             this.progressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.boxProgress = new System.Windows.Forms.ListBox();
             this.openUnicodeFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.BtnClose = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +91,7 @@
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnPauseResume = new System.Windows.Forms.Button();
+            this.BtnPauseResume = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -212,7 +212,7 @@
             this.boxExtension.Text = ".docx";
             this.Wordcount.SetToolTip(this.boxExtension, "The default input file extension you want to use.");
             this.boxExtension.ValueMember = "Text";
-            this.boxExtension.SelectedIndexChanged += new System.EventHandler(this.boxExtension_SelectedIndexChanged);
+            this.boxExtension.SelectedIndexChanged += new System.EventHandler(this.BoxExtension_SelectedIndexChanged);
             // 
             // UpdownFontSize
             // 
@@ -252,7 +252,7 @@
             this.updownThreshold.TabIndex = 36;
             this.Wordcount.SetToolTip(this.updownThreshold, "If the character copy rate drops below this, we pause to let Word catch up.  Zero" +
         " means we never stop to let Word catch up.");
-            this.updownThreshold.ValueChanged += new System.EventHandler(this.updownThreshold_ValueChanged);
+            this.updownThreshold.ValueChanged += new System.EventHandler(this.UpdownThreshold_ValueChanged);
             // 
             // UpdownInterval
             // 
@@ -297,9 +297,9 @@
             // Setup
             // 
             this.Setup.Controls.Add(this.chkCloseOnCompletion);
-            this.Setup.Controls.Add(this.btnBothToExcel);
+            this.Setup.Controls.Add(this.BtnBothToExcel);
             this.Setup.Controls.Add(this.label4);
-            this.Setup.Controls.Add(this.btnSegmentBoth);
+            this.Setup.Controls.Add(this.BtnSegmentBoth);
             this.Setup.Controls.Add(this.grpUnicode);
             this.Setup.Controls.Add(this.grpLegacy);
             this.Setup.Controls.Add(this.btnGetExcelOutput);
@@ -314,14 +314,14 @@
             // 
             // btnBothToExcel
             // 
-            this.btnBothToExcel.Enabled = false;
-            this.btnBothToExcel.Location = new System.Drawing.Point(396, 316);
-            this.btnBothToExcel.Name = "btnBothToExcel";
-            this.btnBothToExcel.Size = new System.Drawing.Size(143, 42);
-            this.btnBothToExcel.TabIndex = 35;
-            this.btnBothToExcel.Text = "Already segmented,  just send to Excel";
-            this.btnBothToExcel.UseVisualStyleBackColor = true;
-            this.btnBothToExcel.Click += new System.EventHandler(this.BothToExcel_Click);
+            this.BtnBothToExcel.Enabled = false;
+            this.BtnBothToExcel.Location = new System.Drawing.Point(396, 316);
+            this.BtnBothToExcel.Name = "btnBothToExcel";
+            this.BtnBothToExcel.Size = new System.Drawing.Size(143, 42);
+            this.BtnBothToExcel.TabIndex = 35;
+            this.BtnBothToExcel.Text = "Already segmented,  just send to Excel";
+            this.BtnBothToExcel.UseVisualStyleBackColor = true;
+            this.BtnBothToExcel.Click += new System.EventHandler(this.BothToExcel_Click);
             // 
             // label4
             // 
@@ -334,19 +334,19 @@
             // 
             // btnSegmentBoth
             // 
-            this.btnSegmentBoth.Enabled = false;
-            this.btnSegmentBoth.Location = new System.Drawing.Point(164, 316);
-            this.btnSegmentBoth.Name = "btnSegmentBoth";
-            this.btnSegmentBoth.Size = new System.Drawing.Size(107, 43);
-            this.btnSegmentBoth.TabIndex = 33;
-            this.btnSegmentBoth.Text = "Segment Both Files";
-            this.btnSegmentBoth.UseVisualStyleBackColor = true;
-            this.btnSegmentBoth.Click += new System.EventHandler(this.btnSegmentBoth_Click);
+            this.BtnSegmentBoth.Enabled = false;
+            this.BtnSegmentBoth.Location = new System.Drawing.Point(164, 316);
+            this.BtnSegmentBoth.Name = "btnSegmentBoth";
+            this.BtnSegmentBoth.Size = new System.Drawing.Size(107, 43);
+            this.BtnSegmentBoth.TabIndex = 33;
+            this.BtnSegmentBoth.Text = "Segment Both Files";
+            this.BtnSegmentBoth.UseVisualStyleBackColor = true;
+            this.BtnSegmentBoth.Click += new System.EventHandler(this.BtnSegmentBoth_Click);
             // 
             // grpUnicode
             // 
             this.grpUnicode.Controls.Add(this.chkUnicodeAddSpace);
-            this.grpUnicode.Controls.Add(this.btnUnicodeToExcel);
+            this.grpUnicode.Controls.Add(this.BtnUnicodeToExcel);
             this.grpUnicode.Controls.Add(this.chkUnicodeToExcel);
             this.grpUnicode.Controls.Add(this.txtUnicodeInput);
             this.grpUnicode.Controls.Add(this.label8);
@@ -356,7 +356,7 @@
             this.grpUnicode.Controls.Add(this.GetUnicodeOutput);
             this.grpUnicode.Controls.Add(this.txtUnicodeWordCount);
             this.grpUnicode.Controls.Add(this.label10);
-            this.grpUnicode.Controls.Add(this.btnSegmentUnicode);
+            this.grpUnicode.Controls.Add(this.BtnSegmentUnicode);
             this.grpUnicode.Location = new System.Drawing.Point(0, 139);
             this.grpUnicode.Name = "grpUnicode";
             this.grpUnicode.Size = new System.Drawing.Size(724, 130);
@@ -376,14 +376,14 @@
             // 
             // btnUnicodeToExcel
             // 
-            this.btnUnicodeToExcel.Enabled = false;
-            this.btnUnicodeToExcel.Location = new System.Drawing.Point(344, 79);
-            this.btnUnicodeToExcel.Name = "btnUnicodeToExcel";
-            this.btnUnicodeToExcel.Size = new System.Drawing.Size(123, 42);
-            this.btnUnicodeToExcel.TabIndex = 28;
-            this.btnUnicodeToExcel.Text = "Already segmented,  just send to Excel";
-            this.btnUnicodeToExcel.UseVisualStyleBackColor = true;
-            this.btnUnicodeToExcel.Click += new System.EventHandler(this.SendToExcel_Click);
+            this.BtnUnicodeToExcel.Enabled = false;
+            this.BtnUnicodeToExcel.Location = new System.Drawing.Point(344, 79);
+            this.BtnUnicodeToExcel.Name = "btnUnicodeToExcel";
+            this.BtnUnicodeToExcel.Size = new System.Drawing.Size(123, 42);
+            this.BtnUnicodeToExcel.TabIndex = 28;
+            this.BtnUnicodeToExcel.Text = "Already segmented,  just send to Excel";
+            this.BtnUnicodeToExcel.UseVisualStyleBackColor = true;
+            this.BtnUnicodeToExcel.Click += new System.EventHandler(this.SendToExcel_Click);
             // 
             // chkUnicodeToExcel
             // 
@@ -395,7 +395,7 @@
             this.chkUnicodeToExcel.TabIndex = 27;
             this.chkUnicodeToExcel.Text = "Send to Excel";
             this.chkUnicodeToExcel.UseVisualStyleBackColor = true;
-            this.chkUnicodeToExcel.CheckStateChanged += new System.EventHandler(this.chkSendtoExcel_Change);
+            this.chkUnicodeToExcel.CheckStateChanged += new System.EventHandler(this.ChkSendtoExcel_Change);
             // 
             // txtUnicodeInput
             // 
@@ -422,7 +422,7 @@
             this.btnGetUnicodeInput.TabIndex = 2;
             this.btnGetUnicodeInput.Text = "Browse";
             this.btnGetUnicodeInput.UseVisualStyleBackColor = true;
-            this.btnGetUnicodeInput.Click += new System.EventHandler(this.btnGetInputFile_Click);
+            this.btnGetUnicodeInput.Click += new System.EventHandler(this.BtnGetInputFile_Click);
             // 
             // label9
             // 
@@ -448,7 +448,7 @@
             this.GetUnicodeOutput.TabIndex = 7;
             this.GetUnicodeOutput.Text = "Browse";
             this.GetUnicodeOutput.UseVisualStyleBackColor = true;
-            this.GetUnicodeOutput.Click += new System.EventHandler(this.btnGetOutputFile_Click);
+            this.GetUnicodeOutput.Click += new System.EventHandler(this.BtnGetOutputFile_Click);
             // 
             // txtUnicodeWordCount
             // 
@@ -470,20 +470,20 @@
             // 
             // btnSegmentUnicode
             // 
-            this.btnSegmentUnicode.Enabled = false;
-            this.btnSegmentUnicode.Location = new System.Drawing.Point(10, 90);
-            this.btnSegmentUnicode.Name = "btnSegmentUnicode";
-            this.btnSegmentUnicode.Size = new System.Drawing.Size(112, 27);
-            this.btnSegmentUnicode.TabIndex = 3;
-            this.btnSegmentUnicode.Text = "Segment  File";
-            this.btnSegmentUnicode.UseVisualStyleBackColor = true;
-            this.btnSegmentUnicode.Click += new System.EventHandler(this.btnSegmentInput_Click);
+            this.BtnSegmentUnicode.Enabled = false;
+            this.BtnSegmentUnicode.Location = new System.Drawing.Point(10, 90);
+            this.BtnSegmentUnicode.Name = "btnSegmentUnicode";
+            this.BtnSegmentUnicode.Size = new System.Drawing.Size(112, 27);
+            this.BtnSegmentUnicode.TabIndex = 3;
+            this.BtnSegmentUnicode.Text = "Segment  File";
+            this.BtnSegmentUnicode.UseVisualStyleBackColor = true;
+            this.BtnSegmentUnicode.Click += new System.EventHandler(this.BtnSegmentInput_Click);
             // 
             // grpLegacy
             // 
             this.grpLegacy.BackColor = System.Drawing.Color.Transparent;
             this.grpLegacy.Controls.Add(this.chkLegacyAddSpace);
-            this.grpLegacy.Controls.Add(this.btnLegacyToExcel);
+            this.grpLegacy.Controls.Add(this.BtnLegacyToExcel);
             this.grpLegacy.Controls.Add(this.chkLegacyToExcel);
             this.grpLegacy.Controls.Add(this.txtLegacyInput);
             this.grpLegacy.Controls.Add(this.label1);
@@ -493,7 +493,7 @@
             this.grpLegacy.Controls.Add(this.btnGetLegacyOutputFile);
             this.grpLegacy.Controls.Add(this.txtLegacyWordCount);
             this.grpLegacy.Controls.Add(this.label6);
-            this.grpLegacy.Controls.Add(this.btnSegmentLegacy);
+            this.grpLegacy.Controls.Add(this.BtnSegmentLegacy);
             this.grpLegacy.Location = new System.Drawing.Point(4, 0);
             this.grpLegacy.Name = "grpLegacy";
             this.grpLegacy.Size = new System.Drawing.Size(717, 133);
@@ -513,14 +513,14 @@
             // 
             // btnLegacyToExcel
             // 
-            this.btnLegacyToExcel.Enabled = false;
-            this.btnLegacyToExcel.Location = new System.Drawing.Point(340, 79);
-            this.btnLegacyToExcel.Name = "btnLegacyToExcel";
-            this.btnLegacyToExcel.Size = new System.Drawing.Size(123, 42);
-            this.btnLegacyToExcel.TabIndex = 18;
-            this.btnLegacyToExcel.Text = "Already segmented,  just send to Excel";
-            this.btnLegacyToExcel.UseVisualStyleBackColor = true;
-            this.btnLegacyToExcel.Click += new System.EventHandler(this.SendToExcel_Click);
+            this.BtnLegacyToExcel.Enabled = false;
+            this.BtnLegacyToExcel.Location = new System.Drawing.Point(340, 79);
+            this.BtnLegacyToExcel.Name = "btnLegacyToExcel";
+            this.BtnLegacyToExcel.Size = new System.Drawing.Size(123, 42);
+            this.BtnLegacyToExcel.TabIndex = 18;
+            this.BtnLegacyToExcel.Text = "Already segmented,  just send to Excel";
+            this.BtnLegacyToExcel.UseVisualStyleBackColor = true;
+            this.BtnLegacyToExcel.Click += new System.EventHandler(this.SendToExcel_Click);
             // 
             // chkLegacyToExcel
             // 
@@ -532,7 +532,7 @@
             this.chkLegacyToExcel.TabIndex = 17;
             this.chkLegacyToExcel.Text = "Send to Excel";
             this.chkLegacyToExcel.UseVisualStyleBackColor = true;
-            this.chkLegacyToExcel.CheckStateChanged += new System.EventHandler(this.chkSendtoExcel_Change);
+            this.chkLegacyToExcel.CheckStateChanged += new System.EventHandler(this.ChkSendtoExcel_Change);
             // 
             // txtLegacyInput
             // 
@@ -559,7 +559,7 @@
             this.btnGetLegacyInputFile.TabIndex = 2;
             this.btnGetLegacyInputFile.Text = "Browse";
             this.btnGetLegacyInputFile.UseVisualStyleBackColor = true;
-            this.btnGetLegacyInputFile.Click += new System.EventHandler(this.btnGetInputFile_Click);
+            this.btnGetLegacyInputFile.Click += new System.EventHandler(this.BtnGetInputFile_Click);
             // 
             // label2
             // 
@@ -585,7 +585,7 @@
             this.btnGetLegacyOutputFile.TabIndex = 7;
             this.btnGetLegacyOutputFile.Text = "Browse";
             this.btnGetLegacyOutputFile.UseVisualStyleBackColor = true;
-            this.btnGetLegacyOutputFile.Click += new System.EventHandler(this.btnGetOutputFile_Click);
+            this.btnGetLegacyOutputFile.Click += new System.EventHandler(this.BtnGetOutputFile_Click);
             // 
             // txtLegacyWordCount
             // 
@@ -607,14 +607,14 @@
             // 
             // btnSegmentLegacy
             // 
-            this.btnSegmentLegacy.Enabled = false;
-            this.btnSegmentLegacy.Location = new System.Drawing.Point(10, 90);
-            this.btnSegmentLegacy.Name = "btnSegmentLegacy";
-            this.btnSegmentLegacy.Size = new System.Drawing.Size(112, 27);
-            this.btnSegmentLegacy.TabIndex = 3;
-            this.btnSegmentLegacy.Text = "Segment  File";
-            this.btnSegmentLegacy.UseVisualStyleBackColor = true;
-            this.btnSegmentLegacy.Click += new System.EventHandler(this.btnSegmentInput_Click);
+            this.BtnSegmentLegacy.Enabled = false;
+            this.BtnSegmentLegacy.Location = new System.Drawing.Point(10, 90);
+            this.BtnSegmentLegacy.Name = "btnSegmentLegacy";
+            this.BtnSegmentLegacy.Size = new System.Drawing.Size(112, 27);
+            this.BtnSegmentLegacy.TabIndex = 3;
+            this.BtnSegmentLegacy.Text = "Segment  File";
+            this.BtnSegmentLegacy.UseVisualStyleBackColor = true;
+            this.BtnSegmentLegacy.Click += new System.EventHandler(this.BtnSegmentInput_Click);
             // 
             // btnGetExcelOutput
             // 
@@ -624,7 +624,7 @@
             this.btnGetExcelOutput.TabIndex = 30;
             this.btnGetExcelOutput.Text = "Browse";
             this.btnGetExcelOutput.UseVisualStyleBackColor = true;
-            this.btnGetExcelOutput.Click += new System.EventHandler(this.btnGetExcelOutput_Click);
+            this.btnGetExcelOutput.Click += new System.EventHandler(this.BtnGetExcelOutput_Click);
             // 
             // txtExcelOutput
             // 
@@ -685,13 +685,13 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(460, 545);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(112, 44);
-            this.btnClose.TabIndex = 27;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.BtnClose.Location = new System.Drawing.Point(460, 545);
+            this.BtnClose.Name = "btnClose";
+            this.BtnClose.Size = new System.Drawing.Size(112, 44);
+            this.BtnClose.TabIndex = 27;
+            this.BtnClose.Text = "Close";
+            this.BtnClose.UseVisualStyleBackColor = true;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // menuStrip1
             // 
@@ -720,14 +720,14 @@
             this.toolStripMenuItem2.Size = new System.Drawing.Size(166, 22);
             this.toolStripMenuItem2.Text = "New Comparison";
             this.toolStripMenuItem2.ToolTipText = "Clear the text boxes so you can start a new comparison.";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.ToolStripMenuItem2_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.toolStripMenuItem1.Text = "Exit";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.btnClose_Click);
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -744,32 +744,32 @@
             this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
             this.documentationToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.documentationToolStripMenuItem.Text = "Documentation";
-            this.documentationToolStripMenuItem.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
+            this.documentationToolStripMenuItem.Click += new System.EventHandler(this.DocumentationToolStripMenuItem_Click);
             // 
             // licenseToolStripMenuItem
             // 
             this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
             this.licenseToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.licenseToolStripMenuItem.Text = "License";
-            this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
+            this.licenseToolStripMenuItem.Click += new System.EventHandler(this.LicenseToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // btnPauseResume
             // 
-            this.btnPauseResume.Enabled = false;
-            this.btnPauseResume.Location = new System.Drawing.Point(219, 545);
-            this.btnPauseResume.Name = "btnPauseResume";
-            this.btnPauseResume.Size = new System.Drawing.Size(112, 44);
-            this.btnPauseResume.TabIndex = 30;
-            this.btnPauseResume.Text = "Pause";
-            this.btnPauseResume.UseVisualStyleBackColor = true;
-            this.btnPauseResume.Click += new System.EventHandler(this.btnPauseResume_Click);
+            this.BtnPauseResume.Enabled = false;
+            this.BtnPauseResume.Location = new System.Drawing.Point(219, 545);
+            this.BtnPauseResume.Name = "btnPauseResume";
+            this.BtnPauseResume.Size = new System.Drawing.Size(112, 44);
+            this.BtnPauseResume.TabIndex = 30;
+            this.BtnPauseResume.Text = "Pause";
+            this.BtnPauseResume.UseVisualStyleBackColor = true;
+            this.BtnPauseResume.Click += new System.EventHandler(this.BtnPauseResume_Click);
             // 
             // label7
             // 
@@ -826,8 +826,8 @@
             this.Controls.Add(this.UpdownFontSize);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.boxExtension);
-            this.Controls.Add(this.btnPauseResume);
-            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.BtnPauseResume);
+            this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.WordsPerLine);
@@ -878,7 +878,7 @@
         private System.Windows.Forms.Button GetUnicodeOutput;
         private System.Windows.Forms.TextBox txtUnicodeWordCount;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button btnSegmentUnicode;
+        private System.Windows.Forms.Button BtnSegmentUnicode;
         private System.Windows.Forms.GroupBox grpLegacy;
         private System.Windows.Forms.TextBox txtLegacyInput;
         private System.Windows.Forms.Label label1;
@@ -888,21 +888,21 @@
         private System.Windows.Forms.Button btnGetLegacyOutputFile;
         private System.Windows.Forms.TextBox txtLegacyWordCount;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnSegmentLegacy;
+        private System.Windows.Forms.Button BtnSegmentLegacy;
         private System.Windows.Forms.Button btnGetExcelOutput;
         private System.Windows.Forms.TextBox txtExcelOutput;
         private System.Windows.Forms.TabPage Progress;
         private System.Windows.Forms.ListBox boxProgress;
         private System.Windows.Forms.OpenFileDialog openUnicodeFileDialog;
-        private System.Windows.Forms.Button btnSegmentBoth;
+        private System.Windows.Forms.Button BtnSegmentBoth;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkUnicodeToExcel;
         private System.Windows.Forms.CheckBox chkLegacyToExcel;
-        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button BtnClose;
         public System.Windows.Forms.SaveFileDialog saveExcelFileDialog;
-        private System.Windows.Forms.Button btnBothToExcel;
-        private System.Windows.Forms.Button btnUnicodeToExcel;
-        private System.Windows.Forms.Button btnLegacyToExcel;
+        private System.Windows.Forms.Button BtnBothToExcel;
+        private System.Windows.Forms.Button BtnUnicodeToExcel;
+        private System.Windows.Forms.Button BtnLegacyToExcel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -913,7 +913,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar progressBar1;
-        private System.Windows.Forms.Button btnPauseResume;
+        private System.Windows.Forms.Button BtnPauseResume;
         private System.Windows.Forms.CheckBox chkUnicodeAddSpace;
         private System.Windows.Forms.CheckBox chkLegacyAddSpace;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;

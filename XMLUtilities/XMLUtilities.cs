@@ -172,8 +172,10 @@ namespace XMLUtilities
             foreach (XmlNode theParagraphData in theNodeList)
             {
                 string theParagraphStyleID = XmlLookup(theParagraphData, "w:pPr/w:pStyle", nsManager, "w:val", "DefaultParagraphFont");
-                RichText TextElement = new RichText();
-                TextElement.Font = null;
+                RichText TextElement = new RichText()
+                {
+                    Font = null
+                };
                 if (theStyleDictionary.Keys.Contains(theParagraphStyleID))
                 {
                     TextElement.Font = theStyleDictionary[theParagraphStyleID];

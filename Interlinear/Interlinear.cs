@@ -6,9 +6,9 @@
  * It was writting as part of a MissionAssist project to convert documents in legacy fonts to Unicode.  Much of the logic is attributable to
  * Dennis Pepler, but the code here was written by Stephen Palmstrom.
  * 
- * Copyright © MissionAssist 2014 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
+ * Copyright © MissionAssist 2017 and distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  * 
- * Last modified on 3 March 2015 by Stephen Palmstrom (stephen.palmstrom@outlook.com) who asserts the right to be regarded as the author of this program
+ * Last modified on 17 May 2017 by Stephen Palmstrom (spalmstrom@missionassist.onmicrosoft.com) who asserts the right to be regarded as the author of this program
  * 
  * Acknowledgement is due to Dennis Pepler who worked out how to scan stories etc.
 */
@@ -57,7 +57,7 @@ namespace Interlinear
         private bool Paused = false;
         private bool CloseApp = false;
         private bool WordWasRunning = false;
-        private bool ExcelWasRunning = false;
+        private bool ExcelFileOpen = false;
         //  Directories
         private string LegacyInputDir = "";
         private string LegacyOutputDir = "";
@@ -107,7 +107,6 @@ namespace Interlinear
             {
                 excelApp = System.Runtime.InteropServices.Marshal.GetActiveObject(
                     "Excel.Application") as Excel;
-                ExcelWasRunning = true; // Remember we were running Excel
             }
             catch
             {
@@ -115,9 +114,7 @@ namespace Interlinear
                  * Excel isn't running, so we run it.
                  */
                 excelApp = new Excel();
-                ExcelWasRunning = false;
             }
-            excelApp.Visible = false;
 
             saveLegacyFileDialog.SupportMultiDottedExtensions = true;
             saveUnicodeFileDialog.SupportMultiDottedExtensions = true;
@@ -207,39 +204,39 @@ namespace Interlinear
             return DefaultValue;
         }
 
-        private void btnGetInputFile_Click(object sender, EventArgs e)
+        private void BtnGetInputFile_Click(object sender, EventArgs e)
         {
             Button theButton = (Button)sender;
             if (theButton.Parent.Text == "Legacy")
             {
-                LegacyInputDir = HandleInputFile(txtLegacyInput, txtLegacyOutput, btnSegmentLegacy, openLegacyFileDialog, saveLegacyFileDialog,
-                    btnLegacyToExcel, chkLegacyToExcel, LegacyInputDir, "LegacyInputDir");
+                LegacyInputDir = HandleInputFile(txtLegacyInput, txtLegacyOutput, BtnSegmentLegacy, openLegacyFileDialog, saveLegacyFileDialog,
+                    BtnLegacyToExcel, chkLegacyToExcel, LegacyInputDir, "LegacyInputDir");
             }
             else
             {
-                UnicodeInputDir = HandleInputFile(txtUnicodeInput, txtUnicodeOutput, btnSegmentUnicode, openUnicodeFileDialog, saveUnicodeFileDialog,
-                    btnUnicodeToExcel, chkLegacyToExcel, UnicodeInputDir, "UnicodeInputDir");
+                UnicodeInputDir = HandleInputFile(txtUnicodeInput, txtUnicodeOutput, BtnSegmentUnicode, openUnicodeFileDialog, saveUnicodeFileDialog,
+                    BtnUnicodeToExcel, chkLegacyToExcel, UnicodeInputDir, "UnicodeInputDir");
             }
 
         }
-        private void chkSendtoExcel_Change(object sender, EventArgs e)
+        private void ChkSendtoExcel_Change(object sender, EventArgs e)
         {
             // handle a change in the just send to Excel buttons
             CheckBox theCheckBox = (CheckBox)sender;
             if (theCheckBox.Parent.Text == "Legacy")
             {
-                HandleCheckBoxChange(txtLegacyOutput.Text, btnLegacyToExcel, theCheckBox.Checked);
+                HandleCheckBoxChange(txtLegacyOutput.Text, BtnLegacyToExcel, theCheckBox.Checked);
             }
             else
             {
-                HandleCheckBoxChange(txtUnicodeOutput.Text, btnUnicodeToExcel, theCheckBox.Checked);
+                HandleCheckBoxChange(txtUnicodeOutput.Text, BtnUnicodeToExcel, theCheckBox.Checked);
             }
         }
         private void HandleCheckBoxChange(string OutputText, Button SendtoExcel, bool Checked)
         {
             SendtoExcel.Enabled = File.Exists(OutputText) && Checked;
         }
-        private string HandleInputFile(TextBox InputText, TextBox OutputText, Button SegmentButton, OpenFileDialog theOpenFileDialog, SaveFileDialog theSaveFileDialog,
+        private string HandleInputFile(TextBox InputText, TextBox OutputText, Button SegmentButton, System.Windows.Forms.OpenFileDialog theOpenFileDialog, System.Windows.Forms.SaveFileDialog theSaveFileDialog,
             Button ExcelButton, CheckBox SendtoExcel, string DefaultDir, string ValueName)
         {
             /*
@@ -273,29 +270,29 @@ namespace Interlinear
                 }
                 theSaveFileDialog.FileName = OutputText.Text;
                 HandleOutputFile1(InputText.Text, OutputText.Text, SegmentButton, ExcelButton, SendtoExcel);  // process further
-                btnSegmentBoth.Enabled = btnSegmentLegacy.Enabled && btnSegmentUnicode.Enabled;
-                btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text) && txtExcelOutput.Text.Length > 0;
+                BtnSegmentBoth.Enabled = BtnSegmentLegacy.Enabled && BtnSegmentUnicode.Enabled;
+                BtnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text) && txtExcelOutput.Text.Length > 0;
                 tmpString = Path.GetDirectoryName(theOpenFileDialog.FileName);
                 Registry.SetValue(keyName, ValueName, tmpString);
             };
             return tmpString;
         }
-        private void btnGetOutputFile_Click(object sender, EventArgs e)
+        private void BtnGetOutputFile_Click(object sender, EventArgs e)
         {
             Button theButton = (Button)sender;
             if (theButton.Parent.Text == "Legacy")
             {
-                LegacyOutputDir = HandleOutputFile(txtLegacyInput, txtLegacyOutput, saveLegacyFileDialog, btnSegmentLegacy, btnLegacyToExcel, chkLegacyToExcel,
+                LegacyOutputDir = HandleOutputFile(txtLegacyInput, txtLegacyOutput, saveLegacyFileDialog, BtnSegmentLegacy, BtnLegacyToExcel, chkLegacyToExcel,
                      LegacyOutputDir, "LegacyOutputDir");
             }
             else
             {
-                UnicodeOutputDir = HandleOutputFile(txtUnicodeInput, txtUnicodeOutput, saveUnicodeFileDialog, btnSegmentUnicode, btnUnicodeToExcel, chkUnicodeToExcel,
+                UnicodeOutputDir = HandleOutputFile(txtUnicodeInput, txtUnicodeOutput, saveUnicodeFileDialog, BtnSegmentUnicode, BtnUnicodeToExcel, chkUnicodeToExcel,
                     UnicodeOutputDir, "UnicodeOutputDir");
 
             }
         }
-        private string HandleOutputFile(TextBox theInputBox, TextBox theOutputBox, SaveFileDialog theDialog, Button SegmentButton,
+        private string HandleOutputFile(TextBox theInputBox, TextBox theOutputBox, System.Windows.Forms.SaveFileDialog theDialog, Button SegmentButton,
             Button ExcelButton, CheckBox SendtoExcel, string DefaultDir, string ValueName)
         {
             theDialog.InitialDirectory = DefaultDir;
@@ -317,12 +314,12 @@ namespace Interlinear
             /*
              * If both individual segment buttons are enabled, we enable the segment both button, too.
              */
-            btnSegmentBoth.Enabled = btnSegmentLegacy.Enabled && btnSegmentUnicode.Enabled;
-            btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text) && txtExcelOutput.Text.Length > 0;
+            BtnSegmentBoth.Enabled = BtnSegmentLegacy.Enabled && BtnSegmentUnicode.Enabled;
+            BtnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text) && txtExcelOutput.Text.Length > 0;
 
 
         }
-        private void btnGetExcelOutput_Click(object sender, EventArgs e)
+        private void BtnGetExcelOutput_Click(object sender, EventArgs e)
         {
             /*
              * Handle the input file dialog.
@@ -339,19 +336,19 @@ namespace Interlinear
                 chkLegacyToExcel.Checked = true;
                 chkUnicodeToExcel.Checked = true;
                 // If the segmented files exist we can send them to Excel without resegmenting
-                btnLegacyToExcel.Enabled = File.Exists(txtLegacyOutput.Text);
-                btnUnicodeToExcel.Enabled = File.Exists(txtUnicodeOutput.Text);
-                btnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text);
+                BtnLegacyToExcel.Enabled = File.Exists(txtLegacyOutput.Text);
+                BtnUnicodeToExcel.Enabled = File.Exists(txtUnicodeOutput.Text);
+                BtnBothToExcel.Enabled = File.Exists(txtLegacyOutput.Text) && File.Exists(txtUnicodeOutput.Text);
                 ExcelDir = Path.GetDirectoryName(saveExcelFileDialog.FileName); // Remember the directory
                 Registry.SetValue(keyName, "ExcelDir", ExcelDir); // for future reference, too.
             }
 
         }
-        private void btnSegmentInput_Click(object sender, EventArgs e)
+        private void BtnSegmentInput_Click(object sender, EventArgs e)
         {
             Button theButton = (Button)sender;
             theButton.Enabled = false;  // Disable as we have started running.
-            btnClose.Enabled = false;
+            BtnClose.Enabled = false;
             boxProgress.Items.Clear();  // empty the progress box
 
             tabControl1.SelectTab("Progress");
@@ -365,22 +362,22 @@ namespace Interlinear
                 SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, chkUnicodeAddSpace, true);
             }
             theButton.Enabled = true;  // enable it again
-            btnClose.Enabled = true;
+            BtnClose.Enabled = true;
             Application.DoEvents();
             System.Media.SystemSounds.Beep.Play();  // and beep
             if (chkCloseOnCompletion.Checked)
             {
-                btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+                BtnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
             }
 
         }
-        private void btnSegmentBoth_Click(object sender, EventArgs e)
+        private void BtnSegmentBoth_Click(object sender, EventArgs e)
         {
             //  Segment both files in one go
             Button theButton = (Button)sender;
             tabControl1.SelectTab("Progress");
             theButton.Enabled = false;
-            btnClose.Enabled = false;
+            BtnClose.Enabled = false;
             boxProgress.Items.Clear();  // empty the progress box
             SegmentFile(txtLegacyInput.Text, txtLegacyOutput.Text, txtLegacyWordCount, chkLegacyToExcel, chkLegacyAddSpace, false);
             SegmentFile(txtUnicodeInput.Text, txtUnicodeOutput.Text, txtUnicodeWordCount, chkUnicodeToExcel, chkUnicodeAddSpace, true);
@@ -389,11 +386,11 @@ namespace Interlinear
                 //MakeInterlinear(excelApp);  // Make the interlinear worksheet, too
             }
             theButton.Enabled = true;
-            btnClose.Enabled = true;
+            BtnClose.Enabled = true;
             System.Media.SystemSounds.Beep.Play();  // and beep
             if (chkCloseOnCompletion.Checked)
             {
-                btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+                BtnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
             }
 
         }
@@ -425,9 +422,9 @@ namespace Interlinear
                     InputDoc = wrdApp.Documents.OpenNoRepairDialog(theInputFile, false, true);  // Read only, and we don't want the repair dialog, nor format prompts.
                     //boxProgress.Items.Add("Opened input file");
                     File.Delete(theOutputFile); // delete the output file
-                  /*
-                   * We now save the input file as the output file.  This will save copying the main story to the output file.
-                   */
+                                                /*
+                                                 * We now save the input file as the output file.  This will save copying the main story to the output file.
+                                                 */
                     InputDoc.SaveAs2(theOutputFile, WordRoot.WdSaveFormat.wdFormatXMLDocument);
                 }
                 catch (Exception e)
@@ -453,7 +450,7 @@ namespace Interlinear
                  * 
                  */
                 boxProgress.Items.Add("**** Starting processing " + Path.GetFileName(theInputFile));
-                btnPauseResume.Enabled = true;
+                BtnPauseResume.Enabled = true;
                 Application.DoEvents();
                 //OptimiseDoc(InputDoc);
                 OptimiseDoc(InputDoc);
@@ -529,7 +526,7 @@ namespace Interlinear
                             }
                             switch (rngStory.StoryType)
                             {
-                                    // You can't delete the text from footnotes.
+                                // You can't delete the text from footnotes.
                                 case WordRoot.WdStoryType.wdFootnoteContinuationNoticeStory:
                                 case WordRoot.WdStoryType.wdFootnoteContinuationSeparatorStory:
                                 case WordRoot.WdStoryType.wdFootnoteSeparatorStory:
@@ -540,10 +537,10 @@ namespace Interlinear
                                 case WordRoot.WdStoryType.wdEndnotesStory:
                                     break;
                                 default:
-                            rngStory.Text = "";  // Clear the story
+                                    rngStory.Text = "";  // Clear the story
                                     break;
                             }
-                                    
+
                         }
                         tmpStory = tmpStory.NextStoryRange;  // trace through a link of substories
                     }
@@ -613,15 +610,15 @@ namespace Interlinear
                 boxProgress.Items.Add("Document (" + CharacterCounter.ToString() + " characters) copied in " + (ElapsedTime / 1000.0).ToString("f2") + " seconds or " + (CharacterCounter * 1000.0 / ElapsedTime).ToString("f2") + " cps");
                 theStopwatch2.Stop();
                 theStopwatch2 = null;
-                btnPauseResume.Enabled = false;
+                BtnPauseResume.Enabled = false;
                 Application.DoEvents();
                 InputDoc.Activate();  // Make sure the document is active.
                 InputDoc.StoryRanges[WordRoot.WdStoryType.wdMainTextStory].Select();  // Select the main story
-                 /*
-                 * Clean up the document
-                 */
+                                                                                      /*
+                                                                                      * Clean up the document
+                                                                                      */
                 CharacterCounter = CleanWordText(wrdApp, InputDoc, theOutputFile, CharacterCounter);
-                SaveDocument(InputDoc, theOutputFile, " document cleaned"); 
+                SaveDocument(InputDoc, theOutputFile, " document cleaned");
                 /*
                   * Now start splitting into a number of space-separated words, i.e. segmenting it.
                   */
@@ -646,7 +643,7 @@ namespace Interlinear
                 InputDoc = null;  // and free up the memory
 
                 wrdApp.ScreenUpdating = true; // turn on screen updating
-                btnPauseResume.Enabled = false;
+                BtnPauseResume.Enabled = false;
                 progressBar1.Value = 0;
                 boxProgress.Items.Add("Completed in " + theStopwatch.Elapsed.ToString("hh\\:mm\\:ss\\.f"));
                 toolStripStatusLabel1.Text = "Completed";
@@ -657,7 +654,7 @@ namespace Interlinear
             }
             AddSpaceAfterRange.Enabled = true; // Enable us to change settings again.
         }
-        private void SaveDocument (Document InputDocument, string theOutputFile, string theComment, bool LastCall = false)
+        private void SaveDocument(Document InputDocument, string theOutputFile, string theComment, bool LastCall = false)
         {
             /*
              * Save the document.  If we have checked the debug, we save an intermediate version so we can see how we fare.
@@ -682,7 +679,7 @@ namespace Interlinear
         }
         private void SleepForABit(int theDelay)
         {
-            progressBar1.Maximum = theDelay*100;
+            progressBar1.Maximum = theDelay * 100;
             for (int Counter = 0; Counter < progressBar1.Maximum; Counter++)
             {
 
@@ -693,7 +690,7 @@ namespace Interlinear
             progressBar1.Value = 0;
 
         }
-         private bool CompareRanges(WordRoot.Range RangeOne, WordRoot.Range RangeTwo)
+        private bool CompareRanges(WordRoot.Range RangeOne, WordRoot.Range RangeTwo)
         {
             // Compare two ranges
             return (RangeOne.Font.Name == RangeTwo.Font.Name && RangeOne.Text == RangeTwo.Text);
@@ -725,7 +722,7 @@ namespace Interlinear
                     InputDoc.ActiveWindow.Selection.Collapse(WordRoot.WdCollapseDirection.wdCollapseEnd);  // Make sure it doesn't get overwritten when we paste.
                     InputDoc.ActiveWindow.Selection.EndKey(WordRoot.WdUnits.wdStory, false);  // Make sure we are at the end of the story.
                     InputDoc.ActiveWindow.Selection.FormattedText = theParagraph.Range.FormattedText; // Copy the text in a formatted form
-                    try 
+                    try
                     {
                         InputDoc.UndoClear();  // Clear the undo buffer lest we fill it.
                     }
@@ -733,7 +730,7 @@ namespace Interlinear
                     {
                         MessageBox.Show(Ex.Message, "Error clearing undo buffer", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    
+
                     float rate1 = ((float)DeltaChars * Stopwatch.Frequency / theStopwatch3.Elapsed.Ticks);
                     toolStripStatusLabel1.Text = "Copied " + DeltaChars.ToString() + " characters at " + rate1.ToString("f2") + " per sec";
                     theStopwatch3.Stop();
@@ -785,7 +782,7 @@ namespace Interlinear
         }
 
 
-        private int InsertAfter2(WordRoot.Range theRange, bool AddSpace, int CharacterCounter, 
+        private int InsertAfter2(WordRoot.Range theRange, bool AddSpace, int CharacterCounter,
             Stopwatch theStopwatch, Stopwatch theStopwatch2, Stopwatch theStopwatch3)
         {
             try
@@ -958,9 +955,9 @@ namespace Interlinear
                 //theRange.Select();
                 Stopwatch theStopWatch2 = new Stopwatch();
                 //theApp.Selection.HomeKey(WordRoot.WdUnits.wdStory);
-                   /*
-                   * Convert tables to text
-                   */
+                /*
+                * Convert tables to text
+                */
                 theStopWatch2.Restart();
                 int Counter = 0;
                 // Remove the tables
@@ -984,21 +981,21 @@ namespace Interlinear
                  */
                 CharacterCounter = RemoveShapes(theApp, theDoc, CharacterCounter);
 
-               /*
-                 * Remove all frames
-                 */
+                /*
+                  * Remove all frames
+                  */
                 theStopWatch2.Restart();
                 Counter = 0;
                 foreach (WordRoot.Frame theFrame in theDoc.Frames)
                 {
                     try
                     {
-                    theFrame.TextWrap = false; // Make it no longer wrap text
-                    theFrame.Borders.OutsideLineStyle = WordRoot.WdLineStyle.wdLineStyleNone;
-                    theFrame.Delete(); // and delete the frame
-                    Counter++;
+                        theFrame.TextWrap = false; // Make it no longer wrap text
+                        theFrame.Borders.OutsideLineStyle = WordRoot.WdLineStyle.wdLineStyleNone;
+                        theFrame.Delete(); // and delete the frame
+                        Counter++;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         boxProgress.Items.Add("Could not remove frame " + ex.Message);
                     }
@@ -1031,7 +1028,7 @@ namespace Interlinear
                 {
                     theEndnote.Delete(); // Delete it
                     Counter++;
-                theDoc.UndoClear(); ;// clear the undo buffer
+                    theDoc.UndoClear(); ;// clear the undo buffer
                 }
                 theDoc.UndoClear(); ;// clear the undo buffer
                 boxProgress.Items.Add("Removed " + Counter.ToString() + " endnotes in " + (theStopWatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
@@ -1039,7 +1036,7 @@ namespace Interlinear
                 // Remove field codes and replace them with their text equivalents
                 theStopWatch2.Restart();
                 Counter = 0;
-                foreach(WordRoot.Field theField in theDoc.Fields)
+                foreach (WordRoot.Field theField in theDoc.Fields)
                 {
                     string theValue = theField.Result.Text;
                     theField.Select();
@@ -1070,7 +1067,7 @@ namespace Interlinear
                 {
                     theParagraph.Format.Alignment = WordRoot.WdParagraphAlignment.wdAlignParagraphLeft;
                 }
-  
+
 
 
                 boxProgress.Items.Add("Cleaned the text in " + (theStopWatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
@@ -1123,10 +1120,6 @@ namespace Interlinear
                         }
                         excelApp.ActiveWorkbook.Close(Save);
                     }
-                    if (ExcelWasRunning)
-                    {
-                        excelApp.Visible = true;
-                    }
                     else
                     {
                         excelApp.Quit();
@@ -1151,19 +1144,18 @@ namespace Interlinear
             }
 
         }
-        private void btnClose_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
             /*
             * Exit
             */
             bool WasPaused = Paused;
             Paused = false;  // so we keep going and close
-            if (sender is Button)
+            if (sender is Button theButton)
             {
-                Button theButton = (Button)sender;
                 theButton.Text = "Closing...";
                 theButton.Enabled = false;
-                btnPauseResume.Enabled = false;
+                BtnPauseResume.Enabled = false;
             }
             // Save some Registry settings
             Registry.SetValue(keyName, "DefaultExtensionIndex", DefaultExtensionIndex);
@@ -1203,7 +1195,7 @@ namespace Interlinear
                 Application.DoEvents();
             }
             theSelection.Find.MatchWildcards = false;  // the default
-            boxProgress.Items.Add("Globally replaced " +SearchChars + " by [ " + ReplacementChars + "] in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+            boxProgress.Items.Add("Globally replaced " + SearchChars + " by [ " + ReplacementChars + "] in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
             Application.DoEvents();
 
 
@@ -1222,10 +1214,10 @@ namespace Interlinear
                 Stopwatch theStopwatch_overall = new Stopwatch();
                 theStopwatch_overall.Start();
                 theStopwatch.Start();
-                 /*
-                        * Use wildcards to add the paragraph markers
-                        * 
-                        */
+                /*
+                       * Use wildcards to add the paragraph markers
+                       * 
+                       */
                 theSelection.Find.ClearFormatting();
                 theSelection.Find.Forward = true;
                 theSelection.Find.Wrap = WordRoot.WdFindWrap.wdFindContinue;
@@ -1270,7 +1262,7 @@ namespace Interlinear
                 //theApp.ScreenUpdating = true;
                 GlobalReplace(theSelection, TheSpace, theParagraph, false, false, " Make each word a paragraph");
                 boxProgress.Items.Add("First pass complete in " + (theStopwatch.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
-                 progressBar1.Value += 1;
+                progressBar1.Value += 1;
                 Application.DoEvents();
                 InputDoc.Save();
 
@@ -1284,8 +1276,8 @@ namespace Interlinear
                 /*
                  * Trim any trailing spaces at the end of lines
                  */
-                 GlobalReplace(theSelection, "[ ]{1,}[^13]", "^p", false, true, " Remove trailing spaces at the end of lines");
-  
+                GlobalReplace(theSelection, "[ ]{1,}[^13]", "^p", false, true, " Remove trailing spaces at the end of lines");
+
                 /*
                  * If the WordCount > 2, we assume 4, 6, 8 etc.
                  */
@@ -1313,10 +1305,10 @@ namespace Interlinear
                     ReplacementString += @"^p";  // Add a paragraph marker at the end
                     // Go to the beginning
                     theSelection.HomeKey(WordRoot.WdUnits.wdStory);
- 
+
                     theSelection.Find.Replacement.Text += "^p"; // ending with one paragraph
                     // and do the second paragraph
-                    boxProgress.Items.Add("Starting segmentation third pass - actual segmentation");                   
+                    boxProgress.Items.Add("Starting segmentation third pass - actual segmentation");
                     theStopwatch.Restart();
                     theApp.ActiveDocument.UndoClear();  // Clear the undo stack
                     GlobalReplace(theSelection, SearchString, ReplacementString, false, true);
@@ -1341,9 +1333,9 @@ namespace Interlinear
                 }
 
                 theSelection.Find.MatchWildcards = false;  // Don't leave wildcards hanging
-             /*
-                 * And make sure we don't have two consequitive paragraphs
-                 */
+                                                           /*
+                                                               * And make sure we don't have two consequitive paragraphs
+                                                               */
                 GlobalReplace(theSelection, "[^13]{2,}", "^p", false, true, " Remove consequitive paragraphs");
                 /*
                  * Trim any trailing spaces at the end of lines
@@ -1409,7 +1401,7 @@ namespace Interlinear
             {
                 WordsPerLine.Increment = 1;
             }
-            
+
         }
 
         private int InitialiseExcel(ExcelApp excelApp, bool EvenRows, string FileName)
@@ -1419,7 +1411,7 @@ namespace Interlinear
              */
 
             bool hasValue = false;
-            excelApp.Visible = false;
+
             Stopwatch theStopwatch = new Stopwatch();
             theStopwatch.Start();
             boxProgress.Items.Add("Clearing worksheet...");
@@ -1427,30 +1419,39 @@ namespace Interlinear
             {
                 int theRow;
                 string StrippedFileName = Path.GetFileName(FileName);  // Get the file name without the directory
-                ExcelRoot.Workbook theWorkbook;
-                if (File.Exists(txtExcelOutput.Text))
+                ExcelRoot.Workbook theWorkbook = null;
+                if (ExcelFileOpen)
                 {
-                    try
-                    {
-                        theWorkbook = excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
-                        excelApp.Visible = false;  // make sure it isn't visible.
-                    }
-                    catch (Exception e)
-                    {
-                        DialogResult theResult = MessageBox.Show(e.Message, "Error in InitialiseExcel", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        tabControl1.SelectTab("Setup");
-                        return 0;
-
-                    }
-
+                    theWorkbook = excelApp.Workbooks[1];
                 }
                 else
                 {
-                    theWorkbook = excelApp.Workbooks.Add();  // add it
-                    excelApp.Visible = false;  // Make sure it stays invisible
-                    excelApp.ActiveWindow.Zoom = 100; // Don't zoom it.
-                    theWorkbook.SaveAs(txtExcelOutput.Text);  // save it
+                    if (File.Exists(txtExcelOutput.Text))
+                    {
+                        try
+                        {
+                            theWorkbook = excelApp.Workbooks.Open(txtExcelOutput.Text);  // Open the file
+                            ExcelFileOpen = true;
+                        }
+                        catch (Exception e)
+                        {
+                            DialogResult theResult = MessageBox.Show(e.Message, "Error in InitialiseExcel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            tabControl1.SelectTab("Setup");
+                            return 0;
+
+                        }
+                    }
+                    else
+                    {
+                        theWorkbook = excelApp.Workbooks.Add();  // add it
+                        excelApp.ActiveWindow.Zoom = 100; // Don't zoom it.
+                        theWorkbook.SaveAs(txtExcelOutput.Text);  // save it
+                        ExcelFileOpen = true;
+                    }
                 }
+                //if (Convert.ToDecimal(excelApp.Version, System.Globalization.CultureInfo.InvariantCulture)  >=  16 &&
+                //   File.Exists(txtExcelOutput.Text) )
+                //    theWorkbook.LockServerFile(); // Lock the file so we can edit it.
                 theWorkbook.Sheets[1].Name = "Interlinear";
                 theWorkbook.Sheets[1].Columns("A").ColumnWidth = 100;  // and make the first column wide
                 if (EvenRows)
@@ -1494,7 +1495,7 @@ namespace Interlinear
                 return -1;
             }
         }
-         private void FillExcel(ExcelApp excelApp, WordApp wrdApp, Document theDoc, int RowCounter)
+        private void FillExcel(ExcelApp excelApp, WordApp wrdApp, Document theDoc, int RowCounter)
         {
             /*
              * Here is where we fill the Excel spreadsheet
@@ -1503,10 +1504,9 @@ namespace Interlinear
             {
                 Stopwatch theStopwatch = new Stopwatch();
                 theStopwatch.Start();
-                excelApp.Visible = false;
                 wrdApp.Visible = false;
                 theExcelOptions = new ExcelAppOptions(excelApp);  // save settings
-                theExcelOptions.OptimiseApp(excelApp);  // Optimise Excel before filling
+                theExcelOptions.OptimiseApp(excelApp, DebugCheckBox.Checked);  // Optimise Excel before filling
                 boxProgress.Items.Add("Starting to fill Excel worksheet");
                 ExcelRoot.Workbook theWorkBook = excelApp.ActiveWorkbook;  // remember the document.
                 excelApp.Calculation = ExcelRoot.XlCalculation.xlCalculationManual; // Don't calculate automatically.
@@ -1523,7 +1523,7 @@ namespace Interlinear
                 int ParagraphCount = theDoc.ComputeStatistics(WordRoot.WdStatistic.wdStatisticParagraphs);
                 MaxParagraphs = Math.Max(MaxParagraphs, ParagraphCount * 2);
                 boxProgress.Items.Add("There are " + ParagraphCount.ToString() + " paragraphs");
-                btnPauseResume.Enabled = true;
+                BtnPauseResume.Enabled = true;
                 Application.DoEvents();
                 // Initialise the progress bar
                 progressBar1.Value = 0;
@@ -1568,22 +1568,22 @@ namespace Interlinear
                     {
                         try
                         {
-  
+
                             theWorkSheet.Paste(theWorkSheet.Range[theCellRef]);  // Paste to it.
                             theWorkSheet.Range[theCellRef].NumberFormat = "@";  // and make it have a text format so lines starting with = don't error.
-                            //theWorkSheet.Range[theCellRef].FormulaR1C1 = theParagraph.Range.Text; // setting the formula should make the cell visible
+                                                                                //theWorkSheet.Range[theCellRef].FormulaR1C1 = theParagraph.Range.Text; // setting the formula should make the cell visible
                             theWorkSheet.Range[theCellRef].VerticalAlignment = ExcelRoot.XlVAlign.xlVAlignTop; // Top
                             theWorkSheet.Range[theCellRef].HorizontalAlignment = ExcelRoot.XlHAlign.xlHAlignGeneral;  // General align
                             theWorkSheet.Range[theCellRef].HorizontalAlignment = ExcelRoot.XlHAlign.xlHAlignLeft; // and left
                             Clipboard.Clear();  // clear the clipboard
-                            
+
                             Failure = false;
 
                         }
                         catch (Exception e)
                         {
                             boxProgress.Items.Add("Paste error " + e.Message + " in row " + theRow.ToString() + ". Retrying...");
-                            Thread.Sleep(100*(ErrorCounter+1));  // wait milliseconds
+                            Thread.Sleep(100 * (ErrorCounter + 1));  // wait milliseconds
                             ErrorCounter++;
                             if (ErrorCounter >= 10)
                             {
@@ -1618,12 +1618,12 @@ namespace Interlinear
                 theDoc.Close(false);
                 theWorkSheet.Columns["A"].Font.Size = UpdownFontSize.Value;  // setting the size in one go may be faster than line by line
                 theWorkSheet.Range["A1"].Select();  // go to the start of the worksheet
-                theExcelOptions.RestoreApp(excelApp); // Restore the Excel settings we saved earlier
                 theWorkBook.Save();
+                theExcelOptions.RestoreApp(excelApp); // Restore the Excel settings we saved earlier
                 boxProgress.Items.Add("Excel interlinear worksheet filled in " + (theStopwatch2.Elapsed).ToString("hh\\:mm\\:ss\\.f"));
                 theStopwatch2.Stop();
                 theStopwatch2 = null;
-                btnPauseResume.Enabled = false;
+                BtnPauseResume.Enabled = false;
                 Application.DoEvents();
             }
             catch (Exception Ex)
@@ -1640,7 +1640,7 @@ namespace Interlinear
                 bool EvenRows;
                 Document theDoc;
                 string FileName;
-                btnClose.Enabled = false;
+                BtnClose.Enabled = false;
                 tabControl1.SelectTab("Progress");
                 try
                 {
@@ -1670,7 +1670,8 @@ namespace Interlinear
                 if (RowCounter > 0)
                 {
                     FillExcel(excelApp, wrdApp, theDoc, RowCounter);
-                    excelApp.ActiveWorkbook.Close();  // Close the workbook
+                    excelApp.ActiveWorkbook.Close(true);  // Close the workbook
+                    ExcelFileOpen = false;
 
                     boxProgress.Items.Add("Finished sending to Excel.");
                 }
@@ -1680,11 +1681,11 @@ namespace Interlinear
                 }
 
                 theDoc = null;
-                btnClose.Enabled = true;
+                BtnClose.Enabled = true;
                 System.Media.SystemSounds.Beep.Play();  // and beep
                 if (chkCloseOnCompletion.Checked)
                 {
-                    btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+                    BtnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
                 }
 
             }
@@ -1704,7 +1705,7 @@ namespace Interlinear
                 theStopwatch.Start();
                 Document theDoc;
                 tabControl1.SelectTab("Progress");
-                btnClose.Enabled = false;
+                BtnClose.Enabled = false;
                 try
                 {
                     theDoc = wrdApp.Documents.Open(txtLegacyOutput.Text);
@@ -1731,7 +1732,8 @@ namespace Interlinear
                 RowCounter = InitialiseExcel(excelApp, true, txtUnicodeOutput.Text);
                 FillExcel(excelApp, wrdApp, theDoc, RowCounter);
                 //MakeInterlinear(excelApp); // Make the interlinear worksheet, too.
-                excelApp.ActiveWorkbook.Close(); // Close the workbook
+                excelApp.ActiveWorkbook.Close(true); // Close the workbook
+                ExcelFileOpen = false;
                 try
                 {
                     boxProgress.Items.Add("Finished sending both files to Excel in " + theStopwatch.Elapsed.ToString("G"));
@@ -1744,11 +1746,11 @@ namespace Interlinear
                 theStopwatch.Stop();
                 theStopwatch = null;
                 theDoc = null;
-                btnClose.Enabled = true;
+                BtnClose.Enabled = true;
                 System.Media.SystemSounds.Beep.Play();  // and beep
                 if (chkCloseOnCompletion.Checked)
                 {
-                    btnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
+                    BtnClose_Click(this, null); //  Shut down.  This helps profiling the application.  
                 }
 
             }
@@ -1771,7 +1773,7 @@ namespace Interlinear
                 WordRoot.Range theRange = theDoc.StoryRanges[WordRoot.WdStoryType.wdMainTextStory];
                 theRange.Select();
                 theApp.Selection.EndKey(WordRoot.WdUnits.wdStory, false); // Move to the end
-                // Remove shapes going through the document.
+                                                                          // Remove shapes going through the document.
                 while (theDoc.Shapes.Count + theDoc.InlineShapes.Count > 0) // keep looping till we have deleted all the shapes
                 {
                     int Counter = 0;
@@ -1898,7 +1900,7 @@ namespace Interlinear
                         }
                     }
 
-                     boxProgress.Items.Add("Removed " + Counter.ToString() + " inline shapes in " + (theStopwatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
+                    boxProgress.Items.Add("Removed " + Counter.ToString() + " inline shapes in " + (theStopwatch2.ElapsedMilliseconds / 1000.0).ToString("f2") + " seconds");
 
                     Application.DoEvents();
 
@@ -1914,7 +1916,7 @@ namespace Interlinear
 
         }
 
-        private void btnHelp_Click(object sender, EventArgs e)
+        private void BtnHelp_Click(object sender, EventArgs e)
         {
             string HelpPath = Path.Combine(Application.StartupPath, "UserGuide.docx");
             WordApp HelpApp = new Word();
@@ -1931,32 +1933,32 @@ namespace Interlinear
 
         }
 
-        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DocumentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string HelpPath = Path.Combine(Application.StartupPath, "Interlinear.docx");
             System.Diagnostics.Process.Start(HelpPath);
 
         }
 
-        private void licenseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string HelpPath = Path.Combine(Application.StartupPath, "gpl.txt");
             System.Diagnostics.Process.Start("Wordpad.exe", '"' + HelpPath + '"');
 
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox1 About = new AboutBox1();
             About.Show();
 
         }
 
-        private void btnPauseResume_Click(object sender, EventArgs e)
+        private void BtnPauseResume_Click(object sender, EventArgs e)
         {
             Button theButton = (Button)sender;
             Paused = !Paused; // Toggle the pause flag
-            btnClose.Enabled = Paused;
+            BtnClose.Enabled = Paused;
             if (Paused)
             {
                 toolStripStatusLabel1.Text = "Paused";
@@ -2017,7 +2019,7 @@ namespace Interlinear
 
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             /*
              * Clear the text boxes.
@@ -2032,9 +2034,8 @@ namespace Interlinear
         {
             foreach (Control theControl in theControls)
             {
-                if (theControl is TextBox)
+                if (theControl is TextBox theTextBox)
                 {
-                    TextBox theTextBox = (TextBox)theControl;
                     theTextBox.Clear(); //clear it
                 }
                 else
@@ -2055,7 +2056,7 @@ namespace Interlinear
             //saveUnicodeFileDialog.FilterIndex = theIndex;
         }
 
-        private void boxExtension_SelectedIndexChanged(object sender, EventArgs e)
+        private void BoxExtension_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox theBox = (ComboBox)sender;
             DefaultExtensionIndex = theBox.SelectedIndex;
@@ -2068,7 +2069,7 @@ namespace Interlinear
             FontSize = (int)theUpdown.Value;
         }
 
-        private void updownThreshold_ValueChanged(object sender, EventArgs e)
+        private void UpdownThreshold_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown theUpdown = (NumericUpDown)sender;
             CopyPauseThreshold = (int)theUpdown.Value;
@@ -2128,7 +2129,7 @@ namespace Interlinear
 
         public WordAppOptions(WordApp theApp)
         {
-            if (theApp.Documents.Count >  0 && theApp.ActiveDocument != null)
+            if (theApp.Documents.Count > 0 && theApp.ActiveDocument != null)
             {
                 try
                 {
@@ -2163,7 +2164,7 @@ namespace Interlinear
                     ReplaceTextFromSpellingChecker = theApp.AutoCorrect.ReplaceTextFromSpellingChecker;
                     TabIndentKey = theApp.Options.TabIndentKey;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + ex.StackTrace, "Error in WordAppOptions", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -2173,42 +2174,43 @@ namespace Interlinear
         {
             if (theApp.Documents.Count > 0 && theApp.ActiveDocument != null)
             {
-                try{
-            theApp.Options.AutoFormatAsYouTypeApplyBorders = false;
-            theApp.Options.AutoFormatAsYouTypeApplyBulletedLists = false;
-            theApp.Options.AutoFormatAsYouTypeApplyHeadings = false;
-            theApp.Options.AutoFormatAsYouTypeApplyNumberedLists = false;
-            theApp.Options.AutoFormatAsYouTypeApplyTables = false;
-            theApp.Options.AutoFormatAsYouTypeAutoLetterWizard = false;
-            theApp.Options.AutoFormatAsYouTypeDefineStyles = false;
-            theApp.Options.AutoFormatAsYouTypeFormatListItemBeginning = false;
-            theApp.Options.AutoFormatAsYouTypeReplaceFractions = false;
-            theApp.Options.AutoFormatAsYouTypeReplaceHyperlinks = false;
-            theApp.Options.AutoFormatAsYouTypeReplaceOrdinals = false;
-            theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis = false;
-            theApp.Options.AutoFormatAsYouTypeReplaceQuotes = false;
-            theApp.Options.AutoFormatAsYouTypeReplaceSymbols = false;
-            theApp.Options.CheckGrammarAsYouType = false;
-            theApp.Options.CheckSpellingAsYouType = false;
-            theApp.AutoCorrect.CorrectCapsLock = false;
-            theApp.AutoCorrect.CorrectDays = false;
-            theApp.AutoCorrect.CorrectInitialCaps = false;
-            theApp.AutoCorrect.CorrectKeyboardSetting = false;
-            theApp.AutoCorrect.CorrectSentenceCaps = false;
-            theApp.AutoCorrect.CorrectTableCells = false;
-            theApp.AutoCorrect.DisplayAutoCorrectOptions = false;
-            theApp.AutoCorrect.CorrectKeyboardSetting = false;
-            theApp.Options.LabelSmartTags = false;
-            theApp.Options.Pagination = false;  // turn off background pagination
-            theApp.Options.RepeatWord = false;
-            theApp.AutoCorrect.ReplaceText = false;
-            theApp.AutoCorrect.ReplaceTextFromSpellingChecker = false;
-            theApp.Options.TabIndentKey = false;
-            // Don't show spelling and grammar errors.
-            theApp.ActiveDocument.ShowGrammaticalErrors = true;
-            theApp.ActiveDocument.ShowSpellingErrors = true;
+                try
+                {
+                    theApp.Options.AutoFormatAsYouTypeApplyBorders = false;
+                    theApp.Options.AutoFormatAsYouTypeApplyBulletedLists = false;
+                    theApp.Options.AutoFormatAsYouTypeApplyHeadings = false;
+                    theApp.Options.AutoFormatAsYouTypeApplyNumberedLists = false;
+                    theApp.Options.AutoFormatAsYouTypeApplyTables = false;
+                    theApp.Options.AutoFormatAsYouTypeAutoLetterWizard = false;
+                    theApp.Options.AutoFormatAsYouTypeDefineStyles = false;
+                    theApp.Options.AutoFormatAsYouTypeFormatListItemBeginning = false;
+                    theApp.Options.AutoFormatAsYouTypeReplaceFractions = false;
+                    theApp.Options.AutoFormatAsYouTypeReplaceHyperlinks = false;
+                    theApp.Options.AutoFormatAsYouTypeReplaceOrdinals = false;
+                    theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis = false;
+                    theApp.Options.AutoFormatAsYouTypeReplaceQuotes = false;
+                    theApp.Options.AutoFormatAsYouTypeReplaceSymbols = false;
+                    theApp.Options.CheckGrammarAsYouType = false;
+                    theApp.Options.CheckSpellingAsYouType = false;
+                    theApp.AutoCorrect.CorrectCapsLock = false;
+                    theApp.AutoCorrect.CorrectDays = false;
+                    theApp.AutoCorrect.CorrectInitialCaps = false;
+                    theApp.AutoCorrect.CorrectKeyboardSetting = false;
+                    theApp.AutoCorrect.CorrectSentenceCaps = false;
+                    theApp.AutoCorrect.CorrectTableCells = false;
+                    theApp.AutoCorrect.DisplayAutoCorrectOptions = false;
+                    theApp.AutoCorrect.CorrectKeyboardSetting = false;
+                    theApp.Options.LabelSmartTags = false;
+                    theApp.Options.Pagination = false;  // turn off background pagination
+                    theApp.Options.RepeatWord = false;
+                    theApp.AutoCorrect.ReplaceText = false;
+                    theApp.AutoCorrect.ReplaceTextFromSpellingChecker = false;
+                    theApp.Options.TabIndentKey = false;
+                    // Don't show spelling and grammar errors.
+                    theApp.ActiveDocument.ShowGrammaticalErrors = true;
+                    theApp.ActiveDocument.ShowSpellingErrors = true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + ex.StackTrace, "Error in OptimiseApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -2219,38 +2221,39 @@ namespace Interlinear
         {
             if (theApp.Documents.Count > 0 && theApp.ActiveDocument != null)
             {
-                try{
-           theApp.Options.AutoFormatAsYouTypeApplyBorders = AutoFormatAsYouTypeApplyBorders;
-            theApp.Options.AutoFormatAsYouTypeApplyBulletedLists = AutoFormatAsYouTypeApplyBulletedLists;
-            theApp.Options.AutoFormatAsYouTypeApplyHeadings = AutoFormatAsYouTypeApplyHeadings;
-            theApp.Options.AutoFormatAsYouTypeApplyNumberedLists = AutoFormatAsYouTypeApplyNumberedLists;
-            theApp.Options.AutoFormatAsYouTypeApplyTables = AutoFormatAsYouTypeApplyTables;
-            theApp.Options.AutoFormatAsYouTypeAutoLetterWizard = AutoFormatAsYouTypeAutoLetterWizard;
-            theApp.Options.AutoFormatAsYouTypeDefineStyles = AutoFormatAsYouTypeDefineStyles;
-            theApp.Options.AutoFormatAsYouTypeFormatListItemBeginning = AutoFormatAsYouTypeFormatListItemBeginning;
-            theApp.Options.AutoFormatAsYouTypeReplaceFractions = AutoFormatAsYouTypeReplaceFractions;
-            theApp.Options.AutoFormatAsYouTypeReplaceHyperlinks = AutoFormatAsYouTypeReplaceHyperlinks;
-            theApp.Options.AutoFormatAsYouTypeReplaceOrdinals = AutoFormatAsYouTypeReplaceOrdinals;
-            theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis = AutoFormatAsYouTypeReplacePlainTextEmphasis;
-            theApp.Options.AutoFormatAsYouTypeReplaceQuotes = AutoFormatAsYouTypeReplaceQuotes;
-            theApp.Options.AutoFormatAsYouTypeReplaceSymbols = AutoFormatAsYouTypeReplaceSymbols;
-            theApp.Options.CheckGrammarAsYouType = CheckGrammarAsYouType;
-            theApp.Options.CheckSpellingAsYouType = CheckSpellingAsYouType;
-            theApp.AutoCorrect.CorrectCapsLock = CorrectCapsLock;
-            theApp.AutoCorrect.CorrectDays = CorrectDays;
-            theApp.AutoCorrect.CorrectInitialCaps = CorrectInitialCaps;
-            theApp.AutoCorrect.CorrectKeyboardSetting = CorrectKeyboardSetting;
-            theApp.AutoCorrect.CorrectSentenceCaps = CorrectSentenceCaps;
-            theApp.AutoCorrect.CorrectTableCells = CorrectTableCells;
-            theApp.AutoCorrect.DisplayAutoCorrectOptions = DisplayAutoCorrectOptions;
-            theApp.Options.LabelSmartTags = LabelSmartTags;
-            theApp.Options.Pagination = Pagination;
-            theApp.Options.RepeatWord = RepeatWord;
-            theApp.AutoCorrect.ReplaceText = ReplaceText;
-            theApp.AutoCorrect.ReplaceTextFromSpellingChecker = ReplaceTextFromSpellingChecker;
-            theApp.Options.TabIndentKey = TabIndentKey;
+                try
+                {
+                    theApp.Options.AutoFormatAsYouTypeApplyBorders = AutoFormatAsYouTypeApplyBorders;
+                    theApp.Options.AutoFormatAsYouTypeApplyBulletedLists = AutoFormatAsYouTypeApplyBulletedLists;
+                    theApp.Options.AutoFormatAsYouTypeApplyHeadings = AutoFormatAsYouTypeApplyHeadings;
+                    theApp.Options.AutoFormatAsYouTypeApplyNumberedLists = AutoFormatAsYouTypeApplyNumberedLists;
+                    theApp.Options.AutoFormatAsYouTypeApplyTables = AutoFormatAsYouTypeApplyTables;
+                    theApp.Options.AutoFormatAsYouTypeAutoLetterWizard = AutoFormatAsYouTypeAutoLetterWizard;
+                    theApp.Options.AutoFormatAsYouTypeDefineStyles = AutoFormatAsYouTypeDefineStyles;
+                    theApp.Options.AutoFormatAsYouTypeFormatListItemBeginning = AutoFormatAsYouTypeFormatListItemBeginning;
+                    theApp.Options.AutoFormatAsYouTypeReplaceFractions = AutoFormatAsYouTypeReplaceFractions;
+                    theApp.Options.AutoFormatAsYouTypeReplaceHyperlinks = AutoFormatAsYouTypeReplaceHyperlinks;
+                    theApp.Options.AutoFormatAsYouTypeReplaceOrdinals = AutoFormatAsYouTypeReplaceOrdinals;
+                    theApp.Options.AutoFormatAsYouTypeReplacePlainTextEmphasis = AutoFormatAsYouTypeReplacePlainTextEmphasis;
+                    theApp.Options.AutoFormatAsYouTypeReplaceQuotes = AutoFormatAsYouTypeReplaceQuotes;
+                    theApp.Options.AutoFormatAsYouTypeReplaceSymbols = AutoFormatAsYouTypeReplaceSymbols;
+                    theApp.Options.CheckGrammarAsYouType = CheckGrammarAsYouType;
+                    theApp.Options.CheckSpellingAsYouType = CheckSpellingAsYouType;
+                    theApp.AutoCorrect.CorrectCapsLock = CorrectCapsLock;
+                    theApp.AutoCorrect.CorrectDays = CorrectDays;
+                    theApp.AutoCorrect.CorrectInitialCaps = CorrectInitialCaps;
+                    theApp.AutoCorrect.CorrectKeyboardSetting = CorrectKeyboardSetting;
+                    theApp.AutoCorrect.CorrectSentenceCaps = CorrectSentenceCaps;
+                    theApp.AutoCorrect.CorrectTableCells = CorrectTableCells;
+                    theApp.AutoCorrect.DisplayAutoCorrectOptions = DisplayAutoCorrectOptions;
+                    theApp.Options.LabelSmartTags = LabelSmartTags;
+                    theApp.Options.Pagination = Pagination;
+                    theApp.Options.RepeatWord = RepeatWord;
+                    theApp.AutoCorrect.ReplaceText = ReplaceText;
+                    theApp.AutoCorrect.ReplaceTextFromSpellingChecker = ReplaceTextFromSpellingChecker;
+                    theApp.Options.TabIndentKey = TabIndentKey;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + ex.StackTrace, "Error in RestoreApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -2272,6 +2275,8 @@ namespace Interlinear
         private bool AutoFillFormulasInLists = false;
         private bool AutoFormatAsYouTypeReplaceHyperlinks;
         private bool ScreenUpdating;
+        private bool DisplayAlerts;
+        private bool Visible;
         private ExcelRoot.XlCalculation Calculation;
 
         public ExcelAppOptions(ExcelApp theApp)
@@ -2285,8 +2290,11 @@ namespace Interlinear
             AutoFormatAsYouTypeReplaceHyperlinks = theApp.AutoFormatAsYouTypeReplaceHyperlinks;
             Calculation = theApp.Calculation;
             ScreenUpdating = theApp.ScreenUpdating;
+            DisplayAlerts = theApp.DisplayAlerts;
+            Visible = theApp.Visible;
+
         }
-        public void OptimiseApp(ExcelApp theApp)
+        public void OptimiseApp(ExcelApp theApp, bool debug = false)
         {
             theApp.AutoCorrect.TwoInitialCapitals = false;
             theApp.AutoCorrect.CorrectCapsLock = false;
@@ -2297,6 +2305,8 @@ namespace Interlinear
             theApp.AutoCorrect.AutoFillFormulasInLists = false;
             theApp.Calculation = ExcelRoot.XlCalculation.xlCalculationManual;
             theApp.ScreenUpdating = false;
+            theApp.DisplayAlerts = false;
+            theApp.Visible = debug;
         }
         public void RestoreApp(ExcelApp theApp)
         {
@@ -2310,6 +2320,8 @@ namespace Interlinear
             theApp.Calculation = (ExcelRoot.XlCalculation)Calculation;
             theApp.AutoFormatAsYouTypeReplaceHyperlinks = AutoFormatAsYouTypeReplaceHyperlinks;
             theApp.ScreenUpdating = ScreenUpdating;
+            theApp.DisplayAlerts = DisplayAlerts;
+            theApp.Visible = Visible;
         }
 
     }
