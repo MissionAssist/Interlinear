@@ -81,7 +81,6 @@ D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\
 D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.ResolveComReference.cache
 D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe
 D:\Users\Stephen\OneDrive\Documents\Visual Studio 2015\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.pdb
-D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csprojResolveAssemblyReference.cache
 D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.ResolveComReference.cache
 D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.AboutBox1.resources
 D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.Interlinear.resources
@@ -121,3 +120,6 @@ D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\b
 D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.TrustInfo.xml
 D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.exe.manifest
 D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.application
+D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csprojAssemblyReference.cache
+D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.CoreCompileInputs.cache
+D:\Users\Stephen\OneDrive - MissionAssist\Projects\Interlinear.git\Interlinear\obj\x86\Debug\Interlinear.csproj.CopyComplete
