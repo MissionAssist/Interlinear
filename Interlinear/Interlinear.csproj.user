@@ -1,13 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>D:\users\Stephen\SkyDrive\Unicode Programs\Interlinear\|http://sdrv.ms/TPNCfL/|http://sdrv.ms/WFJpBp/|publish\</PublishUrlHistory>
-    <InstallUrlHistory>https://skydrive.live.com/%3fcid=c1bcb419809d5ef7&amp;id=C1BCB419809D5EF7%2521660/|http://sdrv.ms/TPNCfL/</InstallUrlHistory>
+    <PublishUrlHistory>C:\Users\Stephen\SharePoint\Unicode Conversion Programs - Progr 1\Interlinear\|W:\spalmstrom\Programs\Interlinear\|E:\Interlinear\|D:\Users\stephen\Documents\Deploy\Interlinear\|\\WUALA_BY_LACIE\Wuala-d7d7d56b5e8\spalmstrom\Programs\</PublishUrlHistory>
+    <InstallUrlHistory>https://missionassist.sharepoint.com/Unicode%2520Conversion/Programs/Program%2520Folders/Forms/AllItems.aspx%3fRootFolder=%252FUnicode%2520Conversion%252FPrograms%252FProgram%2520Folders%252FInterlinear&amp;FolderCTID=0x012000B80F6588E2692A429142AA254020BB00&amp;View=%257B343E3A92%252D9770%252D4966%252D8E62%252D8066E65A77DE%257D/|https://skydrive.live.com/%3fcid=c1bcb419809d5ef7&amp;id=C1BCB419809D5EF7%2521660/|http://sdrv.ms/TPNCfL/</InstallUrlHistory>
     <SupportUrlHistory />
-    <UpdateUrlHistory>http://sdrv.ms/WFJpBp/|https://skydrive.live.com/embed%3fcid=C1BCB419809D5EF7&amp;resid=C1BCB419809D5EF7%2521660&amp;authkey=AOMmyWI9oSMdTOw/</UpdateUrlHistory>
+    <UpdateUrlHistory>https://missionassist.sharepoint.com/Unicode%2520Conversion/Programs/Program%2520Folders/Forms/AllItems.aspx%3fRootFolder=%252FUnicode%2520Conversion%252FPrograms%252FProgram%2520Folders%252FInterlinear/|https://missionassist.sharepoint.com/Unicode%2520Conversion/Programs/Program%2520Folders/Forms/AllItems.aspx%3fRootFolder=%252FUnicode%2520Conversion%252FPrograms%252FProgram%2520Folders%252FInterlinear&amp;FolderCTID=0x012000B80F6588E2692A429142AA254020BB00&amp;View=%257B343E3A92%252D9770%252D4966%252D8E62%252D8066E65A77DE%257D/|\\WUALA_BY_LACIE\Wuala-d7d7d56b5e8\spalmstrom\Programs\|http://sdrv.ms/WFJpBp/|https://skydrive.live.com/embed%3fcid=C1BCB419809D5EF7&amp;resid=C1BCB419809D5EF7%2521660&amp;authkey=AOMmyWI9oSMdTOw/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>true</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
 </Project>
